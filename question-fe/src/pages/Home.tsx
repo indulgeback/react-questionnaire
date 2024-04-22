@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button, Tag, Typography } from 'antd';
+import { Button, Typography } from 'antd';
 import { MANAGE_INDEX_PATH } from '../router';
 import styles from './Home.module.scss';
 import gsap from 'gsap';
@@ -13,9 +13,9 @@ const Home: React.FC = () => {
   useGSAP(() => {
     const tl = gsap.timeline();
     tl.from('#title', { x: -100, duration: 1.5, opacity: 0 });
-    tl.from('#description', { x: 100, duration: 1.5, opacity: 0 }, '<');
-    tl.from('#startBtn', { opacity: 0, y: 200, duration: 1, ease: 'bounce.out' });
-  }, []);
+    tl.from('#startBtn', { opacity: 0, y: 200, duration: 1, ease: 'bounce.out' }, '<');
+    tl.from('#description', { y: 50, duration: 1.5, opacity: 0 });
+  });
 
   return (
     <div className={styles.container}>
@@ -23,7 +23,7 @@ const Home: React.FC = () => {
         <Title id="title">问卷调查 | 在线投票</Title>
         <Paragraph id="description">
           <p style={{ fontSize: '1.2rem' }}>
-            已累计创建问卷 100👧 份，发布问卷 87🧒 份，收到答卷 1800🎀 份
+            已累计创建问卷 100👧 份，发布问卷 87🧒 份，收到答卷 1800📃 份
           </p>
         </Paragraph>
         <div id="startBtn">

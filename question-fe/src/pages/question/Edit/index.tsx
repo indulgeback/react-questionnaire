@@ -1,7 +1,7 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
 
-const Edit: FC = () => {
+const Edit: React.FC = () => {
   const { id = '' } = useParams();
   return (
     <div>

@@ -1,6 +1,6 @@
-import React, { FC } from 'react';
+import React from 'react';
 
-const Trash: FC = () => {
+const Trash: React.FC = () => {
   return (
     <div>
       <h1>Trash</h1>

@@ -1,15 +1,31 @@
-import React, { FC } from 'react';
-import { Outlet } from 'react-router-dom';
+import React from 'react';
+import { Link, Outlet } from 'react-router-dom';
+import { Layout } from 'antd';
+import styles from './MainLayout.module.scss';
+import Logo from '../components/Logo';
+import UserInfo from '../components/UserInfo';
 
-const MainLayout: FC = () => {
+const { Header, Content, Footer } = Layout;
+
+const MainLayout: React.FC = () => {
   return (
-    <>
-      <div>MainLayout header</div>
-      <div>
+    <Layout>
+      <Header className={styles.header}>
+        <div className={styles.left}>
+          <Logo />
+        </div>
+        <div className={styles.right}>
+          <UserInfo />
+        </div>
+      </Header>
+      <Content className={styles.main}>
         <Outlet />
-      </div>
-      <div>MainLayout footer</div>
-    </>
+      </Content>
+      <Footer className={styles.footer}>
+        小木问卷 &copy;2024 - present. Created by{' '}
+        <Link to="https://indulgeback.gitee.io/">IndulgeBack</Link>
+      </Footer>
+    </Layout>
   );
 };
 

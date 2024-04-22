@@ -4,15 +4,15 @@ import { createBrowserRouter } from 'react-router-dom';
 import MainLayout from '../layouts/MainLayout';
 import ManageLayout from '../layouts/ManageLayout';
 import QuestionLayout from '../layouts/QuestionLayout';
-import Home from '../components/Home';
-import Login from '../components/Login';
-import Register from '../components/Register';
-import NotFound from '../components/NotFound';
-import List from '../components/manage/List';
-import Trash from '../components/manage/Trash';
-import Star from '../components/manage/Star';
-import Edit from '../components/question/Edit';
-import Stat from '../components/question/Stat';
+import Home from '../pages/Home';
+import Login from '../pages/Login';
+import Register from '../pages/Register';
+import NotFound from '../pages/NotFound';
+import List from '../pages/manage/List';
+import Trash from '../pages/manage/Trash';
+import Star from '../pages/manage/Star';
+import Edit from '../pages/question/Edit';
+import Stat from '../pages/question/Stat';
 
 const router = createBrowserRouter([
   {
@@ -72,3 +72,9 @@ const router = createBrowserRouter([
 ]);
 
 export default router;
+
+// -------------------- 路由常量 --------------------
+export const HOME_PATH = '/';
+export const LOGIN_PATH = '/login';
+export const REGISTER_PATH = '/register';
+export const MANAGE_INDEX_PATH = '/manage/list';

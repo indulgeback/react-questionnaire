@@ -1,6 +1,6 @@
-import React, { FC } from 'react';
+import React from 'react';
 
-const Stat: FC = () => {
+const Stat: React.FC = () => {
   return (
     <div>
       <h1>Stat</h1>

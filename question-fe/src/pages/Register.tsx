@@ -1,6 +1,6 @@
-import React, { FC } from 'react';
+import React from 'react';
 
-const Register: FC = () => {
+const Register: React.FC = () => {
   return (
     <div>
       <h1>Register</h1>

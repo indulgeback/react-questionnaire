@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button, Typography } from 'antd';
+import { Button, Tag, Typography } from 'antd';
 import { MANAGE_INDEX_PATH } from '../router';
 import styles from './Home.module.scss';
 import gsap from 'gsap';
@@ -22,7 +22,9 @@ const Home: React.FC = () => {
       <div className={styles.info}>
         <Title id="title">问卷调查 | 在线投票</Title>
         <Paragraph id="description">
-          已累计创建问卷 100 份，发布问卷 97 份，收到答卷 1800 份
+          <p style={{ fontSize: '1.2rem' }}>
+            已累计创建问卷 100👧 份，发布问卷 87🧒 份，收到答卷 1800🎀 份
+          </p>
         </Paragraph>
         <div id="startBtn">
           <Button type="dashed" onClick={() => nav(MANAGE_INDEX_PATH)}>

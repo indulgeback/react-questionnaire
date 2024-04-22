@@ -10,7 +10,6 @@ import {
   StarOutlined,
 } from '@ant-design/icons';
 import { Link, useNavigate } from 'react-router-dom';
-import { spawn } from 'child_process';
 
 // ts 自定义类型
 type PropsType = {

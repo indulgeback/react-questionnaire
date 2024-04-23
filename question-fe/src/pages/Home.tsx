@@ -5,6 +5,7 @@ import { MANAGE_INDEX_PATH } from '../router';
 import styles from './Home.module.scss';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
+import Face from '../components/Face';
 
 const { Title, Paragraph } = Typography;
 
@@ -20,9 +21,9 @@ const Home: React.FC = () => {
 
   return (
     <div className={styles.container}>
+      <Face />
       <div className={styles.info}>
         <Title id="title">📜问卷调查 | 在线投票🙋‍♀️</Title>
-        <Title id="subTitle" className={styles.subTitle} level={3}></Title>
         <Paragraph id="description">
           <p style={{ fontSize: '1.2rem' }}>
             已累计创建问卷 100👧 份，发布问卷 87🧒 份，收到答卷 1800📃 份
@@ -33,6 +34,7 @@ const Home: React.FC = () => {
             Start Use &rarr;
           </Button>
         </div>
+        <Title id="subTitle" className={styles.subTitle} level={3}></Title>
       </div>
     </div>
   );

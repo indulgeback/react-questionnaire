@@ -15,8 +15,8 @@ const MainLayout: React.FC = () => {
     gsap.from('#UserInfo', { duration: 1, x: -100, opacity: 0 });
   });
   return (
-    <Layout>
-      <Header className={styles.header}>
+    <Layout style={{ overflow: 'hidden' }}>
+      <Header className={styles.header} style={{ zIndex: 999 }}>
         <div id="Logo" className={styles.left}>
           <Logo />
         </div>
@@ -27,7 +27,7 @@ const MainLayout: React.FC = () => {
       <Content className={styles.main}>
         <Outlet />
       </Content>
-      <Footer className={styles.footer}>
+      <Footer className={styles.footer} style={{ zIndex: 999 }}>
         小木问卷 &copy;2024 - present. Created by{' '}
         <Link to="https://indulgeback.gitee.io/">IndulgeBack</Link>
       </Footer>

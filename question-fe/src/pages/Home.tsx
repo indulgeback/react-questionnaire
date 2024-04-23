@@ -24,7 +24,7 @@ const Home: React.FC = () => {
   return (
     <div className={styles.container}>
       <div className={styles.info}>
-        <Title id="title">问卷调查 | 在线投票</Title>
+        <Title id="title">📜问卷调查 | 在线投票🙋‍♀️</Title>
         <Title id="subTitle" className={styles.subTitle} level={3}></Title>
         <Paragraph id="description">
           <p style={{ fontSize: '1.2rem' }}>

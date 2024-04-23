@@ -1,0 +1,17 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .title {
+    padding: 5px;
+  }
+
+  .search {
+    padding: 5px;
+  }
+}
+
+.list {
+  margin-top: 5px;
+}

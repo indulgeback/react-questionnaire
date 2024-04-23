@@ -23,7 +23,7 @@ const Home: React.FC = () => {
     <div className={styles.container}>
       <Face />
       <div className={styles.info}>
-        <Title id="title">📜问卷调查 | 在线投票🙋‍♀️</Title>
+        <Title id="title">问卷调查 | 在线投票</Title>
         <Paragraph id="description">
           <p style={{ fontSize: '1.2rem' }}>
             已累计创建问卷 100👧 份，发布问卷 87🧒 份，收到答卷 1800📃 份

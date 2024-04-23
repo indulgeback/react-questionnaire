@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import { useTitle } from 'ahooks';
 import QuestionCard from '../../components/QuestionCard';
+import styles from './Common.module.scss';
+import { Typography } from 'antd';
+
+const { Title } = Typography;
+
 const List: React.FC = () => {
   useTitle('小木问卷 - 我的问卷');
   const [questionList, setQuestionList] = useState([
@@ -47,13 +52,13 @@ const List: React.FC = () => {
   ]);
   return (
     <>
-      <div>
-        <div>
-          <h3>我的问卷</h3>
+      <div className={styles.header}>
+        <div className={styles.title}>
+          <Title level={3}>我的问卷</Title>
         </div>
-        <div>（搜索）</div>
+        <div className={styles.search}>（搜索）</div>
       </div>
-      <div>
+      <div className={styles.list}>
         {/* 问卷列表 */}
         {questionList.map(item => (
           <QuestionCard

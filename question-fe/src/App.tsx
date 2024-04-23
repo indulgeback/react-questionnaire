@@ -3,7 +3,7 @@ import { RouterProvider } from 'react-router-dom';
 import router from './router';
 import { ConfigProvider } from 'antd';
 
-const App: React.FC = () => {
+const MyApp: React.FC = () => {
   return (
     <ConfigProvider
       theme={{
@@ -17,4 +17,4 @@ const App: React.FC = () => {
   );
 };
 
-export default App;
+export default MyApp;

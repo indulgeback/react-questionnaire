@@ -5,9 +5,6 @@ import { MANAGE_INDEX_PATH } from '../router';
 import styles from './Home.module.scss';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
-import { TextPlugin } from 'gsap/all';
-
-gsap.registerPlugin(TextPlugin);
 
 const { Title, Paragraph } = Typography;
 

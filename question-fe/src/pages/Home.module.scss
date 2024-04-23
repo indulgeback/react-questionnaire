@@ -9,6 +9,13 @@
   .info {
     text-align: center;
 
+    .subTitle {
+      position: absolute;
+      top: 30%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
     h1 {
       font-size: 56px;
     }

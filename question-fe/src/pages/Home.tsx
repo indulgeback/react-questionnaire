@@ -5,6 +5,9 @@ import { MANAGE_INDEX_PATH } from '../router';
 import styles from './Home.module.scss';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
+import { TextPlugin } from 'gsap/all';
+
+gsap.registerPlugin(TextPlugin);
 
 const { Title, Paragraph } = Typography;
 
@@ -15,12 +18,14 @@ const Home: React.FC = () => {
     tl.from('#title', { x: -100, duration: 1.5, opacity: 0 });
     tl.from('#startBtn', { opacity: 0, y: 200, duration: 1, ease: 'bounce.out' }, '<');
     tl.from('#description', { y: 50, duration: 1.5, opacity: 0 });
+    tl.to('#subTitle', { duration: 1, text: '轻 松 使 用 , 快 捷 便 利 !' });
   });
 
   return (
     <div className={styles.container}>
       <div className={styles.info}>
         <Title id="title">问卷调查 | 在线投票</Title>
+        <Title id="subTitle" className={styles.subTitle} level={3}></Title>
         <Paragraph id="description">
           <p style={{ fontSize: '1.2rem' }}>
             已累计创建问卷 100👧 份，发布问卷 87🧒 份，收到答卷 1800📃 份

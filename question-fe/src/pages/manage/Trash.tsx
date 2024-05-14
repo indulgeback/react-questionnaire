@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { useTitle } from 'ahooks';
 import styles from './Common.module.scss';
-import { Empty, Typography, Table, Tag, Space, Button } from 'antd';
-import { CheckCircleOutlined } from '@ant-design/icons';
+import { Empty, Typography, Table, Tag, Space, Button, Modal } from 'antd';
+import { CheckCircleOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 
 const { Title } = Typography;
+const { confirm } = Modal;
+
 const rowData = [
   {
     _id: 'q1',
@@ -82,12 +84,25 @@ const Trash: React.FC = () => {
   // 记录选中的id
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
 
+  function del() {
+    confirm({
+      title: '确认彻底删除该问卷吗？',
+      icon: <ExclamationCircleOutlined />,
+      content: '删除以后不可以找回',
+      onOk: () => alert('删除' + JSON.stringify(selectedIds)),
+    });
+  }
+
   const TableElm = (
     <>
       <div style={{ marginBottom: '16px' }}>
         <Space>
-          <Button>恢复</Button>
-          <Button>删除</Button>
+          <Button type="primary" disabled={selectedIds.length === 0}>
+            恢复
+          </Button>
+          <Button danger disabled={selectedIds.length === 0} onClick={del}>
+            彻底删除
+          </Button>
         </Space>
       </div>
       <Table

@@ -3,6 +3,7 @@ import { useTitle } from 'ahooks';
 import styles from './Common.module.scss';
 import { Empty, Typography, Table, Tag, Space, Button, Modal } from 'antd';
 import { CheckCircleOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
+import ListSearch from '../../components/listSearch';
 
 const { Title } = Typography;
 const { confirm } = Modal;
@@ -124,7 +125,9 @@ const Trash: React.FC = () => {
         <div className={styles.title}>
           <Title level={3}>星标问卷</Title>
         </div>
-        <div className={styles.search}>（搜索）</div>
+        <div className={styles.search}>
+          <ListSearch />
+        </div>
       </div>
       <div className={styles.list}>
         {/* 问卷列表 */}

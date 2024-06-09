@@ -29,7 +29,7 @@ const MainLayout: React.FC = () => {
       </Content>
       <Footer className={styles.footer} style={{ zIndex: 999 }}>
         小木问卷 &copy;2024 - present. Created by{' '}
-        <Link to="https://indulgeback.gitee.io/">IndulgeBack</Link>
+        <Link to="https://indulgeback.netlify.app/">IndulgeBack</Link>
       </Footer>
     </Layout>
   );

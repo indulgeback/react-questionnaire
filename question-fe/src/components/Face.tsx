@@ -1,9 +1,9 @@
-import React from 'react';
-import styles from './Face.module.scss';
-import useRollEyeBall from '../hooks/useRollEyeBalls';
+import React from 'react'
+import styles from './Face.module.scss'
+import useRollEyeBall from '../hooks/useRollEyeBalls'
 
 const Face: React.FC = () => {
-  const { leftEyeBallRef, rightEyeBallRef } = useRollEyeBall();
+  const { leftEyeBallRef, rightEyeBallRef } = useRollEyeBall()
   return (
     <div className={styles.face}>
       <div className={styles.eye}>
@@ -13,7 +13,7 @@ const Face: React.FC = () => {
         <div ref={rightEyeBallRef} className={styles.ball}></div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Face;
+export default Face

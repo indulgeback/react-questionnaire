@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import { useTitle } from 'ahooks';
-import QuestionCard from '../../components/QuestionCard';
-import styles from './Common.module.scss';
-import { Typography } from 'antd';
-import ListSearch from '../../components/listSearch';
+import React, { useState } from 'react'
+import { useTitle } from 'ahooks'
+import QuestionCard from '../../components/QuestionCard'
+import styles from './Common.module.scss'
+import { Typography } from 'antd'
+import ListSearch from '../../components/listSearch'
 
-const { Title } = Typography;
+const { Title } = Typography
 
 const List: React.FC = () => {
-  useTitle('小木问卷 - 我的问卷');
+  useTitle('小木问卷 - 我的问卷')
   const [questionList, setQuestionList] = useState([
     {
       id: 'q1',
@@ -16,7 +16,7 @@ const List: React.FC = () => {
       isPublished: true,
       isStar: false,
       answerCount: 10,
-      createdAt: 'dawdaw',
+      createdAt: 'dawdaw'
     },
     {
       id: 'q2',
@@ -24,7 +24,7 @@ const List: React.FC = () => {
       isPublished: false,
       isStar: true,
       answerCount: 10,
-      createdAt: 'dawdaw',
+      createdAt: 'dawdaw'
     },
     {
       id: 'q3',
@@ -32,7 +32,7 @@ const List: React.FC = () => {
       isPublished: true,
       isStar: false,
       answerCount: 10,
-      createdAt: 'dawdaw',
+      createdAt: 'dawdaw'
     },
     {
       id: 'q4',
@@ -40,7 +40,7 @@ const List: React.FC = () => {
       isPublished: false,
       isStar: false,
       answerCount: 10,
-      createdAt: 'dawdaw',
+      createdAt: 'dawdaw'
     },
     {
       id: 'q5',
@@ -48,9 +48,9 @@ const List: React.FC = () => {
       isPublished: true,
       isStar: true,
       answerCount: 10,
-      createdAt: 'dawdaw',
-    },
-  ]);
+      createdAt: 'dawdaw'
+    }
+  ])
   return (
     <>
       <div className={styles.header}>
@@ -76,7 +76,7 @@ const List: React.FC = () => {
         ))}
       </div>
     </>
-  );
-};
+  )
+}
 
-export default List;
+export default List

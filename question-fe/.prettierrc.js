@@ -12,7 +12,7 @@ module.exports = {
   // 换行方式
   proseWrap: 'preserve',
   // 分号
-  semi: true,
+  semi: false,
   // 使用单引号
   singleQuote: true,
   // 缩进
@@ -20,6 +20,6 @@ module.exports = {
   // 使用 tab 缩进
   useTabs: false,
   // 后置逗号，多行对象、数组在最后一行增加逗号
-  trailingComma: 'es5',
+  trailingComma: 'none',
   parser: 'typescript',
-};
+}

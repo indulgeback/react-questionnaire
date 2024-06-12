@@ -1,18 +1,18 @@
-import React from 'react';
-import { createBrowserRouter } from 'react-router-dom';
+import React from 'react'
+import { createBrowserRouter } from 'react-router-dom'
 
-import MainLayout from '../layouts/MainLayout';
-import ManageLayout from '../layouts/ManageLayout';
-import QuestionLayout from '../layouts/QuestionLayout';
-import Home from '../pages/Home';
-import Login from '../pages/Login';
-import Register from '../pages/Register';
-import NotFound from '../pages/NotFound';
-import List from '../pages/manage/List';
-import Trash from '../pages/manage/Trash';
-import Star from '../pages/manage/Star';
-import Edit from '../pages/question/Edit';
-import Stat from '../pages/question/Stat';
+import MainLayout from '../layouts/MainLayout'
+import ManageLayout from '../layouts/ManageLayout'
+import QuestionLayout from '../layouts/QuestionLayout'
+import Home from '../pages/Home'
+import Login from '../pages/Login'
+import Register from '../pages/Register'
+import NotFound from '../pages/NotFound'
+import List from '../pages/manage/List'
+import Trash from '../pages/manage/Trash'
+import Star from '../pages/manage/Star'
+import Edit from '../pages/question/Edit'
+import Stat from '../pages/question/Stat'
 
 const router = createBrowserRouter([
   {
@@ -21,15 +21,15 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <Home />,
+        element: <Home />
       },
       {
         path: 'login',
-        element: <Login />,
+        element: <Login />
       },
       {
         path: 'register',
-        element: <Register />,
+        element: <Register />
       },
       {
         path: 'manage',
@@ -37,23 +37,23 @@ const router = createBrowserRouter([
         children: [
           {
             path: 'list',
-            element: <List />,
+            element: <List />
           },
           {
             path: 'star',
-            element: <Star />,
+            element: <Star />
           },
           {
             path: 'trash',
-            element: <Trash />,
-          },
-        ],
+            element: <Trash />
+          }
+        ]
       },
       {
         path: '*',
-        element: <NotFound />,
-      },
-    ],
+        element: <NotFound />
+      }
+    ]
   },
   {
     path: 'question',
@@ -61,20 +61,20 @@ const router = createBrowserRouter([
     children: [
       {
         path: 'edit/:id',
-        element: <Edit />,
+        element: <Edit />
       },
       {
         path: 'stat/:id',
-        element: <Stat />,
-      },
-    ],
-  },
-]);
+        element: <Stat />
+      }
+    ]
+  }
+])
 
-export default router;
+export default router
 
 // -------------------- 路由常量 --------------------
-export const HOME_PATH = '/';
-export const LOGIN_PATH = '/login';
-export const REGISTER_PATH = '/register';
-export const MANAGE_INDEX_PATH = '/manage/list';
+export const HOME_PATH = '/'
+export const LOGIN_PATH = '/login'
+export const REGISTER_PATH = '/register'
+export const MANAGE_INDEX_PATH = '/manage/list'

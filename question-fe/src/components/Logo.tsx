@@ -1,11 +1,11 @@
-import React from 'react';
-import { Space, Typography } from 'antd';
-import { FormOutlined } from '@ant-design/icons';
-import styles from './Logo.module.scss';
-import { Link } from 'react-router-dom';
-import { HOME_PATH } from '../router';
+import React from 'react'
+import { Space, Typography } from 'antd'
+import { FormOutlined } from '@ant-design/icons'
+import styles from './Logo.module.scss'
+import { Link } from 'react-router-dom'
+import { HOME_PATH } from '../router'
 
-const { Title } = Typography;
+const { Title } = Typography
 
 const Logo: React.FC = () => {
   return (
@@ -19,7 +19,7 @@ const Logo: React.FC = () => {
         </Space>
       </Link>
     </div>
-  );
-};
+  )
+}
 
-export default Logo;
+export default Logo

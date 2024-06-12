@@ -1,7 +1,7 @@
-import React from 'react';
+import React from 'react'
 // import './QuestionCard.css'
-import styles from './QuestionCard.module.scss';
-import { Button, Divider, Popconfirm, Space, Tag, message } from 'antd';
+import styles from './QuestionCard.module.scss'
+import { Button, Divider, Popconfirm, Space, Tag, message } from 'antd'
 import {
   CheckCircleOutlined,
   CopyOutlined,
@@ -9,30 +9,30 @@ import {
   EditOutlined,
   LineChartOutlined,
   QuestionCircleOutlined,
-  StarOutlined,
-} from '@ant-design/icons';
-import { Link, useNavigate } from 'react-router-dom';
+  StarOutlined
+} from '@ant-design/icons'
+import { Link, useNavigate } from 'react-router-dom'
 
 // ts 自定义类型
 type PropsType = {
-  _id: string;
-  title: string;
-  isStar: boolean;
-  isPublished: boolean;
-  answerCount: number;
-  createdAt: string;
-};
+  _id: string
+  title: string
+  isStar: boolean
+  isPublished: boolean
+  answerCount: number
+  createdAt: string
+}
 
 const QuestionCard: React.FC<PropsType> = (props: PropsType) => {
-  const [messageApi, contextHolder] = message.useMessage();
-  const nav = useNavigate();
-  const { _id, title, isStar, isPublished, answerCount, createdAt } = props;
+  const [messageApi, contextHolder] = message.useMessage()
+  const nav = useNavigate()
+  const { _id, title, isStar, isPublished, answerCount, createdAt } = props
   const duplicate = () => {
-    messageApi.success('复制成功');
-  };
+    messageApi.success('复制成功')
+  }
   const del = () => {
-    messageApi.success('删除成功');
-  };
+    messageApi.success('删除成功')
+  }
   return (
     <div className={styles.container}>
       {contextHolder}
@@ -68,7 +68,7 @@ const QuestionCard: React.FC<PropsType> = (props: PropsType) => {
               size="small"
               icon={<EditOutlined />}
               onClick={() => {
-                nav(`/question/edit/${_id}`);
+                nav(`/question/edit/${_id}`)
               }}
             >
               编辑问卷
@@ -78,7 +78,7 @@ const QuestionCard: React.FC<PropsType> = (props: PropsType) => {
               size="small"
               icon={<LineChartOutlined />}
               onClick={() => {
-                nav(`/question/stat/${_id}`);
+                nav(`/question/stat/${_id}`)
               }}
               disabled={!isPublished}
             >
@@ -116,7 +116,7 @@ const QuestionCard: React.FC<PropsType> = (props: PropsType) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default QuestionCard;
+export default QuestionCard

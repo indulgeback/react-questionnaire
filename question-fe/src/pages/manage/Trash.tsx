@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { useTitle } from 'ahooks';
-import styles from './Common.module.scss';
-import { Empty, Typography, Table, Tag, Space, Button, Modal } from 'antd';
-import { CheckCircleOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
-import ListSearch from '../../components/listSearch';
+import React, { useState } from 'react'
+import { useTitle } from 'ahooks'
+import styles from './Common.module.scss'
+import { Empty, Typography, Table, Tag, Space, Button, Modal } from 'antd'
+import { CheckCircleOutlined, ExclamationCircleOutlined } from '@ant-design/icons'
+import ListSearch from '../../components/listSearch'
 
-const { Title } = Typography;
-const { confirm } = Modal;
+const { Title } = Typography
+const { confirm } = Modal
 
 const rowData = [
   {
@@ -15,7 +15,7 @@ const rowData = [
     isPublished: true,
     isStar: false,
     answerCount: 10,
-    createdAt: 'dawdaw',
+    createdAt: 'dawdaw'
   },
   {
     _id: 'q2',
@@ -23,7 +23,7 @@ const rowData = [
     isPublished: false,
     isStar: true,
     answerCount: 10,
-    createdAt: 'dawdaw',
+    createdAt: 'dawdaw'
   },
   {
     _id: 'q3',
@@ -31,7 +31,7 @@ const rowData = [
     isPublished: true,
     isStar: false,
     answerCount: 10,
-    createdAt: 'dawdaw',
+    createdAt: 'dawdaw'
   },
   {
     _id: 'q4',
@@ -39,7 +39,7 @@ const rowData = [
     isPublished: false,
     isStar: false,
     answerCount: 10,
-    createdAt: 'dawdaw',
+    createdAt: 'dawdaw'
   },
   {
     _id: 'q5',
@@ -47,14 +47,14 @@ const rowData = [
     isPublished: true,
     isStar: true,
     answerCount: 10,
-    createdAt: 'dawdaw',
-  },
-];
+    createdAt: 'dawdaw'
+  }
+]
 
 const tableColumns = [
   {
     title: '问卷标题',
-    dataIndex: 'title',
+    dataIndex: 'title'
   },
   {
     title: '是否发布',
@@ -66,32 +66,32 @@ const tableColumns = [
         </Tag>
       ) : (
         <Tag>未发布</Tag>
-      );
-    },
+      )
+    }
   },
   {
     title: '答卷数量',
-    dataIndex: 'answerCount',
+    dataIndex: 'answerCount'
   },
   {
     title: '创建时间',
-    dataIndex: 'createdAt',
-  },
-];
+    dataIndex: 'createdAt'
+  }
+]
 
 const Trash: React.FC = () => {
-  useTitle('小木问卷 - 星标问卷');
-  const [questionList, setQuestionList] = useState(rowData);
+  useTitle('小木问卷 - 星标问卷')
+  const [questionList, setQuestionList] = useState(rowData)
   // 记录选中的id
-  const [selectedIds, setSelectedIds] = useState<string[]>([]);
+  const [selectedIds, setSelectedIds] = useState<string[]>([])
 
   function del() {
     confirm({
       title: '确认彻底删除该问卷吗？',
       icon: <ExclamationCircleOutlined />,
       content: '删除以后不可以找回',
-      onOk: () => alert('删除' + JSON.stringify(selectedIds)),
-    });
+      onOk: () => alert('删除' + JSON.stringify(selectedIds))
+    })
   }
 
   const TableElm = (
@@ -113,11 +113,11 @@ const Trash: React.FC = () => {
         rowKey={q => q._id}
         rowSelection={{
           type: 'checkbox',
-          onChange: selectedRowKeys => setSelectedIds(selectedRowKeys as string[]),
+          onChange: selectedRowKeys => setSelectedIds(selectedRowKeys as string[])
         }}
       />
     </>
-  );
+  )
 
   return (
     <>
@@ -136,7 +136,7 @@ const Trash: React.FC = () => {
       </div>
       <div className={styles.footer}>分页</div>
     </>
-  );
-};
+  )
+}
 
-export default Trash;
+export default Trash

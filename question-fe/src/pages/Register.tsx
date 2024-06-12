@@ -1,16 +1,16 @@
-import React from 'react';
-import { Typography, Space, Button, Form, Input } from 'antd';
-import { UserAddOutlined } from '@ant-design/icons';
-import styles from './Register.module.scss';
-import { Link } from 'react-router-dom';
-import { LOGIN_PATH } from '../router';
+import React from 'react'
+import { Typography, Space, Button, Form, Input } from 'antd'
+import { UserAddOutlined } from '@ant-design/icons'
+import styles from './Register.module.scss'
+import { Link } from 'react-router-dom'
+import { LOGIN_PATH } from '../router'
 
-const { Title } = Typography;
+const { Title } = Typography
 
 const Register: React.FC = () => {
   const onFinish = (values: any) => {
-    console.dir(values);
-  };
+    console.dir(values)
+  }
 
   return (
     <div className={styles.container}>
@@ -65,7 +65,7 @@ const Register: React.FC = () => {
         </Form>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Register;
+export default Register

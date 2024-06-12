@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import { useTitle } from 'ahooks';
-import QuestionCard from '../../components/QuestionCard';
-import styles from './Common.module.scss';
-import ListSearch from '../../components/listSearch';
-import { Empty, Typography } from 'antd';
+import React, { useState } from 'react'
+import { useTitle } from 'ahooks'
+import QuestionCard from '../../components/QuestionCard'
+import styles from './Common.module.scss'
+import ListSearch from '../../components/listSearch'
+import { Empty, Typography } from 'antd'
 
-const { Title } = Typography;
+const { Title } = Typography
 
 const Star: React.FC = () => {
-  useTitle('小木问卷 - 星标问卷');
+  useTitle('小木问卷 - 星标问卷')
   const [questionList, setQuestionList] = useState([
     {
       _id: 'q1',
@@ -16,7 +16,7 @@ const Star: React.FC = () => {
       isPublished: true,
       isStar: false,
       answerCount: 10,
-      createdAt: 'dawdaw',
+      createdAt: 'dawdaw'
     },
     {
       _id: 'q2',
@@ -24,7 +24,7 @@ const Star: React.FC = () => {
       isPublished: false,
       isStar: true,
       answerCount: 10,
-      createdAt: 'dawdaw',
+      createdAt: 'dawdaw'
     },
     {
       _id: 'q3',
@@ -32,7 +32,7 @@ const Star: React.FC = () => {
       isPublished: true,
       isStar: false,
       answerCount: 10,
-      createdAt: 'dawdaw',
+      createdAt: 'dawdaw'
     },
     {
       _id: 'q4',
@@ -40,7 +40,7 @@ const Star: React.FC = () => {
       isPublished: false,
       isStar: false,
       answerCount: 10,
-      createdAt: 'dawdaw',
+      createdAt: 'dawdaw'
     },
     {
       _id: 'q5',
@@ -48,9 +48,9 @@ const Star: React.FC = () => {
       isPublished: true,
       isStar: true,
       answerCount: 10,
-      createdAt: 'dawdaw',
-    },
-  ]);
+      createdAt: 'dawdaw'
+    }
+  ])
   return (
     <>
       <div className={styles.header}>
@@ -67,13 +67,13 @@ const Star: React.FC = () => {
 
         {questionList.length > 0 &&
           questionList.map(q => {
-            const { _id } = q;
-            return q.isStar && <QuestionCard key={_id} {...q} />;
+            const { _id } = q
+            return q.isStar && <QuestionCard key={_id} {...q} />
           })}
       </div>
       <div className={styles.footer}>分页</div>
     </>
-  );
-};
+  )
+}
 
-export default Star;
+export default Star

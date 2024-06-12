@@ -1,5 +1,5 @@
-import React from 'react';
-import { Outlet } from 'react-router-dom';
+import React from 'react'
+import { Outlet } from 'react-router-dom'
 
 const QuestionLayout: React.FC = () => {
   return (
@@ -9,7 +9,7 @@ const QuestionLayout: React.FC = () => {
         <Outlet />
       </div>
     </>
-  );
-};
+  )
+}
 
-export default QuestionLayout;
+export default QuestionLayout

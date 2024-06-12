@@ -1,12 +1,12 @@
-import React from 'react';
-import { Outlet, useNavigate, useLocation } from 'react-router-dom';
-import styles from './ManageLayout.module.scss';
-import { Button, Space, Divider } from 'antd';
-import { PlusOutlined, BarsOutlined, StarOutlined, DeleteOutlined } from '@ant-design/icons';
+import React from 'react'
+import { Outlet, useNavigate, useLocation } from 'react-router-dom'
+import styles from './ManageLayout.module.scss'
+import { Button, Space, Divider } from 'antd'
+import { PlusOutlined, BarsOutlined, StarOutlined, DeleteOutlined } from '@ant-design/icons'
 
 const ManageLayout: React.FC = () => {
-  const nav = useNavigate();
-  const { pathname } = useLocation();
+  const nav = useNavigate()
+  const { pathname } = useLocation()
   return (
     <div className={styles.container}>
       <div className={styles.left}>
@@ -45,7 +45,7 @@ const ManageLayout: React.FC = () => {
         <Outlet />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ManageLayout;
+export default ManageLayout

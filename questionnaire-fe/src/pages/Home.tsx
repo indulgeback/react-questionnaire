@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Button, Typography } from 'antd'
 import { MANAGE_INDEX_PATH } from '../router'
@@ -6,11 +6,21 @@ import styles from './Home.module.scss'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import Face from '../components/Face'
+import axios from 'axios'
 
 const { Title, Paragraph } = Typography
 
 const Home: React.FC = () => {
   const nav = useNavigate()
+
+  useEffect(() => {
+    axios('/api/test').then(res => console.log(res.data))
+
+    // fetch('/api/test')
+    //   .then(res => res.json())
+    //   .then(res => console.log(res))
+  }, [])
+
   useGSAP(() => {
     const tl = gsap.timeline()
     tl.from('#title', { x: -100, duration: 1.5, opacity: 0 })

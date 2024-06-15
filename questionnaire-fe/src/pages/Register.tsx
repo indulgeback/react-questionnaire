@@ -27,7 +27,11 @@ const Register: React.FC = () => {
           <Form.Item
             label="用户名"
             name="username"
-            rules={[{ required: true, message: '请输入用户名!' }]}
+            rules={[
+              { required: true, message: '请输入用户名!' },
+              { type: 'string', min: 5, max: 20, message: '字符长度在 5-20 之间' },
+              { pattern: /^\w+$/, message: '只能是数字字母下划线' }
+            ]}
           >
             <Input />
           </Form.Item>
@@ -43,7 +47,19 @@ const Register: React.FC = () => {
           <Form.Item
             label="确认密码"
             name="confirm"
-            rules={[{ required: true, message: '请输入确认密码!' }]}
+            dependencies={['password']}
+            rules={[
+              { required: true, message: '请输入确认密码!' },
+              ({ getFieldValue }) => ({
+                validator(_, value) {
+                  if (!value || getFieldValue('password') === value) {
+                    return Promise.resolve()
+                  } else {
+                    return Promise.reject(new Error('两次密码不一致'))
+                  }
+                }
+              })
+            ]}
           >
             <Input.Password />
           </Form.Item>

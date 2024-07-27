@@ -22,6 +22,7 @@ module.exports = [
       }
     },
   },
+  // 创建问卷
   {
     url: "/api/question",
     method: "post",
@@ -31,6 +32,7 @@ module.exports = [
         data: {
           id: Random.id(),
         },
+        msg: "创建成功",
       }
     },
   },

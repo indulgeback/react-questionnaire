@@ -1,7 +1,7 @@
-import axios from 'axios'
+import axios, { AxiosInstance } from 'axios'
 import { message } from 'antd'
 
-const instance = axios.create({
+const instance: AxiosInstance = axios.create({
   baseURL: 'http://localhost:3001',
   timeout: 5000
 })

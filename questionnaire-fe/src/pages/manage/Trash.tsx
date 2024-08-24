@@ -3,7 +3,7 @@ import { useTitle } from 'ahooks'
 import styles from './Common.module.scss'
 import { Empty, Typography, Table, Tag, Space, Button, Modal } from 'antd'
 import { CheckCircleOutlined, ExclamationCircleOutlined } from '@ant-design/icons'
-import ListSearch from '../../components/listSearch'
+import ListSearch from '@/components/listSearch'
 
 const { Title } = Typography
 const { confirm } = Modal

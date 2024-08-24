@@ -2,22 +2,36 @@ import React, { useState } from 'react'
 import { Outlet, useNavigate, useLocation } from 'react-router-dom'
 import styles from './ManageLayout.module.scss'
 import { Button, Space, Divider, message } from 'antd'
+import { useRequest } from 'ahooks'
 import { PlusOutlined, BarsOutlined, StarOutlined, DeleteOutlined } from '@ant-design/icons'
 import apis from '@/apis'
 const ManageLayout: React.FC = () => {
   const nav = useNavigate()
   const { pathname } = useLocation()
 
-  const [loading, setLoading] = useState(false)
-  const handleCreateQuestion = async () => {
-    setLoading(true)
-    const data = await apis.createQuestion()
-    if (data.id) {
-      nav(`/question/edit/${data.id}`)
+  // const [loading, setLoading] = useState(false)
+  // const handleCreateQuestion = async () => {
+  //   setLoading(true)
+  //   const data = await apis.createQuestion()
+  //   if (data.id) {
+  //     nav(`/question/edit/${data.id}`)
+  //     message.success('创建成功')
+  //   }
+  //   setLoading(false)
+  // }
+
+  // 手动触发逻辑
+  const {
+    loading,
+    error,
+    run: handleCreateQuestion
+  } = useRequest(apis.createQuestion, {
+    manual: true,
+    onSuccess(result) {
+      nav(`/question/edit/${result.id}`)
       message.success('创建成功')
     }
-    setLoading(false)
-  }
+  })
 
   return (
     <div className={styles.container}>

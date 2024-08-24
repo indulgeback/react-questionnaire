@@ -1,24 +1,13 @@
-import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
-import apis from '@/apis'
+import React from 'react'
+
+import useLoadQuestionData from '@/hooks/useLoadQuestionData'
 
 const Edit: React.FC = () => {
-  const { id = '' } = useParams()
-  const [loading, setLoading] = useState(true)
-  const [questionData, setQuestionData] = useState({})
-  const getQuestionData = async () => {
-    const data = await apis.getQuestionById(id)
-    setQuestionData(data)
-    setLoading(false)
-  }
-
-  useEffect(() => {
-    getQuestionData()
-  }, [])
-
+  const { loading, data } = useLoadQuestionData()
   return (
     <div>
-      <h1>Edit{id}</h1>
+      <h1>Edit</h1>
+      <h1>{loading ? <p> loading </p> : <p>{JSON.stringify(data)}</p>}</h1>
     </div>
   )
 }

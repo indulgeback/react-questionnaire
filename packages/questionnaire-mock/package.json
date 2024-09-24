@@ -1,5 +1,5 @@
 {
-  "name": "questionnaire-mock",
+  "name": "@questionnaire/mock",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",

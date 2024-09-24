@@ -10,6 +10,39 @@ react-小木问卷项目
 
 项目于 2024 年 9 月 24 日进行架构重构为 MonoRepo 架构，分包为 fe(前端) 和 mock(mock 服务)
 
+├─README.md
+├─package.json
+├─pnpm-lock.yaml
+├─pnpm-workspace.yaml
+├─packages
+| ├─questionnaire-mock
+| | ├─index.js
+| | ├─package.json
+| | ├─pnpm-lock.yaml
+| | ├─mock
+| | | ├─index.js
+| | | ├─module
+| | | | ├─question.js
+| | | | └test.js
+| | | ├─data
+| | | | └getQuestionList.js
+| ├─questionnaire-fe
+| | ├─.babelrc
+| | ├─.eslintrc.js
+| | ├─.prettierrc.js
+| | ├─README.md
+| | ├─commitlint.config.js
+| | ├─craco.config.js
+| | ├─package-lock.json
+| | ├─package.json
+| | ├─pnpm-lock.yaml
+| | ├─tsconfig.json
+| | ├─src
+| | ├─public
+| | | ├─favicon.ico
+| | | ├─index.html
+| | | └manifest.json
+
 #### 安装教程
 
 ```bash

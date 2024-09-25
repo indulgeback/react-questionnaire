@@ -2,8 +2,8 @@
   "name": "root",
   "private": true,
   "scripts": {
-    "dev:fe": "pnpm -F questionnaire-fe dev",
-    "dev:mock": "pnpm -F questionnaire-mock dev",
+    "dev:fe": "pnpm -F @questionnaire/fe dev",
+    "dev:mock": "pnpm -F @questionnaire/mock dev",
     "prepare": "husky install"
   },
   "devDependencies": {

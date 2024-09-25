@@ -54,8 +54,8 @@ pnpm i
 
 ```json
     "scripts": {
-        "dev:fe": "pnpm -F questionnaire-fe dev", // 前端服务开发模式
-        "dev:mock": "pnpm -F questionnaire-mock dev", // mock 服务开发模式
+        "dev:fe": "pnpm -F @questionnaire/fe dev", // 前端服务开发模式
+        "dev:mock": "pnpm -F @questionnaire/mock dev", // mock 服务开发模式
         "prepare": "husky install"
     },
 ```

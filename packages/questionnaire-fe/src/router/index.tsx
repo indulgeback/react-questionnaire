@@ -13,6 +13,7 @@ import Trash from '../pages/manage/Trash'
 import Star from '../pages/manage/Star'
 import Edit from '../pages/question/Edit'
 import Stat from '../pages/question/Stat'
+import X6 from '../pages/x6'
 
 const router = createBrowserRouter([
   {
@@ -68,6 +69,10 @@ const router = createBrowserRouter([
         element: <Stat />
       }
     ]
+  },
+  {
+    path: 'x6',
+    element: <X6 />
   }
 ])
 

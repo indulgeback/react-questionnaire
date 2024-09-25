@@ -3,7 +3,7 @@ import { Typography, Space, Button, Form, Input } from 'antd'
 import { UserAddOutlined } from '@ant-design/icons'
 import styles from './Register.module.scss'
 import { Link } from 'react-router-dom'
-import { LOGIN_PATH } from '../router'
+import { LOGIN_PATH } from '@/router'
 
 const { Title } = Typography
 

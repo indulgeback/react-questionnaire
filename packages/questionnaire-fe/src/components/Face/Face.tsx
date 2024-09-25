@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './Face.module.scss'
-import useRollEyeBall from '../hooks/useRollEyeBalls'
+import useRollEyeBall from '@/hooks/useRollEyeBalls'
 
 const Face: React.FC = () => {
   const { leftEyeBallRef, rightEyeBallRef } = useRollEyeBall()

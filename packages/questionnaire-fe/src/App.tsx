@@ -5,6 +5,7 @@ import { ConfigProvider } from 'antd'
 
 const MyApp: React.FC = () => {
   return (
+    // AntD 配置主题色
     <ConfigProvider
       theme={{
         token: {

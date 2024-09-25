@@ -1,14 +1,17 @@
 import axios, { AxiosInstance } from 'axios'
 import { message } from 'antd'
 
+// 创建axios实例
 const instance: AxiosInstance = axios.create({
   timeout: 5000
 })
 
+// 请求拦截器
 instance.interceptors.request.use(config => {
   return config
 })
 
+// 响应拦截器
 instance.interceptors.response.use(response => {
   const responseData = response.data
   // 解构状态码与错误提示信息
@@ -17,6 +20,7 @@ instance.interceptors.response.use(response => {
     return responseData
   } else {
     if (msg) {
+      // 错误信息统一处理
       message.error(msg)
       throw new Error(msg)
     }

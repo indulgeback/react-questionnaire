@@ -1,5 +1,4 @@
 import React from 'react'
-// import './QuestionCard.css'
 import styles from './QuestionCard.module.scss'
 import { Button, Divider, Popconfirm, Space, Tag, message } from 'antd'
 import {

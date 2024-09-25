@@ -1,9 +1,9 @@
 import React from 'react'
 import { useRequest, useTitle } from 'ahooks'
-import QuestionCard from '@/components/QuestionCard'
+import QuestionCard from '@/components/Common/QuestionCard'
 import styles from './Common.module.scss'
 import { Typography, Spin } from 'antd'
-import ListSearch from '@/components/listSearch'
+import ListSearch from '@/components/Common/listSearch'
 import apis from '@/apis'
 
 const { Title } = Typography

@@ -1,32 +1,23 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Button, Typography } from 'antd'
-import { MANAGE_INDEX_PATH } from '../router'
+import { MANAGE_INDEX_PATH } from '@/router'
 import styles from './Home.module.scss'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
-import Face from '../components/Face'
-import axios from 'axios'
+import Face from '@/components/Face/Face'
 
 const { Title, Paragraph } = Typography
 
 const Home: React.FC = () => {
   const nav = useNavigate()
 
-  useEffect(() => {
-    axios('/api/test').then(res => console.log(res.data))
-
-    // fetch('/api/test')
-    //   .then(res => res.json())
-    //   .then(res => console.log(res))
-  }, [])
-
+  // 配置 GSAP 动画
   useGSAP(() => {
     const tl = gsap.timeline()
     tl.from('#title', { x: -100, duration: 1.5, opacity: 0 })
     tl.from('#startBtn', { opacity: 0, y: 200, duration: 1, ease: 'bounce.out' }, '<')
     tl.from('#description', { y: 50, duration: 1.5, opacity: 0 })
-    tl.to('#subTitle', { duration: 1, text: '轻 松 使 用 , 快 捷 便 利 !' })
   })
 
   return (

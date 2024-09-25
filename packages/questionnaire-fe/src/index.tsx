@@ -3,11 +3,6 @@ import ReactDOM from 'react-dom/client'
 import './index.css'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
-import gsap from 'gsap'
-import { TextPlugin } from 'gsap/all'
-import { useGSAP } from '@gsap/react'
-
-gsap.registerPlugin(TextPlugin, useGSAP)
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(

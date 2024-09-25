@@ -1,7 +1,7 @@
 import { Input } from 'antd'
 import React, { ChangeEvent, useEffect, useState } from 'react'
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
-import { LIST_SEARCH_PARAM_KEY } from '../constant'
+import { LIST_SEARCH_PARAM_KEY } from '@/constant'
 
 const { Search } = Input
 

@@ -8,7 +8,8 @@ react-小木问卷项目
 
 软件架构说明
 
-项目于 2024 年 9 月 24 日进行架构重构为 MonoRepo 架构，分包为 fe(前端) 和 mock(mock 服务)
+项目于 2024 年 9 月 24 日进行架构重构为 MonoRepo 架构，分包为 fe(前端) 、mock(mock 服务)
+项目于 2024 年 10 月 9 日新增 be(后端) 服务
 
 ├─README.md
 ├─package.json
@@ -55,6 +56,7 @@ pnpm i
 ```json
     "scripts": {
         "dev:fe": "pnpm -F @questionnaire/fe dev", // 前端服务开发模式
+        "dev:be": "pnpm -F @questionnaire/be start:dev", // 后端服务开发模式
         "dev:mock": "pnpm -F @questionnaire/mock dev", // mock 服务开发模式
         "prepare": "husky install"
     },

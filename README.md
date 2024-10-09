@@ -2,7 +2,12 @@
 
 #### 介绍
 
-react-小木问卷项目
+小木问卷 - 基于 NestJS 的问卷生成系统
+
+- 前端(PC前台)：React18 + AntD
+- 前端(移动端前台)：NextJS
+- 后端：NestJS + MySQL + MongoDB
+- Mock：mockjs
 
 #### 软件架构
 

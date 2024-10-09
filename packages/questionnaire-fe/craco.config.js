@@ -4,9 +4,9 @@ module.exports = {
   // 开发服务器配置
   devServer: {
     proxy: {
-      '/api': 'http://localhost:8897'
+      '/api': 'http://localhost:8878'
     },
-    port: 8899
+    port: 8877
   },
   webpack: {
     // webpack配置

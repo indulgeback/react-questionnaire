@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "dev:fe": "pnpm -F @questionnaire/fe dev",
+    "dev:be": "pnpm -F @questionnaire/be start:dev",
     "dev:mock": "pnpm -F @questionnaire/mock dev",
     "prepare": "husky install"
   },

@@ -9,9 +9,11 @@
     "dev:be": "pnpm -F @questionnaire/be start:dev",
     "dev:mock": "pnpm -F @questionnaire/mock dev",
     "generate-tree": "npx treer -e ./structure-tree.txt -i \"/node_modules|.git|dist/\"",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "version": "npx lerna version"
   },
   "devDependencies": {
-    "husky": "^8.0.3"
+    "husky": "^8.0.3",
+    "lerna": "^8.1.8"
   }
 }

@@ -2,7 +2,6 @@
   "dependencies": {
     "@nestjs/mapped-types": "*"
   },
-  "version": "0.0.1",
   "name": "root",
   "private": true,
   "scripts": {

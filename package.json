@@ -11,7 +11,7 @@
     "generate-tree": "npx treer -e ./structure-tree.txt -i \"/node_modules|.git|dist/\"",
     "prepare": "husky install",
     "version": "npx lerna version --conventional-commits --no-git-tag-version --force-publish=*",
-    "postversion": "git add . && git commit -m 'chore: bump versions' && git tag v`node -p \"require('./lerna.json').version\"` && git push --follow-tags"
+    "postversion": "git add . && git commit -m 'chore: bump versions' && git tag v`node -p \"require('./lerna.json').version\"` && git push && git push origin --tags"
   },
   "devDependencies": {
     "@lerna/conventional-commits": "^6.4.1",

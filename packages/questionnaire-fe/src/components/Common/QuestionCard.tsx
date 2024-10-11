@@ -11,6 +11,7 @@ import {
   StarOutlined
 } from '@ant-design/icons'
 import { Link, useNavigate } from 'react-router-dom'
+import dayjs from 'dayjs'
 
 // ts 自定义类型
 type PropsType = {
@@ -39,7 +40,9 @@ const QuestionCard: React.FC<PropsType> = (props: PropsType) => {
         <div className={styles.left}>
           <Link to={isPublished ? `/question/stat/${_id}` : `/question/edit/${_id}`}>
             <Space>
-              {isStar && <StarOutlined style={{ color: '#fadb14' }} />}
+              <span className={styles.star}>
+                {isStar && <StarOutlined style={{ color: '#fadb14' }} />}
+              </span>
               {title}
             </Space>
           </Link>
@@ -54,7 +57,7 @@ const QuestionCard: React.FC<PropsType> = (props: PropsType) => {
               <Tag>未发布</Tag>
             )}
             <span>答卷:{answerCount}</span>
-            <span>创建于:{createdAt}</span>
+            <span>创建于:{dayjs(createdAt).format('YYYY-MM-DD HH:mm:ss')}</span>
           </Space>
         </div>
       </div>

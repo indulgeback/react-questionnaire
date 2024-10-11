@@ -36,10 +36,10 @@ const List: React.FC = () => {
               key={item.id}
               _id={item.id}
               title={item.title}
-              isPublished={item.isPublished}
-              isStar={item.isStar}
-              answerCount={item.answerCount}
-              createdAt={item.createdAt}
+              isPublished={item.is_published}
+              isStar={item.is_star}
+              answerCount={item.answer_count}
+              createdAt={item.create_time}
             />
           ))}
       </div>

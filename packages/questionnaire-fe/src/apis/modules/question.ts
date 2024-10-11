@@ -7,8 +7,8 @@ const prefix = '/api/question'
 /**
  * 获取问卷列表
  */
-export const getQuestionList = async () => {
-  const { data } = await request.get(`${prefix}`)
+export const getQuestionList = async (page: number, limit: number) => {
+  const { data } = await request.get(`${prefix}?page=${page}&limit=${limit}`)
   return data
 }
 

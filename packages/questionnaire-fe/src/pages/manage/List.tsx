@@ -1,5 +1,5 @@
-import React from 'react'
-import { useRequest, useTitle } from 'ahooks'
+import React, { useEffect, useRef, useState } from 'react'
+import { useInViewport, useRequest, useTitle } from 'ahooks'
 import QuestionCard from '@/components/Common/QuestionCard'
 import styles from './Common.module.scss'
 import { Typography, Spin } from 'antd'
@@ -10,8 +10,17 @@ const { Title } = Typography
 
 const List: React.FC = () => {
   useTitle('小木问卷 - 我的问卷')
-  const { loading, data = {} } = useRequest(apis.getQuestionList)
-  const { list: questionList = [] } = data
+  const bottomRef = useRef(null)
+  const [currentView, setCurrentView] = useState(1)
+  const [isTouchBottom] = useInViewport(bottomRef)
+
+  useEffect(() => {
+    const { loading, data = {} } = useRequest(() => apis.getQuestionList(currentView, 20))
+    const { list = [] } = data
+    if (isTouchBottom && data.list.length > 0) {
+      setCurrentView(currentView + 1)
+    }
+  }, [isTouchBottom])
   return (
     <>
       <div className={styles.header}>
@@ -23,11 +32,6 @@ const List: React.FC = () => {
         </div>
       </div>
       <div className={styles.list}>
-        {loading && (
-          <div style={{ textAlign: 'center', marginTop: 60 }}>
-            <Spin />
-          </div>
-        )}
         {/* 问卷列表 */}
         {!loading &&
           questionList.length > 0 &&
@@ -42,6 +46,13 @@ const List: React.FC = () => {
               createdAt={item.create_time}
             />
           ))}
+        <div ref={bottomRef}>
+          {loading && (
+            <div style={{ textAlign: 'center', marginTop: 60 }}>
+              <Spin />
+            </div>
+          )}
+        </div>
       </div>
     </>
   )

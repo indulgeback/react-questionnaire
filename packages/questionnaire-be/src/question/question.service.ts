@@ -15,8 +15,11 @@ export class QuestionService {
     return 'This action adds a new question';
   }
 
-  async findAll() {
-    const questionList = await this.questionRepository.find();
+  async findAll(page, limit) {
+    const questionList = await this.questionRepository.find({
+      skip: (page - 1) * limit,
+      take: limit,
+    });
     return {
       code: 1,
       data: {

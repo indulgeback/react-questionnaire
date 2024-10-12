@@ -1,0 +1,9 @@
+# 数据库配置
+db:
+  type: 'mysql'
+  host: 'localhost'
+  username: 'root'
+  password: '12345678'
+  database: 'questionnaire_db'
+  port: 3306
+  synchronize: true

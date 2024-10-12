@@ -7,20 +7,44 @@ import ListSearch from '@/components/Common/listSearch'
 import apis from '@/apis'
 
 const { Title } = Typography
+// 上拉加载步进长度
+const stepSize = 20
 
 const List: React.FC = () => {
   useTitle('小木问卷 - 我的问卷')
   const bottomRef = useRef(null)
   const [currentView, setCurrentView] = useState(1)
-  const [isTouchBottom] = useInViewport(bottomRef)
+  const [questionList, setQuestionList] = useState([])
 
+  // 使用 useRequest 获取数据
+  const {
+    loading,
+    data,
+    run: getList
+  } = useRequest(() => apis.getQuestionList(currentView, stepSize), {
+    manual: true
+  })
+
+  // 当数据加载完成时更新 questionList
   useEffect(() => {
-    const { loading, data = {} } = useRequest(() => apis.getQuestionList(currentView, 20))
-    const { list = [] } = data
-    if (isTouchBottom && data.list.length > 0) {
-      setCurrentView(currentView + 1)
+    if (data && data.list) {
+      setQuestionList(questionList.concat(data.list))
+    }
+  }, [data])
+
+  // 监听 isTouchBottom 变化，触发加载更多
+  const [isTouchBottom] = useInViewport(bottomRef)
+  useEffect(() => {
+    if (isTouchBottom) {
+      getList()
+      setCurrentView(currentView => currentView + 1)
     }
   }, [isTouchBottom])
+
+  useEffect(() => {
+    getList()
+  }, [])
+
   return (
     <>
       <div className={styles.header}>
@@ -33,8 +57,7 @@ const List: React.FC = () => {
       </div>
       <div className={styles.list}>
         {/* 问卷列表 */}
-        {!loading &&
-          questionList.length > 0 &&
+        {questionList.length > 0 &&
           questionList.map((item: any) => (
             <QuestionCard
               key={item.id}

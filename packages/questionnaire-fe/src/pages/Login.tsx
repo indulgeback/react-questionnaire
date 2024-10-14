@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react'
 import styles from './Login.module.scss'
 import { useNavigate, Link } from 'react-router-dom'
-import { Button, Checkbox, Form, Input, Space, Typography } from 'antd'
+import { Button, Checkbox, Form, Input, message, Space, Typography } from 'antd'
 import { UserAddOutlined } from '@ant-design/icons'
 import { REGISTER_PATH } from '@/router'
+import apis from '@/apis'
 
 const { Title } = Typography
 
@@ -30,9 +31,11 @@ function getUserFormStorage() {
 const Login: React.FC = () => {
   const nav = useNavigate()
 
-  const onFinish = (values: any) => {
+  const onFinish = async (values: any) => {
     const { username, password, remember } = values || {}
     if (remember) {
+      const res = await apis.login({ username, password })
+      message.success(res.msg)
       rememberUser(username, password)
     } else {
       deleteUserFormStorage()

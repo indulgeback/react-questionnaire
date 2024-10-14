@@ -1,9 +1,10 @@
 import { getQuestionById, createQuestion, getQuestionList } from './modules/question'
-import { register } from './modules/auth'
+import { register, login } from './modules/auth'
 
 export default {
   createQuestion,
   getQuestionById,
   getQuestionList,
-  register
+  register,
+  login
 }

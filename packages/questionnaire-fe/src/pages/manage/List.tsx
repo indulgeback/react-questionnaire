@@ -19,7 +19,7 @@ const List: React.FC = () => {
   // 使用 useRequest 获取数据
   const {
     loading,
-    data,
+    data: res,
     run: getList
   } = useRequest(() => apis.getQuestionList(currentView, stepSize), {
     manual: true
@@ -27,10 +27,10 @@ const List: React.FC = () => {
 
   // 当数据加载完成时更新 questionList
   useEffect(() => {
-    if (data && data.list) {
-      setQuestionList(questionList.concat(data.list))
+    if (res && res.data.list) {
+      setQuestionList(questionList.concat(res.data.list))
     }
-  }, [data])
+  }, [res])
 
   // 监听 isTouchBottom 变化，触发加载更多
   const [isTouchBottom] = useInViewport(bottomRef)

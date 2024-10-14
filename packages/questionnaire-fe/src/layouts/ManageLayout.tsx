@@ -28,7 +28,7 @@ const ManageLayout: React.FC = () => {
   } = useRequest(apis.createQuestion, {
     manual: true,
     onSuccess(result) {
-      nav(`/question/edit/${result.id}`)
+      nav(`/question/edit/${result.data.id}`)
       message.success('创建成功')
     }
   })

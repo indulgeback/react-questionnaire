@@ -3,7 +3,9 @@ import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/User.entity';
 import { Repository } from 'typeorm';
-import { RegisterUserDto } from './dto/register-user.dto';
+import RegisterUserDto from './dto/register-user.dto';
+import LoginDto from './dto/login.dto';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class AuthService {
@@ -13,13 +15,28 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  async createUser(RegisterUserDto: RegisterUserDto) {
-    return await this.userRepository.save(RegisterUserDto);
+  async createUser(registerUserDto: RegisterUserDto) {
+    const saltRounds = 10; // 盐的轮数
+    // 撒盐加密
+    registerUserDto.password = await bcrypt.hash(
+      registerUserDto.password,
+      saltRounds,
+    );
+    return await this.userRepository.save(registerUserDto);
   }
 
   async findByUsername(username: string) {
     return await this.userRepository.findOne({
       where: { username },
     });
+  }
+
+  async comparePassword(loginDto: LoginDto) {
+    const user = await this.findByUsername(loginDto.username);
+    // 解密匹配
+    if (user && (await bcrypt.compare(loginDto.password, user.password))) {
+      return true;
+    }
+    return false;
   }
 }

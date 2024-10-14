@@ -1,5 +1,4 @@
-export class RegisterUserDto {
-  username: string;
-  password: string;
+import LoginDto from './login.dto';
+export default class RegisterUserDto extends LoginDto {
   nickname: string;
 }

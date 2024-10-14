@@ -1,5 +1,5 @@
 import React from 'react'
-import { Typography, Space, Button, Form, Input } from 'antd'
+import { Typography, Space, Button, Form, Input, message } from 'antd'
 import { UserAddOutlined } from '@ant-design/icons'
 import styles from './Register.module.scss'
 import { Link } from 'react-router-dom'
@@ -41,7 +41,7 @@ const Register: React.FC = () => {
 
   const onFinish = async (values: UserInfo) => {
     const res = await apis.register(values)
-    console.log(res)
+    message.success(res.msg)
   }
 
   return (

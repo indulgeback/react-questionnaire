@@ -1,8 +1,9 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { RegisterUserDto } from './dto/register-user.dto';
+import { ResponseBody } from 'src/common/classes/response-body';
 
-@Controller('api/auth')
+@Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
@@ -10,17 +11,11 @@ export class AuthController {
   @Post('register')
   async register(@Body() RegisterUserDto: RegisterUserDto) {
     const { username } = RegisterUserDto;
-    const resp = {
-      code: null,
-      data: null,
-      message: null,
-    };
     if (await this.authService.findByUsername(username)) {
-      this.authService.register(RegisterUserDto);
+      return new ResponseBody<null>(0, null, '用户名已存在');
     } else {
-      resp.code = 0;
-      resp.message = '该用户名已存在';
-      return resp;
+      this.authService.createUser(RegisterUserDto);
+      return new ResponseBody<null>(1, null, '注册成功');
     }
   }
 }

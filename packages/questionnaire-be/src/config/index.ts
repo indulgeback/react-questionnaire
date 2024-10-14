@@ -9,8 +9,7 @@ const configFileNameObj = {
   docker: 'docker',
 };
 
-// const env = process.env.NODE_ENV;
-const env = 'development';
+const env = process.env.NODE_ENV || 'development';
 
 export default () => {
   return load(

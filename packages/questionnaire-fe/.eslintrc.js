@@ -9,6 +9,11 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended'
   ],
+  settings: {
+    react: {
+      version: 'detect' // 自动检测 React 版本
+    }
+  },
   overrides: [],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -16,5 +21,8 @@ module.exports = {
     sourceType: 'module'
   },
   plugins: ['react', '@typescript-eslint'],
-  rules: {}
+  rules: {
+    '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/no-unused-vars': 'off'
+  }
 }

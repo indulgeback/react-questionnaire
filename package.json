@@ -11,9 +11,13 @@
     "generate-tree": "npx treer -e ./structure-tree.txt -i \"/node_modules|.git|dist/\"",
     "prepare": "husky install",
     "version": "npx lerna version --conventional-commits --no-git-tag-version --force-publish=*",
-    "postversion": "git add . && git commit -m 'chore: bump versions' && git tag v`node -p \"require('./lerna.json').version\"` && git push && git push origin --tags"
+    "postversion": "git add . && git commit -m 'chore: bump versions' && git tag v`node -p \"require('./lerna.json').version\"` && git push && git push origin --tags",
+    "lint": "pnpm -F @questionnaire/fe lint && pnpm -F @questionnaire/be lint",
+    "format": "pnpm -F @questionnaire/fe format && pnpm -F @questionnaire/be format"
   },
   "devDependencies": {
+    "@commitlint/cli": "^17.4.2",
+    "@commitlint/config-conventional": "^17.4.2",
     "@lerna/conventional-commits": "^6.4.1",
     "husky": "^8.0.3",
     "lerna": "^8.1.8"

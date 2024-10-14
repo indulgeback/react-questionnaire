@@ -5,8 +5,6 @@ module.exports = {
   bracketSpacing: true,
   // 行结束符使用 Unix 格式
   endOfLine: 'auto',
-  // true: Put > on the last line instead of at a new line
-  jsxBracketSameLine: false,
   // 行宽
   printWidth: 100,
   // 换行方式
@@ -21,5 +19,5 @@ module.exports = {
   useTabs: false,
   // 后置逗号，多行对象、数组在最后一行增加逗号
   trailingComma: 'none',
-  parser: 'typescript',
+  parser: 'typescript'
 }

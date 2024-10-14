@@ -1,3 +1,7 @@
+# 服务器配置
+app:
+  port: 8879
+  prefix: '/api'
 # 数据库配置
 db:
   type: 'mysql'

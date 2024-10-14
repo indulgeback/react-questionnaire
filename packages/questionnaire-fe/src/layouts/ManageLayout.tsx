@@ -8,18 +8,7 @@ import apis from '@/apis'
 const ManageLayout: React.FC = () => {
   const nav = useNavigate()
   const { pathname } = useLocation()
-
-  // const [loading, setLoading] = useState(false)
-  // const handleCreateQuestion = async () => {
-  //   setLoading(true)
-  //   const data = await apis.createQuestion()
-  //   if (data.id) {
-  //     nav(`/question/edit/${data.id}`)
-  //     message.success('创建成功')
-  //   }
-  //   setLoading(false)
-  // }
-
+  const [messageApi] = message.useMessage()
   // 手动触发逻辑
   const {
     loading,
@@ -29,7 +18,7 @@ const ManageLayout: React.FC = () => {
     manual: true,
     onSuccess(result) {
       nav(`/question/edit/${result.data.id}`)
-      message.success('创建成功')
+      messageApi.success('创建成功')
     }
   })
 

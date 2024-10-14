@@ -30,12 +30,13 @@ function getUserFormStorage() {
 
 const Login: React.FC = () => {
   const nav = useNavigate()
+  const [messageApi] = message.useMessage()
 
   const onFinish = async (values: any) => {
     const { username, password, remember } = values || {}
     if (remember) {
       const res = await apis.login({ username, password })
-      message.success(res.msg)
+      messageApi.success(res.msg)
       rememberUser(username, password)
     } else {
       deleteUserFormStorage()

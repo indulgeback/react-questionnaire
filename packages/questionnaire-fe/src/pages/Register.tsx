@@ -7,9 +7,12 @@ import { LOGIN_PATH } from '@/router'
 import { Rule } from 'antd/es/form'
 import apis from '@/apis'
 import { UserInfo } from '@/apis/modules/types/auth'
+
 const { Title } = Typography
 
 const Register: React.FC = () => {
+  const [messageApi] = message.useMessage()
+
   enum formItem {
     username = 'username',
     password = 'password',
@@ -41,7 +44,7 @@ const Register: React.FC = () => {
 
   const onFinish = async (values: UserInfo) => {
     const res = await apis.register(values)
-    message.success(res.msg)
+    messageApi.success(res.msg)
   }
 
   return (

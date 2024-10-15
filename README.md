@@ -163,7 +163,11 @@ pnpm i
         "dev:be": "pnpm -F @questionnaire/be start:dev", // 后端服务开发模式
         "dev:mock": "pnpm -F @questionnaire/mock dev", // mock 服务开发模式
         "generate-tree": "npx treer -e ./structure-tree.txt -i \"/node_modules|.git|dist/\"", // 生成目录树
-        "prepare": "husky install"
+        "prepare": "husky install", // 预装 husky
+        "version": "npx lerna version --conventional-commits --no-git-tag-version --force-publish=*", // 发布版本号
+        "postversion": "git add . && git commit -m 'chore: bump versions' && git tag v`node -p \"require('./lerna.json').version\"` && git push && git push origin --tags", // 发布版本号后，自动打 tag
+        "lint": "pnpm -F @questionnaire/fe lint && pnpm -F @questionnaire/be lint", // eslint 校验
+        "format": "pnpm -F @questionnaire/fe format && pnpm -F @questionnaire/be format" // prettier 格式化代码
     },
 ```
 

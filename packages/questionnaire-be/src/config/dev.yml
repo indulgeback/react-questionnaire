@@ -11,3 +11,7 @@ db:
   database: 'questionnaire_db'
   port: 3306
   synchronize: true
+  autoLoadEntities: true
+  keepConnectionAlive: true
+mongo:
+  uri: 'mongodb://localhost:27017/questionnaire_mongo_db'

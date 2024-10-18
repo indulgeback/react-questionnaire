@@ -1,6 +1,7 @@
 import * as path from 'path';
+import * as log4js from 'log4js';
 
-export default {
+log4js.configure({
   appenders: {
     console: { type: 'console' },
     file: {
@@ -14,4 +15,6 @@ export default {
   categories: {
     default: { appenders: ['console', 'file'], level: 'debug' },
   },
-};
+});
+
+export default log4js;

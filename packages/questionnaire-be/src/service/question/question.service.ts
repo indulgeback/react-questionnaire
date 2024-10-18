@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { CreateQuestionDto } from './dto/create-question.dto';
-import { UpdateQuestionDto } from './dto/update-question.dto';
-import { Question } from './entities/question.entity';
+import { CreateQuestionDto } from '@/service/question/dto/create-question.dto';
+import { UpdateQuestionDto } from '@/service/question/dto/update-question.dto';
+import { Question } from '@/service/question/entities/question.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import OpenAI from 'openai';

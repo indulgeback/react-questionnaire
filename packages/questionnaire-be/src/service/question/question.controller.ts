@@ -8,9 +8,9 @@ import {
   Delete,
   Query,
 } from '@nestjs/common';
-import { QuestionService } from './question.service';
-import { CreateQuestionDto } from './dto/create-question.dto';
-import { UpdateQuestionDto } from './dto/update-question.dto';
+import { QuestionService } from '@/service/question/question.service';
+import { CreateQuestionDto } from '@/service/question/dto/create-question.dto';
+import { UpdateQuestionDto } from '@/service/question/dto/update-question.dto';
 
 @Controller('question')
 export class QuestionController {

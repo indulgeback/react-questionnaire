@@ -1,8 +1,6 @@
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
+import { AppModule } from '@/app.module';
 import { rateLimit } from 'express-rate-limit';
-import * as log4js from 'log4js';
-import log4jsConfig from './config/log4js.config.js';
 import { ConfigService } from '@nestjs/config';
 
 async function bootstrap() {
@@ -11,8 +9,6 @@ async function bootstrap() {
   });
 
   const config = app.get(ConfigService);
-
-  log4js.configure(log4jsConfig);
 
   app.setGlobalPrefix(config.get<string>('app.prefix'));
 

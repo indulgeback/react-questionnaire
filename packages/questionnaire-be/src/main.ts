@@ -2,6 +2,8 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from '@/app.module';
 import { rateLimit } from 'express-rate-limit';
 import { ConfigService } from '@nestjs/config';
+import { HttpRequestMiddleware } from '@/middleware/request.middleware';
+import { HttpResponseInterceptor } from './middleware/respoonse.interceptor';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
@@ -11,6 +13,9 @@ async function bootstrap() {
   const config = app.get(ConfigService);
 
   app.setGlobalPrefix(config.get<string>('app.prefix'));
+
+  app.use(new HttpRequestMiddleware().use);
+  app.useGlobalInterceptors(new HttpResponseInterceptor());
 
   // 设置访问频率 防御DDos攻击
   app.use(

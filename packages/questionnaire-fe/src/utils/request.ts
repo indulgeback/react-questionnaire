@@ -1,5 +1,6 @@
 import axios, { AxiosInstance } from 'axios'
-import { message } from 'antd'
+import { App } from 'antd'
+// ... 处理请求
 
 // 创建axios实例
 const instance: AxiosInstance = axios.create({
@@ -21,9 +22,11 @@ instance.interceptors.response.use(response => {
   } else {
     if (msg) {
       // 错误信息统一处理
-      message.error(msg)
-      throw new Error(msg)
+      if ((window as any).message) {
+        ;(window as any).message.error(msg)
+      }
     }
+    return Promise.reject()
   }
 })
 

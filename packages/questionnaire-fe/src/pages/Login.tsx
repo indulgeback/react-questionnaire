@@ -1,42 +1,23 @@
 import React, { useEffect } from 'react'
 import styles from './Login.module.scss'
 import { useNavigate, Link } from 'react-router-dom'
-import { Button, Checkbox, Form, Input, message, Space, Typography } from 'antd'
+import { Button, Checkbox, Form, Input, Space, Typography, App } from 'antd'
 import { UserAddOutlined } from '@ant-design/icons'
 import { REGISTER_PATH } from '@/router'
 import apis from '@/apis'
+import { rememberUser, deleteUserFormStorage, getUserFormStorage } from '@/utils'
 
 const { Title } = Typography
 
-const USERNAME_KEY = 'username'
-const PASSWORD_KEY = 'password'
-
-function rememberUser(username: string, password: string) {
-  localStorage.setItem(USERNAME_KEY, username)
-  localStorage.setItem(PASSWORD_KEY, password)
-}
-
-function deleteUserFormStorage() {
-  localStorage.removeItem(USERNAME_KEY)
-  localStorage.removeItem(PASSWORD_KEY)
-}
-
-function getUserFormStorage() {
-  return {
-    username: localStorage.getItem(USERNAME_KEY),
-    password: localStorage.getItem(PASSWORD_KEY)
-  }
-}
-
 const Login: React.FC = () => {
   const nav = useNavigate()
-  const [messageApi] = message.useMessage()
+  const { message } = App.useApp()
 
   const onFinish = async (values: any) => {
     const { username, password, remember } = values || {}
     if (remember) {
       const res = await apis.login({ username, password })
-      messageApi.success(res.msg)
+      message.success(res.msg)
       rememberUser(username, password)
     } else {
       deleteUserFormStorage()

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Typography, Space, Button, Form, Input, message } from 'antd'
+import { Typography, Space, Button, Form, Input, App } from 'antd'
 import { UserAddOutlined } from '@ant-design/icons'
 import styles from './Register.module.scss'
 import { Link } from 'react-router-dom'
@@ -11,7 +11,7 @@ import { UserInfo } from '@/apis/modules/types/auth'
 const { Title } = Typography
 
 const Register: React.FC = () => {
-  const [messageApi] = message.useMessage()
+  const { message } = App.useApp()
 
   enum formItem {
     username = 'username',
@@ -44,7 +44,7 @@ const Register: React.FC = () => {
 
   const onFinish = async (values: UserInfo) => {
     const res = await apis.register(values)
-    messageApi.success(res.msg)
+    console.log(res)
   }
 
   return (

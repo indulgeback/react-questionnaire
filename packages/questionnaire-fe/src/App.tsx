@@ -1,7 +1,8 @@
 import React from 'react'
 import { RouterProvider } from 'react-router-dom'
 import router from './router'
-import { ConfigProvider } from 'antd'
+import { ConfigProvider, App } from 'antd'
+import MessageProvider from '@/components/Common/MessageProvider'
 
 const MyApp: React.FC = () => {
   return (
@@ -13,7 +14,11 @@ const MyApp: React.FC = () => {
         }
       }}
     >
-      <RouterProvider router={router}></RouterProvider>
+      <MessageProvider>
+        <App>
+          <RouterProvider router={router}></RouterProvider>
+        </App>
+      </MessageProvider>
     </ConfigProvider>
   )
 }

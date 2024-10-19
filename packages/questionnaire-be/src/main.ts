@@ -3,7 +3,7 @@ import { AppModule } from '@/app.module';
 import { rateLimit } from 'express-rate-limit';
 import { ConfigService } from '@nestjs/config';
 import { HttpRequestMiddleware } from '@/middleware/request.middleware';
-import { HttpResponseInterceptor } from './middleware/respoonse.interceptor';
+import { HttpResponseInterceptor } from './middleware/response.interceptor';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {

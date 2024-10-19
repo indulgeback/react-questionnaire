@@ -41,10 +41,6 @@ const List: React.FC = () => {
     }
   }, [isTouchBottom])
 
-  useEffect(() => {
-    getList()
-  }, [])
-
   return (
     <>
       <div className={styles.header}>
@@ -70,10 +66,12 @@ const List: React.FC = () => {
             />
           ))}
         <div ref={bottomRef}>
-          {loading && (
-            <div style={{ textAlign: 'center', marginTop: 60 }}>
+          {loading ? (
+            <div style={{ textAlign: 'center', marginTop: 40 }}>
               <Spin />
             </div>
+          ) : (
+            <div style={{ height: '60px' }}></div>
           )}
         </div>
       </div>

@@ -14,4 +14,7 @@
 
 .list {
   margin-top: 5px;
+  padding: 0 10px;
+  height: calc(100% - 60px);
+  overflow-y: scroll;
 }

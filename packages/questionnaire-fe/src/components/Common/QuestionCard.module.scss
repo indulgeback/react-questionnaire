@@ -1,11 +1,12 @@
 .container {
-    margin-bottom: 20px;
+    margin: 10px 0;
     padding: 12px;
     border-radius: 6px;
     background-color: #fff;
+    transition: box-shadow .3s;
 
     &:hover {
-        box-shadow: 0 4px 10px #e8e8e8;
+        box-shadow: 1px 1px 20px #e8e8e8;
     }
 }
 

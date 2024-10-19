@@ -1,21 +1,26 @@
-.header {
-  padding: 0 24px;
+.app {
+  height: 100vh;
+  background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
 
-  .left {
-    float: left;
+  .header {
+    height: 68px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 24px;
+    background-color: #5353531a;
+    box-shadow: inset 0 -2px 20px 5px #51515128;
   }
 
-  .right {
-    float: right;
+  .main {
+    height: calc(100vh - 68px - 40px);
   }
-}
 
-.main {
-  height: calc(100vh - 64px - 68px);
-}
-
-.footer {
-  text-align: center;
-  background-color: #f7f7f7;
-  border-top: 1px solid #e8e8e8;
+  .footer {
+    height: 40px;
+    text-align: center;
+    background-color: #f7f7f7;
+    border-top: 1px solid #e8e8e8;
+    line-height: 40px;
+  }
 }

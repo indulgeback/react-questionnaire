@@ -6,6 +6,7 @@
     "@ant-design/icons": "^5.3.6",
     "@antv/x6": "^1.35.1",
     "@gsap/react": "^2.1.0",
+    "@questionnaire/shared": "link:../shared",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",

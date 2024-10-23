@@ -54,6 +54,9 @@ importers:
       '@nestjs/typeorm':
         specifier: ^10.0.2
         version: 10.0.2(@nestjs/common@10.4.4(reflect-metadata@0.2.2)(rxjs@7.8.1))(@nestjs/core@10.4.4)(reflect-metadata@0.2.2)(rxjs@7.8.1)(typeorm@0.3.20(mysql2@3.11.3)(ts-node@10.9.2(@types/node@20.16.11)(typescript@5.6.3)))
+      '@questionnaire/shared':
+        specifier: link:../shared
+        version: link:../shared
       bcrypt:
         specifier: ^5.1.1
         version: 5.1.1(encoding@0.1.13)
@@ -172,6 +175,9 @@ importers:
       '@gsap/react':
         specifier: ^2.1.0
         version: 2.1.1
+      '@questionnaire/shared':
+        specifier: link:../shared
+        version: link:../shared
       '@testing-library/jest-dom':
         specifier: ^5.16.5
         version: 5.17.0
@@ -294,6 +300,8 @@ importers:
       nodemon:
         specifier: ^3.1.3
         version: 3.1.7
+
+  packages/shared: {}
 
 packages:
 
@@ -10299,7 +10307,7 @@ snapshots:
       '@types/node': 20.5.1
       chalk: 4.1.2
       cosmiconfig: 8.3.6(typescript@4.9.5)
-      cosmiconfig-typescript-loader: 4.4.0(@types/node@20.5.1)(cosmiconfig@8.3.6(typescript@5.6.3))(ts-node@10.9.2(@types/node@20.5.1)(typescript@5.6.3))(typescript@4.9.5)
+      cosmiconfig-typescript-loader: 4.4.0(@types/node@20.5.1)(cosmiconfig@8.3.6(typescript@4.9.5))(ts-node@10.9.2(@types/node@16.18.113)(typescript@4.9.5))(typescript@4.9.5)
       lodash.isplainobject: 4.0.6
       lodash.merge: 4.6.2
       lodash.uniq: 4.5.0
@@ -13491,7 +13499,7 @@ snapshots:
       - '@swc/core'
       - '@swc/wasm'
 
-  cosmiconfig-typescript-loader@4.4.0(@types/node@20.5.1)(cosmiconfig@8.3.6(typescript@5.6.3))(ts-node@10.9.2(@types/node@20.5.1)(typescript@5.6.3))(typescript@4.9.5):
+  cosmiconfig-typescript-loader@4.4.0(@types/node@20.5.1)(cosmiconfig@8.3.6(typescript@4.9.5))(ts-node@10.9.2(@types/node@16.18.113)(typescript@4.9.5))(typescript@4.9.5):
     dependencies:
       '@types/node': 20.5.1
       cosmiconfig: 8.3.6(typescript@4.9.5)
@@ -15672,7 +15680,7 @@ snapshots:
       slash: 3.0.0
       strip-json-comments: 3.1.1
     optionalDependencies:
-      ts-node: 10.9.2(@types/node@16.18.113)(typescript@4.9.5)
+      ts-node: 10.9.2(@types/node@20.5.1)(typescript@4.9.5)
     transitivePeerDependencies:
       - bufferutil
       - canvas
@@ -17758,7 +17766,7 @@ snapshots:
       yaml: 2.6.0
     optionalDependencies:
       postcss: 8.4.47
-      ts-node: 10.9.2(@types/node@16.18.113)(typescript@4.9.5)
+      ts-node: 10.9.2(@types/node@20.5.1)(typescript@4.9.5)
 
   postcss-loader@6.2.1(postcss@8.4.47)(webpack@5.95.0):
     dependencies:

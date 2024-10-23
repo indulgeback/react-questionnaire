@@ -4,14 +4,23 @@ app:
   prefix: '/api'
 # 数据库配置
 db:
-  type: 'mysql'
-  host: 'localhost'
-  username: 'root'
-  password: '12345678'
-  database: 'questionnaire_db'
-  port: 3306
-  synchronize: true
-  autoLoadEntities: true
-  keepConnectionAlive: true
-mongo:
-  uri: 'mongodb://localhost:27017/questionnaire_mongo_db'
+  mysql:
+    type: 'mysql'
+    host: 'localhost'
+    username: 'root'
+    password: '12345678'
+    database: 'questionnaire_db'
+    port: 3306
+    synchronize: true
+    autoLoadEntities: true
+    keepConnectionAlive: true
+  mongo:
+    uri: 'mongodb://localhost:27017/questionnaire_mongo_db'
+  redis:
+    uri: 'redis://localhost:6379'
+# 邮件配置
+mailer:
+  user: 'XMquestionnaire@163.com'
+  pass: 'HS35qYhKHX8UF5kE'
+  host: 'smtp.163.com'
+  port: 465

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useInViewport, useRequest, useTitle } from 'ahooks'
 import QuestionCard from '@/components/Common/QuestionCard'
 import styles from './Common.module.scss'
-import { Typography, Spin } from 'antd'
+import { Typography, Spin, FloatButton } from 'antd'
 import ListSearch from '@/components/Common/listSearch'
 import apis from '@/apis'
 
@@ -41,6 +41,12 @@ const List: React.FC = () => {
     }
   }, [isTouchBottom])
 
+  const questionListRef = useRef(null)
+
+  const targetFn = () => {
+    return questionListRef.current as any
+  }
+
   return (
     <>
       <div className={styles.header}>
@@ -51,7 +57,7 @@ const List: React.FC = () => {
           <ListSearch />
         </div>
       </div>
-      <div className={styles.list}>
+      <div className={styles.list} ref={questionListRef}>
         {/* 问卷列表 */}
         {questionList.length > 0 &&
           questionList.map((item: any) => (
@@ -65,10 +71,11 @@ const List: React.FC = () => {
               createdAt={item.create_time}
             />
           ))}
+        <FloatButton.BackTop target={targetFn} visibilityHeight={120} />
         <div ref={bottomRef}>
           {loading ? (
             <div style={{ textAlign: 'center', marginTop: 40 }}>
-              <Spin />
+              <Spin fullscreen tip="加载中..." />
             </div>
           ) : (
             <div style={{ height: '60px' }}></div>

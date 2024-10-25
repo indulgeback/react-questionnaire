@@ -4,11 +4,13 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MailerModule } from '@nestjs-modules/mailer';
+import { ScheduleModule } from '@nestjs/schedule';
 
 // 自定义模块
 import { AuthModule } from '@/service/auth/auth.module';
 import { MailModule } from '@/service/mail/mail.module';
 import { QuestionModule } from '@/service/question/question.module';
+import { TasksModule } from '@/tasks/tasks.module';
 
 // 自定义配置
 import configuration from '@/config';
@@ -42,9 +44,11 @@ import configuration from '@/config';
         logger: true, // 启用日志记录
       },
     }),
+    ScheduleModule.forRoot(),
     AuthModule,
     MailModule,
     QuestionModule,
+    TasksModule,
   ],
 })
 export class AppModule {}

@@ -4,11 +4,14 @@ import { rateLimit } from 'express-rate-limit';
 import { ConfigService } from '@nestjs/config';
 import { HttpRequestMiddleware } from '@/middleware/request.middleware';
 import { HttpResponseInterceptor } from './middleware/response.interceptor';
+import { TasksService } from '@/tasks/tasks.service';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     cors: true,
   });
+
+  const tasksService = app.get(TasksService);
 
   const config = app.get(ConfigService);
 

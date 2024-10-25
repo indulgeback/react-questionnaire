@@ -26,7 +26,7 @@ instance.interceptors.response.use(response => {
         ;(window as any).message.error(msg)
       }
     }
-    return Promise.reject()
+    return
   }
 })
 

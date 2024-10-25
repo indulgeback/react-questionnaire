@@ -1,5 +1,5 @@
-import React from 'react'
-import { Typography, Space, Button, Form, Input, App } from 'antd'
+import React, { useState } from 'react'
+import { Typography, Space, Button, Form, Input, App, Modal } from 'antd'
 import { UserAddOutlined } from '@ant-design/icons'
 import styles from './Register.module.scss'
 import { Link } from 'react-router-dom'
@@ -7,11 +7,15 @@ import { LOGIN_PATH } from '@/router'
 import { Rule } from 'antd/es/form'
 import apis from '@/apis'
 import { UserInfo } from '@/apis/modules/types/auth'
+import { isRequestSuccess } from '@/utils'
 
 const { Title } = Typography
 
 const Register: React.FC = () => {
   const { message } = App.useApp()
+  const [open, setOpen] = useState(false)
+  const [email, setEmail] = useState('')
+  const [code, setCode] = useState('')
 
   enum formItem {
     username = 'username',
@@ -42,9 +46,23 @@ const Register: React.FC = () => {
     nickname: [{ required: true, message: '请输入昵称!' }]
   }
 
+  const sendEmailCode = async () => {
+    const res = await apis.mailApi.sendEmailCode({ email })
+    if (isRequestSuccess(res)) {
+      message.success(res.msg)
+    }
+  }
+  const verifyIdentity = async () => {
+    const res = await apis.mailApi.verifyEmailCode({ email, code })
+    if (isRequestSuccess(res)) {
+      message.success(res.msg)
+    }
+  }
+
   const onFinish = async (values: UserInfo) => {
-    const res = await apis.register(values)
-    console.log(res)
+    setOpen(true)
+    // const res = await apis.register(values)
+    // console.log(res)
   }
 
   return (
@@ -58,7 +76,7 @@ const Register: React.FC = () => {
         </Space>
       </div>
       <div>
-        <Form name="basic" labelCol={{ span: 8 }} wrapperCol={{ span: 16 }} onFinish={onFinish}>
+        <Form name="register" labelCol={{ span: 8 }} wrapperCol={{ span: 16 }} onFinish={onFinish}>
           <Form.Item label="用户名" name={formItem.username} rules={rules.username}>
             <Input />
           </Form.Item>
@@ -88,6 +106,21 @@ const Register: React.FC = () => {
           </Form.Item>
         </Form>
       </div>
+      <Modal title="邮箱验证" open={open} onOk={verifyIdentity}>
+        <Form name="emailVerification" labelCol={{ span: 4 }} wrapperCol={{ span: 20 }}>
+          <Form.Item label="电子邮箱" name={'email'}>
+            <Space.Compact style={{ width: '100%' }}>
+              <Input type="email" value={email} onChange={e => setEmail(e.target.value)} />
+              <Button type="primary" onClick={sendEmailCode}>
+                发送验证码
+              </Button>
+            </Space.Compact>
+          </Form.Item>
+          <Form.Item label="验证码" name={'code'}>
+            <Input value={code} onChange={e => setCode(e.target.value)} />
+          </Form.Item>
+        </Form>
+      </Modal>
     </div>
   )
 }

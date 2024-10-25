@@ -14,7 +14,7 @@ const ManageLayout: React.FC = () => {
     loading,
     error,
     run: handleCreateQuestion
-  } = useRequest(apis.createQuestion, {
+  } = useRequest(apis.questionApi.createQuestion, {
     manual: true,
     onSuccess(result) {
       nav(`/question/edit/${result.data.id}`)

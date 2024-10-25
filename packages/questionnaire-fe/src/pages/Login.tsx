@@ -16,7 +16,7 @@ const Login: React.FC = () => {
   const onFinish = async (values: any) => {
     const { username, password, remember } = values || {}
     if (remember) {
-      const res = await apis.login({ username, password })
+      const res = await apis.authApi.login({ username, password })
       message.success(res.msg)
       rememberUser(username, password)
     } else {

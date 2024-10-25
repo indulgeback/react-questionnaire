@@ -1,5 +1,6 @@
 import { Controller, Body, Post } from '@nestjs/common';
 import { MailService } from '@/service/mail/mail.service';
+import { ResponseBody } from '@/common/classes/response-body';
 
 @Controller('mail')
 export class MailController {
@@ -8,17 +9,24 @@ export class MailController {
   @Post('send')
   async sendVerification(
     @Body('email') email: string,
-  ): Promise<{ message: string }> {
+  ): Promise<ResponseBody<null>> {
     const code = await this.mailService.sendVerificationEmail(email);
-    return { message: `Verification code sent to ${email}` };
+    return new ResponseBody<null>(
+      1,
+      null,
+      `Verification code sent to ${email}`,
+    );
   }
 
   @Post('verify')
   async verifyCode(
     @Body('email') email: string,
     @Body('code') code: string,
-  ): Promise<{ verified: boolean }> {
+  ): Promise<ResponseBody<boolean>> {
     const verified = await this.mailService.verifyCode(email, code);
-    return { verified };
+    if (!verified) {
+      return new ResponseBody<boolean>(0, verified, `Verification Failed`);
+    }
+    return new ResponseBody<boolean>(1, verified, `Verification Passed`);
   }
 }

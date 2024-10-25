@@ -29,6 +29,8 @@ export class MailService {
     const verificationCode = this.generateVerificationCode();
     const expirationTime = 60 * 10;
     try {
+      // 先删除之前的验证码
+      await this.client.del(email);
       // 设置键值对，并指定过期时间
       await this.client.set(email, verificationCode, { EX: expirationTime }); // 存储验证码，有效期为10分钟
       await this.mailerService.sendMail({
@@ -50,6 +52,11 @@ export class MailService {
 
   async verifyCode(email: string, code: string): Promise<boolean> {
     const storedCode = await this.client.get(email);
-    return storedCode === code;
+    // 校验成功删除验证码
+    if (storedCode === code) {
+      await this.client.del(email);
+      return true;
+    }
+    return false;
   }
 }

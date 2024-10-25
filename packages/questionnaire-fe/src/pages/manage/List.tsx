@@ -21,7 +21,7 @@ const List: React.FC = () => {
     loading,
     data: res,
     run: getList
-  } = useRequest(() => apis.getQuestionList(currentView, stepSize), {
+  } = useRequest(() => apis.questionApi.getQuestionList(currentView, stepSize), {
     manual: true
   })
 

@@ -1,10 +1,9 @@
-import { getQuestionById, createQuestion, getQuestionList } from './modules/question'
-import { register, login } from './modules/auth'
+import questionApi from './modules/question'
+import authApi from './modules/auth'
+import mailApi from './modules/mail'
 
 export default {
-  createQuestion,
-  getQuestionById,
-  getQuestionList,
-  register,
-  login
+  questionApi,
+  authApi,
+  mailApi
 }

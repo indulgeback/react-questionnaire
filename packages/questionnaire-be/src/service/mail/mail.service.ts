@@ -3,6 +3,7 @@ import { MailerService } from '@nestjs-modules/mailer';
 import { randomBytes } from 'crypto';
 import { createClient, RedisClientType } from 'redis';
 import config from '@/config';
+import generateEmail from '@/common/utils/generateEmail';
 
 @Injectable()
 export class MailService {
@@ -26,14 +27,15 @@ export class MailService {
 
   async sendVerificationEmail(email: string): Promise<string> {
     const verificationCode = this.generateVerificationCode();
+    const expirationTime = 60 * 10;
     try {
       // 设置键值对，并指定过期时间
-      await this.client.set(email, verificationCode, { EX: 600 }); // 存储验证码，有效期为10分钟
+      await this.client.set(email, verificationCode, { EX: expirationTime }); // 存储验证码，有效期为10分钟
       await this.mailerService.sendMail({
         from: '"XM Questionnaire" <XMquestionnaire@163.com>',
         to: email,
         subject: 'Verification Code',
-        text: `Your verification code is ${verificationCode}.`,
+        html: generateEmail(verificationCode, expirationTime),
       });
       return verificationCode;
     } catch (error) {

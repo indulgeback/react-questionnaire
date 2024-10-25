@@ -32,11 +32,11 @@ import configuration from '@/config';
     }),
     MailerModule.forRoot({
       transport: {
-        host: 'smtp.163.com',
+        host: configuration().mailer.host,
         secure: true, // true for 465, false for other ports
         auth: {
-          user: 'XMquestionnaire@163.com', // generated ethereal user
-          pass: 'HS35qYhKHX8UF5kE', // generated ethereal password
+          user: configuration().mailer.user, // generated ethereal user
+          pass: configuration().mailer.pass, // generated ethereal password
         },
         debug: true, // 输出调试信息
         logger: true, // 启用日志记录

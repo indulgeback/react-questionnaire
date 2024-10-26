@@ -1,13 +1,12 @@
 import React, { useEffect } from 'react'
 import styles from './Login.module.scss'
-import { useNavigate, Link } from 'react-router-dom'
-import { Button, Checkbox, Form, Input, Space, Typography, App } from 'antd'
-import { UserAddOutlined } from '@ant-design/icons'
+import { useNavigate } from 'react-router-dom'
+import { Button, Checkbox, Form, Input, Space, App } from 'antd'
 import { REGISTER_PATH } from '@/router'
 import apis from '@/apis'
 import { rememberUser, deleteUserFormStorage, getUserFormStorage } from '@/utils'
-
-const { Title } = Typography
+import colorfulLogo from '@/assets/img/colorful-logo.png'
+import SvgIcon from '@/components/Common/SvgIcon'
 
 const Login: React.FC = () => {
   const nav = useNavigate()
@@ -31,23 +30,11 @@ const Login: React.FC = () => {
     form.setFieldsValue({ username, password })
   }, [])
   return (
-    <div className={styles.container}>
-      <div>
-        <Space>
-          <Title level={2}>
-            <UserAddOutlined />
-          </Title>
-          <Title level={2}>用户登录</Title>
-        </Space>
-      </div>
-      <div>
-        <Form
-          labelCol={{ span: 8 }}
-          wrapperCol={{ span: 16 }}
-          initialValues={{ remember: true }}
-          form={form}
-          onFinish={onFinish}
-        >
+    <div className={styles.wrapper}>
+      <SvgIcon name="bg-auth" />
+      <div className={styles.container}>
+        <img className={styles.logo} src={colorfulLogo} />
+        <Form layout="vertical" initialValues={{ remember: true }} form={form} onFinish={onFinish}>
           <Form.Item
             label="用户名"
             name="username"
@@ -66,15 +53,17 @@ const Login: React.FC = () => {
           >
             <Input.Password />
           </Form.Item>
-          <Form.Item name="remember" valuePropName="checked" wrapperCol={{ offset: 8, span: 16 }}>
+          <Form.Item name="remember" valuePropName="checked">
             <Checkbox>记住我</Checkbox>
           </Form.Item>
-          <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+          <Form.Item className={styles.btnContainer}>
             <Space>
               <Button type="primary" htmlType="submit">
                 登录
               </Button>
-              <Link to={REGISTER_PATH}>注册新用户</Link>
+              <Button type="default" onClick={() => nav(REGISTER_PATH)}>
+                去注册
+              </Button>
             </Space>
           </Form.Item>
         </Form>

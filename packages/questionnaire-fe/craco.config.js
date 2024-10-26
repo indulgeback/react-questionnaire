@@ -1,5 +1,4 @@
-const path = require('path')
-
+import path from 'path'
 module.exports = {
   // 开发服务器配置
   devServer: {
@@ -13,6 +12,17 @@ module.exports = {
     // webpack配置
     alias: {
       '@': path.resolve(__dirname, 'src')
+    },
+    configure: (webpackConfig, { env, paths }) => {
+      // 添加 file-loader 和 url-loader 的配置
+      webpackConfig.module.rules.push({
+        test: /\.svg$/,
+        use: [
+          { loader: 'svg-sprite-loader', options: {} }
+          // { loader: 'svgo-loader', options: { plugins: [{ removeAttrs: { attrs: 'fill' } }] } }
+        ]
+      })
+      return webpackConfig
     }
   }
 }

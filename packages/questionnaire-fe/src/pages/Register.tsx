@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Typography, Space, Button, Form, Input, App, Modal } from 'antd'
 import { UserAddOutlined } from '@ant-design/icons'
 import styles from './Register.module.scss'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { LOGIN_PATH } from '@/router'
 import { Rule } from 'antd/es/form'
 import apis from '@/apis'
@@ -13,9 +13,16 @@ const { Title } = Typography
 
 const Register: React.FC = () => {
   const { message } = App.useApp()
+  const nav = useNavigate()
   const [open, setOpen] = useState(false)
   const [email, setEmail] = useState('')
   const [code, setCode] = useState('')
+  const [userInfo, setUserInfo] = useState<UserInfo>({
+    username: '',
+    password: '',
+    nickname: '',
+    email: ''
+  })
 
   enum formItem {
     username = 'username',
@@ -56,13 +63,29 @@ const Register: React.FC = () => {
     const res = await apis.mailApi.verifyEmailCode({ email, code })
     if (isRequestSuccess(res)) {
       message.success(res.msg)
+      setUserInfo({
+        ...userInfo,
+        email
+      })
+      message.info('验证成功，正在注册中，请稍后')
+      registerUser()
+    }
+  }
+
+  const registerUser = async () => {
+    const res = await apis.authApi.register(userInfo)
+    if (isRequestSuccess(res)) {
+      message.success(res.msg)
+      nav(LOGIN_PATH)
     }
   }
 
   const onFinish = async (values: UserInfo) => {
     setOpen(true)
-    // const res = await apis.register(values)
-    // console.log(res)
+    setUserInfo({
+      ...userInfo,
+      ...values
+    })
   }
 
   return (

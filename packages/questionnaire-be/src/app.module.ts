@@ -14,6 +14,7 @@ import { TasksModule } from '@/tasks/tasks.module';
 
 // 自定义配置
 import configuration from '@/config';
+import DatabaseLogger from '@/common/utils/databaseLogger';
 
 @Module({
   imports: [
@@ -30,7 +31,12 @@ import configuration from '@/config';
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
-      useFactory: (config: ConfigService) => config.get('db.mysql'),
+      useFactory: (config: ConfigService) => {
+        return {
+          ...config.get('db.mysql'),
+          logger: new DatabaseLogger(),
+        };
+      },
     }),
     MailerModule.forRoot({
       transport: {

@@ -7,16 +7,16 @@ import apis from '@/apis'
 import { rememberUser, deleteUserFormStorage, getUserFormStorage } from '@/utils'
 import colorfulLogo from '@/assets/img/colorful-logo.png'
 import SvgIcon from '@/components/Common/SvgIcon'
+import { useSnackbar } from 'notistack'
 
 const Login: React.FC = () => {
   const nav = useNavigate()
-  const { message } = App.useApp()
-
+  const { enqueueSnackbar } = useSnackbar()
   const onFinish = async (values: any) => {
     const { username, password, remember } = values || {}
     if (remember) {
       const res = await apis.authApi.login({ username, password })
-      message.success(res.msg)
+      enqueueSnackbar(res.msg, { variant: 'success' })
       rememberUser(username, password)
     } else {
       deleteUserFormStorage()

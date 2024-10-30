@@ -1,25 +1,42 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { RouterProvider } from 'react-router-dom'
 import router from './router'
-import { ConfigProvider, App } from 'antd'
-import MessageProvider from '@/components/Common/MessageProvider'
+import { App } from 'antd'
+import { createTheme, ThemeProvider } from '@mui/material'
+import { SnackbarProvider, useSnackbar } from 'notistack'
+import store from '@/store'
+import { Provider, useDispatch } from 'react-redux'
+import { setEnqueueSnackbar } from '@/store/modules/utilsSlice'
+
+const theme = createTheme({
+  palette: {
+    mode: 'light',
+    primary: {
+      main: '#009E8E'
+    },
+    secondary: {
+      main: '#63d6a5'
+    }
+  }
+})
 
 const MyApp: React.FC = () => {
+  const { enqueueSnackbar } = useSnackbar()
+
   return (
-    // AntD 配置主题色
-    <ConfigProvider
-      theme={{
-        token: {
-          colorPrimary: '#24bab0'
-        }
-      }}
-    >
-      <MessageProvider>
+    <ThemeProvider theme={theme}>
+      <SnackbarProvider
+        maxSnack={3}
+        autoHideDuration={2000}
+        anchorOrigin={{ horizontal: 'left', vertical: 'top' }}
+      >
         <App>
-          <RouterProvider router={router}></RouterProvider>
+          <Provider store={store}>
+            <RouterProvider router={router}></RouterProvider>
+          </Provider>
         </App>
-      </MessageProvider>
-    </ConfigProvider>
+      </SnackbarProvider>
+    </ThemeProvider>
   )
 }
 

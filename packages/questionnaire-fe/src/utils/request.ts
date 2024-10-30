@@ -1,6 +1,7 @@
 import axios, { AxiosInstance } from 'axios'
-import { App } from 'antd'
 // ... 处理请求
+
+// const enqueueSnackbar = store.getState().utils.enqueueSnackbar as unknown as EnqueueSnackbar
 
 // 创建axios实例
 const instance: AxiosInstance = axios.create({
@@ -20,12 +21,6 @@ instance.interceptors.response.use(response => {
   if (code === 1) {
     return responseData
   } else {
-    if (msg) {
-      // 错误信息统一处理
-      if ((window as any).message) {
-        ;(window as any).message.error(msg)
-      }
-    }
     return
   }
 })

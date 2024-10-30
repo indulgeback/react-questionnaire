@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link, Outlet } from 'react-router-dom'
-import styles from './MainLayout.module.scss'
 import Logo from '@/components/Common/Logo'
 import UserInfo from '@/components/Common/UserInfo'
 import gsap from 'gsap'
@@ -12,19 +11,19 @@ const MainLayout: React.FC = () => {
     gsap.from('#UserInfo', { duration: 1, x: -100, opacity: 0 })
   })
   return (
-    <div className={styles.app} style={{ overflow: 'hidden' }}>
-      <header className={styles.header} style={{ zIndex: 999 }}>
-        <div id="Logo" className={styles.left}>
+    <div className="custom-app">
+      <header className="custom-header">
+        <div id="Logo">
           <Logo />
         </div>
-        <div id="UserInfo" className={styles.right}>
+        <div id="UserInfo">
           <UserInfo />
         </div>
       </header>
-      <main className={styles.main}>
+      <main className="custom-main">
         <Outlet />
       </main>
-      <footer className={styles.footer} style={{ zIndex: 999 }}>
+      <footer className="custom-footer">
         小木问卷 &copy;2024 - present. Created by{' '}
         <Link to="https://indulgeback.netlify.app/">IndulgeBack</Link>
       </footer>

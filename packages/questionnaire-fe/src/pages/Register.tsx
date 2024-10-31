@@ -87,24 +87,18 @@ const Register: React.FC = () => {
 
   return (
     <div className="custom-main flex flex-col justify-center items-center">
-      <div className="bg-white/50 backdrop-blur-sm p-5 rounded-md shadow-white shadow-2xl">
+      <div className="bg-white/50 backdrop-blur-sm p-10 rounded-md shadow-white shadow-2xl">
         <img className="h-48" src={colorfulLogo} />
         <Form name="register" layout="vertical" onFinish={onFinish}>
-          <Form.Item
-            className="mb-3"
-            label="用户名"
-            name={formItem.username}
-            rules={rules.username}
-          >
+          <Form.Item label="用户名" name={formItem.username} rules={rules.username}>
             <Input />
           </Form.Item>
 
-          <Form.Item className="mb-3" label="密码" name={formItem.password} rules={rules.password}>
+          <Form.Item label="密码" name={formItem.password} rules={rules.password}>
             <Input.Password />
           </Form.Item>
 
           <Form.Item
-            className="mb-3"
             label="确认密码"
             name={formItem.confirm}
             dependencies={['password']}
@@ -113,7 +107,7 @@ const Register: React.FC = () => {
             <Input.Password />
           </Form.Item>
 
-          <Form.Item className="mb-3" label="昵称" name={formItem.nickname} rules={rules.nickname}>
+          <Form.Item label="昵称" name={formItem.nickname} rules={rules.nickname}>
             <Input />
           </Form.Item>
 

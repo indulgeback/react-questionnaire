@@ -35,7 +35,6 @@ const Login: React.FC = () => {
         <img className="h-48" src={colorfulLogo} />
         <Form layout="vertical" initialValues={{ remember: true }} form={form} onFinish={onFinish}>
           <Form.Item
-            className="mb-3"
             label="用户名"
             name="username"
             rules={[
@@ -47,14 +46,13 @@ const Login: React.FC = () => {
             <Input />
           </Form.Item>
           <Form.Item
-            className="mb-3"
             label="密码"
             name="password"
             rules={[{ required: true, message: '请输入密码' }]}
           >
             <Input.Password />
           </Form.Item>
-          <Form.Item className="mb-3" name="remember" valuePropName="checked">
+          <Form.Item name="remember" valuePropName="checked">
             <Checkbox>记住我</Checkbox>
           </Form.Item>
           <div className="flex justify-center items-center gap-4">

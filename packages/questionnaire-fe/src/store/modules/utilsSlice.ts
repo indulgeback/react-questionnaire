@@ -3,16 +3,17 @@ import { createSlice } from '@reduxjs/toolkit'
 export const utilsSlice = createSlice({
   name: 'utils',
   initialState: {
-    enqueueSnackbar: null
+    screenSpinning: false
   },
   reducers: {
-    setEnqueueSnackbar: (state, action) => {
-      state.enqueueSnackbar = action.payload
+    setScreenSpinning: (state, action) => {
+      console.log('setScreenSpinning', action)
+      state.screenSpinning = action.payload
     }
   }
 })
 
 // 为每个 case reducer 函数生成 Action creators
-export const { setEnqueueSnackbar } = utilsSlice.actions
+export const { setScreenSpinning } = utilsSlice.actions
 
 export default utilsSlice.reducer

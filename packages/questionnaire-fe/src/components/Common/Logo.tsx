@@ -6,9 +6,9 @@ import whiteLogo from '@/assets/img/white-logo.png'
 
 const Logo: React.FC = () => {
   return (
-    <div className={styles.container}>
+    <div className="w-48 text-xs text-center">
       <Link to={HOME_PATH}>
-        <img src={whiteLogo} />
+        <img className="h-17" src={whiteLogo} />
       </Link>
     </div>
   )

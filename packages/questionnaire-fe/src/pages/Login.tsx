@@ -1,23 +1,24 @@
 import React, { useEffect } from 'react'
 import styles from './Login.module.scss'
 import { useNavigate } from 'react-router-dom'
-import { Button, Checkbox, Form, Input, Space, App } from 'antd'
+import { Button, Checkbox, Form, Input, Space } from 'antd'
 import { REGISTER_PATH } from '@/router'
 import apis from '@/apis'
 import { rememberUser, deleteUserFormStorage, getUserFormStorage } from '@/utils'
 import colorfulLogo from '@/assets/img/colorful-logo.png'
 import SvgIcon from '@/components/Common/SvgIcon'
-import { useSnackbar } from 'notistack'
+import useRequestSuccessChecker from '@/hooks/useRequestSuccessChecker'
 
 const Login: React.FC = () => {
   const nav = useNavigate()
-  const { enqueueSnackbar } = useSnackbar()
+  const { isRequestSuccess } = useRequestSuccessChecker()
   const onFinish = async (values: any) => {
     const { username, password, remember } = values || {}
     if (remember) {
       const res = await apis.authApi.login({ username, password })
-      enqueueSnackbar(res.msg, { variant: 'success' })
-      rememberUser(username, password)
+      if (isRequestSuccess(res)) {
+        rememberUser(username, password)
+      }
     } else {
       deleteUserFormStorage()
     }

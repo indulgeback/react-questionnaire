@@ -26,7 +26,7 @@ export class AuthController {
       if (await this.authService.comparePassword(loginDto)) {
         return new ResponseBody<null>(1, null, '登录成功');
       } else {
-        return new ResponseBody<null>(0, null, '密码错误');
+        return new ResponseBody<null>(0, null, '用户名或密码错误');
       }
     } else {
       return new ResponseBody<null>(0, null, '该用户不存在');

@@ -1,12 +1,11 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { RouterProvider } from 'react-router-dom'
 import router from './router'
 import { App } from 'antd'
 import { createTheme, ThemeProvider } from '@mui/material'
-import { SnackbarProvider, useSnackbar } from 'notistack'
+import { SnackbarProvider } from 'notistack'
 import store from '@/store'
-import { Provider, useDispatch } from 'react-redux'
-import { setEnqueueSnackbar } from '@/store/modules/utilsSlice'
+import { Provider } from 'react-redux'
 
 const theme = createTheme({
   palette: {
@@ -21,8 +20,6 @@ const theme = createTheme({
 })
 
 const MyApp: React.FC = () => {
-  const { enqueueSnackbar } = useSnackbar()
-
   return (
     <ThemeProvider theme={theme}>
       <SnackbarProvider

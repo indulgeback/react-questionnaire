@@ -1,39 +1,28 @@
 import React from 'react'
 import { RouterProvider } from 'react-router-dom'
 import router from './router'
-import { App } from 'antd'
-import { createTheme, ThemeProvider } from '@mui/material'
-import { SnackbarProvider } from 'notistack'
+import { App, ConfigProvider, Spin } from 'antd'
 import store from '@/store'
 import { Provider } from 'react-redux'
 
-const theme = createTheme({
-  palette: {
-    mode: 'light',
-    primary: {
-      main: '#009E8E'
-    },
-    secondary: {
-      main: '#63d6a5'
-    }
-  }
-})
-
 const MyApp: React.FC = () => {
   return (
-    <ThemeProvider theme={theme}>
-      <SnackbarProvider
-        maxSnack={3}
-        autoHideDuration={2000}
-        anchorOrigin={{ horizontal: 'left', vertical: 'top' }}
-      >
-        <App>
-          <Provider store={store}>
-            <RouterProvider router={router}></RouterProvider>
-          </Provider>
-        </App>
-      </SnackbarProvider>
-    </ThemeProvider>
+    <ConfigProvider
+      theme={{
+        token: {
+          colorPrimary: '#009E8E',
+          colorText: '#081E40',
+          colorTextDisabled: '#A9A9A9'
+        }
+      }}
+    >
+      <App>
+        <Provider store={store}>
+          <RouterProvider router={router}></RouterProvider>
+          <Spin spinning fullscreen />
+        </Provider>
+      </App>
+    </ConfigProvider>
   )
 }
 

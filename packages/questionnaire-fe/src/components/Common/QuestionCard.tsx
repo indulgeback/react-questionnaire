@@ -1,8 +1,9 @@
 import React from 'react'
 import styles from './QuestionCard.module.scss'
-import { Button, Divider, Popconfirm, Space, Tag, message } from 'antd'
+import { App, Button, Divider, Popconfirm, Space, Tag, message } from 'antd'
 import {
   CheckCircleOutlined,
+  ClockCircleOutlined,
   CopyOutlined,
   DeleteOutlined,
   EditOutlined,
@@ -24,46 +25,45 @@ type PropsType = {
 }
 
 const QuestionCard: React.FC<PropsType> = (props: PropsType) => {
-  const [messageApi, contextHolder] = message.useMessage()
+  const { message } = App.useApp()
   const nav = useNavigate()
   const { _id, title, isStar, isPublished, answerCount, createdAt } = props
   const duplicate = () => {
-    messageApi.success('复制成功')
+    message.success('复制成功' + _id)
   }
   const del = () => {
-    messageApi.success('删除成功')
+    message.success('删除成功' + _id)
   }
   return (
-    <div className={styles.container}>
-      {contextHolder}
-      <div className={styles.title}>
-        <div className={styles.left}>
+    <div className="my-3 p-3 rounded-md bg-white duration-300 hover:shadow-md">
+      <div className="flex">
+        <div className="flex-1">
           <Link to={isPublished ? `/question/stat/${_id}` : `/question/edit/${_id}`}>
             <Space>
-              <span className={styles.star}>
-                {isStar && <StarOutlined style={{ color: '#fadb14' }} />}
+              <span className="inline-block w-4">
+                {isStar && <StarOutlined className="text-custom-yellow" />}
               </span>
               {title}
             </Space>
           </Link>
         </div>
-        <div className={styles.right}>
+        <div className="flex-1 text-right text-xs">
           <Space>
             {isPublished ? (
               <Tag color="cyan" icon={<CheckCircleOutlined />}>
                 已发布
               </Tag>
             ) : (
-              <Tag>未发布</Tag>
+              <Tag icon={<ClockCircleOutlined />}>未发布</Tag>
             )}
             <span>答卷:{answerCount}</span>
             <span>创建于:{dayjs(createdAt).format('YYYY-MM-DD HH:mm:ss')}</span>
           </Space>
         </div>
       </div>
-      <Divider style={{ margin: '12px 0' }} />
-      <div className={styles['button-container']}>
-        <div className={styles.left}>
+      <Divider className="my-3" />
+      <div className="flex">
+        <div className="flex-1">
           <Space>
             <Button
               type="text"
@@ -88,7 +88,7 @@ const QuestionCard: React.FC<PropsType> = (props: PropsType) => {
             </Button>
           </Space>
         </div>
-        <div className={styles.right}>
+        <div className="flex-1 text-right">
           <Space>
             <Button type="text" size="small" icon={<StarOutlined />}>
               {isStar ? '取消星标' : '星标问卷'}
@@ -106,9 +106,10 @@ const QuestionCard: React.FC<PropsType> = (props: PropsType) => {
             <Popconfirm
               title="确定删除该问卷？"
               okText="确定"
+              okType="danger"
               cancelText="取消"
               onConfirm={del}
-              icon={<QuestionCircleOutlined style={{ color: 'red' }} />}
+              icon={<QuestionCircleOutlined className="text-custom-red" />}
             >
               <Button type="text" size="small" icon={<DeleteOutlined />}>
                 删除

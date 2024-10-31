@@ -31,12 +31,13 @@ const Login: React.FC = () => {
     form.setFieldsValue({ username, password })
   }, [])
   return (
-    <div className={styles.wrapper}>
+    <div className="custom-main bg-gray-100 flex justify-center items-center">
       <SvgIcon name="bg-auth" />
-      <div className={styles.container}>
-        <img className={styles.logo} src={colorfulLogo} />
+      <div className="bg-white p-5 rounded-md shadow-md">
+        <img className="h-48" src={colorfulLogo} />
         <Form layout="vertical" initialValues={{ remember: true }} form={form} onFinish={onFinish}>
           <Form.Item
+            className="mb-4"
             label="用户名"
             name="username"
             rules={[
@@ -48,6 +49,7 @@ const Login: React.FC = () => {
             <Input />
           </Form.Item>
           <Form.Item
+            className="mb-4"
             label="密码"
             name="password"
             rules={[{ required: true, message: '请输入密码' }]}
@@ -57,16 +59,14 @@ const Login: React.FC = () => {
           <Form.Item name="remember" valuePropName="checked">
             <Checkbox>记住我</Checkbox>
           </Form.Item>
-          <Form.Item className={styles.btnContainer}>
-            <Space>
-              <Button type="primary" htmlType="submit">
-                登录
-              </Button>
-              <Button type="default" onClick={() => nav(REGISTER_PATH)}>
-                去注册
-              </Button>
-            </Space>
-          </Form.Item>
+          <div className="flex justify-center items-center gap-4">
+            <Button type="primary" htmlType="submit">
+              登录
+            </Button>
+            <Button type="default" onClick={() => nav(REGISTER_PATH)}>
+              去注册
+            </Button>
+          </div>
         </Form>
       </div>
     </div>

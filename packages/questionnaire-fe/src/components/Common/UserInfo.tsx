@@ -10,10 +10,10 @@ const UserInfo: React.FC = () => {
     <Space>
       <Button onClick={() => nav(LOGIN_PATH)}>
         <RocketOutlined />
-        登录
+        sign in
       </Button>
       <Button type="link" onClick={() => nav(REGISTER_PATH)}>
-        免费注册
+        sign up
       </Button>
     </Space>
   )

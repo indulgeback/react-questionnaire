@@ -1,5 +1,5 @@
 import { RespType } from '@/apis/modules/types/common'
-import { useSnackbar } from 'notistack'
+import { App } from 'antd'
 
 /**
  * 钩子函数，用于检查请求是否成功并显示相应的通知
@@ -7,9 +7,7 @@ import { useSnackbar } from 'notistack'
  * @returns {Object} 返回一个对象，包含一个用于检查请求是否成功的函数
  */
 const useRequestSuccessChecker = () => {
-  // 使用useSnackbar钩子来管理Snackbar通知
-  const { enqueueSnackbar } = useSnackbar()
-
+  const { message } = App.useApp()
   /**
    * 检查请求是否成功
    * 根据响应代码判断请求是否成功，并显示相应的Snackbar通知
@@ -18,11 +16,11 @@ const useRequestSuccessChecker = () => {
   const isRequestSuccess = (response: RespType<any>) => {
     // 如果响应代码为1，表示请求成功，显示成功通知
     if (response?.code === 1) {
-      enqueueSnackbar(response?.msg, { variant: 'success' })
+      message.success(response?.msg)
       return true
     } else {
       // 如果响应代码不为1，表示请求失败，显示错误通知
-      enqueueSnackbar(response?.msg, { variant: 'error' })
+      message.error(response?.msg)
       return false
     }
   }

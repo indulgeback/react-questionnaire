@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 import { Typography, Space, Button, Form, Input, App, Modal } from 'antd'
-import { UserAddOutlined } from '@ant-design/icons'
-import styles from './Register.module.scss'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { LOGIN_PATH } from '@/router'
 import { Rule } from 'antd/es/form'
 import apis from '@/apis'
@@ -89,26 +87,24 @@ const Register: React.FC = () => {
   }
 
   return (
-    <div className={styles.container}>
-      <div>
-        <Space>
-          <Title level={2}>
-            <UserAddOutlined />
-          </Title>
-          <Title level={2}>注册新用户</Title>
-        </Space>
-      </div>
-      <div>
-        <Form name="register" labelCol={{ span: 8 }} wrapperCol={{ span: 16 }} onFinish={onFinish}>
-          <Form.Item label="用户名" name={formItem.username} rules={rules.username}>
+    <div className="custom-main flex flex-col justify-center items-center bg-gray-100">
+      <div className="bg-white p-8 rounded-lg shadow-md w-[400px]">
+        <Form name="register" layout="vertical" onFinish={onFinish}>
+          <Form.Item
+            className="mb-4"
+            label="用户名"
+            name={formItem.username}
+            rules={rules.username}
+          >
             <Input />
           </Form.Item>
 
-          <Form.Item label="密码" name={formItem.password} rules={rules.password}>
+          <Form.Item className="mb-4" label="密码" name={formItem.password} rules={rules.password}>
             <Input.Password />
           </Form.Item>
 
           <Form.Item
+            className="mb-4"
             label="确认密码"
             name={formItem.confirm}
             dependencies={['password']}
@@ -117,16 +113,18 @@ const Register: React.FC = () => {
             <Input.Password />
           </Form.Item>
 
-          <Form.Item label="昵称" name={formItem.nickname} rules={rules.nickname}>
+          <Form.Item className="mb-4" label="昵称" name={formItem.nickname} rules={rules.nickname}>
             <Input />
           </Form.Item>
 
-          <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+          <div className="flex gap-4 justify-center items-center">
             <Button type="primary" htmlType="submit">
               注册
             </Button>
-            <Link to={LOGIN_PATH}>已有用户，登录</Link>
-          </Form.Item>
+            <Button type="default" onClick={() => nav(LOGIN_PATH)}>
+              已注册，去登录
+            </Button>
+          </div>
         </Form>
       </div>
       <Modal title="邮箱验证" open={open} onOk={verifyIdentity}>

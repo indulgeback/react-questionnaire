@@ -4,7 +4,7 @@ import { MANAGE_INDEX_PATH } from '@/router'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import Face from '@/components/Face/Face'
-import { Button, Typography } from '@mui/material'
+import { Button } from 'antd'
 
 const Home: React.FC = () => {
   const nav = useNavigate()
@@ -21,15 +21,15 @@ const Home: React.FC = () => {
     <div className="custom-main flex flex-col justify-center items-center">
       <Face />
       <div className="text-center mb-10">
-        <Typography variant="h1" className="custom-main-title !mb-5" id="title">
+        <div className="custom-main-title mb-5" id="title">
           问卷调查 | 在线投票
-        </Typography>
-        <Typography variant="body1" className="!mb-5" id="description">
+        </div>
+        <div className="mb-5 text-lg" id="description">
           已累计创建问卷 100👧 份，发布问卷 87🧒 份，收到答卷 1800📃 份
-        </Typography>
+        </div>
         <div id="startBtn">
-          <Button variant="contained" onClick={() => nav(MANAGE_INDEX_PATH)}>
-            start use
+          <Button type="dashed" onClick={() => nav(MANAGE_INDEX_PATH)}>
+            START USE
           </Button>
         </div>
       </div>

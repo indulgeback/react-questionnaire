@@ -6,7 +6,6 @@ import { REGISTER_PATH } from '@/router'
 import apis from '@/apis'
 import { rememberUser, deleteUserFormStorage, getUserFormStorage } from '@/utils'
 import colorfulLogo from '@/assets/img/colorful-logo.png'
-import SvgIcon from '@/components/Common/SvgIcon'
 import useRequestSuccessChecker from '@/hooks/useRequestSuccessChecker'
 
 const Login: React.FC = () => {
@@ -31,13 +30,12 @@ const Login: React.FC = () => {
     form.setFieldsValue({ username, password })
   }, [])
   return (
-    <div className="custom-main bg-gray-100 flex justify-center items-center">
-      <SvgIcon name="bg-auth" />
-      <div className="bg-white p-5 rounded-md shadow-md">
+    <div className="custom-main flex justify-center items-center">
+      <div className="bg-white/50 backdrop-blur-sm p-5 rounded-md shadow-white shadow-2xl">
         <img className="h-48" src={colorfulLogo} />
         <Form layout="vertical" initialValues={{ remember: true }} form={form} onFinish={onFinish}>
           <Form.Item
-            className="mb-4"
+            className="mb-3"
             label="用户名"
             name="username"
             rules={[
@@ -49,14 +47,14 @@ const Login: React.FC = () => {
             <Input />
           </Form.Item>
           <Form.Item
-            className="mb-4"
+            className="mb-3"
             label="密码"
             name="password"
             rules={[{ required: true, message: '请输入密码' }]}
           >
             <Input.Password />
           </Form.Item>
-          <Form.Item name="remember" valuePropName="checked">
+          <Form.Item className="mb-3" name="remember" valuePropName="checked">
             <Checkbox>记住我</Checkbox>
           </Form.Item>
           <div className="flex justify-center items-center gap-4">

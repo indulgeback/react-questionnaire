@@ -1,13 +1,12 @@
 import React, { useState } from 'react'
-import { Typography, Space, Button, Form, Input, App, Modal } from 'antd'
+import { Space, Button, Form, Input, App, Modal } from 'antd'
 import { useNavigate } from 'react-router-dom'
 import { LOGIN_PATH } from '@/router'
 import { Rule } from 'antd/es/form'
 import apis from '@/apis'
+import colorfulLogo from '@/assets/img/colorful-logo.png'
 import { UserInfo } from '@/apis/modules/types/auth'
 import { isRequestSuccess } from '@/utils'
-
-const { Title } = Typography
 
 const Register: React.FC = () => {
   const { message } = App.useApp()
@@ -87,11 +86,12 @@ const Register: React.FC = () => {
   }
 
   return (
-    <div className="custom-main flex flex-col justify-center items-center bg-gray-100">
-      <div className="bg-white p-8 rounded-lg shadow-md w-[400px]">
+    <div className="custom-main flex flex-col justify-center items-center">
+      <div className="bg-white/50 backdrop-blur-sm p-5 rounded-md shadow-white shadow-2xl">
+        <img className="h-48" src={colorfulLogo} />
         <Form name="register" layout="vertical" onFinish={onFinish}>
           <Form.Item
-            className="mb-4"
+            className="mb-3"
             label="用户名"
             name={formItem.username}
             rules={rules.username}
@@ -99,12 +99,12 @@ const Register: React.FC = () => {
             <Input />
           </Form.Item>
 
-          <Form.Item className="mb-4" label="密码" name={formItem.password} rules={rules.password}>
+          <Form.Item className="mb-3" label="密码" name={formItem.password} rules={rules.password}>
             <Input.Password />
           </Form.Item>
 
           <Form.Item
-            className="mb-4"
+            className="mb-3"
             label="确认密码"
             name={formItem.confirm}
             dependencies={['password']}
@@ -113,7 +113,7 @@ const Register: React.FC = () => {
             <Input.Password />
           </Form.Item>
 
-          <Form.Item className="mb-4" label="昵称" name={formItem.nickname} rules={rules.nickname}>
+          <Form.Item className="mb-3" label="昵称" name={formItem.nickname} rules={rules.nickname}>
             <Input />
           </Form.Item>
 

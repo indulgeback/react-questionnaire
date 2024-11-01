@@ -3,14 +3,14 @@ import { App } from 'antd'
 
 /**
  * 钩子函数，用于检查请求是否成功并显示相应的通知
- * 该函数的主要作用是根据响应结果判断请求状态，并通过Snackbar通知用户
+ * 该函数的主要作用是根据响应结果判断请求状态，并通过message通知用户
  * @returns {Object} 返回一个对象，包含一个用于检查请求是否成功的函数
  */
 const useRequestSuccessChecker = () => {
   const { message } = App.useApp()
   /**
    * 检查请求是否成功
-   * 根据响应代码判断请求是否成功，并显示相应的Snackbar通知
+   * 根据响应代码判断请求是否成功，并显示相应的message通知
    * @param {RespType<any>} response 请求的响应数据，用于判断请求状态
    */
   const isRequestSuccess = (response: RespType<any>) => {

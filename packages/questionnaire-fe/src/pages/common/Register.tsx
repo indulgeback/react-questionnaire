@@ -3,15 +3,17 @@ import { Space, Button, Form, Input, App, Modal } from 'antd'
 import { useNavigate } from 'react-router-dom'
 import { LOGIN_PATH } from '@/router'
 import { Rule } from 'antd/es/form'
+import shared from '@questionnaire/shared'
 import apis from '@/apis'
 import colorfulLogo from '@/assets/img/colorful-logo.png'
 import { UserInfo } from '@/apis/modules/types/auth'
-import { isRequestSuccess } from '@/utils'
+import useRequestSuccessChecker from '@/hooks/useRequestSuccessChecker'
 
 const Register: React.FC = () => {
   const { message } = App.useApp()
   const nav = useNavigate()
-  const [open, setOpen] = useState(false)
+  const { isRequestSuccess } = useRequestSuccessChecker()
+  const [isModalOpen, setIsModalOpen] = useState(false)
   const [email, setEmail] = useState('')
   const [code, setCode] = useState('')
   const [userInfo, setUserInfo] = useState<UserInfo>({
@@ -25,7 +27,9 @@ const Register: React.FC = () => {
     username = 'username',
     password = 'password',
     confirm = 'confirm',
-    nickname = 'nickname'
+    nickname = 'nickname',
+    email = 'email',
+    code = 'code'
   }
 
   const rules: Record<formItem, Rule[]> = {
@@ -47,19 +51,25 @@ const Register: React.FC = () => {
         }
       })
     ],
-    nickname: [{ required: true, message: '请输入昵称!' }]
+    nickname: [{ required: true, message: '请输入昵称!' }],
+    email: [{ type: 'email', message: '请输入正确的邮箱地址' }],
+    code: [{ len: 6, message: '验证码长度为6位' }]
+  }
+
+  const afterCloseModal = () => {
+    setEmail('')
+    setCode('')
   }
 
   const sendEmailCode = async () => {
+    const isValidEmail = shared.RegExp.emailRegExp.test(email)
+    if (!isValidEmail) return
     const res = await apis.mailApi.sendEmailCode({ email })
-    if (isRequestSuccess(res)) {
-      message.success(res.msg)
-    }
+    isRequestSuccess(res)
   }
   const verifyIdentity = async () => {
     const res = await apis.mailApi.verifyEmailCode({ email, code })
     if (isRequestSuccess(res)) {
-      message.success(res.msg)
       setUserInfo({
         ...userInfo,
         email
@@ -72,13 +82,12 @@ const Register: React.FC = () => {
   const registerUser = async () => {
     const res = await apis.authApi.register(userInfo)
     if (isRequestSuccess(res)) {
-      message.success(res.msg)
       nav(LOGIN_PATH)
     }
   }
 
   const onFinish = async (values: UserInfo) => {
-    setOpen(true)
+    setIsModalOpen(true)
     setUserInfo({
       ...userInfo,
       ...values
@@ -121,17 +130,25 @@ const Register: React.FC = () => {
           </div>
         </Form>
       </div>
-      <Modal title="邮箱验证" open={open} onOk={verifyIdentity}>
+      <Modal
+        title="邮箱验证"
+        open={isModalOpen}
+        okText="发送"
+        onOk={verifyIdentity}
+        cancelText="取消"
+        onCancel={() => setIsModalOpen(false)}
+        afterClose={afterCloseModal}
+      >
         <Form name="emailVerification" labelCol={{ span: 4 }} wrapperCol={{ span: 20 }}>
-          <Form.Item label="电子邮箱" name={'email'}>
-            <Space.Compact style={{ width: '100%' }}>
+          <Form.Item label="电子邮箱" name={formItem.email} rules={rules.email}>
+            <Space.Compact className="w-full">
               <Input type="email" value={email} onChange={e => setEmail(e.target.value)} />
               <Button type="primary" onClick={sendEmailCode}>
                 发送验证码
               </Button>
             </Space.Compact>
           </Form.Item>
-          <Form.Item label="验证码" name={'code'}>
+          <Form.Item label="验证码" name={formItem.code} rules={rules.code}>
             <Input value={code} onChange={e => setCode(e.target.value)} />
           </Form.Item>
         </Form>

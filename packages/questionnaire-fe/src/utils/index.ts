@@ -16,7 +16,3 @@ export const getUserFormStorage = () => {
     password: localStorage.getItem(PASSWORD_KEY)
   }
 }
-
-export const isRequestSuccess = (res: any) => {
-  return res?.code === 1
-}

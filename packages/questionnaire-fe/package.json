@@ -4,7 +4,6 @@
   "private": true,
   "dependencies": {
     "@ant-design/icons": "^5.3.6",
-    "@antv/x6": "^1.35.1",
     "@fontsource/roboto": "^5.1.0",
     "@gsap/react": "^2.1.0",
     "@questionnaire/shared": "link:../shared",

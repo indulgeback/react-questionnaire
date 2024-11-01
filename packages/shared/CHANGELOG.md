@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0](https://gitee.com/IndulgeBack/react-questionnaire/compare/v1.0.1...v1.1.0) (2024-11-01)
+
+
+### Features
+
+* 邮箱添加后端校验 ([bc453d0](https://gitee.com/IndulgeBack/react-questionnaire/commits/bc453d034824e3954105003a42f66cdd7f6324b9))
+* FE - 前端验证码校验 ([3c2eb0f](https://gitee.com/IndulgeBack/react-questionnaire/commits/3c2eb0fe1e7e4c9ba542a34cf02969d1ea1a15bf))
+
+
+
+
+
 ## [1.0.1](https://gitee.com/IndulgeBack/react-questionnaire/compare/v0.2.1...v1.0.1) (2024-10-28)
 
 **Note:** Version bump only for package @questionnaire/shared

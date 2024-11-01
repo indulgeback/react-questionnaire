@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0](https://gitee.com/IndulgeBack/react-questionnaire/compare/v1.0.1...v1.1.0) (2024-11-01)
+
+
+### Features
+
+* BE - 更新拦截器配置 ([60deab6](https://gitee.com/IndulgeBack/react-questionnaire/commits/60deab6f87e7c7d0063f90ebeb6bc155d07adae4))
+* FE - 抽离复杂动画的sass实现 ([6196ebe](https://gitee.com/IndulgeBack/react-questionnaire/commits/6196ebeb2daecb7279f84e5831c99186dd6f14c3))
+* FE - 登陆注册页面布局调整 ([5b904b4](https://gitee.com/IndulgeBack/react-questionnaire/commits/5b904b4484bc25c0df822ce56e5ddbfde701f785))
+* FE - 登陆注册页面UI更新 ([ec924e3](https://gitee.com/IndulgeBack/react-questionnaire/commits/ec924e35e5f0c4483ad45df7fa74b308c4c38f09))
+* FE - 封装 useRequestSuccessChecker hook 解决消息通知问题 ([3198462](https://gitee.com/IndulgeBack/react-questionnaire/commits/31984624e8e2c8af3562b318b311568d10d36e6a))
+* FE - 集成MUI与tailwindcss ([fb53c7d](https://gitee.com/IndulgeBack/react-questionnaire/commits/fb53c7df3d8958e4fef4a6af2e0719f66c2c46df))
+* FE - 前端验证码校验 ([3c2eb0f](https://gitee.com/IndulgeBack/react-questionnaire/commits/3c2eb0fe1e7e4c9ba542a34cf02969d1ea1a15bf))
+* FE - 全屏加载封装 ([55d757b](https://gitee.com/IndulgeBack/react-questionnaire/commits/55d757b431d7013e0a82127a4ff40814010d8236))
+* FE - 图标替换 ([197db45](https://gitee.com/IndulgeBack/react-questionnaire/commits/197db45d93d3211f00a587b38086856cbf7e42ac))
+* FE - 问卷列表页面更新 ([aa276f0](https://gitee.com/IndulgeBack/react-questionnaire/commits/aa276f0cbd02f707f24a4242e98ae814935ed812))
+* FE - 问卷列表页面使用全局loading ([138ca1c](https://gitee.com/IndulgeBack/react-questionnaire/commits/138ca1c76fb1f0487ab7f0d98dd58390dc3ea67d))
+* FE - 修改组件库为AntD ([8caf5fc](https://gitee.com/IndulgeBack/react-questionnaire/commits/8caf5fc7be5b9ac5d63cfb7a2043c082396384b7))
+* FE - 验证码发送体验优化 ([518a1ed](https://gitee.com/IndulgeBack/react-questionnaire/commits/518a1ed9986dceaddf9318ddca4981b62054b7cc))
+* FE - 邮件验证成功注册功能 ([8706c5c](https://gitee.com/IndulgeBack/react-questionnaire/commits/8706c5c77ecc27e17966b105b2336885d0428a5e))
+* FE - 注册验证邮箱功能 ([3aeeb9b](https://gitee.com/IndulgeBack/react-questionnaire/commits/3aeeb9b6021b2af19313a3a6ff4fc9986a8282c7))
+* FE - SvgIcon通用组件封装 ([11e0312](https://gitee.com/IndulgeBack/react-questionnaire/commits/11e0312b82e5e8b7cf6396c896b1c8f0d703887e))
+
+
+
+
+
 ## [1.0.1](https://gitee.com/IndulgeBack/react-questionnaire/compare/v0.2.1...v1.0.1) (2024-10-28)
 
 

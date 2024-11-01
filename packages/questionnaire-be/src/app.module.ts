@@ -15,6 +15,9 @@ import { TasksModule } from '@/tasks/tasks.module';
 // 自定义配置
 import configuration from '@/config';
 import DatabaseLogger from '@/common/utils/databaseLogger';
+import { HttpRequestInterceptor } from './middleware/request.interceptor';
+import { HttpResponseInterceptor } from './middleware/response.interceptor';
+import { APP_INTERCEPTOR } from '@nestjs/core';
 
 @Module({
   imports: [
@@ -55,6 +58,16 @@ import DatabaseLogger from '@/common/utils/databaseLogger';
     MailModule,
     QuestionModule,
     TasksModule,
+  ],
+  providers: [
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: HttpRequestInterceptor,
+    },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: HttpResponseInterceptor,
+    },
   ],
 })
 export class AppModule {}

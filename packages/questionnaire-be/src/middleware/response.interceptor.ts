@@ -1,6 +1,3 @@
-/**
- * 自定义响应日志记录拦截器
- */
 import {
   CallHandler,
   ExecutionContext,
@@ -14,10 +11,12 @@ import { HttpLogger } from '@/common/utils/log4js';
 @Injectable()
 export class HttpResponseInterceptor implements NestInterceptor {
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
-    const req = context.getArgByIndex(1).req;
+    const req = context.switchToHttp().getRequest();
+    const res = context.switchToHttp().getResponse();
 
     return next.handle().pipe(
       map((data) => {
+        // 组装日志信息
         const logFormat = {
           httpType: 'Response',
           ip: req.headers?.remoteip
@@ -28,8 +27,17 @@ export class HttpResponseInterceptor implements NestInterceptor {
           params: req.params,
           query: req.query,
           body: req.body,
+          responseStatus: res.statusCode,
+          responseData: data,
         };
-        HttpLogger.access(JSON.stringify(logFormat));
+
+        // 根据状态码，进行日志类型区分
+        if (res.statusCode >= 400) {
+          HttpLogger.error(JSON.stringify(logFormat));
+        } else {
+          HttpLogger.access(JSON.stringify(logFormat));
+        }
+
         return data;
       }),
     );

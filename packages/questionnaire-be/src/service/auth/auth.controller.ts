@@ -7,12 +7,12 @@ import { ResponseBody } from '@/common/classes/response-body';
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
-  // 注册
+
   @Post('register')
   async register(@Body() registerUserDto: RegisterUserDto) {
-    const { username } = registerUserDto;
-    if (await this.authService.findByUsername(username)) {
-      return new ResponseBody<null>(0, null, '用户名已存在');
+    const { email } = registerUserDto;
+    if (await this.authService.findByEmail(email)) {
+      return new ResponseBody<null>(0, null, '该邮箱已注册');
     } else {
       this.authService.createUser(registerUserDto);
       return new ResponseBody<null>(1, null, '注册成功');
@@ -21,8 +21,8 @@ export class AuthController {
 
   @Post('login')
   async login(@Body() loginDto: LoginDto) {
-    const { username } = loginDto;
-    if (await this.authService.findByUsername(username)) {
+    const { email } = loginDto;
+    if (await this.authService.findByEmail(email)) {
       if (await this.authService.comparePassword(loginDto)) {
         return new ResponseBody<null>(1, null, '登录成功');
       } else {

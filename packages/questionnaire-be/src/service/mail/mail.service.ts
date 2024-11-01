@@ -26,6 +26,15 @@ export class MailService {
   }
 
   async sendVerificationEmail(email: string): Promise<string> {
+    // 检查验证码是否已存在且未过期
+    const storedCode = await this.client.get(email);
+    if (storedCode) {
+      const ttl = await this.client.ttl(email);
+      if (ttl > 0) {
+        throw new Error('验证码已发送，请勿重复发送');
+      }
+    }
+
     const verificationCode = this.generateVerificationCode();
     const expirationTime = 60 * 10;
     try {
@@ -39,6 +48,7 @@ export class MailService {
         subject: 'Verification Code',
         html: generateEmail(verificationCode, expirationTime),
       });
+
       return verificationCode;
     } catch (error) {
       console.error(error);
@@ -46,6 +56,7 @@ export class MailService {
     }
   }
 
+  // 生成验证码
   private generateVerificationCode(): string {
     return randomBytes(3).toString('hex').toUpperCase();
   }

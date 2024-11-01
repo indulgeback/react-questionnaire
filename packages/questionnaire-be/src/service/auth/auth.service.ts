@@ -25,14 +25,14 @@ export class AuthService {
     return await this.userRepository.save(registerUserDto);
   }
 
-  async findByUsername(username: string) {
+  async findByEmail(email: string) {
     return await this.userRepository.findOne({
-      where: { username },
+      where: { email },
     });
   }
 
   async comparePassword(loginDto: LoginDto) {
-    const user = await this.findByUsername(loginDto.username);
+    const user = await this.findByEmail(loginDto.email);
     // 解密匹配
     if (user && (await bcrypt.compare(loginDto.password, user.password))) {
       return true;

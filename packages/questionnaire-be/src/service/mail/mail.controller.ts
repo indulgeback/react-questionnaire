@@ -16,7 +16,11 @@ export class MailController {
     if (!isValidEmail) {
       return new ResponseBody<null>(0, null, '输入的邮箱地址不合法');
     }
-    await this.mailService.sendVerificationEmail(email);
+    try {
+      await this.mailService.sendVerificationEmail(email);
+    } catch (error) {
+      return new ResponseBody<null>(0, null, error.message);
+    }
     return new ResponseBody<null>(1, null, `验证码已发送至 ${email}`);
   }
 

@@ -56,22 +56,22 @@ const List: React.FC = () => {
   }
 
   return (
-    <>
-      <div className={styles.header}>
-        <div className={styles.title}>
+    <div className="flex flex-col h-full">
+      <div className="flex justify-between items-center">
+        <div className="p-2">
           <Title level={3}>我的问卷</Title>
         </div>
-        <div className={styles.search}>
+        <div className="p-2">
           <ListSearch />
         </div>
       </div>
-      <div className={styles.list} ref={questionListRef}>
+      <div className="px-2 overflow-y-scroll" ref={questionListRef}>
         {/* 问卷列表 */}
         {questionList.length > 0 &&
           questionList.map((item: any) => (
             <QuestionCard
               key={item.id}
-              _id={item.id}
+              id={item.id}
               title={item.title}
               isPublished={item.is_published}
               isStar={item.is_star}
@@ -82,7 +82,7 @@ const List: React.FC = () => {
         <FloatButton.BackTop target={targetFn} visibilityHeight={120} />
         <div ref={bottomRef} className="h-14"></div>
       </div>
-    </>
+    </div>
   )
 }
 

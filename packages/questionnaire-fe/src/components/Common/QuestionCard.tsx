@@ -16,7 +16,7 @@ import dayjs from 'dayjs'
 
 // ts 自定义类型
 type PropsType = {
-  _id: string
+  id: string
   title: string
   isStar: boolean
   isPublished: boolean
@@ -27,18 +27,18 @@ type PropsType = {
 const QuestionCard: React.FC<PropsType> = (props: PropsType) => {
   const { message } = App.useApp()
   const nav = useNavigate()
-  const { _id, title, isStar, isPublished, answerCount, createdAt } = props
+  const { id, title, isStar, isPublished, answerCount, createdAt } = props
   const duplicate = () => {
-    message.success('复制成功' + _id)
+    message.success('复制成功' + id)
   }
   const del = () => {
-    message.success('删除成功' + _id)
+    message.success('删除成功' + id)
   }
   return (
     <div className="my-3 p-3 rounded-md bg-white duration-300 hover:shadow-md">
       <div className="flex">
         <div className="flex-1">
-          <Link to={isPublished ? `/question/stat/${_id}` : `/question/edit/${_id}`}>
+          <Link to={isPublished ? `/question/stat/${id}` : `/question/edit/${id}`}>
             <Space>
               <span className="inline-block w-4">
                 {isStar && <StarOutlined className="text-custom-yellow" />}
@@ -70,7 +70,7 @@ const QuestionCard: React.FC<PropsType> = (props: PropsType) => {
               size="small"
               icon={<EditOutlined />}
               onClick={() => {
-                nav(`/question/edit/${_id}`)
+                nav(`/question/edit/${id}`)
               }}
             >
               编辑问卷
@@ -80,7 +80,7 @@ const QuestionCard: React.FC<PropsType> = (props: PropsType) => {
               size="small"
               icon={<LineChartOutlined />}
               onClick={() => {
-                nav(`/question/stat/${_id}`)
+                nav(`/question/stat/${id}`)
               }}
               disabled={!isPublished}
             >

@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import styles from './Login.module.scss'
 import { useNavigate } from 'react-router-dom'
 import { Button, Checkbox, Form, Input, Space } from 'antd'
 import { REGISTER_PATH } from '@/router'

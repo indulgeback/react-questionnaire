@@ -9,67 +9,25 @@ const { Title } = Typography
 
 const Star: React.FC = () => {
   useTitle('小木问卷 - 星标问卷')
-  const [questionList, setQuestionList] = useState([
-    {
-      _id: 'q1',
-      title: '问卷1',
-      isPublished: true,
-      isStar: false,
-      answerCount: 10,
-      createdAt: 'dawdaw'
-    },
-    {
-      _id: 'q2',
-      title: '问卷2',
-      isPublished: false,
-      isStar: true,
-      answerCount: 10,
-      createdAt: 'dawdaw'
-    },
-    {
-      _id: 'q3',
-      title: '问卷3',
-      isPublished: true,
-      isStar: false,
-      answerCount: 10,
-      createdAt: 'dawdaw'
-    },
-    {
-      _id: 'q4',
-      title: '问卷4',
-      isPublished: false,
-      isStar: false,
-      answerCount: 10,
-      createdAt: 'dawdaw'
-    },
-    {
-      _id: 'q5',
-      title: '问卷5',
-      isPublished: true,
-      isStar: true,
-      answerCount: 10,
-      createdAt: 'dawdaw'
-    }
-  ])
+  const [questionList, setQuestionList] = useState([])
   return (
     <>
-      <div className={styles.header}>
-        <div className={styles.title}>
+      <div className="flex justify-between items-center">
+        <div className="p-2">
           <Title level={3}>星标问卷</Title>
         </div>
-        <div className={styles.search}>
+        <div className="p-2">
           <ListSearch />
         </div>
       </div>
-      <div className={styles.list}>
+      <div className="px-2 overflow-y-scroll">
         {/* 问卷列表 */}
         {questionList.length === 0 && <Empty description="暂无星标问卷" />}
 
-        {questionList.length > 0 &&
+        {/* {questionList.length > 0 &&
           questionList.map(q => {
-            const { _id } = q
-            return q.isStar && <QuestionCard key={_id} {...q} />
-          })}
+            // ;<QuestionCard />
+          })} */}
       </div>
       <div className={styles.footer}>分页</div>
     </>

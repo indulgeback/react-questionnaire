@@ -24,6 +24,13 @@
     height: calc(100vh - 68px - 40px);
 }
 
+.custom-questionnaire-list {
+    margin-top: 5px;
+    padding: 0 10px;
+    height: calc(100% - 60px);
+    overflow-y: scroll;
+}
+
 .custom-footer {
     height: 40px;
     text-align: center;

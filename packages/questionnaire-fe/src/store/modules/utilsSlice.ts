@@ -7,7 +7,6 @@ export const utilsSlice = createSlice({
   },
   reducers: {
     setScreenSpinning: (state, action) => {
-      console.log('setScreenSpinning', action)
       state.screenSpinning = action.payload
     }
   }

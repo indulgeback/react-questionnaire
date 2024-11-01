@@ -8,49 +8,6 @@ import ListSearch from '@/components/Common/listSearch'
 const { Title } = Typography
 const { confirm } = Modal
 
-const rowData = [
-  {
-    _id: 'q1',
-    title: '问卷1',
-    isPublished: true,
-    isStar: false,
-    answerCount: 10,
-    createdAt: 'dawdaw'
-  },
-  {
-    _id: 'q2',
-    title: '问卷2',
-    isPublished: false,
-    isStar: true,
-    answerCount: 10,
-    createdAt: 'dawdaw'
-  },
-  {
-    _id: 'q3',
-    title: '问卷3',
-    isPublished: true,
-    isStar: false,
-    answerCount: 10,
-    createdAt: 'dawdaw'
-  },
-  {
-    _id: 'q4',
-    title: '问卷4',
-    isPublished: false,
-    isStar: false,
-    answerCount: 10,
-    createdAt: 'dawdaw'
-  },
-  {
-    _id: 'q5',
-    title: '问卷5',
-    isPublished: true,
-    isStar: true,
-    answerCount: 10,
-    createdAt: 'dawdaw'
-  }
-]
-
 const tableColumns = [
   {
     title: '问卷标题',
@@ -81,7 +38,7 @@ const tableColumns = [
 
 const Trash: React.FC = () => {
   useTitle('小木问卷 - 星标问卷')
-  const [questionList, setQuestionList] = useState(rowData)
+  const [questionList, setQuestionList] = useState([])
   // 记录选中的id
   const [selectedIds, setSelectedIds] = useState<string[]>([])
 
@@ -110,7 +67,6 @@ const Trash: React.FC = () => {
         dataSource={questionList}
         columns={tableColumns}
         pagination={false}
-        rowKey={q => q._id}
         rowSelection={{
           type: 'checkbox',
           onChange: selectedRowKeys => setSelectedIds(selectedRowKeys as string[])
@@ -121,15 +77,15 @@ const Trash: React.FC = () => {
 
   return (
     <>
-      <div className={styles.header}>
-        <div className={styles.title}>
+      <div className="flex justify-between items-center">
+        <div className="p-2">
           <Title level={3}>星标问卷</Title>
         </div>
-        <div className={styles.search}>
+        <div className="p-2">
           <ListSearch />
         </div>
       </div>
-      <div className={styles.list}>
+      <div className="px-2 overflow-y-scroll">
         {/* 问卷列表 */}
         {questionList.length === 0 && <Empty description="回收站空空如也" />}
         {questionList.length > 0 && TableElm}

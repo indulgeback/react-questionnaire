@@ -8,13 +8,13 @@ import ManageLayout from '@/layouts/ManageLayout'
 // 问卷页面layout
 import QuestionLayout from '@/layouts/QuestionLayout'
 // 主页
-import Home from '@/pages/Home'
+import Home from '@/pages/common/Home'
 // 登陆
-import Login from '@/pages/Login'
+import Login from '@/pages/common/Login'
 // 注册
-import Register from '@/pages/Register'
+import Register from '@/pages/common/Register'
 // 404
-import NotFound from '@/pages/NotFound'
+import NotFound from '@/pages/common/NotFound'
 // 问卷列表
 import List from '@/pages/manage/List'
 // 回收站
@@ -25,8 +25,6 @@ import Star from '@/pages/manage/Star'
 import Edit from '@/pages/question/Edit'
 // 问卷统计
 import Stat from '@/pages/question/Stat'
-// X6测试页面
-import X6 from '@/pages/x6'
 
 const router = createBrowserRouter([
   {
@@ -82,10 +80,6 @@ const router = createBrowserRouter([
         element: <Stat />
       }
     ]
-  },
-  {
-    path: 'x6',
-    element: <X6 />
   }
 ])
 

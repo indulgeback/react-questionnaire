@@ -14,4 +14,7 @@ export class User {
 
   @Column({ length: 255 })
   nickname: string; // 昵称
+
+  @Column({ length: 255 })
+  email: string;
 }

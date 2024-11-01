@@ -1,6 +1,7 @@
 import { Controller, Body, Post } from '@nestjs/common';
 import { MailService } from '@/service/mail/mail.service';
 import { ResponseBody } from '@/common/classes/response-body';
+import shared from '@questionnaire/shared';
 
 @Controller('mail')
 export class MailController {
@@ -10,12 +11,13 @@ export class MailController {
   async sendVerification(
     @Body('email') email: string,
   ): Promise<ResponseBody<null>> {
-    const code = await this.mailService.sendVerificationEmail(email);
-    return new ResponseBody<null>(
-      1,
-      null,
-      `Verification code sent to ${email}`,
-    );
+    // 校验email是否为邮箱格式
+    const isValidEmail = shared.RegExp.emailRegExp.test(email);
+    if (!isValidEmail) {
+      return new ResponseBody<null>(0, null, '输入的邮箱地址不合法');
+    }
+    await this.mailService.sendVerificationEmail(email);
+    return new ResponseBody<null>(1, null, `验证码已发送至 ${email}`);
   }
 
   @Post('verify')
@@ -25,8 +27,12 @@ export class MailController {
   ): Promise<ResponseBody<boolean>> {
     const verified = await this.mailService.verifyCode(email, code);
     if (!verified) {
-      return new ResponseBody<boolean>(0, verified, `Verification Failed`);
+      return new ResponseBody<boolean>(
+        0,
+        verified,
+        `验证失败，请检查验证码是否正确`,
+      );
     }
-    return new ResponseBody<boolean>(1, verified, `Verification Passed`);
+    return new ResponseBody<boolean>(1, verified, `验证通过`);
   }
 }

@@ -8,6 +8,7 @@ import apis from '@/apis'
 import colorfulLogo from '@/assets/img/colorful-logo.png'
 import { UserInfo } from '@/apis/modules/types/auth'
 import useRequestSuccessChecker from '@/hooks/useRequestSuccessChecker'
+import { useRequest } from 'ahooks'
 
 const Register: React.FC = () => {
   const { message } = App.useApp()
@@ -16,15 +17,12 @@ const Register: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [email, setEmail] = useState('')
   const [code, setCode] = useState('')
-  const [userInfo, setUserInfo] = useState<UserInfo>({
-    username: '',
-    password: '',
+  const [userInfo, setUserInfo] = useState({
     nickname: '',
-    email: ''
+    password: ''
   })
 
   enum formItem {
-    username = 'username',
     password = 'password',
     confirm = 'confirm',
     nickname = 'nickname',
@@ -33,11 +31,6 @@ const Register: React.FC = () => {
   }
 
   const rules: Record<formItem, Rule[]> = {
-    username: [
-      { required: true, message: '请输入用户名!' },
-      { type: 'string', min: 5, max: 20, message: '字符长度在 5-20 之间' },
-      { pattern: /^\w+$/, message: '只能是数字字母下划线' }
-    ],
     password: [{ required: true, message: '请输入密码!' }],
     confirm: [
       { required: true, message: '请输入确认密码!' },
@@ -51,7 +44,10 @@ const Register: React.FC = () => {
         }
       })
     ],
-    nickname: [{ required: true, message: '请输入昵称!' }],
+    nickname: [
+      { required: true, message: '请输入昵称!' },
+      { type: 'string', min: 2, max: 20, message: '昵称长度为2-20位' }
+    ],
     email: [{ type: 'email', message: '请输入正确的邮箱地址' }],
     code: [{ len: 6, message: '验证码长度为6位' }]
   }
@@ -67,29 +63,29 @@ const Register: React.FC = () => {
     const res = await apis.mailApi.sendEmailCode({ email })
     isRequestSuccess(res)
   }
+
+  const { run: sendCode, loading: sendLoading } = useRequest(sendEmailCode, {
+    manual: true
+  })
+
   const verifyIdentity = async () => {
     const res = await apis.mailApi.verifyEmailCode({ email, code })
     if (isRequestSuccess(res)) {
-      setUserInfo({
-        ...userInfo,
-        email
-      })
       message.info('验证成功，正在注册中，请稍后')
-      registerUser()
+      registerUser({ ...userInfo, email })
     }
   }
 
-  const registerUser = async () => {
-    const res = await apis.authApi.register(userInfo)
+  const registerUser = async (data: UserInfo) => {
+    const res = await apis.authApi.register(data)
     if (isRequestSuccess(res)) {
       nav(LOGIN_PATH)
     }
   }
 
-  const onFinish = async (values: UserInfo) => {
+  const onFinish = async (values: typeof userInfo) => {
     setIsModalOpen(true)
     setUserInfo({
-      ...userInfo,
       ...values
     })
   }
@@ -99,7 +95,7 @@ const Register: React.FC = () => {
       <div className="bg-white/50 backdrop-blur-sm p-10 rounded-md shadow-white shadow-2xl">
         <img className="h-48" src={colorfulLogo} />
         <Form name="register" layout="vertical" onFinish={onFinish}>
-          <Form.Item label="用户名" name={formItem.username} rules={rules.username}>
+          <Form.Item label="昵称" name={formItem.nickname} rules={rules.nickname}>
             <Input />
           </Form.Item>
 
@@ -114,10 +110,6 @@ const Register: React.FC = () => {
             rules={rules.confirm}
           >
             <Input.Password />
-          </Form.Item>
-
-          <Form.Item label="昵称" name={formItem.nickname} rules={rules.nickname}>
-            <Input />
           </Form.Item>
 
           <div className="flex gap-4 justify-center items-center">
@@ -143,7 +135,7 @@ const Register: React.FC = () => {
           <Form.Item label="电子邮箱" name={formItem.email} rules={rules.email}>
             <Space.Compact className="w-full">
               <Input type="email" value={email} onChange={e => setEmail(e.target.value)} />
-              <Button type="primary" onClick={sendEmailCode}>
+              <Button type="primary" loading={sendLoading} onClick={sendCode}>
                 发送验证码
               </Button>
             </Space.Compact>

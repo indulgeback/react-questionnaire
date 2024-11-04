@@ -2,6 +2,9 @@
 app:
   port: 8879
   prefix: '/api'
+  jwt:
+    secret: 'secret'
+    expiresIn: '1d'
 # 数据库配置
 db:
   mysql:

@@ -1,11 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useInViewport, useRequest, useTitle } from 'ahooks'
 import QuestionCard from '@/components/Common/QuestionCard'
-import styles from './Common.module.scss'
 import { Typography, Spin, FloatButton } from 'antd'
 import ListSearch from '@/components/Common/listSearch'
 import apis from '@/apis'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { setScreenSpinning } from '@/store/modules/utilsSlice'
 
 const { Title } = Typography

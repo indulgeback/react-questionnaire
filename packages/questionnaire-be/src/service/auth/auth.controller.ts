@@ -26,9 +26,8 @@ export class AuthController {
   }
 
   @Public()
-  @HttpCode(200)
   @Post('login')
-  async login(@Body() loginDto: LoginDto, @Res() res: Response) {
+  async login(@Body() loginDto: LoginDto) {
     const { email } = loginDto;
     if (await this.authService.findByEmail(email)) {
       if (await this.authService.comparePassword(loginDto)) {

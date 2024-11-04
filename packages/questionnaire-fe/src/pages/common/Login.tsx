@@ -7,10 +7,13 @@ import { rememberUser, deleteUserFormStorage, getUserFormStorage } from '@/utils
 import colorfulLogo from '@/assets/img/colorful-logo.png'
 import useRequestSuccessChecker from '@/hooks/useRequestSuccessChecker'
 import shared from '@questionnaire/shared'
+import { setToken } from '@/store/modules/profileSlice'
+import { useDispatch } from 'react-redux'
 
 const Login: React.FC = () => {
   const nav = useNavigate()
   const { isRequestSuccess } = useRequestSuccessChecker()
+  const dispatch = useDispatch()
 
   const rules = {
     email: [
@@ -23,7 +26,11 @@ const Login: React.FC = () => {
   const onFinish = async (values: any) => {
     const { email, password, remember } = values || {}
     const res = await apis.authApi.login({ email, password })
-    isRequestSuccess(res) && remember ? rememberUser(email, password) : deleteUserFormStorage()
+    if (isRequestSuccess(res)) {
+      console.log('登录成功')
+      remember ? rememberUser(email, password) : deleteUserFormStorage()
+      dispatch(setToken(res.data?.token))
+    }
   }
 
   const [form] = Form.useForm()

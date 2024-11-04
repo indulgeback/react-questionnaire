@@ -2,11 +2,13 @@ import { Controller, Body, Post } from '@nestjs/common';
 import { MailService } from '@/service/mail/mail.service';
 import { ResponseBody } from '@/common/classes/response-body';
 import shared from '@questionnaire/shared';
+import { Public } from '@/common/decorators/public.decorator';
 
 @Controller('mail')
 export class MailController {
   constructor(private readonly mailService: MailService) {}
 
+  @Public()
   @Post('send')
   async sendVerification(
     @Body('email') email: string,
@@ -24,6 +26,7 @@ export class MailController {
     return new ResponseBody<null>(1, null, `验证码已发送至 ${email}`);
   }
 
+  @Public()
   @Post('verify')
   async verifyCode(
     @Body('email') email: string,

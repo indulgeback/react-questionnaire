@@ -15,9 +15,10 @@ import { TasksModule } from '@/tasks/tasks.module';
 // 自定义配置
 import configuration from '@/config';
 import DatabaseLogger from '@/common/utils/databaseLogger';
+import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { HttpRequestInterceptor } from './middleware/request.interceptor';
 import { HttpResponseInterceptor } from './middleware/response.interceptor';
-import { APP_INTERCEPTOR } from '@nestjs/core';
+import { JwtAuthGuard } from './guard/jwt-auth.guard';
 
 @Module({
   imports: [
@@ -67,6 +68,10 @@ import { APP_INTERCEPTOR } from '@nestjs/core';
     {
       provide: APP_INTERCEPTOR,
       useClass: HttpResponseInterceptor,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: JwtAuthGuard,
     },
   ],
 })

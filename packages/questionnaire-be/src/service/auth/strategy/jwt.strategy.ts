@@ -14,6 +14,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
 
   async validate(payload: any) {
-    return { email: payload.email, password: payload.password };
+    // 这里返回的数据会被注入到 @Req.user 对象内
+    return payload;
   }
 }

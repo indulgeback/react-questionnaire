@@ -13,7 +13,6 @@ export class AuthController {
     private readonly jwtService: JwtService,
   ) {}
 
-  @Public()
   @Post('register')
   async register(@Body() registerUserDto: RegisterUserDto) {
     const { email } = registerUserDto;
@@ -25,13 +24,12 @@ export class AuthController {
     }
   }
 
-  @Public()
   @Post('login')
   async login(@Body() loginDto: LoginDto) {
     const { email } = loginDto;
     if (await this.authService.findByEmail(email)) {
       if (await this.authService.comparePassword(loginDto)) {
-        const access_token = this.jwtService.sign({
+        const access_token = this.authService.createToken({
           email: loginDto.email,
           password: loginDto.password,
         });

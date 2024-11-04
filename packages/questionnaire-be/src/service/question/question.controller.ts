@@ -14,7 +14,9 @@ import { QuestionService } from '@/service/question/question.service';
 import { CreateQuestionDto } from '@/service/question/dto/create-question.dto';
 import { UpdateQuestionDto } from '@/service/question/dto/update-question.dto';
 import { JwtAuthGuard } from '@/guard/jwt-auth.guard';
+import { Public } from '@/common/decorators/public.decorator';
 
+@UseGuards(JwtAuthGuard)
 @Controller('question')
 export class QuestionController {
   constructor(private readonly questionService: QuestionService) {}
@@ -24,7 +26,6 @@ export class QuestionController {
     return this.questionService.create(createQuestionDto);
   }
 
-  @UseGuards(JwtAuthGuard)
   @Get()
   findAll(@Query('page') page: number = 1, @Query('limit') limit: number = 20) {
     return this.questionService.findAll(page, limit);

@@ -39,4 +39,9 @@ export class AuthService {
     }
     return false;
   }
+
+  // 生成 Token
+  createToken(data) {
+    return this.jwtService.sign(data);
+  }
 }

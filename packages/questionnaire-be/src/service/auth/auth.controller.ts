@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, HttpCode, Post, Res } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import RegisterUserDto from './dto/register-user.dto';
 import LoginDto from './dto/login.dto';
@@ -13,6 +13,7 @@ export class AuthController {
     private readonly jwtService: JwtService,
   ) {}
 
+  @Public()
   @Post('register')
   async register(@Body() registerUserDto: RegisterUserDto) {
     const { email } = registerUserDto;
@@ -24,8 +25,10 @@ export class AuthController {
     }
   }
 
+  @Public()
+  @HttpCode(200)
   @Post('login')
-  async login(@Body() loginDto: LoginDto) {
+  async login(@Body() loginDto: LoginDto, @Res() res: Response) {
     const { email } = loginDto;
     if (await this.authService.findByEmail(email)) {
       if (await this.authService.comparePassword(loginDto)) {
@@ -33,7 +36,11 @@ export class AuthController {
           email: loginDto.email,
           password: loginDto.password,
         });
-        return new ResponseBody<string>(1, access_token, '登录成功');
+        return new ResponseBody<{ token: string }>(
+          1,
+          { token: access_token },
+          '登录成功',
+        );
       } else {
         return new ResponseBody<null>(0, null, '用户名或密码错误');
       }

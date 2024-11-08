@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useLayoutEffect, useState } from 'react'
 import { Space, Button, Form, Input, App, Modal } from 'antd'
 import { useNavigate } from 'react-router-dom'
 import { LOGIN_PATH } from '@/router'
@@ -9,6 +9,8 @@ import colorfulLogo from '@/assets/img/colorful-logo.png'
 import { UserInfo } from '@/apis/modules/types/auth'
 import useRequestSuccessChecker from '@/hooks/useRequestSuccessChecker'
 import { useRequest } from 'ahooks'
+import AuthBg from '@/components/Common/AuthBg'
+import gsap from 'gsap'
 
 const Register: React.FC = () => {
   const { message } = App.useApp()
@@ -21,6 +23,10 @@ const Register: React.FC = () => {
     nickname: '',
     password: ''
   })
+
+  useLayoutEffect(() => {
+    gsap.fromTo('#register-form', { opacity: 0, x: 100 }, { opacity: 1, x: 0, duration: 1 })
+  }, [])
 
   enum formItem {
     password = 'password',
@@ -91,36 +97,42 @@ const Register: React.FC = () => {
   }
 
   return (
-    <div className="custom-main flex flex-col justify-center items-center">
-      <div className="bg-white/50 backdrop-blur-sm p-10 rounded-md shadow-white shadow-2xl">
-        <img className="h-48" src={colorfulLogo} />
-        <Form name="register" layout="vertical" onFinish={onFinish}>
-          <Form.Item label="昵称" name={formItem.nickname} rules={rules.nickname}>
-            <Input />
-          </Form.Item>
+    <div className="custom-main flex items-center">
+      <AuthBg />
+      <div className="w-1/2 flex justify-center">
+        <div
+          className="bg-white/50 backdrop-blur-sm p-10 rounded-md shadow-white shadow-2xl"
+          id="register-form"
+        >
+          <img className="h-48" src={colorfulLogo} />
+          <Form name="register" layout="vertical" onFinish={onFinish}>
+            <Form.Item label="昵称" name={formItem.nickname} rules={rules.nickname}>
+              <Input />
+            </Form.Item>
 
-          <Form.Item label="密码" name={formItem.password} rules={rules.password}>
-            <Input.Password />
-          </Form.Item>
+            <Form.Item label="密码" name={formItem.password} rules={rules.password}>
+              <Input.Password />
+            </Form.Item>
 
-          <Form.Item
-            label="确认密码"
-            name={formItem.confirm}
-            dependencies={['password']}
-            rules={rules.confirm}
-          >
-            <Input.Password />
-          </Form.Item>
+            <Form.Item
+              label="确认密码"
+              name={formItem.confirm}
+              dependencies={['password']}
+              rules={rules.confirm}
+            >
+              <Input.Password />
+            </Form.Item>
 
-          <div className="flex gap-4 justify-center items-center">
-            <Button type="primary" htmlType="submit">
-              注册
-            </Button>
-            <Button type="default" onClick={() => nav(LOGIN_PATH)}>
-              已注册，去登录
-            </Button>
-          </div>
-        </Form>
+            <div className="flex gap-4 justify-center items-center">
+              <Button type="primary" htmlType="submit">
+                注册
+              </Button>
+              <Button type="default" onClick={() => nav(LOGIN_PATH)}>
+                已注册，去登录
+              </Button>
+            </div>
+          </Form>
+        </div>
       </div>
       <Modal
         title="邮箱验证"

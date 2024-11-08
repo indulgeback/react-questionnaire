@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useLayoutEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Button, Checkbox, Form, Input, Space } from 'antd'
 import { REGISTER_PATH } from '@/router'
@@ -9,11 +9,17 @@ import useRequestSuccessChecker from '@/hooks/useRequestSuccessChecker'
 import shared from '@questionnaire/shared'
 import { setToken } from '@/store/modules/profileSlice'
 import { useDispatch } from 'react-redux'
+import AuthBg from '@/components/Common/AuthBg'
+import gsap from 'gsap'
 
 const Login: React.FC = () => {
   const nav = useNavigate()
   const { isRequestSuccess } = useRequestSuccessChecker()
   const dispatch = useDispatch()
+
+  useLayoutEffect(() => {
+    gsap.fromTo('#login-form', { opacity: 0, x: 100 }, { opacity: 1, x: 0, duration: 1 })
+  }, [])
 
   const rules = {
     email: [
@@ -40,28 +46,39 @@ const Login: React.FC = () => {
     form.setFieldsValue({ email, password })
   }, [])
   return (
-    <div className="custom-main flex justify-center items-center">
-      <div className="bg-white/50 backdrop-blur-sm p-5 rounded-md shadow-white shadow-2xl">
-        <img className="h-48" src={colorfulLogo} />
-        <Form layout="vertical" initialValues={{ remember: true }} form={form} onFinish={onFinish}>
-          <Form.Item label="邮箱" name="email" rules={rules.email}>
-            <Input type="email" />
-          </Form.Item>
-          <Form.Item label="密码" name="password" rules={rules.password}>
-            <Input.Password />
-          </Form.Item>
-          <Form.Item name="remember" valuePropName="checked">
-            <Checkbox>记住我</Checkbox>
-          </Form.Item>
-          <div className="flex justify-center items-center gap-4">
-            <Button type="primary" htmlType="submit">
-              登录
-            </Button>
-            <Button type="default" onClick={() => nav(REGISTER_PATH)}>
-              去注册
-            </Button>
-          </div>
-        </Form>
+    <div className="custom-main flex items-center">
+      <AuthBg />
+      <div className="w-1/2 flex justify-center">
+        <div
+          className="bg-white/50  backdrop-blur-sm p-5 rounded-md shadow-white shadow-2xl"
+          id="login-form"
+        >
+          <img className="h-48" src={colorfulLogo} />
+          <Form
+            layout="vertical"
+            initialValues={{ remember: true }}
+            form={form}
+            onFinish={onFinish}
+          >
+            <Form.Item label="邮箱" name="email" rules={rules.email}>
+              <Input type="email" />
+            </Form.Item>
+            <Form.Item label="密码" name="password" rules={rules.password}>
+              <Input.Password />
+            </Form.Item>
+            <Form.Item name="remember" valuePropName="checked">
+              <Checkbox>记住我</Checkbox>
+            </Form.Item>
+            <div className="flex justify-center items-center gap-4">
+              <Button type="primary" htmlType="submit">
+                登录
+              </Button>
+              <Button type="default" onClick={() => nav(REGISTER_PATH)}>
+                去注册
+              </Button>
+            </div>
+          </Form>
+        </div>
       </div>
     </div>
   )

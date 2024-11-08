@@ -1,4 +1,4 @@
-import { EMAIL_KEY, PASSWORD_KEY, TOKEN_KEY } from '@/constant'
+import { EMAIL_KEY, LOGIN_STATE, LOGIN_STATE_KEY, PASSWORD_KEY, TOKEN_KEY } from '@/constant'
 
 export const rememberUser = (email: string, password: string) => {
   localStorage.setItem(EMAIL_KEY, email)
@@ -27,4 +27,17 @@ export const getTokenFormStorage = () => {
 
 export const deleteTokenFormStorage = () => {
   localStorage.removeItem(TOKEN_KEY)
+}
+
+export const login = () => {
+  localStorage.setItem(LOGIN_STATE_KEY, LOGIN_STATE.LOGIN)
+}
+
+export const logout = () => {
+  localStorage.setItem(LOGIN_STATE_KEY, LOGIN_STATE.LOGOUT)
+  deleteTokenFormStorage()
+}
+
+export const getLoginState = () => {
+  return localStorage.getItem(LOGIN_STATE_KEY)
 }

@@ -3,14 +3,15 @@ import { useNavigate, useSearchParams } from 'react-router-dom'
 import { App, Button, Checkbox, Form, Input } from 'antd'
 import { REGISTER_PATH } from '@/router'
 import apis from '@/apis'
-import { rememberUser, deleteUserFormStorage, getUserFormStorage } from '@/utils'
+import { rememberUser, deleteUserFormStorage, getUserFormStorage, login } from '@/utils'
 import colorfulLogo from '@/assets/img/colorful-logo.png'
 import useRequestSuccessChecker from '@/hooks/useRequestSuccessChecker'
 import shared from '@questionnaire/shared'
-import { setToken } from '@/store/modules/profileSlice'
+import { setLoginState, setToken } from '@/store/modules/profileSlice'
 import { useDispatch } from 'react-redux'
 import AuthBg from '@/components/Common/AuthBg'
 import gsap from 'gsap'
+import { LOGIN_STATE } from '@/constant'
 
 const Login: React.FC = () => {
   const nav = useNavigate()
@@ -37,6 +38,7 @@ const Login: React.FC = () => {
     if (isRequestSuccess(res)) {
       remember ? rememberUser(email, password) : deleteUserFormStorage()
       dispatch(setToken(res.data?.token))
+      dispatch(setLoginState(LOGIN_STATE.LOGIN))
       nav(searchParams.get('redirect') || '/')
     }
   }

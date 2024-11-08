@@ -13,6 +13,8 @@ import Home from '@/pages/common/Home'
 import Login from '@/pages/common/Login'
 // 注册
 import Register from '@/pages/common/Register'
+// 个人信息
+import Profile from '@/components/Common/Profile'
 // 404
 import NotFound from '@/pages/common/NotFound'
 // 问卷列表
@@ -42,6 +44,10 @@ const router = createBrowserRouter([
       {
         path: 'register',
         element: <Register />
+      },
+      {
+        path: 'profile',
+        element: <Profile />
       },
       {
         path: 'manage',
@@ -89,4 +95,5 @@ export default router
 export const HOME_PATH = '/'
 export const LOGIN_PATH = '/login'
 export const REGISTER_PATH = '/register'
+export const PROFILE_PATH = '/profile'
 export const MANAGE_INDEX_PATH = '/manage/list'

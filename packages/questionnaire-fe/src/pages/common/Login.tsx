@@ -45,8 +45,14 @@ const Login: React.FC = () => {
 
   const [form] = Form.useForm()
 
+  const checkAuth = () => {
+    if (!searchParams.get('redirect')) return
+    dispatch(setLoginState(LOGIN_STATE.LOGOUT))
+    message.warning('登录凭证已过期，请重新登录')
+  }
+
   useEffect(() => {
-    searchParams.get('redirect') && message.warning('登录凭证已过期，请重新登录')
+    checkAuth()
     const { email, password } = getUserFormStorage()
     form.setFieldsValue({ email, password })
   }, [])

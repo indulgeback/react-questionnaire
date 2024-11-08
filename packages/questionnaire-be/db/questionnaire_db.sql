@@ -11,7 +11,7 @@
  Target Server Version : 80039 (8.0.39)
  File Encoding         : 65001
 
- Date: 14/10/2024 19:00:51
+ Date: 08/11/2024 15:46:26
 */
 
 SET NAMES utf8mb4;
@@ -29,113 +29,115 @@ CREATE TABLE `question` (
   `is_published` tinyint NOT NULL DEFAULT '0',
   `is_star` tinyint NOT NULL DEFAULT '0',
   `is_deleted` tinyint NOT NULL DEFAULT '0',
+  `description` varchar(255) NOT NULL DEFAULT '暂无描述',
+  `author` varchar(255) NOT NULL DEFAULT '官方',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=201 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=301 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of question
 -- ----------------------------
 BEGIN;
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 1', 1, 2, '2024-10-11 16:00:27', 1, 0, 1);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 2', 2, 4, '2024-10-11 16:00:27', 1, 0, 0);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 3', 3, 2, '2024-10-11 16:00:27', 1, 1, 1);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 4', 4, 7, '2024-10-11 16:00:27', 1, 1, 0);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 5', 5, 7, '2024-10-11 16:00:27', 1, 1, 1);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 6', 6, 1, '2024-10-11 16:00:27', 0, 1, 1);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 7', 7, 0, '2024-10-11 16:00:27', 1, 0, 0);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 8', 8, 7, '2024-10-11 16:00:27', 1, 1, 1);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 9', 9, 1, '2024-10-11 16:00:27', 1, 1, 1);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 10', 10, 3, '2024-10-11 16:00:27', 0, 0, 0);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 11', 11, 0, '2024-10-11 16:00:27', 0, 1, 0);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 12', 12, 2, '2024-10-11 16:00:27', 1, 0, 1);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 13', 13, 4, '2024-10-11 16:00:27', 1, 0, 0);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 14', 14, 8, '2024-10-11 16:00:27', 0, 0, 0);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 15', 15, 0, '2024-10-11 16:00:27', 0, 1, 1);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 16', 16, 3, '2024-10-11 16:00:27', 0, 0, 1);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 17', 17, 1, '2024-10-11 16:00:27', 1, 0, 0);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 18', 18, 2, '2024-10-11 16:00:27', 1, 0, 0);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 19', 19, 4, '2024-10-11 16:00:27', 0, 1, 1);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 20', 20, 6, '2024-10-11 16:00:27', 1, 0, 0);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 21', 21, 6, '2024-10-11 16:00:27', 0, 0, 0);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 22', 22, 0, '2024-10-11 16:00:27', 0, 1, 1);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 23', 23, 0, '2024-10-11 16:00:27', 0, 1, 1);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 24', 24, 4, '2024-10-11 16:00:27', 0, 1, 1);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 25', 25, 2, '2024-10-11 16:00:27', 1, 0, 0);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 26', 26, 9, '2024-10-11 16:00:27', 1, 0, 1);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 27', 27, 6, '2024-10-11 16:00:27', 1, 1, 1);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 28', 28, 6, '2024-10-11 16:00:27', 1, 0, 1);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 29', 29, 3, '2024-10-11 16:00:27', 1, 0, 0);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 30', 30, 1, '2024-10-11 16:00:27', 1, 0, 0);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 31', 31, 5, '2024-10-11 16:00:27', 1, 0, 0);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 32', 32, 2, '2024-10-11 16:00:27', 1, 1, 1);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 33', 33, 1, '2024-10-11 16:00:27', 1, 0, 0);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 34', 34, 2, '2024-10-11 16:00:27', 0, 1, 0);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 35', 35, 7, '2024-10-11 16:00:27', 1, 0, 0);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 36', 36, 4, '2024-10-11 16:00:27', 0, 1, 1);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 37', 37, 2, '2024-10-11 16:00:27', 1, 1, 0);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 38', 38, 3, '2024-10-11 16:00:27', 1, 0, 0);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 39', 39, 3, '2024-10-11 16:00:27', 0, 0, 0);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 40', 40, 5, '2024-10-11 16:00:27', 1, 1, 1);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 41', 41, 9, '2024-10-11 16:00:27', 0, 0, 1);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 42', 42, 5, '2024-10-11 16:00:27', 1, 0, 1);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 43', 43, 0, '2024-10-11 16:00:27', 1, 0, 0);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 44', 44, 4, '2024-10-11 16:00:27', 0, 0, 1);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 45', 45, 4, '2024-10-11 16:00:27', 1, 1, 1);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 46', 46, 7, '2024-10-11 16:00:27', 0, 1, 0);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 47', 47, 9, '2024-10-11 16:00:27', 0, 1, 1);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 48', 48, 1, '2024-10-11 16:00:27', 0, 0, 1);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 49', 49, 7, '2024-10-11 16:00:27', 1, 0, 0);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 50', 50, 2, '2024-10-11 16:00:27', 0, 1, 1);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 51', 51, 6, '2024-10-11 16:00:27', 1, 0, 0);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 52', 52, 4, '2024-10-11 16:00:27', 1, 1, 1);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 53', 53, 2, '2024-10-11 16:00:27', 0, 1, 0);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 54', 54, 6, '2024-10-11 16:00:27', 1, 1, 0);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 55', 55, 7, '2024-10-11 16:00:27', 0, 1, 0);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 56', 56, 1, '2024-10-11 16:00:27', 1, 0, 1);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 57', 57, 6, '2024-10-11 16:00:27', 0, 0, 1);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 58', 58, 5, '2024-10-11 16:00:27', 1, 1, 1);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 59', 59, 6, '2024-10-11 16:00:27', 0, 0, 1);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 60', 60, 6, '2024-10-11 16:00:27', 1, 1, 0);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 61', 61, 4, '2024-10-11 16:00:27', 1, 0, 1);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 62', 62, 9, '2024-10-11 16:00:27', 0, 1, 1);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 63', 63, 1, '2024-10-11 16:00:27', 1, 1, 1);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 64', 64, 2, '2024-10-11 16:00:27', 1, 0, 1);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 65', 65, 0, '2024-10-11 16:00:27', 1, 1, 0);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 66', 66, 9, '2024-10-11 16:00:27', 1, 1, 1);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 67', 67, 3, '2024-10-11 16:00:27', 1, 1, 0);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 68', 68, 7, '2024-10-11 16:00:27', 1, 0, 0);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 69', 69, 7, '2024-10-11 16:00:27', 0, 0, 0);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 70', 70, 8, '2024-10-11 16:00:27', 0, 0, 1);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 71', 71, 7, '2024-10-11 16:00:27', 1, 0, 0);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 72', 72, 0, '2024-10-11 16:00:27', 0, 1, 0);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 73', 73, 5, '2024-10-11 16:00:27', 0, 0, 0);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 74', 74, 2, '2024-10-11 16:00:27', 0, 0, 1);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 75', 75, 1, '2024-10-11 16:00:27', 0, 0, 0);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 76', 76, 2, '2024-10-11 16:00:27', 1, 1, 1);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 77', 77, 0, '2024-10-11 16:00:27', 0, 0, 0);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 78', 78, 6, '2024-10-11 16:00:27', 1, 0, 0);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 79', 79, 3, '2024-10-11 16:00:27', 0, 0, 0);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 80', 80, 5, '2024-10-11 16:00:27', 1, 1, 0);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 81', 81, 5, '2024-10-11 16:00:27', 1, 1, 1);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 82', 82, 2, '2024-10-11 16:00:27', 1, 0, 1);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 83', 83, 0, '2024-10-11 16:00:27', 1, 1, 1);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 84', 84, 0, '2024-10-11 16:00:27', 0, 1, 1);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 85', 85, 4, '2024-10-11 16:00:27', 0, 1, 0);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 86', 86, 9, '2024-10-11 16:00:27', 1, 1, 0);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 87', 87, 3, '2024-10-11 16:00:27', 1, 1, 1);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 88', 88, 2, '2024-10-11 16:00:27', 0, 0, 0);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 89', 89, 4, '2024-10-11 16:00:27', 1, 0, 0);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 90', 90, 0, '2024-10-11 16:00:27', 1, 0, 0);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 91', 91, 1, '2024-10-11 16:00:27', 0, 1, 0);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 92', 92, 7, '2024-10-11 16:00:27', 0, 1, 1);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 93', 93, 8, '2024-10-11 16:00:27', 0, 1, 1);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 94', 94, 5, '2024-10-11 16:00:27', 0, 0, 0);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 95', 95, 6, '2024-10-11 16:00:27', 0, 1, 1);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 96', 96, 8, '2024-10-11 16:00:27', 1, 1, 1);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 97', 97, 9, '2024-10-11 16:00:27', 1, 1, 1);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 98', 98, 1, '2024-10-11 16:00:27', 0, 1, 0);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 99', 99, 1, '2024-10-11 16:00:27', 1, 0, 0);
-INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`) VALUES ('Question 100', 100, 1, '2024-10-11 16:00:27', 0, 1, 1);
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 1', 201, 4, '2024-11-08 15:43:14', 0, 0, 0, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 2', 202, 5, '2024-11-08 15:43:14', 1, 0, 1, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 3', 203, 4, '2024-11-08 15:43:14', 1, 0, 1, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 4', 204, 8, '2024-11-08 15:43:14', 0, 1, 1, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 5', 205, 9, '2024-11-08 15:43:14', 0, 0, 0, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 6', 206, 4, '2024-11-08 15:43:14', 1, 1, 0, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 7', 207, 4, '2024-11-08 15:43:14', 0, 1, 1, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 8', 208, 9, '2024-11-08 15:43:14', 1, 1, 1, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 9', 209, 7, '2024-11-08 15:43:14', 1, 1, 1, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 10', 210, 7, '2024-11-08 15:43:14', 0, 1, 0, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 11', 211, 9, '2024-11-08 15:43:14', 1, 0, 0, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 12', 212, 7, '2024-11-08 15:43:14', 1, 1, 1, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 13', 213, 3, '2024-11-08 15:43:14', 0, 0, 0, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 14', 214, 0, '2024-11-08 15:43:14', 1, 1, 0, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 15', 215, 1, '2024-11-08 15:43:14', 1, 1, 1, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 16', 216, 8, '2024-11-08 15:43:14', 1, 1, 0, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 17', 217, 7, '2024-11-08 15:43:14', 1, 0, 1, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 18', 218, 3, '2024-11-08 15:43:14', 1, 1, 0, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 19', 219, 7, '2024-11-08 15:43:14', 1, 1, 0, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 20', 220, 7, '2024-11-08 15:43:14', 0, 1, 0, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 21', 221, 2, '2024-11-08 15:43:14', 1, 1, 0, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 22', 222, 1, '2024-11-08 15:43:14', 0, 1, 1, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 23', 223, 1, '2024-11-08 15:43:14', 1, 1, 0, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 24', 224, 4, '2024-11-08 15:43:14', 1, 1, 1, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 25', 225, 7, '2024-11-08 15:43:14', 1, 0, 0, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 26', 226, 0, '2024-11-08 15:43:14', 1, 1, 1, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 27', 227, 4, '2024-11-08 15:43:14', 0, 1, 0, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 28', 228, 6, '2024-11-08 15:43:14', 0, 0, 1, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 29', 229, 4, '2024-11-08 15:43:14', 0, 1, 0, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 30', 230, 7, '2024-11-08 15:43:14', 1, 0, 0, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 31', 231, 2, '2024-11-08 15:43:14', 1, 1, 0, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 32', 232, 1, '2024-11-08 15:43:14', 1, 1, 0, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 33', 233, 1, '2024-11-08 15:43:14', 0, 1, 1, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 34', 234, 8, '2024-11-08 15:43:14', 0, 1, 0, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 35', 235, 0, '2024-11-08 15:43:14', 1, 1, 1, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 36', 236, 9, '2024-11-08 15:43:14', 1, 1, 1, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 37', 237, 3, '2024-11-08 15:43:14', 1, 0, 0, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 38', 238, 6, '2024-11-08 15:43:14', 0, 0, 0, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 39', 239, 1, '2024-11-08 15:43:14', 0, 0, 1, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 40', 240, 8, '2024-11-08 15:43:14', 1, 1, 1, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 41', 241, 2, '2024-11-08 15:43:14', 1, 1, 1, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 42', 242, 7, '2024-11-08 15:43:14', 1, 0, 0, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 43', 243, 5, '2024-11-08 15:43:14', 0, 1, 0, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 44', 244, 3, '2024-11-08 15:43:14', 1, 1, 1, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 45', 245, 9, '2024-11-08 15:43:14', 0, 0, 0, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 46', 246, 2, '2024-11-08 15:43:14', 1, 0, 0, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 47', 247, 5, '2024-11-08 15:43:14', 1, 0, 0, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 48', 248, 0, '2024-11-08 15:43:14', 0, 1, 0, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 49', 249, 3, '2024-11-08 15:43:14', 0, 0, 0, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 50', 250, 3, '2024-11-08 15:43:14', 0, 0, 1, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 51', 251, 4, '2024-11-08 15:43:14', 0, 0, 1, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 52', 252, 7, '2024-11-08 15:43:14', 1, 0, 0, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 53', 253, 7, '2024-11-08 15:43:14', 1, 0, 1, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 54', 254, 3, '2024-11-08 15:43:14', 0, 1, 0, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 55', 255, 4, '2024-11-08 15:43:14', 0, 1, 0, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 56', 256, 8, '2024-11-08 15:43:14', 1, 1, 1, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 57', 257, 9, '2024-11-08 15:43:14', 0, 1, 1, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 58', 258, 8, '2024-11-08 15:43:14', 0, 0, 1, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 59', 259, 2, '2024-11-08 15:43:14', 1, 1, 0, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 60', 260, 9, '2024-11-08 15:43:14', 0, 0, 1, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 61', 261, 1, '2024-11-08 15:43:14', 1, 1, 1, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 62', 262, 5, '2024-11-08 15:43:14', 1, 1, 0, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 63', 263, 6, '2024-11-08 15:43:14', 0, 1, 1, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 64', 264, 4, '2024-11-08 15:43:14', 0, 1, 0, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 65', 265, 1, '2024-11-08 15:43:14', 1, 1, 0, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 66', 266, 4, '2024-11-08 15:43:14', 0, 0, 1, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 67', 267, 5, '2024-11-08 15:43:14', 1, 0, 1, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 68', 268, 3, '2024-11-08 15:43:14', 0, 0, 0, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 69', 269, 4, '2024-11-08 15:43:14', 1, 1, 0, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 70', 270, 1, '2024-11-08 15:43:14', 0, 0, 0, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 71', 271, 2, '2024-11-08 15:43:14', 1, 0, 1, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 72', 272, 6, '2024-11-08 15:43:14', 1, 0, 0, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 73', 273, 1, '2024-11-08 15:43:14', 1, 1, 0, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 74', 274, 0, '2024-11-08 15:43:14', 0, 1, 1, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 75', 275, 0, '2024-11-08 15:43:14', 0, 0, 0, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 76', 276, 1, '2024-11-08 15:43:14', 0, 1, 1, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 77', 277, 5, '2024-11-08 15:43:14', 0, 1, 1, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 78', 278, 5, '2024-11-08 15:43:14', 1, 0, 1, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 79', 279, 7, '2024-11-08 15:43:14', 1, 1, 0, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 80', 280, 9, '2024-11-08 15:43:14', 0, 1, 0, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 81', 281, 4, '2024-11-08 15:43:14', 1, 0, 0, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 82', 282, 5, '2024-11-08 15:43:14', 1, 0, 1, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 83', 283, 4, '2024-11-08 15:43:14', 0, 1, 1, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 84', 284, 1, '2024-11-08 15:43:14', 0, 1, 0, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 85', 285, 8, '2024-11-08 15:43:14', 0, 0, 0, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 86', 286, 0, '2024-11-08 15:43:14', 1, 0, 1, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 87', 287, 3, '2024-11-08 15:43:14', 0, 0, 0, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 88', 288, 5, '2024-11-08 15:43:14', 0, 0, 1, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 89', 289, 0, '2024-11-08 15:43:14', 0, 0, 1, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 90', 290, 2, '2024-11-08 15:43:14', 0, 0, 1, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 91', 291, 9, '2024-11-08 15:43:14', 1, 1, 0, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 92', 292, 2, '2024-11-08 15:43:14', 1, 0, 1, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 93', 293, 0, '2024-11-08 15:43:14', 1, 0, 0, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 94', 294, 8, '2024-11-08 15:43:14', 0, 0, 0, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 95', 295, 5, '2024-11-08 15:43:14', 1, 1, 1, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 96', 296, 6, '2024-11-08 15:43:14', 1, 1, 0, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 97', 297, 1, '2024-11-08 15:43:14', 1, 1, 0, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 98', 298, 9, '2024-11-08 15:43:14', 0, 1, 0, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 99', 299, 8, '2024-11-08 15:43:14', 0, 0, 0, '暂无描述', '官方');
+INSERT INTO `question` (`title`, `id`, `answer_count`, `create_time`, `is_published`, `is_star`, `is_deleted`, `description`, `author`) VALUES ('Question 100', 300, 4, '2024-11-08 15:43:14', 0, 1, 0, '暂无描述', '官方');
 COMMIT;
 
 -- ----------------------------
@@ -144,18 +146,18 @@ COMMIT;
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `nickname` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `email` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `IDX_e12875dfb3b1d92d7d7c5377e2` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
 BEGIN;
-INSERT INTO `user` (`id`, `username`, `password`, `nickname`) VALUES (8, 'LeviLiu', '$2b$10$P0FoWb7hnw/VkSrYAnv9iuqJ9Zw.4jB7T2J24slOnGgPHxc0plgGS', 'Redux');
-INSERT INTO `user` (`id`, `username`, `password`, `nickname`) VALUES (9, 'LeviLiu1', '$2b$10$xBseyVzvBXQYQGMbrOFXVOZ7cBgg.bM3dphp/FPLE1d.vbViTID2u', 'Redux');
+INSERT INTO `user` (`id`, `password`, `nickname`, `email`) VALUES (18, '$2b$10$MyOIBSoPm2pIKY3F75qseOppF5ZcIRtfXBCg8xz5pKI1IxOl7d/4K', 'IndulgeBack', 'liuwenyu1937@outlook.com');
 COMMIT;
 
 -- ----------------------------

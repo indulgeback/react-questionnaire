@@ -14,7 +14,6 @@ import { QuestionService } from '@/service/question/question.service';
 import { CreateQuestionDto } from '@/service/question/dto/create-question.dto';
 import { UpdateQuestionDto } from '@/service/question/dto/update-question.dto';
 import { JwtAuthGuard } from '@/guard/jwt-auth.guard';
-import { Public } from '@/common/decorators/public.decorator';
 
 @UseGuards(JwtAuthGuard)
 @Controller('question')

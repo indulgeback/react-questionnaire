@@ -9,6 +9,12 @@ export class Question {
   @Column({ length: 255 })
   title: string; // 标题
 
+  @Column({ length: 255, default: '暂无描述' })
+  description: string; // 描述
+
+  @Column({ length: 255, default: '官方' })
+  author: string; // 作者
+
   @Column()
   answer_count: number; // 填写次数
 

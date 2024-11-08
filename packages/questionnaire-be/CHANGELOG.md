@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://gitee.com/IndulgeBack/react-questionnaire/compare/v1.1.0...v1.2.0) (2024-11-08)
+
+
+### Features
+
+* 登录Token持久化，请求携带token ([ee3ecaa](https://gitee.com/IndulgeBack/react-questionnaire/commits/ee3ecaa6fb9ed6343e535f8e0d8f8c35009edcbb))
+* BE - 集成 JWT 校验 ([48ffe5f](https://gitee.com/IndulgeBack/react-questionnaire/commits/48ffe5fcd36fce13124e197ccdf7007ef19f1515))
+* BE - 集成 JWT 校验 ([94190ee](https://gitee.com/IndulgeBack/react-questionnaire/commits/94190ee7ecaf153d06952b967d3567064031363a))
+* BE - 集成 JWT 校验 ([ef88847](https://gitee.com/IndulgeBack/react-questionnaire/commits/ef8884766ab9734a83445a6d0797fbcfd714ebfa))
+
+
+
+
+
 # [1.1.0](https://gitee.com/IndulgeBack/react-questionnaire/compare/v1.0.1...v1.1.0) (2024-11-01)
 
 

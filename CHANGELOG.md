@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://gitee.com/IndulgeBack/react-questionnaire/compare/v1.1.0...v1.2.0) (2024-11-08)
+
+
+### Features
+
+* 登录Token持久化，请求携带token ([ee3ecaa](https://gitee.com/IndulgeBack/react-questionnaire/commits/ee3ecaa6fb9ed6343e535f8e0d8f8c35009edcbb))
+* BE - 集成 JWT 校验 ([48ffe5f](https://gitee.com/IndulgeBack/react-questionnaire/commits/48ffe5fcd36fce13124e197ccdf7007ef19f1515))
+* BE - 集成 JWT 校验 ([94190ee](https://gitee.com/IndulgeBack/react-questionnaire/commits/94190ee7ecaf153d06952b967d3567064031363a))
+* BE - 集成 JWT 校验 ([ef88847](https://gitee.com/IndulgeBack/react-questionnaire/commits/ef8884766ab9734a83445a6d0797fbcfd714ebfa))
+* FE - 封装SvgIcon组件 ([5602d0d](https://gitee.com/IndulgeBack/react-questionnaire/commits/5602d0d8b6469862752c946272c5a83569e3e581))
+* FE - 鉴权页面添加背景图与缓入动画 ([d911d7f](https://gitee.com/IndulgeBack/react-questionnaire/commits/d911d7f990e6bb222c21edba09d11a3e7a9c907d))
+* FE - 接口鉴权失败返回重新登录，前置路由记忆功能，提示 ([51cc51b](https://gitee.com/IndulgeBack/react-questionnaire/commits/51cc51b863887f57da97c598552ca321b6422439))
+
+
+
+
+
 # [1.1.0](https://gitee.com/IndulgeBack/react-questionnaire/compare/v1.0.1...v1.1.0) (2024-11-01)
 
 

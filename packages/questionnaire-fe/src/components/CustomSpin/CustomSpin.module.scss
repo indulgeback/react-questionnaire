@@ -1,7 +1,7 @@
 $ballSize: 15px; // 小球尺寸
 $containerSize: 225px; // 容器尺寸
 $n: 36; // 小球数量
-$pdeg: 360deg / $n; // 旋转角度
+$pdeg: calc(360deg / $n); // 旋转角度
 $ani-duration: 2000ms; // 动画持续时间
 $white-color: #ffffff; // 白色
 $primary-color: #009E8E; // 主题色
@@ -19,8 +19,8 @@ $primary-color: #009E8E; // 主题色
         top: 50%;
         width: $ballSize;
         height: $ballSize;
-        margin-left: calc(-#{$ballSize / 2});
-        margin-top: calc(-#{$ballSize / 2});
+        margin-left: calc(-#{calc($ballSize / 2)});
+        margin-top: calc(-#{calc($ballSize / 2)});
         perspective: 70px;
         transform-style: preserve-3d;
 
@@ -95,7 +95,7 @@ $primary-color: #009E8E; // 主题色
 
         &::before,
         &::after {
-            animation-delay: calc(-#{$ani-duration * 6 / $n * $i});
+            animation-delay: calc(-#{calc($ani-duration * 6 / $n * $i)});
         }
     }
 }

@@ -1,8 +1,8 @@
+@import "./customStyle.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import "./customStyle.css";
 
 * {
   margin: 0;

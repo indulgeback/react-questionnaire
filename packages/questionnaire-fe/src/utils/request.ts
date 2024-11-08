@@ -23,7 +23,7 @@ instance.interceptors.response.use(
   },
   (error: AxiosError) => {
     if (error.response?.status === 401) {
-      window.location.href = LOGIN_PATH
+      window.location.href = LOGIN_PATH + '?redirect=' + window.location.pathname
     }
     return Promise.reject(error)
   }

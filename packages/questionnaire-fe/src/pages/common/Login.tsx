@@ -1,6 +1,6 @@
 import React, { useEffect, useLayoutEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { Button, Checkbox, Form, Input, Space } from 'antd'
+import { useNavigate, useSearchParams } from 'react-router-dom'
+import { App, Button, Checkbox, Form, Input } from 'antd'
 import { REGISTER_PATH } from '@/router'
 import apis from '@/apis'
 import { rememberUser, deleteUserFormStorage, getUserFormStorage } from '@/utils'
@@ -16,6 +16,8 @@ const Login: React.FC = () => {
   const nav = useNavigate()
   const { isRequestSuccess } = useRequestSuccessChecker()
   const dispatch = useDispatch()
+  const { message } = App.useApp()
+  const [searchParams] = useSearchParams()
 
   useLayoutEffect(() => {
     gsap.fromTo('#login-form', { opacity: 0, x: 100 }, { opacity: 1, x: 0, duration: 1 })
@@ -33,15 +35,16 @@ const Login: React.FC = () => {
     const { email, password, remember } = values || {}
     const res = await apis.authApi.login({ email, password })
     if (isRequestSuccess(res)) {
-      console.log('登录成功')
       remember ? rememberUser(email, password) : deleteUserFormStorage()
       dispatch(setToken(res.data?.token))
+      nav(searchParams.get('redirect') || '/')
     }
   }
 
   const [form] = Form.useForm()
 
   useEffect(() => {
+    searchParams.get('redirect') && message.warning('登录凭证已过期，请重新登录')
     const { email, password } = getUserFormStorage()
     form.setFieldsValue({ email, password })
   }, [])

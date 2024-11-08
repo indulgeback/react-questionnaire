@@ -1,6 +1,6 @@
 .custom-app {
     height: 100vh;
-    background-image: linear-gradient(120deg, #84fac1 0%, #8fd3f4 100%);
+    background-image: linear-gradient(120deg, var(--accent-100) 0%, var(--primary-300) 100%);
     overflow: hidden;
 }
 
@@ -34,8 +34,9 @@
 .custom-footer {
     height: 40px;
     text-align: center;
-    background-color: #f7f7f7;
-    border-top: 1px solid #e8e8e8;
+    background-color: var(--bg-200);
+    border-top: 1px solid var(--primary-300);
+    color: var(--text-200);
     line-height: 40px;
     z-index: 999;
 }
@@ -43,7 +44,7 @@
 .custom-main-title {
     font-weight: 600 !important;
     font-size: 56px !important;
-    background: -webkit-linear-gradient(315deg, #42d392 25%, #647eff);
+    background: -webkit-linear-gradient(315deg, var(--text-100) 25%, var(--text-200));
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;

@@ -3,8 +3,8 @@ $containerSize: 225px; // 容器尺寸
 $n: 36; // 小球数量
 $pdeg: calc(360deg / $n); // 旋转角度
 $ani-duration: 2000ms; // 动画持续时间
-$white-color: #ffffff; // 白色
-$primary-color: #009E8E; // 主题色
+$white-color: #cdfaf6; // 白色
+$primary-color: #26A69A; // 主题色
 
 .loading {
     width: $containerSize;

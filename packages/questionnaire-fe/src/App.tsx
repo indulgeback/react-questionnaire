@@ -7,9 +7,9 @@ import { Provider } from 'react-redux'
 
 const theme = {
   token: {
-    colorPrimary: '#009E8E',
-    colorText: '#081E40',
-    colorTextDisabled: '#A9A9A9'
+    colorPrimary: '#26A69A',
+    colorText: '#263339',
+    colorTextDisabled: '#728f9e'
   }
 }
 

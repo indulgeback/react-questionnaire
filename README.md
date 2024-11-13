@@ -4,149 +4,15 @@
 
 小木问卷 - 基于 NestJS 的问卷生成系统
 
-- 前端(PC端前台)：React18 + AntD
+- 前端(PC 端前台)：React18 + AntD
 - 前端(移动端前台)：NextJS
-- 后端：NestJS + MySQL + MongoDB
+- 后端：NestJS + MySQL + MongoDB + Redis
 - Mock：mockjs
 
 #### 软件架构
 
-软件架构图
-
-```js
-react-questionnaire
-├─README.md
-├─package.json
-├─pnpm-lock.yaml
-├─pnpm-workspace.yaml
-├─result.txt
-├─packages
-| ├─questionnaire-mock
-| | ├─index.js
-| | ├─package.json
-| | ├─pnpm-lock.yaml
-| | ├─mock
-| | | ├─index.js
-| | | ├─module
-| | | | ├─question.js
-| | | | └test.js
-| | | ├─data
-| | | | └getQuestionList.js
-| ├─questionnaire-fe
-| | ├─.babelrc
-| | ├─.eslintrc.js
-| | ├─.prettierrc.js
-| | ├─README.md
-| | ├─commitlint.config.js
-| | ├─craco.config.js
-| | ├─package-lock.json
-| | ├─package.json
-| | ├─pnpm-lock.yaml
-| | ├─tsconfig.json
-| | ├─src
-| | | ├─App.css
-| | | ├─App.tsx
-| | | ├─index.css
-| | | ├─index.tsx
-| | | ├─logo.svg
-| | | ├─react-app-env.d.ts
-| | | ├─reportWebVitals.ts
-| | | ├─setupTests.ts
-| | | ├─utils
-| | | | └request.ts
-| | | ├─router
-| | | | └index.tsx
-| | | ├─pages
-| | | | ├─Home.module.scss
-| | | | ├─Home.tsx
-| | | | ├─Login.module.scss
-| | | | ├─Login.tsx
-| | | | ├─NotFound.tsx
-| | | | ├─Register.module.scss
-| | | | ├─Register.tsx
-| | | | ├─x6
-| | | | | ├─index.module.scss
-| | | | | └index.tsx
-| | | | ├─question
-| | | | | ├─Stat
-| | | | | | └index.tsx
-| | | | | ├─Edit
-| | | | | | └index.tsx
-| | | | ├─manage
-| | | | | ├─Common.module.scss
-| | | | | ├─List.tsx
-| | | | | ├─Star.tsx
-| | | | | └Trash.tsx
-| | | ├─layouts
-| | | | ├─MainLayout.module.scss
-| | | | ├─MainLayout.tsx
-| | | | ├─ManageLayout.module.scss
-| | | | ├─ManageLayout.tsx
-| | | | └QuestionLayout.tsx
-| | | ├─hooks
-| | | | ├─useLoadQuestionData.ts
-| | | | └useRollEyeBalls.ts
-| | | ├─constant
-| | | | └index.ts
-| | | ├─components
-| | | | ├─Face
-| | | | | ├─Face.module.scss
-| | | | | └Face.tsx
-| | | | ├─Common
-| | | | | ├─Logo.module.scss
-| | | | | ├─Logo.tsx
-| | | | | ├─QuestionCard.module.scss
-| | | | | ├─QuestionCard.tsx
-| | | | | ├─UserInfo.tsx
-| | | | | └listSearch.tsx
-| | | ├─apis
-| | | | ├─index.ts
-| | | | ├─modules
-| | | | | ├─question.ts
-| | | | | ├─types
-| | | | | | ├─common.d.ts
-| | | | | | └question.d.ts
-| | ├─public
-| | | ├─favicon.ico
-| | | ├─index.html
-| | | ├─logo192.png
-| | | ├─logo512.png
-| | | ├─manifest.json
-| | | └robots.txt
-| ├─questionnaire-be
-| | ├─.eslintrc.js
-| | ├─.prettierrc
-| | ├─README.md
-| | ├─nest-cli.json
-| | ├─package.json
-| | ├─tsconfig.build.json
-| | ├─tsconfig.json
-| | ├─test
-| | | ├─app.e2e-spec.ts
-| | | └jest-e2e.json
-| | ├─src
-| | | ├─app.controller.spec.ts
-| | | ├─app.controller.ts
-| | | ├─app.module.ts
-| | | ├─app.service.ts
-| | | ├─main.ts
-| | | ├─question
-| | | | ├─question.controller.spec.ts
-| | | | ├─question.controller.ts
-| | | | ├─question.module.ts
-| | | | ├─question.service.spec.ts
-| | | | ├─question.service.ts
-| | | | ├─entities
-| | | | | └question.entity.ts
-| | | | ├─dto
-| | | | | ├─create-question.dto.ts
-| | | | | └update-question.dto.ts
-├─.husky
-| ├─commit-msg
-| ├─pre-commit
-| ├─\*
-| | └husky.sh
-```
+目录树请查看 /doc/structure-tree.txt
+架构图请查看 /doc/小木问卷软件架构图.pdf
 
 #### 安装教程
 
@@ -162,12 +28,13 @@ pnpm i
         "dev:fe": "pnpm -F @questionnaire/fe dev", // 前端服务开发模式
         "dev:be": "pnpm -F @questionnaire/be start:dev", // 后端服务开发模式
         "dev:mock": "pnpm -F @questionnaire/mock dev", // mock 服务开发模式
-        "generate-tree": "npx treer -e ./structure-tree.txt -i \"/node_modules|.git|dist/\"", // 生成目录树
+        "generate-tree": "npx treer -e ./doc/structure-tree.txt -i \"/node_modules|.git|dist/\"", // 生成目录树
         "prepare": "husky install", // 预装 husky
         "version": "npx lerna version --conventional-commits --no-git-tag-version --force-publish=*", // 发布版本号
         "postversion": "git add . && git commit -m 'chore: bump versions' && git tag v`node -p \"require('./lerna.json').version\"` && git push && git push origin --tags", // 发布版本号后，自动打 tag
         "lint": "pnpm -F @questionnaire/fe lint && pnpm -F @questionnaire/be lint", // eslint 校验
-        "format": "pnpm -F @questionnaire/fe format && pnpm -F @questionnaire/be format" // prettier 格式化代码
+        "format": "pnpm -F @questionnaire/fe format && pnpm -F @questionnaire/be format", // prettier 格式化代码
+        "stat": "cloc --include-lang=JavaScript,TypeScript,SCSS --exclude-dir=node_modules,dist,build ." // 统计代码行数 自行安装 cloc npm全局包
     },
 ```
 

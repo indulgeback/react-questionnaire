@@ -12,21 +12,21 @@ export class QuestionService {
     @InjectRepository(Question)
     private questionRepository: Repository<Question>,
   ) {}
+
   create(createQuestionDto: CreateQuestionDto) {
     return 'This action adds a new question';
   }
 
-  async findAll(page, limit) {
-    const questionList = await this.questionRepository.find({
-      skip: (page - 1) * limit,
-      take: limit,
-    });
+  async findAll(page, limit, search: string) {
+    const result = await this.questionRepository
+      .createQueryBuilder('question')
+      .where('question.title LIKE :title', { title: `%${search}%` })
+      .skip((page - 1) * limit)
+      .take(limit)
+      .getManyAndCount();
     return {
-      code: 1,
-      data: {
-        list: questionList,
-      },
-      message: 'success',
+      list: result[0],
+      count: result[1],
     };
   }
 

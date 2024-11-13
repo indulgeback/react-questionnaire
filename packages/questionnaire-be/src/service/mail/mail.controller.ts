@@ -3,6 +3,7 @@ import { MailService } from '@/service/mail/mail.service';
 import { ResponseBody } from '@/common/classes/response-body';
 import shared from '@questionnaire/shared';
 import { Public } from '@/common/decorators/public.decorator';
+import { Logger } from '@/common/utils/log4js';
 
 @Controller('mail')
 export class MailController {
@@ -21,6 +22,7 @@ export class MailController {
     try {
       await this.mailService.sendVerificationEmail(email);
     } catch (error) {
+      Logger.error(error);
       return new ResponseBody<null>(0, null, error.message);
     }
     return new ResponseBody<null>(1, null, `验证码已发送至 ${email}`);

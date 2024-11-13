@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useTitle } from 'ahooks'
 import QuestionCard from '@/components/Common/QuestionCard'
-import styles from './Common.module.scss'
 import ListSearch from '@/components/Common/listSearch'
 import { Empty, Typography } from 'antd'
 
@@ -16,9 +15,7 @@ const Star: React.FC = () => {
         <div className="p-2">
           <Title level={3}>星标问卷</Title>
         </div>
-        <div className="p-2">
-          <ListSearch />
-        </div>
+        <div className="p-2">{/* <ListSearch /> */}</div>
       </div>
       <div className="px-2 overflow-y-scroll">
         {/* 问卷列表 */}
@@ -29,7 +26,6 @@ const Star: React.FC = () => {
             // ;<QuestionCard />
           })} */}
       </div>
-      <div className={styles.footer}>分页</div>
     </>
   )
 }

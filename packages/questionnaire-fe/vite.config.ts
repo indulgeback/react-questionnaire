@@ -18,7 +18,8 @@ export default defineConfig({
         changeOrigin: true
       }
     },
-    port: 8877
+    port: 8877,
+    open: true
   },
   plugins: [
     react(),

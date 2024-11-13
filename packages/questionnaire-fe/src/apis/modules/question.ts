@@ -7,8 +7,10 @@ const prefix = '/api/question'
 /**
  * 获取问卷列表
  */
-const getQuestionList = async (page: number, limit: number) => {
-  return await request.get<any, RespType<any>>(`${prefix}?page=${page}&limit=${limit}`)
+const getQuestionList = async (page: number, limit: number, search: string) => {
+  return await request.get<any, RespType<any>>(
+    `${prefix}?page=${page}&limit=${limit}&search=${search}`
+  )
 }
 
 /**

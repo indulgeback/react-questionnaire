@@ -6,6 +6,8 @@ import ListSearch from '@/components/Common/listSearch'
 import apis from '@/apis'
 import { useDispatch } from 'react-redux'
 import { setScreenSpinning } from '@/store/modules/utilsSlice'
+import { useSearchParams } from 'react-router-dom'
+import { LIST_SEARCH_PARAM_KEY } from '@/constant'
 
 const { Title } = Typography
 // 上拉加载步进长度
@@ -16,7 +18,7 @@ const List: React.FC = () => {
   const bottomRef = useRef(null)
   const [currentView, setCurrentView] = useState(1)
   const [questionList, setQuestionList] = useState([])
-
+  const [search, setSearch] = useState('')
   const dispatch = useDispatch()
 
   // 使用 useRequest 获取数据
@@ -24,9 +26,16 @@ const List: React.FC = () => {
     loading,
     data: res,
     run: getList
-  } = useRequest(() => apis.questionApi.getQuestionList(currentView, stepSize), {
+  } = useRequest(() => apis.questionApi.getQuestionList(currentView, stepSize, search), {
     manual: true
   })
+
+  const searchChange = (search: string) => {
+    setSearch(search)
+    setCurrentView(1)
+    setQuestionList([])
+    getList()
+  }
 
   // 当数据加载完成时更新 questionList
   useEffect(() => {
@@ -61,7 +70,7 @@ const List: React.FC = () => {
           <Title level={3}>我的问卷</Title>
         </div>
         <div className="p-2">
-          <ListSearch />
+          <ListSearch searchChange={searchChange} />
         </div>
       </div>
       <div className="px-2 overflow-y-scroll" ref={questionListRef}>

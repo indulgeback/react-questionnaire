@@ -1,14 +1,12 @@
 import { Input } from 'antd'
 import React, { ChangeEvent, useEffect, useState } from 'react'
-import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom'
 import { LIST_SEARCH_PARAM_KEY } from '@/constant'
 
 const { Search } = Input
 
-const ListSearch: React.FC = () => {
+const ListSearch: React.FC<{ searchChange: (search: string) => void }> = ({ searchChange }) => {
   const [value, setValue] = useState('')
-  const nav = useNavigate()
-  const { pathname } = useLocation()
   const [searchParams] = useSearchParams()
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -16,11 +14,7 @@ const ListSearch: React.FC = () => {
   }
 
   const handleSearch = (value: string) => {
-    // 跳转页面增加url参数
-    nav({
-      pathname,
-      search: `${LIST_SEARCH_PARAM_KEY}=${value}`
-    })
+    searchChange(value)
   }
 
   useEffect(() => {
@@ -33,6 +27,7 @@ const ListSearch: React.FC = () => {
       placeholder="搜索"
       allowClear
       size="large"
+      value={value}
       onSearch={handleSearch}
       onChange={handleChange}
     />

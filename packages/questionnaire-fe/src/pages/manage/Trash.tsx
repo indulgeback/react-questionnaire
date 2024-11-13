@@ -53,7 +53,7 @@ const Trash: React.FC = () => {
 
   const TableElm = (
     <>
-      <div style={{ marginBottom: '16px' }}>
+      <div className="mb-4">
         <Space>
           <Button type="primary" disabled={selectedIds.length === 0}>
             恢复
@@ -81,16 +81,13 @@ const Trash: React.FC = () => {
         <div className="p-2">
           <Title level={3}>星标问卷</Title>
         </div>
-        <div className="p-2">
-          <ListSearch />
-        </div>
+        <div className="p-2">{/* <ListSearch /> */}</div>
       </div>
       <div className="px-2 overflow-y-scroll">
         {/* 问卷列表 */}
         {questionList.length === 0 && <Empty description="回收站空空如也" />}
         {questionList.length > 0 && TableElm}
       </div>
-      <div className={styles.footer}>分页</div>
     </>
   )
 }

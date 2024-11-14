@@ -1,10 +1,8 @@
 import {
   Controller,
   Get,
-  NotFoundException,
   Param,
   Post,
-  Query,
   Res,
   UploadedFile,
   UseInterceptors,
@@ -16,6 +14,8 @@ import { v4 as uuidv4 } from 'uuid';
 import { ResponseBody } from '@/common/classes/response-body';
 import { Public } from '@/common/decorators/public.decorator';
 import { createReadStream } from 'fs';
+import { Logger } from '@/common/utils/log4js';
+import { Response } from 'express';
 
 @Public()
 @Controller('file')
@@ -26,7 +26,7 @@ export class FileController {
   @UseInterceptors(
     FileInterceptor('file', {
       storage: diskStorage({
-        destination: './uploads',
+        destination: './static',
         filename: (_req, file, cb) => {
           console.log(file);
           // 生成文件名：日期+随机数+后缀
@@ -45,9 +45,9 @@ export class FileController {
   }
 
   @Get(':filename')
-  downloadFile(@Param('filename') filename: string, @Res() res) {
+  downloadFile(@Param('filename') filename: string, @Res() res: Response) {
     const rootDir = join(__dirname, '../../../');
-    const filePath = join(rootDir, 'uploads', filename);
+    const filePath = join(rootDir, 'static', filename);
     // 检查文件是否存在
     try {
       const fileStream = createReadStream(filePath);
@@ -57,8 +57,14 @@ export class FileController {
       );
       res.setHeader('Content-Type', 'application/octet-stream');
       fileStream.pipe(res);
+
+      // 监听文件流的错误事件
+      fileStream.on('error', (err) => {
+        Logger.error(`Error reading file: ${err.message}`);
+        res.status(404).send(new ResponseBody(0, null, err.message));
+      });
     } catch (error) {
-      return new ResponseBody(0, null, '文件不存在');
+      res.status(404).send(new ResponseBody(0, null, error.message));
     }
   }
 }

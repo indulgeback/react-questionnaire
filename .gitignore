@@ -6,7 +6,7 @@ node_modules
 .pnp.js
 dist
 logs
-uploads
+static
 
 # testing
 /coverage

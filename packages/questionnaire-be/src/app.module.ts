@@ -20,6 +20,8 @@ import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { HttpRequestInterceptor } from './middleware/request.interceptor';
 import { HttpResponseInterceptor } from './middleware/response.interceptor';
 import { JwtAuthGuard } from './guard/jwt-auth.guard';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
   imports: [
@@ -54,6 +56,10 @@ import { JwtAuthGuard } from './guard/jwt-auth.guard';
         debug: true, // 输出调试信息
         logger: true, // 启用日志记录
       },
+    }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'static'), // 静态文件路径
+      serveRoot: '/files/', // 路径前缀
     }),
     ScheduleModule.forRoot(),
     AuthModule,

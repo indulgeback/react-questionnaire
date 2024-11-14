@@ -1,6 +1,6 @@
 import React from 'react'
 import { LOGIN_PATH, PROFILE_PATH, REGISTER_PATH } from '@/router'
-import { Button, Dropdown, MenuProps, Space } from 'antd'
+import { Avatar, Button, Dropdown, MenuProps, Space } from 'antd'
 import { DownOutlined, LogoutOutlined, RocketOutlined, UserOutlined } from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
@@ -45,6 +45,7 @@ const UserMenu: React.FC = () => {
           <img />
           <Dropdown menu={{ items }}>
             <Space className="cursor-pointer">
+              <Avatar src={<img src="" alt="" />} />
               Hover me
               <DownOutlined />
             </Space>

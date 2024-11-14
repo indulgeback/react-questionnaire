@@ -8,7 +8,7 @@ import { RootState } from '@/store'
 import { LOGIN_STATE } from '@/constant'
 import { setLoginState } from '@/store/modules/profileSlice'
 
-const UserInfo: React.FC = () => {
+const UserMenu: React.FC = () => {
   const nav = useNavigate()
   const dispatch = useDispatch()
   const loginState = useSelector((state: RootState) => state.profile.loginState)
@@ -65,4 +65,4 @@ const UserInfo: React.FC = () => {
   )
 }
 
-export default UserInfo
+export default UserMenu

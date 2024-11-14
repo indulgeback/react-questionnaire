@@ -14,7 +14,7 @@ import Login from '@/pages/common/Login'
 // 注册
 import Register from '@/pages/common/Register'
 // 个人信息
-import Profile from '@/components/Common/Profile'
+import Profile from '@/pages/common/Profile'
 // 404
 import NotFound from '@/pages/common/NotFound'
 // 问卷列表

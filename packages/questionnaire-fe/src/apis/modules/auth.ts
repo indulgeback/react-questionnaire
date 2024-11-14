@@ -8,16 +8,12 @@ const prefix = '/api/auth'
 /**
  * 用户注册
  */
-const register = async (data: UserInfo) => {
-  return await request.post<any, RespType<any>>(`${prefix}/register`, data)
-}
+const register = (data: UserInfo) => request.post<any, RespType<any>>(`${prefix}/register`, data)
 
 /**
  * 用户登录
  */
-const login = async (data: UserInfo) => {
-  return await request.post<any, RespType<any>>(`${prefix}/login`, data)
-}
+const login = (data: UserInfo) => request.post<any, RespType<any>>(`${prefix}/login`, data)
 
 export default {
   register,

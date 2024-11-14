@@ -10,6 +10,7 @@ import { ScheduleModule } from '@nestjs/schedule';
 import { AuthModule } from '@/service/auth/auth.module';
 import { MailModule } from '@/service/mail/mail.module';
 import { QuestionModule } from '@/service/question/question.module';
+import { FileModule } from '@/service/file/file.module';
 import { TasksModule } from '@/tasks/tasks.module';
 
 // 自定义配置
@@ -58,6 +59,7 @@ import { JwtAuthGuard } from './guard/jwt-auth.guard';
     AuthModule,
     MailModule,
     QuestionModule,
+    FileModule,
     TasksModule,
   ],
   providers: [

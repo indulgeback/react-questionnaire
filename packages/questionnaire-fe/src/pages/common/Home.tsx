@@ -5,7 +5,7 @@ import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { Button } from 'antd'
 import lottieFile from '@/assets/lottie/lottieFile.json'
-import LottieAnimation from '@/components/Common/LottieAnimation'
+import LottieAnimation from '@/components/common/LottieAnimation'
 
 const Home: React.FC = () => {
   const nav = useNavigate()

@@ -1,4 +1,4 @@
-import SvgIcon from '@/components/Common/SvgIcon'
+import SvgIcon from '@/components/common/SvgIcon'
 import React from 'react'
 
 const AuthBg: React.FC = () => {

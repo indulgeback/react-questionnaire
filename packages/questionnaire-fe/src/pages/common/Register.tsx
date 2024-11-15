@@ -9,7 +9,7 @@ import colorfulLogo from '@/assets/img/colorful-logo.png'
 import { UserInfo } from '@/apis/modules/types/auth'
 import useRequestSuccessChecker from '@/hooks/useRequestSuccessChecker'
 import { useRequest } from 'ahooks'
-import AuthBg from '@/components/Common/AuthBg'
+import AuthBg from '@/components/common/AuthBg'
 import gsap from 'gsap'
 
 const Register: React.FC = () => {

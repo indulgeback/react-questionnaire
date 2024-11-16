@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useTitle } from 'ahooks'
-import QuestionCard from '@/components/common/QuestionCard'
-import ListSearch from '@/components/common/listSearch'
+import QuestionCard from '@/components/Common/QuestionCard'
+import ListSearch from '@/components/Common/ListSearch'
 import { Empty, Typography } from 'antd'
 
 const { Title } = Typography

@@ -5,7 +5,7 @@ import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { Button } from 'antd'
 import lottieFile from '@/assets/lottie/lottieFile.json'
-import LottieAnimation from '@/components/common/LottieAnimation'
+import LottieAnimation from '@/components/Common/LottieAnimation'
 
 const Home: React.FC = () => {
   const nav = useNavigate()
@@ -20,7 +20,7 @@ const Home: React.FC = () => {
 
   return (
     <div className="custom-main flex flex-col justify-center items-center">
-      <div className="absolute top-8">
+      <div className="absolute top-12 w-1/4">
         <LottieAnimation animationData={lottieFile} />
       </div>
       <div className="text-center mb-10">

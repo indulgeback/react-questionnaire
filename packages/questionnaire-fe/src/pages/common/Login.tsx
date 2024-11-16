@@ -9,7 +9,7 @@ import useRequestSuccessChecker from '@/hooks/useRequestSuccessChecker'
 import shared from '@questionnaire/shared'
 import { setLoginState, setToken } from '@/store/modules/profileSlice'
 import { useDispatch } from 'react-redux'
-import AuthBg from '@/components/common/AuthBg'
+import AuthBg from '@/components/Common/AuthBg'
 import gsap from 'gsap'
 import { LOGIN_STATE } from '@/constant'
 

@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://gitee.com/IndulgeBack/react-questionnaire/compare/v1.2.0...v1.3.0) (2024-11-18)
+
+
+### Bug Fixes
+
+* FE - 修复鉴权失败没有修改登录状态的BUG ([c189fc8](https://gitee.com/IndulgeBack/react-questionnaire/commits/c189fc82d65243f90d7936255e513a12605662bd))
+
+
+### Features
+
+* FE - 登录状态持久化 ([7b85f28](https://gitee.com/IndulgeBack/react-questionnaire/commits/7b85f2897ba731484f40608af3c7ad8a2aacad99))
+* FE - 前端集成lottie动画 ([85e689a](https://gitee.com/IndulgeBack/react-questionnaire/commits/85e689afbe82bd4f97fa21f0bf88f5e3abbe0913))
+* FE - 问卷列表支持模糊搜索 ([d950b82](https://gitee.com/IndulgeBack/react-questionnaire/commits/d950b824dd7d3e5a8f286ed8e9372b865e9535fd))
+* FE - 修复问卷列表搜索BUG ([3f2efb7](https://gitee.com/IndulgeBack/react-questionnaire/commits/3f2efb731811184fa4eb639d2f6f344a17840612))
+* FE - 用户详情静态搭建 ([bb1b893](https://gitee.com/IndulgeBack/react-questionnaire/commits/bb1b8933c84ead11bfbcaf5a1c529a212b4f52b5))
+* FE - UI主题更新 - 绿松石 ([7240cba](https://gitee.com/IndulgeBack/react-questionnaire/commits/7240cba2f99cd5e5be68eed3d3299376d7464c5b))
+
+
+
+
+
 # [1.2.0](https://gitee.com/IndulgeBack/react-questionnaire/compare/v1.1.0...v1.2.0) (2024-11-08)
 
 

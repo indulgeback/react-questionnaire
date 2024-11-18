@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://gitee.com/IndulgeBack/react-questionnaire/compare/v1.2.0...v1.3.0) (2024-11-18)
+
+
+### Features
+
+* BE - 更新问卷表结构 ([bb89b38](https://gitee.com/IndulgeBack/react-questionnaire/commits/bb89b3845af227b86b8d25bb6636bcee945ec146))
+* BE - 静态资源服务 ([e664b57](https://gitee.com/IndulgeBack/react-questionnaire/commits/e664b57c80cada78051e5c529b3ebfc15f6476c4))
+* BE - 文件上传下载功能 ([6512da1](https://gitee.com/IndulgeBack/react-questionnaire/commits/6512da196ba7e61f578f41f6ec095fa441b829f3))
+* BE - 问卷列表支持模糊搜索 ([490b278](https://gitee.com/IndulgeBack/react-questionnaire/commits/490b278586d373a06d435c9381141a2f88332771))
+
+
+
+
+
 # [1.2.0](https://gitee.com/IndulgeBack/react-questionnaire/compare/v1.1.0...v1.2.0) (2024-11-08)
 
 

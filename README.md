@@ -13,6 +13,8 @@
 
 目录树请查看 /doc/structure-tree.txt
 架构图请查看 /doc/小木问卷软件架构图.pdf
+ER图请查看 /doc/ER.dio
+数据流图请查看 /doc/DFD.dio
 
 #### 安装教程
 

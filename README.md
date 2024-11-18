@@ -7,7 +7,6 @@
 - 前端(PC 端前台)：React18 + AntD
 - 前端(移动端前台)：NextJS
 - 后端：NestJS + MySQL + MongoDB + Redis
-- Mock：mockjs
 
 #### 软件架构
 

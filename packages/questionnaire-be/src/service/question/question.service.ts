@@ -53,35 +53,25 @@ export class QuestionService {
     };
   }
 
-  async findOne(id: number) {
-    try {
-      const openai = new OpenAI({
-        // 若没有配置环境变量，请用百炼API Key将下行替换为：apiKey: "sk-xxx",
-        apiKey: 'sk-746e24bbb3d14fc7bced0a4d35453a41',
-        baseURL: 'https://dashscope.aliyuncs.com/compatible-mode/v1',
-      });
-      const completion = await openai.chat.completions.create({
-        model: 'qwen-plus', //模型列表：https://help.aliyun.com/zh/model-studio/getting-started/models
-        messages: [
-          { role: 'system', content: 'You are a helpful assistant.' },
-          { role: 'user', content: '你是谁？' },
-        ],
-      });
-      console.log(completion.choices[0].message.content);
-    } catch (error) {
-      console.log(`错误信息：${error}`);
-      console.log(
-        '请参考文档：https://help.aliyun.com/zh/model-studio/developer-reference/error-code',
-      );
-    }
-    return `This action returns a #${id} question`;
-  }
-
   update(id: number, updateQuestionDto: UpdateQuestionDto) {
     return `This action updates a #${id} question`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} question`;
+  async remove(id: number) {
+    const res = await this.findOne(id);
+    if (res) {
+      if (!res.is_deleted) {
+        return await this.questionRepository.update(id, {
+          is_deleted: true,
+        });
+      } else {
+        return await this.questionRepository.delete(id);
+      }
+    } else {
+      throw new Error('该问卷不存在');
+    }
+  }
+  async findOne(id: number) {
+    return await this.questionRepository.findOneBy({ id });
   }
 }

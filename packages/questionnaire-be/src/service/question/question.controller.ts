@@ -8,7 +8,6 @@ import {
   Delete,
   Query,
   UseGuards,
-  Req,
 } from '@nestjs/common';
 import { QuestionService } from '@/service/question/question.service';
 import CreateQuestionDto from '@/service/question/dto/create-question.dto';
@@ -54,8 +53,14 @@ export class QuestionController {
     return this.questionService.update(+id, updateQuestionDto);
   }
 
+  @Public()
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.questionService.remove(+id);
+  async remove(@Param('id') id: string) {
+    try {
+      await this.questionService.remove(+id);
+      return new ResponseBody<any>(1, null, '删除成功');
+    } catch (error) {
+      return new ResponseBody<any>(0, null, error.message);
+    }
   }
 }

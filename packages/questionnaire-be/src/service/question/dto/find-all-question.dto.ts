@@ -24,7 +24,7 @@ class FindAllQuestionDto {
   @IsBoolean()
   @Transform(({ value }) => value === 'true' || value === true)
   @IsOptional()
-  is_deleted?: boolean;
+  is_deleted?: boolean = false;
 }
 
 export default FindAllQuestionDto;

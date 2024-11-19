@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { CreateQuestionDto } from '@/service/question/dto/create-question.dto';
-import { UpdateQuestionDto } from '@/service/question/dto/update-question.dto';
+import CreateQuestionDto from '@/service/question/dto/create-question.dto';
+import UpdateQuestionDto from '@/service/question/dto/update-question.dto';
+import FindAllQuestionDto from './dto/find-all-question.dto';
 import { Question } from '@/service/question/entities/question.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -17,16 +18,38 @@ export class QuestionService {
     return 'This action adds a new question';
   }
 
-  async findAll(page, limit, search: string) {
-    const result = await this.questionRepository
-      .createQueryBuilder('question')
-      .where('question.title LIKE :title', { title: `%${search}%` })
+  async findAll({
+    page,
+    limit,
+    search,
+    is_star,
+    is_deleted,
+  }: FindAllQuestionDto) {
+    console.log(page, limit, search, is_star, is_deleted);
+    const queryBuilder = this.questionRepository.createQueryBuilder('question');
+    if (search) {
+      queryBuilder.where('question.title LIKE :title', {
+        title: `%${search}%`,
+      });
+    }
+
+    if (is_star !== undefined) {
+      queryBuilder.andWhere('question.is_star = :is_star', { is_star });
+    }
+
+    if (is_deleted !== undefined) {
+      queryBuilder.andWhere('question.is_deleted = :is_deleted', {
+        is_deleted,
+      });
+    }
+    const [list, count] = await queryBuilder
       .skip((page - 1) * limit)
       .take(limit)
       .getManyAndCount();
+
     return {
-      list: result[0],
-      count: result[1],
+      list,
+      count,
     };
   }
 

@@ -1,1 +1,3 @@
-export class CreateQuestionDto {}
+class CreateQuestionDto {}
+
+export default CreateQuestionDto;

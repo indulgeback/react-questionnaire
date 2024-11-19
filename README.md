@@ -10,10 +10,10 @@
 
 #### 软件架构
 
-目录树请查看 /doc/structure-tree.txt
-架构图请查看 /doc/小木问卷软件架构图.pdf
-ER图请查看 /doc/ER.dio
-数据流图请查看 /doc/DFD.dio
+- 目录树请查看 /doc/structure-tree.txt
+- 架构图请查看 /doc/小木问卷软件架构图.pdf
+- ER图请查看 /doc/ER.dio
+- 数据流图请查看 /doc/DFD.dio
 
 #### 安装教程
 
@@ -28,7 +28,6 @@ pnpm i
     "scripts": {
         "dev:fe": "pnpm -F @questionnaire/fe dev", // 前端服务开发模式
         "dev:be": "pnpm -F @questionnaire/be start:dev", // 后端服务开发模式
-        "dev:mock": "pnpm -F @questionnaire/mock dev", // mock 服务开发模式
         "generate-tree": "npx treer -e ./doc/structure-tree.txt -i \"/node_modules|.git|dist/\"", // 生成目录树
         "prepare": "husky install", // 预装 husky
         "version": "npx lerna version --conventional-commits --no-git-tag-version --force-publish=*", // 发布版本号

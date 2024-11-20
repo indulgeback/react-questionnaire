@@ -1,6 +1,10 @@
 #!/usr/bin/env sh
+echo "😈Starting pre-commit hook..."
 . "$(dirname -- "$0")/_/husky.sh"
-
+echo "😈Running npm run lint..."
 npm run lint
+echo "😈Running npm run format..."
 npm run format
+echo "😈Adding changes to staging area..."
 git add .
+echo "😈Pre-commit hook completed."

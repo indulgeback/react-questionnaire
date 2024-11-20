@@ -1,5 +1,5 @@
-import React, { useLayoutEffect, useState } from 'react'
-import { Space, Button, Form, Input, App, Modal } from 'antd'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
+import { Space, Button, Form, Input, App, Modal, Statistic } from 'antd'
 import { useNavigate } from 'react-router-dom'
 import { LOGIN_PATH } from '@/router'
 import { Rule } from 'antd/es/form'
@@ -19,6 +19,7 @@ const Register: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [email, setEmail] = useState('')
   const [code, setCode] = useState('')
+  const [ttl, setTtl] = useState(0)
   const [userInfo, setUserInfo] = useState({
     nickname: '',
     password: ''
@@ -27,6 +28,10 @@ const Register: React.FC = () => {
   useLayoutEffect(() => {
     gsap.fromTo('#register-form', { opacity: 0, x: 100 }, { opacity: 1, x: 0, duration: 1 })
   }, [])
+
+  useEffect(() => {
+    setTtl(0)
+  }, [email])
 
   enum formItem {
     password = 'password',
@@ -67,7 +72,10 @@ const Register: React.FC = () => {
     const isValidEmail = shared.RegExp.emailRegExp.test(email)
     if (!isValidEmail) return
     const res = await apis.mailApi.sendEmailCode({ email })
-    isRequestSuccess(res)
+    if (isRequestSuccess(res)) {
+      const times = res.data ? res.data * 1000 : 1000 * 60 * 10
+      setTtl(Date.now() + times)
+    }
   }
 
   const { run: sendCode, loading: sendLoading } = useRequest(sendEmailCode, {
@@ -147,8 +155,17 @@ const Register: React.FC = () => {
           <Form.Item label="电子邮箱" name={formItem.email} rules={rules.email}>
             <Space.Compact className="w-full">
               <Input type="email" value={email} onChange={e => setEmail(e.target.value)} />
-              <Button type="primary" loading={sendLoading} onClick={sendCode}>
-                发送验证码
+              <Button type="primary" disabled={!!ttl} loading={sendLoading} onClick={sendCode}>
+                {ttl ? (
+                  <Statistic.Countdown
+                    value={ttl}
+                    format="mm:ss"
+                    valueStyle={{ fontSize: '14px', color: '#cccccc', width: '40px' }}
+                    onFinish={() => setTtl(0)}
+                  />
+                ) : (
+                  '发送验证码'
+                )}
               </Button>
             </Space.Compact>
           </Form.Item>

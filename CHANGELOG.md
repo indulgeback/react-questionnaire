@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://gitee.com/IndulgeBack/react-questionnaire/compare/v1.3.0...v1.4.0) (2024-11-20)
+
+
+### Features
+
+* BE - 单个问卷移除与彻底删除功能 ([67073ea](https://gitee.com/IndulgeBack/react-questionnaire/commits/67073ea144c0d8086c5bba8d2bf5e0c7cf74b80c))
+* BE - 问卷列表接口支持星标与回收站查询 ([bc0f62a](https://gitee.com/IndulgeBack/react-questionnaire/commits/bc0f62a224196d3a6dfb4b5f87a423f4cb358634))
+
+
+### Performance Improvements
+
+* BE - 文件上传接口封装文件上传通用拦截器优化 ([7c71563](https://gitee.com/IndulgeBack/react-questionnaire/commits/7c7156384f07bdd1965ee9bbbcb3f457b89db599))
+* BE - 优化邮件验证码发送体验 ([2330d5a](https://gitee.com/IndulgeBack/react-questionnaire/commits/2330d5a94d53b247f4914ffaec70030963eda40f))
+* FE - 前端邮件验证码增加重发倒计时 ([f257c27](https://gitee.com/IndulgeBack/react-questionnaire/commits/f257c2787beac1e2223e79763ba2bdae661273be))
+
+
+
+
+
 # [1.3.0](https://gitee.com/IndulgeBack/react-questionnaire/compare/v1.2.0...v1.3.0) (2024-11-18)
 
 

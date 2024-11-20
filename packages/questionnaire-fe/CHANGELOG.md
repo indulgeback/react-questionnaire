@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://gitee.com/IndulgeBack/react-questionnaire/compare/v1.3.0...v1.4.0) (2024-11-20)
+
+
+### Performance Improvements
+
+* FE - 前端邮件验证码增加重发倒计时 ([f257c27](https://gitee.com/IndulgeBack/react-questionnaire/commits/f257c2787beac1e2223e79763ba2bdae661273be))
+
+
+
+
+
 # [1.3.0](https://gitee.com/IndulgeBack/react-questionnaire/compare/v1.2.0...v1.3.0) (2024-11-18)
 
 

@@ -24,6 +24,15 @@ pnpm i
 
 #### 使用说明
 
+注：mac或linux用户使用husky脚本时，请赋予执行权限
+
+```bash
+# 添加权限给.husky文件夹下的所有脚本
+chmod +x .husky/*
+```
+
+项目 node 脚本 scripts 如下：
+
 ```json
     "scripts": {
         "dev:fe": "pnpm -F @questionnaire/fe dev", // 前端服务开发模式

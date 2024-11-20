@@ -1,7 +1,6 @@
 import { Input } from 'antd'
 import React, { ChangeEvent, useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { LIST_SEARCH_PARAM_KEY } from '@/constant'
 
 const { Search } = Input
 
@@ -16,11 +15,6 @@ const ListSearch: React.FC<{ searchChange: (search: string) => void }> = ({ sear
   const handleSearch = (value: string) => {
     searchChange(value)
   }
-
-  useEffect(() => {
-    const curVal = searchParams.get(LIST_SEARCH_PARAM_KEY) || ''
-    setValue(curVal)
-  }, [searchParams])
 
   return (
     <Search

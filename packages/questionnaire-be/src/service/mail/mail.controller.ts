@@ -13,14 +13,21 @@ export class MailController {
   @Post('send')
   async sendVerification(
     @Body('email') email: string,
-  ): Promise<ResponseBody<null>> {
+  ): Promise<ResponseBody<null | number>> {
     // 校验email是否为邮箱格式
     const isValidEmail = shared.RegExp.emailRegExp.test(email);
     if (!isValidEmail) {
       return new ResponseBody<null>(0, null, '输入的邮箱地址不合法');
     }
     try {
-      await this.mailService.sendVerificationEmail(email);
+      const ttl = await this.mailService.sendVerificationEmail(email);
+      if (ttl) {
+        return new ResponseBody<number>(
+          1,
+          ttl,
+          `验证码已发送，如果没有收到邮件，请于 ${ttl} 秒后重试`,
+        );
+      }
     } catch (error) {
       Logger.error(error);
       return new ResponseBody<null>(0, null, error.message);

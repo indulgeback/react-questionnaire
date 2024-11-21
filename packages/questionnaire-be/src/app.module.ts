@@ -13,6 +13,11 @@ import { QuestionModule } from '@/service/question/question.module';
 import { FileModule } from '@/service/file/file.module';
 import { TasksModule } from '@/tasks/tasks.module';
 
+// 实体类
+import User from '@/entities/user.entity';
+import Question from '@/entities/question.entity';
+import UserFavorite from '@/entities/user-favorite.entity';
+
 // 自定义配置
 import configuration from '@/config';
 import DatabaseLogger from '@/common/utils/databaseLogger';
@@ -42,6 +47,7 @@ import { join } from 'path';
         return {
           ...config.get('db.mysql'),
           logger: new DatabaseLogger(),
+          entities: [User, Question, UserFavorite],
         };
       },
     }),

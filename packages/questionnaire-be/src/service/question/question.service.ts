@@ -2,10 +2,9 @@ import { Injectable } from '@nestjs/common';
 import CreateQuestionDto from '@/service/question/dto/create-question.dto';
 import UpdateQuestionDto from '@/service/question/dto/update-question.dto';
 import FindAllQuestionDto from './dto/find-all-question.dto';
-import { Question } from '@/service/question/entities/question.entity';
+import Question from '@/entities/question.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import OpenAI from 'openai';
 
 @Injectable()
 export class QuestionService {
@@ -60,13 +59,7 @@ export class QuestionService {
   async remove(id: number) {
     const res = await this.findOne(id);
     if (res) {
-      if (!res.is_deleted) {
-        return await this.questionRepository.update(id, {
-          is_deleted: true,
-        });
-      } else {
-        return await this.questionRepository.delete(id);
-      }
+      return await this.questionRepository.delete(id);
     } else {
       throw new Error('该问卷不存在');
     }

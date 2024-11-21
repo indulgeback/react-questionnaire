@@ -25,6 +25,11 @@ export class AuthService {
     return await this.userRepository.save(registerUserDto);
   }
 
+  async getUserInfo(email) {
+    const { id } = await this.findByEmail(email);
+    console.log(id);
+  }
+
   async findByEmail(email: string) {
     return await this.userRepository.findOne({
       where: { email },

@@ -1,10 +1,22 @@
-import { Body, Controller, HttpCode, Post, Res } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpCode,
+  Post,
+  Req,
+  Res,
+} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import RegisterUserDto from './dto/register-user.dto';
 import LoginDto from './dto/login.dto';
 import { ResponseBody } from '@/common/classes/response-body';
 import { JwtService } from '@nestjs/jwt';
 import { Public } from '@/common/decorators/public.decorator';
+import {
+  currentUser,
+  UserToken,
+} from '@/common/decorators/current-user.decorator';
 
 @Controller('auth')
 export class AuthController {
@@ -46,5 +58,11 @@ export class AuthController {
     } else {
       return new ResponseBody<null>(0, null, '该用户不存在');
     }
+  }
+
+  @Get('info')
+  async getUserInfo(@currentUser() userToken: UserToken) {
+    const user = await this.authService.getUserInfo(userToken.email);
+    return new ResponseBody<{ user: any }>(1, { user }, '获取用户信息成功');
   }
 }

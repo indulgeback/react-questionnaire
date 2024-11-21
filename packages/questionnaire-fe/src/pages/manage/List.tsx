@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useInViewport, useRequest, useTitle } from 'ahooks'
 import QuestionCard from '@/components/Common/QuestionCard'
 import ListSearch from '@/components/Common/ListSearch'
-import { Typography, FloatButton } from 'antd'
+import { Typography, FloatButton, Empty } from 'antd'
 import apis from '@/apis'
 import { useDispatch } from 'react-redux'
 import { setScreenSpinning } from '@/store/modules/utilsSlice'
@@ -75,7 +75,7 @@ const List: React.FC = () => {
       </div>
       <div className="px-2 overflow-y-scroll" ref={questionListRef}>
         {/* 问卷列表 */}
-        {questionList.length > 0 &&
+        {questionList.length > 0 ? (
           questionList.map((item: any) => (
             <QuestionCard
               key={item.id}
@@ -86,7 +86,10 @@ const List: React.FC = () => {
               answerCount={item.answer_count}
               createdAt={item.create_time}
             />
-          ))}
+          ))
+        ) : (
+          <Empty className="mt-40" description="暂无问卷" />
+        )}
         <FloatButton.BackTop target={targetFn} visibilityHeight={120} />
         <div ref={bottomRef} className="h-14 text-lg text-center text-custom-text-100">
           {questionList.length >= total ? '🎉duang! 到底喽!🎉' : ''}

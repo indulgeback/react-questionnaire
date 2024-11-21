@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { useTitle } from 'ahooks'
-import styles from './Common.module.scss'
 import { Empty, Typography, Table, Tag, Space, Button, Modal } from 'antd'
 import { CheckCircleOutlined, ExclamationCircleOutlined } from '@ant-design/icons'
 import ListSearch from '@/components/Common/ListSearch'
@@ -85,8 +84,11 @@ const Trash: React.FC = () => {
       </div>
       <div className="px-2 overflow-y-scroll">
         {/* 问卷列表 */}
-        {questionList.length === 0 && <Empty description="回收站空空如也" />}
-        {questionList.length > 0 && TableElm}
+        {questionList.length > 0 ? (
+          TableElm
+        ) : (
+          <Empty className="mt-40" description="回收站空空如也" />
+        )}
       </div>
     </>
   )

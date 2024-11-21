@@ -19,8 +19,6 @@ import Profile from '@/pages/common/Profile'
 import NotFound from '@/pages/common/NotFound'
 // 问卷列表
 import List from '@/pages/manage/List'
-// 回收站
-import Trash from '@/pages/manage/Trash'
 // 星标问卷
 import Star from '@/pages/manage/Star'
 // 问卷编辑
@@ -60,10 +58,6 @@ const router = createBrowserRouter([
           {
             path: 'star',
             element: <Star />
-          },
-          {
-            path: 'trash',
-            element: <Trash />
           }
         ]
       },

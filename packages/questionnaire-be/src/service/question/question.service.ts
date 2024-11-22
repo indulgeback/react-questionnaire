@@ -5,12 +5,15 @@ import FindAllQuestionDto from './dto/find-all-question.dto';
 import Question from '@/entities/question.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import UserFavorite from '@/entities/user-favorite.entity';
 
 @Injectable()
 export class QuestionService {
   constructor(
     @InjectRepository(Question)
     private questionRepository: Repository<Question>,
+    @InjectRepository(UserFavorite)
+    private userFavorateRepository: Repository<UserFavorite>,
   ) {}
 
   create(createQuestionDto: CreateQuestionDto) {
@@ -50,6 +53,18 @@ export class QuestionService {
       list,
       count,
     };
+  }
+
+  async favorate(user_id: number, question_id: number) {
+    const res = this.findOne(question_id);
+    if (res) {
+      return await this.userFavorateRepository.save({
+        user_id,
+        question_id,
+      });
+    } else {
+      throw new Error('该问卷不存在');
+    }
   }
 
   update(id: number, updateQuestionDto: UpdateQuestionDto) {

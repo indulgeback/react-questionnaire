@@ -1,6 +1,7 @@
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
 
 export type UserToken = {
+  userId: number;
   email: string;
   password: string;
   iat: number;

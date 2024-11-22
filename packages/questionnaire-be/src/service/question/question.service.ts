@@ -20,14 +20,8 @@ export class QuestionService {
     return 'This action adds a new question';
   }
 
-  async findAll({
-    page,
-    limit,
-    search,
-    is_star,
-    is_deleted,
-  }: FindAllQuestionDto) {
-    console.log(page, limit, search, is_star, is_deleted);
+  async findAll({ page, limit, search }: FindAllQuestionDto) {
+    console.log(page, limit, search);
     const queryBuilder = this.questionRepository.createQueryBuilder('question');
     if (search) {
       queryBuilder.where('question.title LIKE :title', {
@@ -35,15 +29,6 @@ export class QuestionService {
       });
     }
 
-    if (is_star !== undefined) {
-      queryBuilder.andWhere('question.is_star = :is_star', { is_star });
-    }
-
-    if (is_deleted !== undefined) {
-      queryBuilder.andWhere('question.is_deleted = :is_deleted', {
-        is_deleted,
-      });
-    }
     const [list, count] = await queryBuilder
       .skip((page - 1) * limit)
       .take(limit)

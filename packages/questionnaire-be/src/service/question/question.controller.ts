@@ -85,4 +85,19 @@ export class QuestionController {
       return new ResponseBody<any>(0, null, error.message);
     }
   }
+
+  // 取消收藏问卷
+  @Delete('favorate/:question_id')
+  async unFavorate(
+    @Param('question_id', ParseIntPipe) question_id: number,
+    @currentUser() user: UserToken,
+  ) {
+    try {
+      const { userId } = user;
+      await this.questionService.unFavorate(userId, question_id);
+      return new ResponseBody<any>(1, null, '取消收藏成功');
+    } catch (error) {
+      return new ResponseBody<any>(0, null, error.message);
+    }
+  }
 }

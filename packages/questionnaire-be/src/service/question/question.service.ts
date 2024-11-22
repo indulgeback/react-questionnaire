@@ -56,9 +56,55 @@ export class QuestionService {
   }
 
   async favorate(user_id: number, question_id: number) {
-    const res = this.findOne(question_id);
+    try {
+      const [question, favorateQuestion] = await this.checkQuestionAndFavorate(
+        user_id,
+        question_id,
+      );
+
+      if (!question) {
+        throw new Error('该问卷不存在');
+      }
+
+      if (favorateQuestion) {
+        throw new Error('已收藏');
+      }
+
+      return await this.addFavorate(user_id, question_id);
+    } catch (error) {
+      throw error; // 重新抛出错误，以便调用者可以处理
+    }
+  }
+
+  private async checkQuestionAndFavorate(
+    user_id: number,
+    question_id: number,
+  ): Promise<[any, any]> {
+    return Promise.all([
+      this.findOne(question_id),
+      this.userFavorateRepository.findOne({
+        where: {
+          user_id,
+          question_id,
+        },
+      }),
+    ]);
+  }
+
+  private async addFavorate(
+    user_id: number,
+    question_id: number,
+  ): Promise<any> {
+    return this.userFavorateRepository.save({
+      user_id,
+      question_id,
+    });
+  }
+
+  async unFavorate(user_id: number, question_id: number) {
+    const res = await this.findOne(question_id);
     if (res) {
-      return await this.userFavorateRepository.save({
+      return await this.userFavorateRepository.delete({
         user_id,
         question_id,
       });

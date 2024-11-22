@@ -20,8 +20,22 @@ const getQuestionById = (id: string) => request.get<string, RespType<any>>(`${pr
  */
 const createQuestion = () => request.post<any, RespType<{ id: string }>>(`${prefix}`)
 
+/**
+ * 收藏问卷
+ */
+const favorateQuestion = (id: string) =>
+  request.get<string, RespType<any>>(`${prefix}/favorate/${id}`)
+
+/**
+ * 取消收藏问卷
+ */
+const unFavorateQuestion = (id: string) =>
+  request.get<string, RespType<any>>(`${prefix}/favorate/${id}`)
+
 export default {
   getQuestionList,
   getQuestionById,
-  createQuestion
+  createQuestion,
+  favorateQuestion,
+  unFavorateQuestion
 }

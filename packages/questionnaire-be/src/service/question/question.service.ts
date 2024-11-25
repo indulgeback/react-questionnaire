@@ -20,12 +20,27 @@ export class QuestionService {
     return 'This action adds a new question';
   }
 
-  async findAll({ page, limit, search }: FindAllQuestionDto) {
-    console.log(page, limit, search);
+  async findAll(
+    { page, limit, search, is_favorated }: FindAllQuestionDto,
+    user_id: number,
+  ) {
     const queryBuilder = this.questionRepository.createQueryBuilder('question');
     if (search) {
       queryBuilder.where('question.title LIKE :title', {
         title: `%${search}%`,
+      });
+    }
+
+    if (is_favorated) {
+      const userFavorites = await this.userFavorateRepository.find({
+        where: { user_id },
+        select: ['question_id'],
+      });
+
+      const favoriteIds = userFavorites.map((fav) => fav.question_id);
+
+      queryBuilder.andWhere('question.id IN (:...favoriteIds)', {
+        favoriteIds,
       });
     }
 

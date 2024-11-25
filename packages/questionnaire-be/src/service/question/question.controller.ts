@@ -33,12 +33,15 @@ export class QuestionController {
     return this.questionService.create(createQuestionDto);
   }
 
-  // 获取问卷市场列表
-  @Public()
+  // 获取问卷列表
   @Get()
-  async findAll(@Query() query: FindAllQuestionDto) {
+  async findAll(
+    @Query() query: FindAllQuestionDto,
+    @currentUser() user: UserToken,
+  ) {
     try {
-      const res = await this.questionService.findAll(query);
+      const { userId } = user;
+      const res = await this.questionService.findAll(query, userId);
       return new ResponseBody<any>(1, res, '查询成功');
     } catch (error) {
       Logger.error(error);

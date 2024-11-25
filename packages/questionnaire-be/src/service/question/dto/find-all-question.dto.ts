@@ -1,5 +1,5 @@
-import { IsInt, IsOptional, IsString } from 'class-validator';
-import { Type } from 'class-transformer';
+import { IsBoolean, IsInt, IsOptional, IsString } from 'class-validator';
+import { Transform, Type } from 'class-transformer';
 
 class FindAllQuestionDto {
   @IsInt()
@@ -15,6 +15,11 @@ class FindAllQuestionDto {
   @IsString()
   @IsOptional()
   search: string = '';
+
+  @IsBoolean()
+  @Transform(({ value }) => value === 'true' || value === true)
+  @IsOptional()
+  is_favorated?: boolean;
 }
 
 export default FindAllQuestionDto;

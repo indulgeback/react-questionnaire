@@ -26,8 +26,17 @@ export class AuthService {
   }
 
   async getUserInfo(email) {
-    const { id } = await this.findByEmail(email);
-    console.log(id);
+    const user = await this.findByEmail(email);
+    if (!user) {
+      throw new Error('用户不存在');
+    }
+    return {
+      nickname: user.nickname,
+      email: user.email,
+      createTime: user.create_time,
+      avatar: user.avatar,
+      bio: user.bio,
+    };
   }
 
   async findByEmail(email: string) {

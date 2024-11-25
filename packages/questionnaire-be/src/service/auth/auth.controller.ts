@@ -45,9 +45,13 @@ export class AuthController {
           email: user.email,
           password: user.password,
         });
-        return new ResponseBody<{ token: string }>(
+        const userInfo = {
+          userId: user.id,
+          nickname: user.nickname,
+        };
+        return new ResponseBody<{ token: string; userInfo: typeof userInfo }>(
           1,
-          { token: access_token },
+          { token: access_token, userInfo: userInfo },
           '登录成功',
         );
       } else {
@@ -59,8 +63,16 @@ export class AuthController {
   }
 
   @Get('info')
-  async getUserInfo(@currentUser() userToken: UserToken) {
-    const user = await this.authService.getUserInfo(userToken.email);
-    return new ResponseBody<{ user: any }>(1, { user }, '获取用户信息成功');
+  async getUserInfo(@currentUser() user: UserToken) {
+    try {
+      const userInfo = await this.authService.getUserInfo(user.email);
+      return new ResponseBody<{ userInfo: any }>(
+        1,
+        { userInfo },
+        '获取用户信息成功',
+      );
+    } catch (error) {
+      return new ResponseBody<null>(0, null, error.message);
+    }
   }
 }

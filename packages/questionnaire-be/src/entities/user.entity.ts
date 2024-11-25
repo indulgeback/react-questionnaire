@@ -25,6 +25,12 @@ class User {
   @CreateDateColumn()
   create_time: Date; // 注册时间
 
+  @Column({ nullable: true })
+  avatar: string; // 头像 URL
+
+  @Column({ type: 'text', nullable: true })
+  bio: string; // 个人简介
+
   @OneToMany(() => UserFavorite, (userFavorite) => userFavorite.user)
   favorites: UserFavorite[];
 }

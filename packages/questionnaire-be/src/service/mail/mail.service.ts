@@ -25,6 +25,7 @@ export class MailService {
     this.client.connect();
   }
 
+  // 发送验证码邮件
   async sendVerificationEmail(email: string): Promise<number> {
     // 检查验证码是否已存在且未过期
     const storedCode = await this.client.get(email);
@@ -59,6 +60,7 @@ export class MailService {
     return randomBytes(3).toString('hex').toUpperCase();
   }
 
+  // 校验验证码
   async verifyCode(email: string, code: string): Promise<boolean> {
     const storedCode = await this.client.get(email);
     // 校验成功删除验证码

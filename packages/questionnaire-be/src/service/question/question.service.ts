@@ -20,6 +20,7 @@ export class QuestionService {
     return 'This action adds a new question';
   }
 
+  // 分页查询问卷列表
   async findAll(
     { page, limit, search, is_favorated }: FindAllQuestionDto,
     user_id: number,
@@ -66,6 +67,7 @@ export class QuestionService {
     };
   }
 
+  // 收藏问卷
   async favorate(user_id: number, question_id: number) {
     try {
       const [question, favorateQuestion] = await this.checkQuestionAndFavorate(
@@ -87,6 +89,7 @@ export class QuestionService {
     }
   }
 
+  // 检查问卷是否存在，用户是否已收藏
   private async checkQuestionAndFavorate(
     user_id: number,
     question_id: number,
@@ -102,6 +105,7 @@ export class QuestionService {
     ]);
   }
 
+  // 添加收藏
   private async addFavorate(
     user_id: number,
     question_id: number,
@@ -112,6 +116,7 @@ export class QuestionService {
     });
   }
 
+  // 取消收藏
   async unFavorate(user_id: number, question_id: number) {
     const res = await this.findOne(question_id);
     if (res) {
@@ -128,6 +133,7 @@ export class QuestionService {
     return `This action updates a #${id} question`;
   }
 
+  // 删除问卷
   async remove(id: number) {
     const res = await this.findOne(id);
     if (res) {

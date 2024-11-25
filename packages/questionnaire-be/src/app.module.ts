@@ -1,5 +1,5 @@
 // 第三方模块
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 // import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -22,10 +22,12 @@ import UserFavorite from '@/entities/user-favorite.entity';
 import configuration from '@/config';
 import DatabaseLogger from '@/common/utils/databaseLogger';
 import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
-import { HttpRequestInterceptor } from './middleware/request.interceptor';
-import { HttpResponseInterceptor } from './middleware/response.interceptor';
-import { JwtAuthGuard } from './guard/jwt-auth.guard';
+import { HttpRequestInterceptor } from '@/middleware/request.interceptor';
+import { HttpResponseInterceptor } from '@/middleware/response.interceptor';
+import { JwtAuthGuard } from '@/guard/jwt-auth.guard';
 import { ServeStaticModule } from '@nestjs/serve-static';
+import { DefaultResponseMiddleware } from '@/middleware/default-response.middleware';
+
 import { join } from 'path';
 
 @Module({
@@ -89,4 +91,8 @@ import { join } from 'path';
     },
   ],
 })
-export class AppModule {}
+export class AppModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(DefaultResponseMiddleware).forRoutes('*');
+  }
+}

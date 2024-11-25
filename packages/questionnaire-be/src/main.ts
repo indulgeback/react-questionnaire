@@ -4,6 +4,7 @@ import { rateLimit } from 'express-rate-limit';
 import { ConfigService } from '@nestjs/config';
 import { TasksService } from '@/tasks/tasks.service';
 import { ValidationPipe } from '@nestjs/common';
+import { AllExceptionsFilter } from '@/middleware/all-exceptions.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
@@ -15,6 +16,8 @@ async function bootstrap() {
   const config = app.get(ConfigService);
 
   app.setGlobalPrefix(config.get<string>('app.prefix'));
+
+  app.useGlobalFilters(new AllExceptionsFilter());
 
   app.useGlobalPipes(
     new ValidationPipe({

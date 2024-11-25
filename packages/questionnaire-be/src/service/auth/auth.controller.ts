@@ -1,12 +1,4 @@
-import {
-  Body,
-  Controller,
-  Get,
-  HttpCode,
-  Post,
-  Req,
-  Res,
-} from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import RegisterUserDto from './dto/register-user.dto';
 import LoginDto from './dto/login.dto';
@@ -47,6 +39,7 @@ export class AuthController {
         });
         const userInfo = {
           userId: user.id,
+          avatar: user.avatar,
           nickname: user.nickname,
         };
         return new ResponseBody<{ token: string; userInfo: typeof userInfo }>(

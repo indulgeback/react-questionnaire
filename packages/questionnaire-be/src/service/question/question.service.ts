@@ -31,14 +31,17 @@ export class QuestionService {
       });
     }
 
+    // 获取当前用户的已收藏问卷
+    const userFavorites = await this.userFavorateRepository.find({
+      where: { user_id },
+      select: ['question_id'],
+    });
+
+    // 映射用户收藏问卷的 ID 数组
+    const favoriteIds = userFavorites.map((fav) => fav.question_id);
+
+    // 如果 is_favorated 为 true，则只返回已收藏的问卷
     if (is_favorated) {
-      const userFavorites = await this.userFavorateRepository.find({
-        where: { user_id },
-        select: ['question_id'],
-      });
-
-      const favoriteIds = userFavorites.map((fav) => fav.question_id);
-
       queryBuilder.andWhere('question.id IN (:...favoriteIds)', {
         favoriteIds,
       });
@@ -49,8 +52,16 @@ export class QuestionService {
       .take(limit)
       .getManyAndCount();
 
+    // 添加 is_favorated 字段，便于前端用来展示该问卷当前用户是否已收藏
+    const resultList = list.map((q) => {
+      return {
+        ...q,
+        is_favorated: favoriteIds.includes(q.id),
+      };
+    });
+
     return {
-      list,
+      list: resultList,
       count,
     };
   }

@@ -14,6 +14,7 @@ import { createReadStream } from 'fs';
 import { Logger } from '@/common/utils/log4js';
 import { Response } from 'express';
 import { FileUploadInterceptor } from '@/middleware/file-upload.interceptor';
+import config from '@/config';
 
 @Public()
 @Controller('file')
@@ -23,7 +24,9 @@ export class FileController {
   @Post()
   @UseInterceptors(FileUploadInterceptor('file', {}))
   uploadFile(@UploadedFile() file: Express.Multer.File) {
-    return new ResponseBody(1, file.filename, '上传成功');
+    const configrue = config();
+    const fileUrl = `${configrue.app.domain}:${configrue.app.port}/files/${file.filename}`;
+    return new ResponseBody(1, fileUrl, '上传成功');
   }
 
   @Get(':filename')

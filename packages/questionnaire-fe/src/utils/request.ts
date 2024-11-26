@@ -1,6 +1,6 @@
 import { LOGIN_PATH } from '@/router'
 import axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios'
-import { getTokenFormStorage } from '.'
+import { getTokenFromStorage } from '@/utils/index'
 
 // 创建axios实例
 const instance: AxiosInstance = axios.create({
@@ -9,7 +9,7 @@ const instance: AxiosInstance = axios.create({
 
 // 请求拦截器
 instance.interceptors.request.use(config => {
-  const token = getTokenFormStorage()
+  const token = getTokenFromStorage()
   if (token) {
     config.headers.Authorization = `Bearer ${token}`
   }

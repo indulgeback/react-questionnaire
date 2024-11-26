@@ -3,11 +3,11 @@ import { useNavigate, useSearchParams } from 'react-router-dom'
 import { App, Button, Checkbox, Form, Input } from 'antd'
 import { REGISTER_PATH } from '@/router'
 import apis from '@/apis'
-import { rememberUser, deleteUserFormStorage, getUserFormStorage, login } from '@/utils'
+import { rememberUser, deleteUserFromStorage, getUserFromStorage, login } from '@/utils'
 import colorfulLogo from '@/assets/img/colorful-logo.png'
 import useRequestSuccessChecker from '@/hooks/useRequestSuccessChecker'
 import shared from '@questionnaire/shared'
-import { setLoginState, setToken } from '@/store/modules/profileSlice'
+import { setLoginState, setToken, setUserInfo } from '@/store/modules/profileSlice'
 import { useDispatch } from 'react-redux'
 import AuthBg from '@/components/Common/AuthBg'
 import gsap from 'gsap'
@@ -36,8 +36,9 @@ const Login: React.FC = () => {
     const { email, password, remember } = values || {}
     const res = await apis.authApi.login({ email, password })
     if (isRequestSuccess(res)) {
-      remember ? rememberUser(email, password) : deleteUserFormStorage()
+      remember ? rememberUser(email, password) : deleteUserFromStorage()
       dispatch(setToken(res.data?.token))
+      dispatch(setUserInfo(res.data?.userInfo))
       dispatch(setLoginState(LOGIN_STATE.LOGIN))
       nav(searchParams.get('redirect') || '/')
     }
@@ -53,7 +54,7 @@ const Login: React.FC = () => {
 
   useEffect(() => {
     checkAuth()
-    const { email, password } = getUserFormStorage()
+    const { email, password } = getUserFromStorage()
     form.setFieldsValue({ email, password })
   }, [])
   return (

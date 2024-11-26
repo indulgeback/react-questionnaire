@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { LOGIN_PATH, PROFILE_PATH, REGISTER_PATH } from '@/router'
 import { Avatar, Button, Dropdown, MenuProps, Space } from 'antd'
 import { DownOutlined, LogoutOutlined, RocketOutlined, UserOutlined } from '@ant-design/icons'
@@ -7,12 +7,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@/store'
 import { LOGIN_STATE } from '@/constant'
 import { setLoginState } from '@/store/modules/profileSlice'
-
+import { defaultAvatarList } from '@/constant/defaultDataConstant'
 const UserMenu: React.FC = () => {
   const nav = useNavigate()
   const dispatch = useDispatch()
   const loginState = useSelector((state: RootState) => state.profile.loginState)
-
+  const userInfo = useSelector((state: RootState) => state.profile.userInfo)
   const handleLogout = () => {
     dispatch(setLoginState(LOGIN_STATE.LOGOUT))
     nav(LOGIN_PATH)
@@ -42,11 +42,19 @@ const UserMenu: React.FC = () => {
     <>
       {loginState === LOGIN_STATE.LOGIN ? (
         <Space>
-          <img />
           <Dropdown menu={{ items }}>
             <Space className="cursor-pointer">
-              <Avatar src={<img src="" alt="" />} />
-              Hover me
+              <Avatar
+                src={
+                  <img
+                    src={
+                      userInfo.avatar ||
+                      defaultAvatarList[Math.floor(Math.random() * defaultAvatarList.length)]
+                    }
+                  />
+                }
+              />
+              <span className="text-custom-text-100">{userInfo.nickname}</span>
               <DownOutlined />
             </Space>
           </Dropdown>

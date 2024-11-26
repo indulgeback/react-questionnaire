@@ -8,3 +8,4 @@ export enum LOGIN_STATE {
   LOGIN = 'login',
   LOGOUT = 'loguot'
 }
+export const USERINFO_KEY = 'userInfo'

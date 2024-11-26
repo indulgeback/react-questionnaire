@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.5.0](https://gitee.com/IndulgeBack/react-questionnaire/compare/v1.4.0...v1.5.0) (2024-11-26)
+
+
+### Bug Fixes
+
+* 修复列表空状态样式 ([88f88ee](https://gitee.com/IndulgeBack/react-questionnaire/commits/88f88eeb666ea322ff14f691f48914b4c26e7970))
+
+
+### Features
+
+* BE - 新增查询用户详情接口 ([e3fc241](https://gitee.com/IndulgeBack/react-questionnaire/commits/e3fc2415c704808f3593719e03b9057a24384579))
+* FE - 封装问卷收藏相关接口 ([7978a50](https://gitee.com/IndulgeBack/react-questionnaire/commits/7978a504709d24f2694a91151cfb366785cd40d0))
+* FE - 用户信息持久化存储与默认头像设置 ([e9b07ea](https://gitee.com/IndulgeBack/react-questionnaire/commits/e9b07ea3db899c4118206d6b746d804fc94e9a7a))
+
+
+
+
+
 # [1.4.0](https://gitee.com/IndulgeBack/react-questionnaire/compare/v1.3.0...v1.4.0) (2024-11-20)
 
 

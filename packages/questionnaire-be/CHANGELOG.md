@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.5.0](https://gitee.com/IndulgeBack/react-questionnaire/compare/v1.4.0...v1.5.0) (2024-11-26)
+
+
+### Bug Fixes
+
+* BE - 登录接口返回的部分用户信息添加avatar字段 ([d5980d7](https://gitee.com/IndulgeBack/react-questionnaire/commits/d5980d7a82220e1ea03743147a79aa27197a8fe7))
+* BE - 修复问卷市场列表接口 ([470da27](https://gitee.com/IndulgeBack/react-questionnaire/commits/470da27f6e0d77cff3029d40c79767c9221a7f30))
+
+
+### Features
+
+* 新增用户收藏表，调整项目结构 ([f599c99](https://gitee.com/IndulgeBack/react-questionnaire/commits/f599c99b37c7e072cb8eb1d902619bece533fa18))
+* BE - 问卷列表返回值添加is_favorated字段，用来判断该问卷当前用户是否收藏 ([a2eb342](https://gitee.com/IndulgeBack/react-questionnaire/commits/a2eb342ebc1e8de82bf9d0f30778f9f58a4ee193))
+* BE - 问卷列表支持查询用户收藏的问卷 ([df4afec](https://gitee.com/IndulgeBack/react-questionnaire/commits/df4afec906494d5c04c933d527624fe15a27efbf))
+* BE - 新增查询用户详情接口 ([e3fc241](https://gitee.com/IndulgeBack/react-questionnaire/commits/e3fc2415c704808f3593719e03b9057a24384579))
+* BE - 新增取消收藏问卷接口 ([3c81824](https://gitee.com/IndulgeBack/react-questionnaire/commits/3c81824a926b7f853122383683c6e52706185ffa))
+* BE - 新增用户收藏问卷接口 ([4768d40](https://gitee.com/IndulgeBack/react-questionnaire/commits/4768d407ab757912a28081073ca07b65045b3b67))
+* BE - 用户信息接口 ([ef2ba65](https://gitee.com/IndulgeBack/react-questionnaire/commits/ef2ba65aa7235557a389a7697fea1959103c46e6))
+
+
+### Performance Improvements
+
+* BE - 后端项目优化：配置全局错误处理器于默认响应状态码 ([cfc646f](https://gitee.com/IndulgeBack/react-questionnaire/commits/cfc646f4b08db9d4c81366d7e15eacf035361b45))
+
+
+
+
+
 # [1.4.0](https://gitee.com/IndulgeBack/react-questionnaire/compare/v1.3.0...v1.4.0) (2024-11-20)
 
 

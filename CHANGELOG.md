@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.1](https://gitee.com/IndulgeBack/react-questionnaire/compare/v1.5.0...v1.5.1) (2024-11-26)
+
+
+### Bug Fixes
+
+* BE - 修复默认返回状态码组件将所有状态码都重置为200 ([9e048b0](https://gitee.com/IndulgeBack/react-questionnaire/commits/9e048b0d3542c36ccaa635c599f924fed7b4f7be))
+* BE - 修复全局环境变量问题，引入cross-env传递全局环境变量 ([1cf0bba](https://gitee.com/IndulgeBack/react-questionnaire/commits/1cf0bba4cf96ff0866be13a7b87c5a9a0e9e42b4))
+
+
+### Performance Improvements
+
+* BE - 静态文件服务器优化，写入配置进配置文件，上传文件接口返回静态服务器访问url ([30fbebb](https://gitee.com/IndulgeBack/react-questionnaire/commits/30fbebb398782b822796d61bbcbed92bcffb2172))
+
+
+
+
+
 # [1.5.0](https://gitee.com/IndulgeBack/react-questionnaire/compare/v1.4.0...v1.5.0) (2024-11-26)
 
 

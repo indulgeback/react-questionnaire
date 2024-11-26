@@ -7,7 +7,11 @@ export class DefaultResponseMiddleware implements NestMiddleware {
     const originalJson = res.json;
 
     res.json = function (body) {
-      if (!res.headersSent) {
+      // 检查当前状态码是否在2xx范围内或未设置状态码
+      if (
+        (!res.headersSent && !res.statusCode) ||
+        (res.statusCode >= 200 && res.statusCode < 300)
+      ) {
         res.status(200);
       }
       return originalJson.call(this, body); // 确保返回 Response 对象

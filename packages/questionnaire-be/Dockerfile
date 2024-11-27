@@ -1,9 +1,6 @@
 # 使用官方 Node.js 22 版本作为基础镜像
 FROM node:22 as build
 
-# 设置 npm 镜像源为淘宝镜像
-RUN npm config set registry https://registry.npmmirror.com
-
 # 安装 pnpm
 RUN npm install -g pnpm
 
@@ -15,7 +12,8 @@ COPY packages/questionnaire-fe/package*.json ./
 COPY pnpm-lock.yaml ./
 
 # 安装依赖
-RUN pnpm install --frozen-lockfile && pnpm list --depth=0
+RUN pnpm install && \
+  ls -la node_modules/@nestjs/cli 
 
 # 将 shared 包复制到工作目录
 COPY packages/shared ./shared

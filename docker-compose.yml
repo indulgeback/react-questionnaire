@@ -1,0 +1,24 @@
+services:
+  frontend:
+    build: 
+      context: .
+      dockerfile: packages/questionnaire-fe/Dockerfile
+    ports:
+      - "8877:80"  # 将主机的 8877 端口映射到容器的 80 端口
+    depends_on:
+      - backend
+
+  backend:
+    build: 
+      context: .
+      dockerfile: packages/questionnaire-be/Dockerfile
+    ports:
+      - "8879:8879"  # 将主机的 8879 端口映射到容器的 8879 端口
+    environment:
+      # 你可以在这里添加后端需要的环境变量
+      - NODE_ENV=production
+    # 如果有数据库或其他外部服务，可以在这里指定它们
+    # networks:
+    #   - mynetwork
+    # volumes:
+    #   - ./packages/questionnaire-be/logs:/app/logs

@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   frontend:
     build: 
@@ -7,6 +9,8 @@ services:
       - "8877:80"  # 将主机的 8877 端口映射到容器的 80 端口
     depends_on:
       - backend
+    environment:
+      - TZ=Asia/Shanghai  # 设置时区为上海
 
   backend:
     build: 
@@ -19,10 +23,10 @@ services:
       - db
     environment:
       # 你可以在这里添加后端需要的环境变量
-      DB_HOST: db
-      DB_PORT: 3307
-      REDIS_HOST: redis
-      REDIS_PORT: 6379
+      - NODE_ENV=docker
+      - MYSQL_HOST=db
+      - REDIS_HOST=redis
+      - TZ=Asia/Shanghai  # 设置时区为上海
     # 如果有数据库或其他外部服务，可以在这里指定它们
     # networks:
     #   - mynetwork
@@ -38,9 +42,11 @@ services:
     image: mysql:8.0
     ports:
       - "3307:3307"
+    command: --port=3307
     environment:
       - MYSQL_ROOT_PASSWORD=12345678
       - MYSQL_DATABASE=questionnaire_db
+      - TZ=Asia/Shanghai  # 设置时区为上海
     volumes:
       - db_data:/var/lib/mysql
 volumes:

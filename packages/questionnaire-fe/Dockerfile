@@ -1,10 +1,6 @@
 # 使用官方 Node.js 22 版本作为基础镜像
 FROM node:22 as build
 
-# 添加一个版本号或时间戳
-ARG BUILD_DATE=$(date +%s)
-RUN echo "Build date: ${BUILD_DATE}"
-
 # 安装 pnpm
 RUN npm install -g pnpm
 

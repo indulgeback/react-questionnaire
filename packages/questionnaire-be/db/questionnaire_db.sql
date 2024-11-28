@@ -11,7 +11,7 @@
  Target Server Version : 80039 (8.0.39)
  File Encoding         : 65001
 
- Date: 21/11/2024 19:11:30
+ Date: 28/11/2024 17:07:18
 */
 
 SET NAMES utf8mb4;
@@ -148,6 +148,8 @@ CREATE TABLE `user` (
   `nickname` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `create_time` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+  `avatar` varchar(255) DEFAULT NULL,
+  `bio` text,
   PRIMARY KEY (`id`),
   UNIQUE KEY `IDX_e12875dfb3b1d92d7d7c5377e2` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -156,7 +158,7 @@ CREATE TABLE `user` (
 -- Records of user
 -- ----------------------------
 BEGIN;
-INSERT INTO `user` (`id`, `password`, `nickname`, `email`, `create_time`) VALUES (18, '$2b$10$MyOIBSoPm2pIKY3F75qseOppF5ZcIRtfXBCg8xz5pKI1IxOl7d/4K', 'IndulgeBack', 'liuwenyu1937@outlook.com', '2024-11-21 15:59:53.228394');
+INSERT INTO `user` (`id`, `password`, `nickname`, `email`, `create_time`, `avatar`, `bio`) VALUES (18, '$2b$10$MyOIBSoPm2pIKY3F75qseOppF5ZcIRtfXBCg8xz5pKI1IxOl7d/4K', 'IndulgeBack', 'liuwenyu1937@outlook.com', '2024-11-21 15:59:53.228394', NULL, NULL);
 COMMIT;
 
 -- ----------------------------
@@ -173,12 +175,17 @@ CREATE TABLE `user_favorites` (
   KEY `FK_09c7eaa2ae773062f54d1749a8f` (`question_id`),
   CONSTRAINT `FK_09c7eaa2ae773062f54d1749a8f` FOREIGN KEY (`question_id`) REFERENCES `question` (`id`),
   CONSTRAINT `FK_5238ce0a21cc77dc16c8efe3d36` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of user_favorites
 -- ----------------------------
 BEGIN;
+INSERT INTO `user_favorites` (`created_time`, `user_id`, `question_id`, `id`) VALUES ('2024-11-25 11:31:54.856008', 18, 244, 17);
+INSERT INTO `user_favorites` (`created_time`, `user_id`, `question_id`, `id`) VALUES ('2024-11-25 11:31:59.334294', 18, 245, 18);
+INSERT INTO `user_favorites` (`created_time`, `user_id`, `question_id`, `id`) VALUES ('2024-11-25 11:32:03.763178', 18, 299, 19);
+INSERT INTO `user_favorites` (`created_time`, `user_id`, `question_id`, `id`) VALUES ('2024-11-25 11:32:08.520144', 18, 223, 20);
+INSERT INTO `user_favorites` (`created_time`, `user_id`, `question_id`, `id`) VALUES ('2024-11-25 11:32:12.891288', 18, 254, 21);
 COMMIT;
 
 -- ----------------------------

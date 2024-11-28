@@ -43,7 +43,8 @@ chmod +x .husky/*
         "postversion": "git add . && git commit -m 'chore: bump versions' && git tag v`node -p \"require('./lerna.json').version\"` && git push && git push origin --tags", // 发布版本号后，自动打 tag
         "lint": "pnpm -F @questionnaire/fe lint && pnpm -F @questionnaire/be lint", // eslint 校验
         "format": "pnpm -F @questionnaire/fe format && pnpm -F @questionnaire/be format", // prettier 格式化代码
-        "stat": "cloc --include-lang=JavaScript,TypeScript,SCSS --exclude-dir=node_modules,dist,build ." // 统计代码行数 自行安装 cloc npm全局包
+        "stat": "cloc --include-lang=JavaScript,TypeScript,SCSS --exclude-dir=node_modules,dist,build .", // 统计代码行数 自行安装 cloc npm全局包
+        "build:docker-compose": "docker-compose down && docker-compose up -d" // 构建docker-compose
     },
 ```
 

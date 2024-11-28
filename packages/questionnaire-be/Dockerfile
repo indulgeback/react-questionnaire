@@ -1,30 +1,27 @@
 # 使用官方 Node.js 22 版本作为基础镜像
 FROM node:22 as build
 
+# 添加一个版本号或时间戳
+ARG BUILD_DATE=$(date +%s)
+RUN echo "Build date: ${BUILD_DATE}"
+
 # 安装 pnpm
 RUN npm install -g pnpm
 
 # 设置工作目录为 /app
 WORKDIR /app
 
-# 将 package.json 和 pnpm-lock.yaml 复制到工作目录
-COPY packages/questionnaire-fe/package*.json ./
-COPY pnpm-lock.yaml ./
+# 将整个项目复制到容器内
+COPY . .
 
 # 安装依赖
-RUN pnpm install && \
-  ls -la node_modules/@nestjs/cli 
-
-# 将 shared 包复制到工作目录
-COPY packages/shared ./shared
-
-# 将后端源代码复制到工作目录
-COPY packages/questionnaire-be/ .
+RUN pnpm install
 
 # 暴露端口 8879
 EXPOSE 8879
 
-RUN pnpm run build
+# 构建后端应用
+RUN pnpm --filter @questionnaire/questionnaire-be run build
 
 # 启动后端应用
-CMD ["node", "dist/main"]
+CMD ["node", "packages/questionnaire-be/dist/main"]

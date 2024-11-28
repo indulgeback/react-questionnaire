@@ -13,9 +13,9 @@ export class MailService {
     this.client = createClient({ url: config().db.redis.uri });
 
     // 监听 Redis 连接事件
-    this.client.on('error', (error) => {
-      console.error('Redis Client Error', error);
-    });
+    // this.client.on('error', (error) => {
+    //   console.error('Redis Client Error', error);
+    // });
 
     this.client.on('connect', () => {
       console.log('Connected to Redis');

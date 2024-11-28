@@ -1,0 +1,30 @@
+# 服务器配置
+app:
+  domain: 'http://localhost'
+  port: 8879
+  prefix: '/api'
+  jwt:
+    secret: 'secret'
+    expiresIn: '1d'
+# 数据库配置
+db:
+  mysql:
+    type: 'mysql'
+    host: 'localhost'
+    username: 'root'
+    password: '12345678'
+    database: 'questionnaire_db'
+    port: 3307
+    synchronize: false
+    autoLoadEntities: true
+    keepConnectionAlive: true
+  mongo:
+    uri: 'mongodb://localhost:27017/questionnaire_mongo_db'
+  redis:
+    uri: 'redis://localhost:6379'
+# 邮件配置
+mailer:
+  user: 'XMquestionnaire@163.com'
+  pass: 'HS35qYhKHX8UF5kE'
+  host: 'smtp.163.com'
+  port: 465

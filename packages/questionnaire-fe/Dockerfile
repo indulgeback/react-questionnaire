@@ -7,6 +7,9 @@ RUN npm config set registry https://registry.npmmirror.com
 # 安装 pnpm
 RUN npm install -g pnpm
 
+# 安装 typescript
+RUN npm i -g typescript
+
 # 设置工作目录为 /app
 WORKDIR /app
 
@@ -16,11 +19,11 @@ COPY packages/questionnaire-fe/ .
 # 将 pnpm-lock.yaml 复制到工作目录
 COPY pnpm-lock.yaml ./
 
-# 安装依赖
-RUN pnpm install && pnpm list --depth=0
-
 # 将 shared 包复制到工作目录
 COPY packages/shared ./shared
+
+# 安装依赖
+RUN pnpm install && pnpm list --depth=0
 
 # 构建前端应用
 RUN pnpm run build

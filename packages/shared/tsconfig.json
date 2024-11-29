@@ -5,8 +5,9 @@
     "declaration": true, // 生成 .d.ts 文件
     "module": "commonjs", // 或者 "esnext" 根据需求
     "target": "es5", // 或者更高版本
-    "composite": true, // 允许将此项目用作构建图的一部分
-    "lib": ["ESNext", "DOM"]
+    "composite": false, // 允许将此项目用作构建图的一部分
+    "lib": ["ESNext", "DOM"],
+    "incremental": false
   },
   "include": ["src"]
 }

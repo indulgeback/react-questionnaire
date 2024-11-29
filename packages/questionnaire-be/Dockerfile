@@ -7,6 +7,9 @@ RUN npm config set registry https://registry.npmmirror.com
 # 安装 pnpm
 RUN npm install -g pnpm
 
+# 安装 typescript
+RUN npm i -g typescript
+
 # 设置工作目录为 /app
 WORKDIR /app
 
@@ -14,10 +17,13 @@ WORKDIR /app
 COPY . .
 
 # 安装依赖
-RUN pnpm install
+RUN pnpm install 
 
 # 暴露端口 8879
 EXPOSE 8879
+
+# 编译工具包
+RUN pnpm --filter @questionnaire/shared run build
 
 # 构建后端应用
 RUN pnpm --filter @questionnaire/be run build

@@ -1,6 +1,9 @@
 # 使用官方 Node.js 22 版本作为基础镜像
 FROM node:22 AS build
 
+# 使用淘宝镜像源加速 npm 安装
+RUN npm config set registry https://registry.npmmirror.com
+
 # 安装 pnpm
 RUN npm install -g pnpm
 

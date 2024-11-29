@@ -1,5 +1,5 @@
 # 使用官方 Node.js 22 版本作为基础镜像
-FROM node:22 as build
+FROM node:22 AS build
 
 # 安装 pnpm
 RUN npm install -g pnpm

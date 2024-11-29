@@ -1,6 +1,6 @@
 import React, { useEffect, useLayoutEffect } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
-import { App, Button, Checkbox, Form, Input } from 'antd'
+import { App, Button, Checkbox, Form, FormRule, Input } from 'antd'
 import { REGISTER_PATH } from '@/router'
 import apis from '@/apis'
 import { rememberUser, deleteUserFromStorage, getUserFromStorage, login } from '@/utils'
@@ -24,12 +24,19 @@ const Login: React.FC = () => {
     gsap.fromTo('#login-form', { opacity: 0, x: 100 }, { opacity: 1, x: 0, duration: 1 })
   }, [])
 
-  const rules = {
+  const rules: Record<string, FormRule[]> = {
     email: [
       { required: true, message: '请输入邮箱' },
       { pattern: shared.RegExp.emailRegExp, message: '邮箱格式错误' }
     ],
-    password: [{ required: true, message: '请输入密码' }]
+    password: [
+      { required: true, message: '请输入密码' },
+      {
+        min: 8,
+        max: 16,
+        message: '密码长度不能小于8位,大于16位'
+      }
+    ]
   }
 
   const onFinish = async (values: any) => {

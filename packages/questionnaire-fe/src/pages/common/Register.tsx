@@ -42,7 +42,14 @@ const Register: React.FC = () => {
   }
 
   const rules: Record<formItem, Rule[]> = {
-    password: [{ required: true, message: '请输入密码!' }],
+    password: [
+      { required: true, message: '请输入密码!' },
+      {
+        min: 8,
+        max: 16,
+        message: '密码长度不能小于8位,大于16位'
+      }
+    ],
     confirm: [
       { required: true, message: '请输入确认密码!' },
       ({ getFieldValue }) => ({

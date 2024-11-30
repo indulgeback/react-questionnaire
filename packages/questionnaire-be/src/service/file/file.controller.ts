@@ -24,9 +24,13 @@ export class FileController {
   @Post()
   @UseInterceptors(FileUploadInterceptor('file', {}))
   uploadFile(@UploadedFile() file: Express.Multer.File) {
-    const configrue = config();
-    const fileUrl = `${configrue.app.domain}:${configrue.app.port}/files/${file.filename}`;
-    return new ResponseBody(1, fileUrl, '上传成功');
+    try {
+      const configrue = config();
+      const fileUrl = `${configrue.app.domain}:${configrue.app.port}/files/${file.filename}`;
+      return new ResponseBody(1, fileUrl, '上传成功');
+    } catch (error) {
+      return new ResponseBody(0, null, error.message);
+    }
   }
 
   @Get(':filename')

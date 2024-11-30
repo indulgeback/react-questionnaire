@@ -4,7 +4,7 @@ import { diskStorage } from 'multer';
 import { extname } from 'path';
 import { v4 as uuidv4 } from 'uuid';
 
-interface FileUploadOptions {
+type FileUploadOptions = {
   destination?: string;
   filename?: (
     req: any,
@@ -12,7 +12,7 @@ interface FileUploadOptions {
     callback: (error: Error | null, filename: string) => void,
   ) => void;
   limits?: { [key: string]: number };
-}
+};
 
 export function FileUploadInterceptor(
   fieldName: string,

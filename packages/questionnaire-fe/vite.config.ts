@@ -4,7 +4,7 @@ import react from '@vitejs/plugin-react-swc'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 
 export default defineConfig({
-  base: './',
+  base: '/',
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src'),

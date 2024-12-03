@@ -1,11 +1,11 @@
 # 服务器配置
 app:
-  domain: 'http://localhost'
-  port: 8879
-  prefix: '/api'
+  domain: 'http://localhost' # 服务器域名
+  port: 8879 # 服务器端口
+  prefix: '/api' # 接口前缀
   jwt:
-    secret: 'secret'
-    expiresIn: '1d'
+    secret: 'secret' # jwt密钥
+    expiresIn: '1d' # jwt过期时间
 # 数据库配置
 db:
   mysql:

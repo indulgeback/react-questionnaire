@@ -26,7 +26,7 @@ export class FileController {
   uploadFile(@UploadedFile() file: Express.Multer.File) {
     try {
       const configrue = config();
-      const fileUrl = `${configrue.app.domain}:${configrue.app.port}/files/${file.filename}`;
+      const fileUrl = `${configrue.app.domain}/files/${file.filename}`;
       return new ResponseBody(1, fileUrl, '上传成功');
     } catch (error) {
       return new ResponseBody(0, null, error.message);

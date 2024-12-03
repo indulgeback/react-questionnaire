@@ -1,6 +1,6 @@
 # 服务器配置
 app:
-  domain: 'http://localhost'
+  domain: 'http://8.152.210.136' # 服务器域名/ip
   port: 8879
   prefix: '/api'
   jwt:

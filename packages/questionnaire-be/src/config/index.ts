@@ -1,6 +1,5 @@
 import { readFileSync } from 'fs';
 import { load } from 'js-yaml';
-import * as Moment from 'moment';
 import { join } from 'path';
 
 const configFileNameObj = {
@@ -10,10 +9,6 @@ const configFileNameObj = {
 };
 
 const env = process.env.NODE_ENV || 'development';
-
-console.log(
-  '😈当 前 版 本 构 建 于😈' + Moment().format('YYYY-MM-DD HH:mm:ss'),
-);
 
 const config = load(
   readFileSync(join(__dirname, `../config/${configFileNameObj[env]}.yml`)),

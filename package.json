@@ -14,13 +14,17 @@
     "lint": "pnpm -F @questionnaire/fe lint && pnpm -F @questionnaire/be lint",
     "format": "pnpm -F @questionnaire/fe format && pnpm -F @questionnaire/be format",
     "stat": "cloc --include-lang=JavaScript,TypeScript,SCSS --exclude-dir=node_modules,dist,build .",
-    "build:docker-compose": "docker-compose down && docker-compose up --build -d"
+    "build:docker-compose:dev": "docker-compose down && docker-compose up --build -d",
+    "build:docker-images-and-push-to-registry": "node scripts/buildAndPushImageWithLernaVersion.js"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.4.2",
     "@commitlint/config-conventional": "^17.4.2",
     "@lerna/conventional-commits": "^6.4.1",
+    "chalk": "4",
+    "dotenv": "^16.4.7",
     "husky": "^8.0.3",
-    "lerna": "^8.1.8"
+    "lerna": "^8.1.8",
+    "ora": "5"
   }
 }

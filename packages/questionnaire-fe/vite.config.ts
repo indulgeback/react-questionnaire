@@ -2,6 +2,7 @@ import path from 'path'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
+import { ViteImageOptimizer } from 'vite-plugin-image-optimizer'
 
 export default defineConfig({
   base: '/',
@@ -28,7 +29,8 @@ export default defineConfig({
       iconDirs: [path.resolve(process.cwd(), 'src/assets/svg')],
       // 指定symbolId格式
       symbolId: 'icon-[dir]-[name]'
-    })
+    }),
+    ViteImageOptimizer()
   ],
   css: {
     preprocessorOptions: {

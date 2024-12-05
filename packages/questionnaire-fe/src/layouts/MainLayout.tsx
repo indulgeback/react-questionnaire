@@ -32,7 +32,7 @@ const MainLayout: React.FC = () => {
       </main>
       <footer className="custom-footer">
         小木问卷 &copy;2024 - present. Created by{' '}
-        <Link to="https://indulgeback.netlify.app/">IndulgeBack</Link>
+        <Link to="https://indulgeback.netlify.app/">IndulgeBack</Link> Version: {__APP_VERSION__}
       </footer>
       <Spin indicator={<CustomSpin />} spinning={screenSpinning} fullscreen />
     </div>

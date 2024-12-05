@@ -3,6 +3,9 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import { ViteImageOptimizer } from 'vite-plugin-image-optimizer'
+import pkg from './package.json'
+
+const { version } = pkg
 
 export default defineConfig({
   base: '/',
@@ -49,5 +52,8 @@ export default defineConfig({
         plugins: [require('tailwindcss'), require('autoprefixer')]
       }
     }
+  },
+  define: {
+    __APP_VERSION__: JSON.stringify(version)
   }
 })

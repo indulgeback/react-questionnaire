@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.3](https://gitee.com/IndulgeBack/react-questionnaire/compare/v1.5.2...v1.5.3) (2024-12-05)
+
+
+### Bug Fixes
+
+* BE - 文件服务增加错误捕获 ([afbcd14](https://gitee.com/IndulgeBack/react-questionnaire/commits/afbcd1454d47d399a69bfb49ab81d56f82ce39db))
+* FE - 解决前端路由匹配错误的bug ([67a6a5b](https://gitee.com/IndulgeBack/react-questionnaire/commits/67a6a5b8cfde30bf0ca6e3713d18fe29fbdc8eca))
+* FE - 修复登录与注册密码表单校验前后端不一致的问题 ([a8a070d](https://gitee.com/IndulgeBack/react-questionnaire/commits/a8a070d41d98fc086be2b4973259f1563cae68dc))
+
+
+
+
+
 ## [1.5.2](https://gitee.com/IndulgeBack/react-questionnaire/compare/v1.5.1...v1.5.2) (2024-11-28)
 
 **Note:** Version bump only for package @questionnaire/fe

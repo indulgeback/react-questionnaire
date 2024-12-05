@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.3](https://gitee.com/IndulgeBack/react-questionnaire/compare/v1.5.2...v1.5.3) (2024-12-05)
+
+**Note:** Version bump only for package @questionnaire/shared
+
+
+
+
+
 ## [1.5.2](https://gitee.com/IndulgeBack/react-questionnaire/compare/v1.5.1...v1.5.2) (2024-11-28)
 
 **Note:** Version bump only for package @questionnaire/shared

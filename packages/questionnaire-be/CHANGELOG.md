@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.3](https://gitee.com/IndulgeBack/react-questionnaire/compare/v1.5.2...v1.5.3) (2024-12-05)
+
+
+### Bug Fixes
+
+* 修复服务器文件模块返回链接错误的问题 ([b226626](https://gitee.com/IndulgeBack/react-questionnaire/commits/b226626beb27a7107716666266cfd3d824ec7b58))
+* BE - 文件服务增加错误捕获 ([afbcd14](https://gitee.com/IndulgeBack/react-questionnaire/commits/afbcd1454d47d399a69bfb49ab81d56f82ce39db))
+
+
+
+
+
 ## [1.5.2](https://gitee.com/IndulgeBack/react-questionnaire/compare/v1.5.1...v1.5.2) (2024-11-28)
 
 **Note:** Version bump only for package @questionnaire/be

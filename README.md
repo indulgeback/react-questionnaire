@@ -12,7 +12,7 @@
 
 - 目录树请查看 /doc/structure-tree.txt
 - 架构图请查看 /doc/小木问卷软件架构图.pdf
-- ER图请查看 /doc/ER.dio
+- ER 图请查看 /doc/ER.dio
 - 数据流图请查看 /doc/DFD.dio
 
 #### 安装教程
@@ -24,7 +24,7 @@ pnpm i
 
 #### 使用说明
 
-注：mac或linux用户使用husky脚本时，请赋予执行权限
+注：mac 或 linux 用户使用 husky 脚本时，请赋予执行权限
 
 ```bash
 # 添加权限给.husky文件夹下的所有脚本
@@ -44,9 +44,14 @@ chmod +x .husky/*
         "lint": "pnpm -F @questionnaire/fe lint && pnpm -F @questionnaire/be lint", // eslint 校验
         "format": "pnpm -F @questionnaire/fe format && pnpm -F @questionnaire/be format", // prettier 格式化代码
         "stat": "cloc --include-lang=JavaScript,TypeScript,SCSS --exclude-dir=node_modules,dist,build .", // 统计代码行数 自行安装 cloc npm全局包
-        "build:docker-compose": "docker-compose down && docker-compose up -d" // 构建docker-compose
+        "build:docker-compose:dev": "docker-compose down && docker-compose up -d", // 构建docker-compose
+        "build:docker-images-and-push-to-registry": "node scripts/buildAndPushImageWithLernaVersion.js" // 构建docker镜像并推送到镜像仓库
     },
 ```
+
+#### 容器化部署
+
+想要进行本地服务器或云服务器部署的同志，请复制根目录下 /docker/docker-compose.yml 配置文件到服务器，并修改相关配置，例如：MySQL 密码等等，然后执行 docker-compose up -d 命令即可。一些没有暴露环境变量的配置，可在前后端项目的配置文件中自行修改，打包镜像到自己的仓库，切记修改相关的镜像配置。
 
 #### 参与贡献
 

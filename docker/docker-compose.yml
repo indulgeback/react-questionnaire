@@ -1,0 +1,42 @@
+services:
+  frontend:
+    image: crpi-oe4mbgvc2pu6g852.cn-beijing.personal.cr.aliyuncs.com/xm_questionnaire/questionnaire-frontend:latest
+    ports:
+      - "8877:80"  # 将主机的 8877 端口映射到容器的 80 端口
+    depends_on:
+      - backend
+    environment:
+      - TZ=Asia/Shanghai  # 设置时区为上海
+
+  backend:
+    image: crpi-oe4mbgvc2pu6g852.cn-beijing.personal.cr.aliyuncs.com/xm_questionnaire/questionnaire-backend:latest
+    ports:
+      - "8879:8879"  # 将主机的 8879 端口映射到容器的 8879 端口
+    depends_on:
+      - redis
+      - db
+    environment:
+      - NODE_ENV=docker
+      - MYSQL_HOST=db
+      - REDIS_HOST=redis
+      - TZ=Asia/Shanghai  # 设置时区为上海
+
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+
+  db:
+    image: mysql:8.0
+    ports:
+      - "3307:3307"
+    command: --port=3307
+    environment:
+      - MYSQL_ROOT_PASSWORD=12345678
+      - MYSQL_DATABASE=questionnaire_db
+      - TZ=Asia/Shanghai  # 设置时区为上海
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:

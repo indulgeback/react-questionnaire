@@ -72,7 +72,7 @@ const Login: React.FC = () => {
           className="bg-white/50  backdrop-blur-sm p-5 rounded-md shadow-white shadow-2xl"
           id="login-form"
         >
-          <img className="h-48" src={colorfulLogo} />
+          <img className="h-48" src={colorfulLogo} alt="logo" />
           <Form
             layout="vertical"
             initialValues={{ remember: true }}

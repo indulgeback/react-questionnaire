@@ -15,7 +15,8 @@ export const profileSlice = createSlice({
   initialState: {
     token: getTokenFromStorage() || '',
     loginState: getLoginState(),
-    userInfo: getUserInfoFromStorage()
+    userInfo: getUserInfoFromStorage(),
+    defaultAvatar: ''
   },
   reducers: {
     setToken: (state, action) => {
@@ -29,11 +30,14 @@ export const profileSlice = createSlice({
     setUserInfo: (state, action) => {
       state.userInfo = action.payload
       setUserInfoStorage(action.payload)
+    },
+    setDefaultAvatar: (state, action) => {
+      state.defaultAvatar = action.payload
     }
   }
 })
 
 // 为每个 case reducer 函数生成 Action creators
-export const { setToken, setLoginState, setUserInfo } = profileSlice.actions
+export const { setToken, setLoginState, setUserInfo, setDefaultAvatar } = profileSlice.actions
 
 export default profileSlice.reducer

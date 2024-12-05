@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { memo, useEffect } from 'react'
 import { LOGIN_PATH, PROFILE_PATH, REGISTER_PATH } from '@/router'
 import { Avatar, Button, Dropdown, MenuProps, Space } from 'antd'
 import { DownOutlined, LogoutOutlined, RocketOutlined, UserOutlined } from '@ant-design/icons'
@@ -6,17 +6,29 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@/store'
 import { LOGIN_STATE } from '@/constant'
-import { setLoginState } from '@/store/modules/profileSlice'
+import { setDefaultAvatar, setLoginState } from '@/store/modules/profileSlice'
 import { defaultAvatarList } from '@/constant/defaultDataConstant'
+
 const UserMenu: React.FC = () => {
   const nav = useNavigate()
   const dispatch = useDispatch()
   const loginState = useSelector((state: RootState) => state.profile.loginState)
   const userInfo = useSelector((state: RootState) => state.profile.userInfo)
+  const defaultAvatar = useSelector((state: RootState) => state.profile.defaultAvatar)
+
+  useEffect(() => {
+    if (!defaultAvatar && !userInfo.avatar) {
+      const randomAvatar = defaultAvatarList[Math.floor(Math.random() * defaultAvatarList.length)]
+      dispatch(setDefaultAvatar(randomAvatar))
+    }
+  }, [dispatch, defaultAvatar, userInfo.avatar])
+
   const handleLogout = () => {
     dispatch(setLoginState(LOGIN_STATE.LOGOUT))
     nav(LOGIN_PATH)
   }
+
+  defaultAvatarList[Math.floor(Math.random() * defaultAvatarList.length)]
 
   const items: MenuProps['items'] = [
     {
@@ -44,16 +56,7 @@ const UserMenu: React.FC = () => {
         <Space>
           <Dropdown menu={{ items }}>
             <Space className="cursor-pointer">
-              <Avatar
-                src={
-                  <img
-                    src={
-                      userInfo.avatar ||
-                      defaultAvatarList[Math.floor(Math.random() * defaultAvatarList.length)]
-                    }
-                  />
-                }
-              />
+              <Avatar src={<img src={userInfo.avatar || defaultAvatar || ''} alt="avatar" />} />
               <span className="text-custom-text-100">{userInfo.nickname}</span>
               <DownOutlined />
             </Space>

@@ -7,7 +7,7 @@ const Logo: React.FC = () => {
   return (
     <div className="w-48 text-xs text-center">
       <Link to={HOME_PATH}>
-        <img className="h-17" src={whiteLogo} />
+        <img className="h-17" src={whiteLogo} alt="logo" />
       </Link>
     </div>
   )

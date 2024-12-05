@@ -119,7 +119,7 @@ const Register: React.FC = () => {
           className="bg-white/50 backdrop-blur-sm p-10 rounded-md shadow-white shadow-2xl"
           id="register-form"
         >
-          <img className="h-48" src={colorfulLogo} />
+          <img className="h-48" src={colorfulLogo} alt="logo" />
           <Form name="register" layout="vertical" onFinish={onFinish}>
             <Form.Item label="昵称" name={formItem.nickname} rules={rules.nickname}>
               <Input />

@@ -105,7 +105,9 @@ async function buildAndPushMultiArchImage(
     )
 
     // 构建成功后停止加载动画，并显示成功消息
-    spinner.succeed(`镜像构建并推送成功: ${logSuccess(imageNameWithTag)}`)
+    spinner.succeed(
+      `镜像构建并推送成功: ${chalk.greenBright(imageNameWithTag)}`
+    )
     const endTime = process.hrtime.bigint()
     const timeDiff = (endTime - startTime) / 1000n / 1000n // Convert to milliseconds
     logInfo(`构建用时: ${timeDiff} ms`)
@@ -145,7 +147,7 @@ async function createAndPushManifestList(imageName, tag, platforms, version) {
 
     // 成功后停止加载动画，并显示成功消息
     spinner.succeed(
-      `Manifest List 创建并推送成功: ${logSuccess(imageNameWithTag)}`
+      `Manifest List 创建并推送成功: ${chalk.greenBright(imageNameWithTag)}`
     )
   } catch (err) {
     // 如果发生错误，停止加载动画，并显示错误消息

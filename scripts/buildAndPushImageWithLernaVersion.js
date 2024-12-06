@@ -12,20 +12,6 @@ const spinner = ora({
   color: "yellow",
 })
 
-figlet("XM_questionnaire", function (err, data) {
-  if (err) {
-    console.log("Something went wrong...")
-    console.dir(err)
-    return
-  }
-  console.log("")
-  logSuccess("欢迎使用 XM_questionnaire docker构建工具")
-  console.log("")
-  logInfo(data)
-  console.log("")
-  console.log("")
-})
-
 // 使用chalk定义颜色函数
 const logInfo = (...args) => console.log(chalk.blueBright(...args))
 const logSuccess = (...args) => console.log(chalk.greenBright(...args))
@@ -53,16 +39,6 @@ if (missingEnvVars.length > 0) {
   process.exit(1)
 }
 
-logInfo(" -------------------- 环境变量加载完毕 -------------------- ")
-logInfo("Aliyun Registry URL:", process.env.ALIYUN_REGISTRY_URL)
-logInfo("Aliyun Username:", process.env.ALIYUN_USERNAME)
-logInfo("Aliyun Password:", process.env.ALIYUN_PASSWORD)
-logInfo("Frontend Image Name:", process.env.FRONTEND_IMAGE_NAME)
-logInfo("Backend Image Name:", process.env.BACKEND_IMAGE_NAME)
-logInfo("Frontend Dockerfile Path:", process.env.FRONTEND_DOCKERFILE_PATH)
-logInfo("Backend Dockerfile Path:", process.env.BACKEND_DOCKERFILE_PATH)
-logInfo(" --------------------------------------------------------- ")
-
 // 从lerna.json读取版本号
 function getVersionFromLerna() {
   try {
@@ -74,6 +50,35 @@ function getVersionFromLerna() {
     logError("无法读取或解析lerna.json:", err.message)
     process.exit(1)
   }
+}
+
+async function logASCIIArtAndENV() {
+  return new Promise((resolve) => {
+    figlet("XM_questionnaire", function (err, data) {
+      if (err) {
+        console.log("Something went wrong...")
+        console.dir(err)
+        return
+      }
+      console.log("")
+      logSuccess("欢迎使用 XM_questionnaire docker 构建工具")
+      console.log("")
+      logInfo(data)
+      console.log("")
+      console.log("")
+
+      logInfo(" -------------------- 环境变量加载完毕 -------------------- ")
+      logInfo("Aliyun Registry URL:", process.env.ALIYUN_REGISTRY_URL)
+      logInfo("Aliyun Username:", process.env.ALIYUN_USERNAME)
+      logInfo("Aliyun Password:", process.env.ALIYUN_PASSWORD)
+      logInfo("Frontend Image Name:", process.env.FRONTEND_IMAGE_NAME)
+      logInfo("Backend Image Name:", process.env.BACKEND_IMAGE_NAME)
+      logInfo("Frontend Dockerfile Path:", process.env.FRONTEND_DOCKERFILE_PATH)
+      logInfo("Backend Dockerfile Path:", process.env.BACKEND_DOCKERFILE_PATH)
+      logInfo(" -------------------------------------------------------- ")
+      resolve()
+    })
+  })
 }
 
 // 执行命令并返回结果
@@ -184,6 +189,8 @@ async function loginToRegistry() {
 // 主流程控制
 async function main() {
   try {
+    await logASCIIArtAndENV()
+
     // 获取lerna.json中的版本号
     const version = getVersionFromLerna()
     logInfo("从 lerna.json 中读取到的版本号:", chalk.cyan(version))

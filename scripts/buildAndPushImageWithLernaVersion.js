@@ -4,11 +4,26 @@ const fs = require("fs")
 const path = require("path")
 const ora = require("ora")
 const chalk = require("chalk")
+const figlet = require("figlet")
 
 // 初始化Ora加载器
 const spinner = ora({
   text: "正在处理...",
   color: "yellow",
+})
+
+figlet("XM_questionnaire", function (err, data) {
+  if (err) {
+    console.log("Something went wrong...")
+    console.dir(err)
+    return
+  }
+  console.log("")
+  logSuccess("欢迎使用 XM_questionnaire docker构建工具")
+  console.log("")
+  logInfo(data)
+  console.log("")
+  console.log("")
 })
 
 // 使用chalk定义颜色函数

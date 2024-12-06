@@ -23,6 +23,7 @@
     "@lerna/conventional-commits": "^6.4.1",
     "chalk": "4",
     "dotenv": "^16.4.7",
+    "figlet": "^1.8.0",
     "husky": "^8.0.3",
     "lerna": "^8.1.8",
     "ora": "5"

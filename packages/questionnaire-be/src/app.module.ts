@@ -20,7 +20,7 @@ import UserFavorite from '@/entities/user-favorite.entity';
 
 // 自定义配置
 import configuration from '@/config';
-import DatabaseLogger from '@/common/utils/databaseLogger';
+import { DbLogger } from '@/common/utils/log4js';
 import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { HttpRequestInterceptor } from '@/middleware/request.interceptor';
 import { HttpResponseInterceptor } from '@/middleware/response.interceptor';
@@ -48,7 +48,7 @@ import { join } from 'path';
       useFactory: (config: ConfigService) => {
         return {
           ...config.get('db.mysql'),
-          logger: new DatabaseLogger(),
+          logger: new DbLogger(),
           entities: [User, Question, UserFavorite],
         };
       },

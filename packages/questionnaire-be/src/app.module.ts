@@ -11,6 +11,7 @@ import { AuthModule } from '@/service/auth/auth.module';
 import { MailModule } from '@/service/mail/mail.module';
 import { QuestionModule } from '@/service/question/question.module';
 import { FileModule } from '@/service/file/file.module';
+import { AiModule } from '@/service/ai/ai.module';
 import { TasksModule } from '@/tasks/tasks.module';
 
 // 实体类
@@ -74,6 +75,7 @@ import { join } from 'path';
     MailModule,
     QuestionModule,
     FileModule,
+    AiModule,
     TasksModule,
   ],
   providers: [

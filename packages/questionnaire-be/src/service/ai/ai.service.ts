@@ -5,7 +5,7 @@ import OpenAI from 'openai';
 export class AiService {
   async generate(body: any) {
     const description = `生成关于${body.theme}的20题问卷，类型包括选择题、是非题、简答题。输出JSON格式：
-{"survey":{"title":"问卷标题","description":"问卷目的","questions":[{"id":1,"type":"multiple-choice","question":"问题文本","options":["选项1","选项2"]},...]}}。确保每题ID唯一，内容围绕青少年早恋看法。`;
+{"survey":{"title":"问卷标题","description":"问卷目的","questions":[{"id":1,"type":"multiple-choice","question":"问题文本","options":["选项1","选项2"]},...]}}。确保每题ID唯一，内容围绕${body.theme}。`;
 
     const openai = new OpenAI({
       baseURL: 'https://api.deepseek.com',

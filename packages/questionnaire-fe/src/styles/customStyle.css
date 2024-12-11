@@ -21,7 +21,7 @@
 }
 
 .custom-main {
-    height: calc(100vh - 68px - 40px);
+    height: calc(100vh - 68px - 50px);
 }
 
 .custom-questionnaire-list {
@@ -32,12 +32,16 @@
 }
 
 .custom-footer {
-    height: 40px;
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     text-align: center;
     background-color: var(--bg-200);
     border-top: 1px solid var(--primary-300);
     color: var(--text-200);
-    line-height: 40px;
+    line-height: 20px;
     z-index: 999;
 }
 

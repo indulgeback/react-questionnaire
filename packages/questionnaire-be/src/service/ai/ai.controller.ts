@@ -1,13 +1,14 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Sse, Query } from '@nestjs/common';
 import { AiService } from '@/service/ai/ai.service';
 import { Public } from '@/common/decorators/public.decorator';
+import { Observable } from 'rxjs';
 @Controller('ai')
 export class AiController {
   constructor(private readonly aiService: AiService) {}
 
   @Public()
-  @Post('generate')
-  generate(@Body() body: any) {
-    return this.aiService.generate(body);
+  @Sse('generate')
+  generate(@Query('theme') theme: any): Promise<Observable<MessageEvent>> {
+    return this.aiService.generate(theme);
   }
 }

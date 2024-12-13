@@ -1,93 +1,126 @@
-import React from 'react'
+import React, { Suspense, lazy } from 'react'
 import { createBrowserRouter } from 'react-router-dom'
 
 // 主体页面layout
 import MainLayout from '@/layouts/MainLayout'
-// 管理页面layout
 import ManageLayout from '@/layouts/ManageLayout'
-// 问卷页面layout
 import QuestionLayout from '@/layouts/QuestionLayout'
-// 主页
-import Home from '@/pages/common/Home'
-// 登陆
-import Login from '@/pages/common/Login'
-// 注册
-import Register from '@/pages/common/Register'
-// 个人信息
-import Profile from '@/pages/common/Profile'
-// 404
-import NotFound from '@/pages/common/NotFound'
-// 问卷列表
-import List from '@/pages/manage/List'
-// 星标问卷
-import Star from '@/pages/manage/Star'
-// 问卷编辑
-import Edit from '@/pages/question/Edit'
-// 问卷统计
-import Stat from '@/pages/question/Stat'
+
+// 自定义组件
+import CustomSpin from '@/components/CustomSpin/CustomSpin'
+
+// 使用懒加载
+const Home = lazy(() => import('@/pages/common/Home'))
+const Login = lazy(() => import('@/pages/common/Login'))
+const Register = lazy(() => import('@/pages/common/Register'))
+const Profile = lazy(() => import('@/pages/common/Profile'))
+const NotFound = lazy(() => import('@/pages/common/NotFound'))
+const List = lazy(() => import('@/pages/manage/List'))
+const Star = lazy(() => import('@/pages/manage/Star'))
+const Edit = lazy(() => import('@/pages/question/Edit'))
+const Stat = lazy(() => import('@/pages/question/Stat'))
+
+// 路由常量
+export const HOME_PATH = '/'
+export const LOGIN_PATH = '/login'
+export const REGISTER_PATH = '/register'
+export const PROFILE_PATH = '/profile'
+export const MANAGE_INDEX_PATH = '/manage/list'
+export const MANAGE_STAR_PATH = '/manage/star'
+export const QUESTION_EDIT_PATH = '/question/edit/:id'
+export const QUESTION_STAT_PATH = '/question/stat/:id'
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: HOME_PATH,
     element: <MainLayout />,
     children: [
       {
-        path: '/',
-        element: <Home />
+        path: HOME_PATH,
+        element: (
+          <Suspense fallback={<CustomSpin />}>
+            <Home />
+          </Suspense>
+        )
       },
       {
-        path: 'login',
-        element: <Login />
+        path: LOGIN_PATH,
+        element: (
+          <Suspense fallback={<CustomSpin />}>
+            <Login />
+          </Suspense>
+        )
       },
       {
-        path: 'register',
-        element: <Register />
+        path: REGISTER_PATH,
+        element: (
+          <Suspense fallback={<CustomSpin />}>
+            <Register />
+          </Suspense>
+        )
       },
       {
-        path: 'profile',
-        element: <Profile />
+        path: PROFILE_PATH,
+        element: (
+          <Suspense fallback={<CustomSpin />}>
+            <Profile />
+          </Suspense>
+        )
       },
       {
-        path: 'manage',
+        path: '/manage',
         element: <ManageLayout />,
         children: [
           {
-            path: 'list',
-            element: <List />
+            path: MANAGE_INDEX_PATH,
+            element: (
+              <Suspense fallback={<CustomSpin />}>
+                <List />
+              </Suspense>
+            )
           },
           {
-            path: 'star',
-            element: <Star />
+            path: MANAGE_STAR_PATH,
+            element: (
+              <Suspense fallback={<CustomSpin />}>
+                <Star />
+              </Suspense>
+            )
           }
         ]
       },
       {
         path: '*',
-        element: <NotFound />
+        element: (
+          <Suspense fallback={<CustomSpin />}>
+            <NotFound />
+          </Suspense>
+        )
       }
     ]
   },
   {
-    path: 'question',
+    path: '/question',
     element: <QuestionLayout />,
     children: [
       {
-        path: 'edit/:id',
-        element: <Edit />
+        path: QUESTION_EDIT_PATH,
+        element: (
+          <Suspense fallback={<CustomSpin />}>
+            <Edit />
+          </Suspense>
+        )
       },
       {
-        path: 'stat/:id',
-        element: <Stat />
+        path: QUESTION_STAT_PATH,
+        element: (
+          <Suspense fallback={<CustomSpin />}>
+            <Stat />
+          </Suspense>
+        )
       }
     ]
   }
 ])
 
 export default router
-
-// -------------------- 路由常量 --------------------
-export const HOME_PATH = '/'
-export const LOGIN_PATH = '/login'
-export const REGISTER_PATH = '/register'
-export const PROFILE_PATH = '/profile'
-export const MANAGE_INDEX_PATH = '/manage/list'

@@ -49,6 +49,7 @@ export class MailService {
         subject: 'Verification Code',
         html: generateEmail(verificationCode, expirationTime),
       });
+      return expirationTime;
     } catch (error) {
       console.error(error);
       throw error;

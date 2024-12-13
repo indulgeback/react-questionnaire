@@ -28,3 +28,7 @@ mailer:
   pass: 'HS35qYhKHX8UF5kE'
   host: 'smtp.163.com'
   port: 465
+# 大模型 API 配置
+openai:
+  apiKey: 'sk-2edf4f402e524747923f625f5154e808'
+  baseURL: 'https://api.deepseek.com'

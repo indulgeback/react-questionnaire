@@ -8,7 +8,7 @@ export class AiController {
 
   @Public()
   @Sse('generate')
-  generate(@Query('theme') theme: any): Promise<Observable<MessageEvent>> {
+  generate(@Query('theme') theme: string): Promise<Observable<MessageEvent>> {
     return this.aiService.generate(theme);
   }
 }

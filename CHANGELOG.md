@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.6.0](https://gitee.com/IndulgeBack/react-questionnaire/compare/v1.5.3...v1.6.0) (2024-12-13)
+
+
+### Bug Fixes
+
+* 修复自动化构建脚本输出的异步问题 ([b3d5482](https://gitee.com/IndulgeBack/react-questionnaire/commits/b3d5482bb3eb5491ebda44d9aee57458d771584a))
+* 优化自动化构建脚本 ([e24f1b1](https://gitee.com/IndulgeBack/react-questionnaire/commits/e24f1b1a2b1638745fe4b4ed094962d46be03a68))
+* BE - 修复服务端日志的保存问题 ([f3ef7c5](https://gitee.com/IndulgeBack/react-questionnaire/commits/f3ef7c5ad1c09456ffb7332e942ca80d7123cafa))
+* BE - 修复问卷生成服务以动态使用主题内容 ([ae2ccda](https://gitee.com/IndulgeBack/react-questionnaire/commits/ae2ccda1a84c1d2f4935cabe303d62bd5262e1dd))
+
+
+### Features
+
+* 自动化docker构建脚本添加figlet实现ASCII艺术 ([4aaa1f7](https://gitee.com/IndulgeBack/react-questionnaire/commits/4aaa1f79382d40fbae4414c008272a4d29f84aba))
+* BE - 更新AI服务以支持流式问卷生成，添加OpenAI API配置 ([dee3879](https://gitee.com/IndulgeBack/react-questionnaire/commits/dee38794dcefcbc2bb67226b6af63ca444d2b6ac))
+* BE - 添加AI控制器和服务的单元测试，更新生成方法以接受字符串主题 ([c3f7098](https://gitee.com/IndulgeBack/react-questionnaire/commits/c3f709837b19003bbf3e1f26139f7c0e111bb75e))
+* BE - 添加AI模块及问卷生成服务 ([6f0b5c3](https://gitee.com/IndulgeBack/react-questionnaire/commits/6f0b5c350a1f83b8f7f5826eaa870ce5b946cb16))
+* BE - 添加AuthController和AuthService的单元测试，涵盖用户注册、登录及信息获取功能 ([26d0409](https://gitee.com/IndulgeBack/react-questionnaire/commits/26d0409c35142f67a88b53c9626b897af84ebbbe))
+* BE - 添加FileController的单元测试，涵盖文件上传和下载功能，包括错误处理 ([c0862ee](https://gitee.com/IndulgeBack/react-questionnaire/commits/c0862ee7cb50063f5a982171221e2c39a2dbf619))
+* BE - 添加MailController和MailService的单元测试，涵盖邮箱验证和验证码验证功能；更新AI服务测试以生成预期结果 ([871f056](https://gitee.com/IndulgeBack/react-questionnaire/commits/871f056f04f52dacaa9f1ab4de952f5c00cca3c1))
+* FE - 修改页脚添加网站备案信息区域 ([27a7fe2](https://gitee.com/IndulgeBack/react-questionnaire/commits/27a7fe26719a5d08d07a531b38a151ac9712612e))
+* FE - 页脚添加软件版本号 ([55e2afa](https://gitee.com/IndulgeBack/react-questionnaire/commits/55e2afa64b315da74e816549c439f85aa5d789a1))
+* FE - 在用户登录后没有头像时，使用默认头像，持久化到redux ([ad176c1](https://gitee.com/IndulgeBack/react-questionnaire/commits/ad176c15ac9a784475600cb82211e8b169a8cf13))
+
+
+
+
+
 ## [1.5.3](https://gitee.com/IndulgeBack/react-questionnaire/compare/v1.5.2...v1.5.3) (2024-12-05)
 
 

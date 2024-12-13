@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.6.0](https://gitee.com/IndulgeBack/react-questionnaire/compare/v1.5.3...v1.6.0) (2024-12-13)
+
+
+### Features
+
+* FE - 修改页脚添加网站备案信息区域 ([27a7fe2](https://gitee.com/IndulgeBack/react-questionnaire/commits/27a7fe26719a5d08d07a531b38a151ac9712612e))
+* FE - 页脚添加软件版本号 ([55e2afa](https://gitee.com/IndulgeBack/react-questionnaire/commits/55e2afa64b315da74e816549c439f85aa5d789a1))
+* FE - 在用户登录后没有头像时，使用默认头像，持久化到redux ([ad176c1](https://gitee.com/IndulgeBack/react-questionnaire/commits/ad176c15ac9a784475600cb82211e8b169a8cf13))
+
+
+
+
+
 ## [1.5.3](https://gitee.com/IndulgeBack/react-questionnaire/compare/v1.5.2...v1.5.3) (2024-12-05)
 
 

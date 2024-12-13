@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.1](https://gitee.com/IndulgeBack/react-questionnaire/compare/v1.6.0...v1.6.1) (2024-12-13)
+
+
+### Bug Fixes
+
+* BE - 修复docker环境下openai配置 ([4817720](https://gitee.com/IndulgeBack/react-questionnaire/commits/481772003de052d3dc91083f44f4fefa449905b6))
+
+
+
+
+
 # [1.6.0](https://gitee.com/IndulgeBack/react-questionnaire/compare/v1.5.3...v1.6.0) (2024-12-13)
 
 

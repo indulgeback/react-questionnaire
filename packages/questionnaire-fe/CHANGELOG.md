@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.1](https://gitee.com/IndulgeBack/react-questionnaire/compare/v1.6.0...v1.6.1) (2024-12-13)
+
+
+### Performance Improvements
+
+* FE - 实现路由的懒加载并增强 Vite 配置以实现手动分包 ([0a20ded](https://gitee.com/IndulgeBack/react-questionnaire/commits/0a20ded8af3b3eb7a13dcfeaca93958ca0d9c502))
+
+
+
+
+
 # [1.6.0](https://gitee.com/IndulgeBack/react-questionnaire/compare/v1.5.3...v1.6.0) (2024-12-13)
 
 

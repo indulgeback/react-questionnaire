@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.7.0](https://gitee.com/IndulgeBack/react-questionnaire/compare/v1.6.1...v1.7.0) (2024-12-16)
+
+
+### Bug Fixes
+
+* BE - 更新docker环境配置以使用容器传递的环境变量 ([b7b3fd8](https://gitee.com/IndulgeBack/react-questionnaire/commits/b7b3fd809248f7563822cc4fee5957c2e4217ec6))
+
+
+### Features
+
+* BE - 删除问卷前先删除该问卷有关的收藏记录；删除问卷流程添加事务； ([245829e](https://gitee.com/IndulgeBack/react-questionnaire/commits/245829e17bc60c859500623c8dff55dcce28cf7e))
+* FE - 添加AI生成问卷Demo入口 ([54257f5](https://gitee.com/IndulgeBack/react-questionnaire/commits/54257f5ed4b1e1482c6dac36c3da2f5655137298))
+* FE - 新增问卷JSON数据生成体验Demo ([b1d550b](https://gitee.com/IndulgeBack/react-questionnaire/commits/b1d550b529c4523708da8fde55229613a601367f))
+
+
+
+
+
 ## [1.6.1](https://gitee.com/IndulgeBack/react-questionnaire/compare/v1.6.0...v1.6.1) (2024-12-13)
 
 

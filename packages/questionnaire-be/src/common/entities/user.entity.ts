@@ -31,7 +31,7 @@ class User {
   @Column({ type: 'text', nullable: true })
   bio: string; // 个人简介
 
-  @OneToMany(() => UserFavorite, (userFavorite) => userFavorite.user)
+  @OneToMany(() => UserFavorite, (userFavorite) => userFavorite.user_id)
   favorites: UserFavorite[];
 }
 export default User;

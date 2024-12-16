@@ -35,7 +35,7 @@ class Question {
   @Column({ type: 'boolean', default: false })
   is_published: boolean; // 是否发布
 
-  @OneToMany(() => UserFavorite, (userFavorite) => userFavorite.user)
+  @OneToMany(() => UserFavorite, (userFavorite) => userFavorite.question_id)
   favorites: UserFavorite[];
 }
 

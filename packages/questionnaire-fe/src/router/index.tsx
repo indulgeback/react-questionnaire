@@ -19,6 +19,7 @@ const List = lazy(() => import('@/pages/manage/List'))
 const Star = lazy(() => import('@/pages/manage/Star'))
 const Edit = lazy(() => import('@/pages/question/Edit'))
 const Stat = lazy(() => import('@/pages/question/Stat'))
+const MarkdownView = lazy(() => import('@/pages/markdown-view'))
 
 // 路由常量
 export const HOME_PATH = '/'
@@ -120,6 +121,10 @@ const router = createBrowserRouter([
         )
       }
     ]
+  },
+  {
+    path: '/markdown-view',
+    element: <MarkdownView />
   }
 ])
 

@@ -6,7 +6,7 @@ import {
   UpdateDateColumn,
   OneToMany,
 } from 'typeorm';
-import UserFavorite from '@/entities/user-favorite.entity';
+import UserFavorite from '@/common/entities/user-favorite.entity';
 
 // 问卷模块实体类
 @Entity()

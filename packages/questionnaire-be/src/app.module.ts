@@ -15,9 +15,9 @@ import { AiModule } from '@/service/ai/ai.module';
 import { TasksModule } from '@/tasks/tasks.module';
 
 // 实体类
-import User from '@/entities/user.entity';
-import Question from '@/entities/question.entity';
-import UserFavorite from '@/entities/user-favorite.entity';
+import User from '@/common/entities/user.entity';
+import Question from '@/common/entities/question.entity';
+import UserFavorite from '@/common/entities/user-favorite.entity';
 
 // 自定义配置
 import configuration from '@/config';

@@ -6,8 +6,8 @@ import {
   JoinColumn,
   Column,
 } from 'typeorm';
-import User from '@/entities/user.entity';
-import Question from '@/entities/question.entity';
+import User from '@/common/entities/user.entity';
+import Question from '@/common/entities/question.entity';
 
 @Entity('user_favorites')
 class UserFavorite {

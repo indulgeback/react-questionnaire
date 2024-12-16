@@ -2,10 +2,10 @@ import { Injectable } from '@nestjs/common';
 import CreateQuestionDto from '@/service/question/dto/create-question.dto';
 import UpdateQuestionDto from '@/service/question/dto/update-question.dto';
 import FindAllQuestionDto from './dto/find-all-question.dto';
-import Question from '@/entities/question.entity';
+import Question from '@/common/entities/question.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import UserFavorite from '@/entities/user-favorite.entity';
+import UserFavorite from '@/common/entities/user-favorite.entity';
 
 @Injectable()
 export class QuestionService {

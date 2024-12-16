@@ -30,6 +30,7 @@ export const MANAGE_INDEX_PATH = '/manage/list'
 export const MANAGE_STAR_PATH = '/manage/star'
 export const QUESTION_EDIT_PATH = '/question/edit/:id'
 export const QUESTION_STAT_PATH = '/question/stat/:id'
+export const MARKDOWN_VIEW_PATH = '/markdown-view'
 
 const router = createBrowserRouter([
   {

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { MANAGE_INDEX_PATH } from '@/router'
+import { MANAGE_INDEX_PATH, MARKDOWN_VIEW_PATH } from '@/router'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { Button } from 'antd'
@@ -15,6 +15,7 @@ const Home: React.FC = () => {
     const tl = gsap.timeline()
     tl.from('#title', { x: -100, duration: 1.5, opacity: 0 })
     tl.from('#startBtn', { opacity: 0, y: 200, duration: 1, ease: 'bounce.out' }, '<')
+    tl.from('#aiBtn', { opacity: 0, y: 200, duration: 1, ease: 'circ.in' }, '<')
     tl.from('#description', { y: 50, duration: 1.5, opacity: 0 })
   })
 
@@ -33,6 +34,11 @@ const Home: React.FC = () => {
         <div id="startBtn">
           <Button type="dashed" onClick={() => nav(MANAGE_INDEX_PATH)}>
             START USE
+          </Button>
+        </div>
+        <div id="aiBtn" className="mt-4">
+          <Button type="dashed" onClick={() => nav(MARKDOWN_VIEW_PATH)}>
+            TRY AI
           </Button>
         </div>
       </div>

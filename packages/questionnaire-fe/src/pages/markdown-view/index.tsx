@@ -2,13 +2,15 @@ import apis from '@/apis'
 import React, { useState, useRef, useEffect } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { Input, Button } from 'antd'
+import { useNavigate } from 'react-router-dom'
+import { HOME_PATH } from '@/router'
 
 const MarkdownView: React.FC = () => {
   const [questionJsonStr, setQuestionJsonStr] = useState('')
   const [theme, setTheme] = useState('')
 
   const markdownRef = useRef<HTMLDivElement>(null)
-
+  const nav = useNavigate()
   const handleButtonClick = () => {
     const { eventSource, onMessage, onError, close } = apis.aiApi.generateQuestionnaire(theme)
     setTheme('')
@@ -44,6 +46,9 @@ const MarkdownView: React.FC = () => {
         />
         <Button type="primary" onClick={handleButtonClick}>
           生成问卷
+        </Button>
+        <Button className="ml-4" type="primary" onClick={() => nav(HOME_PATH)}>
+          Back To Home
         </Button>
       </div>
 

@@ -3,8 +3,8 @@ import CreateQuestionDto from '@/service/question/dto/create-question.dto';
 import UpdateQuestionDto from '@/service/question/dto/update-question.dto';
 import FindAllQuestionDto from './dto/find-all-question.dto';
 import Question from '@/common/entities/question.entity';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { InjectRepository, InjectDataSource } from '@nestjs/typeorm';
+import { Repository, DataSource } from 'typeorm';
 import UserFavorite from '@/common/entities/user-favorite.entity';
 
 @Injectable()
@@ -14,6 +14,8 @@ export class QuestionService {
     private questionRepository: Repository<Question>,
     @InjectRepository(UserFavorite)
     private userFavorateRepository: Repository<UserFavorite>,
+    @InjectDataSource()
+    private dataSource: DataSource,
   ) {}
 
   create(createQuestionDto: CreateQuestionDto) {
@@ -135,13 +137,32 @@ export class QuestionService {
 
   // 删除问卷
   async remove(id: number) {
-    const res = await this.findOne(id);
-    if (res) {
-      return await this.questionRepository.delete(id);
-    } else {
-      throw new Error('该问卷不存在');
+    const queryRunner = this.dataSource.createQueryRunner();
+
+    await queryRunner.connect();
+    await queryRunner.startTransaction();
+
+    try {
+      const res = await this.findOne(id);
+      if (!res) {
+        throw new Error('该问卷不存在');
+      }
+
+      // 先删除所有与该问卷相关的收藏记录
+      await queryRunner.manager.delete(UserFavorite, { question_id: id });
+
+      // 然后删除问卷
+      await queryRunner.manager.delete(Question, id);
+
+      await queryRunner.commitTransaction();
+    } catch (error) {
+      await queryRunner.rollbackTransaction();
+      throw error;
+    } finally {
+      await queryRunner.release();
     }
   }
+
   async findOne(id: number) {
     return await this.questionRepository.findOneBy({ id });
   }

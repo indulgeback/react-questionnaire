@@ -125,7 +125,11 @@ const router = createBrowserRouter([
   },
   {
     path: '/markdown-view',
-    element: <MarkdownView />
+    element: (
+      <Suspense fallback={<CustomSpin />}>
+        <MarkdownView />
+      </Suspense>
+    )
   }
 ])
 

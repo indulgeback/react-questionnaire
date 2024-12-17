@@ -31,6 +31,11 @@ export class HttpResponseInterceptor implements NestInterceptor {
           responseData: data,
         };
 
+        // 如果 content-type:text/event-stream，则返回 data
+        if (req.headers['content-type'] === 'text/event-stream') {
+          return data;
+        }
+
         // 根据状态码，进行日志类型区分
         if (res.statusCode >= 400) {
           HttpLogger.error(JSON.stringify(logFormat));

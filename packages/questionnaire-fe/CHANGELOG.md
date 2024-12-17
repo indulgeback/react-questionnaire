@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.7.1](https://gitee.com/IndulgeBack/react-questionnaire/compare/v1.7.0...v1.7.1) (2024-12-17)
+
+
+### Bug Fixes
+
+* FE - 修复组件挂起引发的加载错误426BUG ([e0e1d4d](https://gitee.com/IndulgeBack/react-questionnaire/commits/e0e1d4d8dc79075cd338b7df78ba156a89408968))
+
+
+
+
+
 # [1.7.0](https://gitee.com/IndulgeBack/react-questionnaire/compare/v1.6.1...v1.7.0) (2024-12-16)
 
 

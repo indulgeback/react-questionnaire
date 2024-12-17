@@ -1,6 +1,6 @@
 import React, { memo, useEffect } from 'react'
 import { LOGIN_PATH, PROFILE_PATH, REGISTER_PATH } from '@/router'
-import { Avatar, Button, Dropdown, MenuProps, Space } from 'antd'
+import { Avatar, Button, Dropdown, MenuProps, Space, Tooltip } from 'antd'
 import { DownOutlined, LogoutOutlined, RocketOutlined, UserOutlined } from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
@@ -8,6 +8,8 @@ import { RootState } from '@/store'
 import { LOGIN_STATE } from '@/constant'
 import { setDefaultAvatar, setLoginState } from '@/store/modules/profileSlice'
 import { defaultAvatarList } from '@/constant/defaultDataConstant'
+import SvgIcon from '@/components/Common/SvgIcon'
+import { App } from 'antd'
 
 const UserMenu: React.FC = () => {
   const nav = useNavigate()
@@ -15,6 +17,7 @@ const UserMenu: React.FC = () => {
   const loginState = useSelector((state: RootState) => state.profile.loginState)
   const userInfo = useSelector((state: RootState) => state.profile.userInfo)
   const defaultAvatar = useSelector((state: RootState) => state.profile.defaultAvatar)
+  const { message } = App.useApp()
 
   useEffect(() => {
     if (!defaultAvatar && !userInfo.avatar) {
@@ -29,6 +32,29 @@ const UserMenu: React.FC = () => {
   }
 
   defaultAvatarList[Math.floor(Math.random() * defaultAvatarList.length)]
+
+  const iconItems = [
+    {
+      key: 'gitee',
+      icon: <SvgIcon name="gitee" size="1.2em" />,
+      url: 'https://gitee.com/IndulgeBack/react-questionnaire'
+    },
+    {
+      key: 'github',
+      icon: <SvgIcon name="github" size="1.2em" />,
+      url: 'https://github.com/indulgeback/react-questionnaire'
+    },
+    {
+      key: 'email',
+      icon: <SvgIcon name="email" size="1.2em" />,
+      url: 'https://xmquestionnaire@163.com'
+    },
+    {
+      key: 'juejin',
+      icon: <SvgIcon name="juejin" size="1.2em" />,
+      url: 'https://juejin.cn/user/1410020421418286'
+    }
+  ]
 
   const items: MenuProps['items'] = [
     {
@@ -50,8 +76,31 @@ const UserMenu: React.FC = () => {
     }
   ]
 
+  const clickIconItem = (item: { key: string; icon: React.ReactNode; url: string }) => {
+    if (item.key === 'email') {
+      // 复制邮箱
+      navigator.clipboard.writeText(item.url)
+      message.success('邮箱已复制到剪贴板')
+      return
+    }
+    window.open(item.url, '_blank')
+  }
+
   return (
-    <>
+    <div className="flex items-center gap-4">
+      {iconItems.map(item => {
+        return (
+          <Tooltip title={item.key} key={item.key}>
+            <div
+              className="w-6 h-6 flex justify-center items-center cursor-pointer hover:bg-gray-200 rounded-md"
+              onClick={() => clickIconItem(item)}
+            >
+              {item.icon}
+            </div>
+          </Tooltip>
+        )
+      })}
+
       {loginState === LOGIN_STATE.LOGIN ? (
         <Space>
           <Dropdown menu={{ items }}>
@@ -73,7 +122,7 @@ const UserMenu: React.FC = () => {
           </Button>
         </Space>
       )}
-    </>
+    </div>
   )
 }
 

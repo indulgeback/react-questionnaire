@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.8.0](https://gitee.com/IndulgeBack/react-questionnaire/compare/v1.7.1...v1.8.0) (2024-12-17)
+
+
+### Features
+
+* FE - 添加顶栏icon ([03eefbf](https://gitee.com/IndulgeBack/react-questionnaire/commits/03eefbf0c02960e485467e3d819106b9630db9df))
+* FE - 问卷生成取消生成功能 ([689ad5e](https://gitee.com/IndulgeBack/react-questionnaire/commits/689ad5efcf2d49ea724910c44efeb476afbdf922))
+
+
+### Performance Improvements
+
+* BE - 优化日志，在进行ai流式传输时，不打印日志 ([9890e9a](https://gitee.com/IndulgeBack/react-questionnaire/commits/9890e9aa807166da8b45ae43bd9369ca6aad1db3))
+
+
+
+
+
 ## [1.7.1](https://gitee.com/IndulgeBack/react-questionnaire/compare/v1.7.0...v1.7.1) (2024-12-17)
 
 

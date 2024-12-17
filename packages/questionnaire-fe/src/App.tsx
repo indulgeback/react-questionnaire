@@ -1,6 +1,6 @@
 import React from 'react'
 import { RouterProvider } from 'react-router-dom'
-import router from './router'
+import router from '@/router'
 import { App, ConfigProvider } from 'antd'
 import store from '@/store'
 import { Provider } from 'react-redux'

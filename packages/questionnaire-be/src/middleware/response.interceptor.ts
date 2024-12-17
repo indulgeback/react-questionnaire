@@ -31,8 +31,8 @@ export class HttpResponseInterceptor implements NestInterceptor {
           responseData: data,
         };
 
-        // 如果 content-type:text/event-stream，则返回 data
-        if (req.headers['content-type'] === 'text/event-stream') {
+        // 如果请求是SSE，则返回 data
+        if (req.route.path.includes('ai')) {
           return data;
         }
 
@@ -42,7 +42,6 @@ export class HttpResponseInterceptor implements NestInterceptor {
         } else {
           HttpLogger.access(JSON.stringify(logFormat));
         }
-
         return data;
       }),
     );

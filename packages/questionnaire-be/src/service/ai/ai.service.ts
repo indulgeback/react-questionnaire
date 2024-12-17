@@ -48,6 +48,9 @@ export class AiService {
               accumulatedContent += content;
               // 向订阅者发送累积的内容
               subscriber.next({ data: accumulatedContent } as MessageEvent);
+              if (subscriber.closed) {
+                abortController.abort();
+              }
             }
             // 发送完成标记
             subscriber.next({ data: '{[DONE]}' } as MessageEvent);

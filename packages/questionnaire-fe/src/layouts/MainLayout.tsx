@@ -24,7 +24,7 @@ const MainLayout: React.FC = () => {
           小木问卷 &copy;2024 - present. Created by{' '}
           <Link to="https://indulgeback.netlify.app/">IndulgeBack</Link> Version: {__APP_VERSION__}
         </div>
-        <div>ICP备案信息</div>
+        <div>晋ICP备2023025256号-2</div>
       </footer>
       <Spin indicator={<CustomSpin />} spinning={screenSpinning} fullscreen />
     </div>

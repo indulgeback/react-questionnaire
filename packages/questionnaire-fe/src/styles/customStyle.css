@@ -17,7 +17,6 @@
     right: 0;
 }
 
-.custom-main {}
 
 .custom-hero-banner {
     height: 95vh;
@@ -30,6 +29,27 @@
     position: relative;
     clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
     -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+}
+
+.custom-intro-banner {
+    height: 40vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: 14vh 0;
+}
+
+.custom-intro-card {
+    width: 34vw;
+    background-color: rgba(var(--primary-300), 0.5);
+    padding: 20px;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 10px rgba(var(--primary-100), 0.5);
+}
+
+.custom-intro-lottie {
+    width: 34vw;
 }
 
 

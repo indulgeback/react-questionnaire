@@ -5,28 +5,22 @@
 @tailwind utilities;
 
 :root:root {
-  --primary-100: #26A69A;
-  --primary-200: #408d86;
-  --primary-300: #cdfaf6;
-  --accent-100: #80CBC4;
-  --accent-200: #43A49B;
-  --text-100: #263339;
-  --text-200: #728f9e;
-  --bg-100: #E0F2F1;
-  --bg-200: #D0EBEA;
-  --bg-300: #FFFFFF;
+  --primary-100: 38, 166, 154;
+  --primary-200: 64, 141, 134;
+  --primary-300: 205, 250, 246;
+  --accent-100: 128, 203, 196;
+  --accent-200: 67, 164, 155;
+  --text-100: 38, 51, 57;
+  --text-200: 114, 143, 158;
+  --bg-100: 224, 242, 241;
+  --bg-200: 208, 235, 234;
+  --bg-300: 255, 255, 255;
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
-
-
-/* 添加滚动条样式 */
-::-webkit-scrollbar {
-  width: 7px;
 }
 
 ::-webkit-scrollbar-track {

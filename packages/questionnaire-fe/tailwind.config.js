@@ -4,19 +4,19 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'custom-primary-100': '#26A69A',
-        'custom-primary-200': '#408d86',
-        'custom-primary-300': '#cdfaf6',
-        'custom-accent-100': '#80CBC4',
-        'custom-accent-200': '#43A49B',
-        'custom-text-100': '#263339',
-        'custom-text-200': '#728f9e',
-        'custom-bg-100': '#E0F2F1',
-        'custom-bg-200': '#D0EBEA',
-        'custom-bg-300': '#FFFFFF',
-        'custom-blue': '#1890ff',
-        'custom-yellow': '#fadb14',
-        'custom-red': '#ff4d4f'
+        'custom-primary-100': 'rgb(38, 166, 154)',
+        'custom-primary-200': 'rgb(64, 141, 134)',
+        'custom-primary-300': 'rgb(205, 250, 246)',
+        'custom-accent-100': 'rgb(128, 203, 196)',
+        'custom-accent-200': 'rgb(67, 164, 155)',
+        'custom-text-100': 'rgb(38, 51, 57)',
+        'custom-text-200': 'rgb(114, 143, 158)',
+        'custom-bg-100': 'rgb(224, 242, 241)',
+        'custom-bg-200': 'rgb(208, 235, 234)',
+        'custom-bg-300': 'rgb(255, 255, 255)',
+        'custom-blue': 'rgb(24, 144, 255)',
+        'custom-yellow': 'rgb(250, 219, 20)',
+        'custom-red': 'rgb(255, 77, 79)'
       }
     }
   },

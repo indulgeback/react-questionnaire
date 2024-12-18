@@ -4,9 +4,19 @@
 
 小木问卷 - 基于 NestJS 的问卷生成系统
 
-- **前端(PC 端前台)**：React18 + AntD
+- **前端(PC 端前台)**：React18
 - **前端(移动端前台)**：NextJS
 - **后端**：NestJS + MySQL + MongoDB + Redis
+- **AI 模型**：DeepSeek Chat
+- **动画库**：GSAP + lottie web
+- **UI 库**：Ant Design + TailwindCSS
+- **前端构建工具**：Vite + SWC
+- **包管理器**：pnpm
+- **版本管理**：Lerna
+- **代码规范**：ESLint + Prettier
+- **提交规范**：Husky + Commitlint
+- **单元测试**：Jest
+- **开源协议**：MIT
 
 #### 软件架构
 

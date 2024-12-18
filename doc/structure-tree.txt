@@ -1,60 +1,47 @@
 react-questionnaire
-├─.DS_Store
+├─.env
 ├─CHANGELOG.md
 ├─LICENSE
 ├─README.md
 ├─commitlint.config.js
+├─docker-compose.yml
 ├─lerna.json
 ├─package.json
 ├─pnpm-lock.yaml
 ├─pnpm-workspace.yaml
+├─scripts
+|    └buildAndPushImageWithLernaVersion.js
 ├─packages
-|    ├─.DS_Store
 |    ├─shared
 |    |   ├─CHANGELOG.md
 |    |   ├─package.json
 |    |   ├─tsconfig.json
-|    |   ├─tsconfig.tsbuildinfo
 |    |   ├─src
 |    |   |  ├─index.ts
 |    |   |  ├─modules
 |    |   |  |    ├─regexp.ts
 |    |   |  |    └utils.ts
-|    ├─questionnaire-mock
-|    |         ├─CHANGELOG.md
-|    |         ├─index.js
-|    |         ├─package.json
-|    |         ├─pnpm-lock.yaml
-|    |         ├─mock
-|    |         |  ├─index.js
-|    |         |  ├─module
-|    |         |  |   ├─question.js
-|    |         |  |   └test.js
-|    |         |  ├─data
-|    |         |  |  └getQuestionList.js
 |    ├─questionnaire-fe
-|    |        ├─.DS_Store
 |    |        ├─.babelrc
 |    |        ├─.eslintrc.js
 |    |        ├─.prettierrc.js
 |    |        ├─CHANGELOG.md
+|    |        ├─Dockerfile
 |    |        ├─README.md
 |    |        ├─index.html
-|    |        ├─package-lock.json
 |    |        ├─package.json
-|    |        ├─pnpm-lock.yaml
 |    |        ├─postcss.config.js
 |    |        ├─tailwind.config.js
 |    |        ├─tsconfig.json
 |    |        ├─vite.config.ts
 |    |        ├─src
-|    |        |  ├─.DS_Store
 |    |        |  ├─App.tsx
 |    |        |  ├─main.tsx
 |    |        |  ├─vite.env.d.ts
 |    |        |  ├─utils
 |    |        |  |   ├─index.ts
-|    |        |  |   └request.ts
+|    |        |  |   ├─request.ts
+|    |        |  |   └sseRequest.ts
 |    |        |  ├─styles
 |    |        |  |   ├─customStyle.css
 |    |        |  |   └index.css
@@ -71,24 +58,29 @@ react-questionnaire
 |    |        |  |   |    |  └index.tsx
 |    |        |  |   |    ├─Edit
 |    |        |  |   |    |  └index.tsx
+|    |        |  |   ├─markdown-view
+|    |        |  |   |       └index.tsx
 |    |        |  |   ├─manage
-|    |        |  |   |   ├─Common.module.scss
 |    |        |  |   |   ├─List.tsx
-|    |        |  |   |   ├─Star.tsx
-|    |        |  |   |   └Trash.tsx
+|    |        |  |   |   └Star.tsx
 |    |        |  |   ├─common
 |    |        |  |   |   ├─Home.tsx
 |    |        |  |   |   ├─Login.tsx
 |    |        |  |   |   ├─NotFound.tsx
+|    |        |  |   |   ├─Profile.tsx
 |    |        |  |   |   └Register.tsx
 |    |        |  ├─layouts
 |    |        |  |    ├─MainLayout.tsx
 |    |        |  |    ├─ManageLayout.tsx
-|    |        |  |    └QuestionLayout.tsx
+|    |        |  |    ├─QuestionLayout.tsx
+|    |        |  |    ├─components
+|    |        |  |    |     ├─Logo.tsx
+|    |        |  |    |     └UserMenu.tsx
 |    |        |  ├─hooks
 |    |        |  |   ├─useLoadQuestionData.ts
 |    |        |  |   └useRequestSuccessChecker.ts
 |    |        |  ├─constant
+|    |        |  |    ├─defaultDataConstant.ts
 |    |        |  |    └index.ts
 |    |        |  ├─components
 |    |        |  |     ├─CustomSpin
@@ -96,27 +88,42 @@ react-questionnaire
 |    |        |  |     |     └CustomSpin.tsx
 |    |        |  |     ├─Common
 |    |        |  |     |   ├─AuthBg.tsx
-|    |        |  |     |   ├─Logo.tsx
+|    |        |  |     |   ├─ListSearch.tsx
 |    |        |  |     |   ├─LottieAnimation.tsx
-|    |        |  |     |   ├─Profile.tsx
 |    |        |  |     |   ├─QuestionCard.tsx
-|    |        |  |     |   ├─SvgIcon.tsx
-|    |        |  |     |   ├─UserInfo.tsx
-|    |        |  |     |   └listSearch.tsx
+|    |        |  |     |   └SvgIcon.tsx
 |    |        |  ├─assets
-|    |        |  |   ├─.DS_Store
 |    |        |  |   ├─svg
-|    |        |  |   |  └auth.svg
+|    |        |  |   |  ├─analysis.svg
+|    |        |  |   |  ├─auth.svg
+|    |        |  |   |  ├─email.svg
+|    |        |  |   |  ├─generate.svg
+|    |        |  |   |  ├─gitee.svg
+|    |        |  |   |  ├─github.svg
+|    |        |  |   |  ├─juejin.svg
+|    |        |  |   |  ├─monitor.svg
+|    |        |  |   |  └report.svg
 |    |        |  |   ├─lottie
 |    |        |  |   |   └lottieFile.json
 |    |        |  |   ├─img
 |    |        |  |   |  ├─bg-auth.png
+|    |        |  |   |  ├─bg-feature.png
+|    |        |  |   |  ├─bg-hero.png
 |    |        |  |   |  ├─colorful-logo.png
-|    |        |  |   |  └white-logo.png
+|    |        |  |   |  ├─white-logo.png
+|    |        |  |   |  ├─avatar
+|    |        |  |   |  |   ├─avatar0.png
+|    |        |  |   |  |   ├─avatar1.png
+|    |        |  |   |  |   ├─avatar2.png
+|    |        |  |   |  |   ├─avatar3.png
+|    |        |  |   |  |   ├─avatar4.png
+|    |        |  |   |  |   └avatar5.png
 |    |        |  ├─apis
 |    |        |  |  ├─index.ts
 |    |        |  |  ├─modules
+|    |        |  |  |    ├─ai.ts
 |    |        |  |  |    ├─auth.ts
+|    |        |  |  |    ├─common.ts
 |    |        |  |  |    ├─mail.ts
 |    |        |  |  |    ├─question.ts
 |    |        |  |  |    ├─types
@@ -125,17 +132,13 @@ react-questionnaire
 |    |        |  |  |    |   └question.d.ts
 |    |        ├─public
 |    |        |   └favicon.ico
-|    |        ├─build
-|    |        |   ├─static
-|    |        |   |   ├─media
-|    |        |   |   ├─js
-|    |        |   |   ├─css
+|    |        ├─nginx
+|    |        |   └nginx.conf
 |    ├─questionnaire-be
-|    |        ├─.DS_Store
-|    |        ├─.env
 |    |        ├─.eslintrc.js
 |    |        ├─.prettierrc
 |    |        ├─CHANGELOG.md
+|    |        ├─Dockerfile
 |    |        ├─README.md
 |    |        ├─nest-cli.json
 |    |        ├─package.json
@@ -144,6 +147,7 @@ react-questionnaire
 |    |        ├─test
 |    |        |  ├─app.e2e-spec.ts
 |    |        |  └jest-e2e.json
+|    |        ├─static
 |    |        ├─src
 |    |        |  ├─app.module.ts
 |    |        |  ├─main.ts
@@ -155,81 +159,78 @@ react-questionnaire
 |    |        |  |    |    ├─question.controller.ts
 |    |        |  |    |    ├─question.module.ts
 |    |        |  |    |    ├─question.service.ts
-|    |        |  |    |    ├─entities
-|    |        |  |    |    |    └question.entity.ts
 |    |        |  |    |    ├─dto
 |    |        |  |    |    |  ├─create-question.dto.ts
+|    |        |  |    |    |  ├─find-all-question.dto.ts
 |    |        |  |    |    |  └update-question.dto.ts
 |    |        |  |    ├─mail
+|    |        |  |    |  ├─mail.controller.spec.ts
 |    |        |  |    |  ├─mail.controller.ts
 |    |        |  |    |  ├─mail.module.ts
+|    |        |  |    |  ├─mail.service.spec.ts
 |    |        |  |    |  └mail.service.ts
+|    |        |  |    ├─file
+|    |        |  |    |  ├─file.controller.spec.ts
+|    |        |  |    |  ├─file.controller.ts
+|    |        |  |    |  └file.module.ts
 |    |        |  |    ├─auth
+|    |        |  |    |  ├─auth.controller.spec.ts
 |    |        |  |    |  ├─auth.controller.ts
 |    |        |  |    |  ├─auth.module.ts
+|    |        |  |    |  ├─auth.service.spec.ts
 |    |        |  |    |  ├─auth.service.ts
-|    |        |  |    |  ├─strategy
-|    |        |  |    |  |    └jwt.strategy.ts
-|    |        |  |    |  ├─entities
-|    |        |  |    |  |    └user.entity.ts
 |    |        |  |    |  ├─dto
 |    |        |  |    |  |  ├─login.dto.ts
 |    |        |  |    |  |  └register-user.dto.ts
+|    |        |  |    ├─ai
+|    |        |  |    | ├─ai.controller.spec.ts
+|    |        |  |    | ├─ai.controller.ts
+|    |        |  |    | ├─ai.module.ts
+|    |        |  |    | ├─ai.service.spec.ts
+|    |        |  |    | └ai.service.ts
 |    |        |  ├─middleware
+|    |        |  |     ├─all-exceptions.filter.ts
+|    |        |  |     ├─default-response.middleware.ts
+|    |        |  |     ├─file-upload.interceptor.ts
 |    |        |  |     ├─request.interceptor.ts
 |    |        |  |     └response.interceptor.ts
 |    |        |  ├─guard
 |    |        |  |   └jwt-auth.guard.ts
 |    |        |  ├─config
 |    |        |  |   ├─dev.yml
+|    |        |  |   ├─docker.yml
 |    |        |  |   ├─index.ts
-|    |        |  |   └log4js.config.ts
+|    |        |  |   ├─log4js.config.ts
+|    |        |  |   └prod.yml
 |    |        |  ├─common
 |    |        |  |   ├─utils
-|    |        |  |   |   ├─databaseLogger.ts
 |    |        |  |   |   ├─generateEmail.ts
 |    |        |  |   |   └log4js.ts
+|    |        |  |   ├─strategy
+|    |        |  |   |    └jwt.strategy.ts
+|    |        |  |   ├─entities
+|    |        |  |   |    ├─question.entity.ts
+|    |        |  |   |    ├─user-favorite.entity.ts
+|    |        |  |   |    └user.entity.ts
 |    |        |  |   ├─decorators
+|    |        |  |   |     ├─current-user.decorator.ts
 |    |        |  |   |     └public.decorator.ts
 |    |        |  |   ├─classes
 |    |        |  |   |    └response-body.ts
 |    |        ├─logs
 |    |        |  ├─error
-|    |        |  |   ├─error.2024-10-18.log
-|    |        |  |   ├─error.2024-10-23.log
-|    |        |  |   ├─error.2024-10-25.log
-|    |        |  |   ├─error.2024-10-29.log
-|    |        |  |   ├─error.2024-10-30.log
-|    |        |  |   ├─error.2024-10-31.log
-|    |        |  |   ├─error.2024-11-01.log
-|    |        |  |   ├─error.2024-11-04.log
-|    |        |  |   ├─error.2024-11-08.log
-|    |        |  |   └error.2024-11-13.log
 |    |        |  ├─app-out
-|    |        |  |    ├─app.2024-10-18.log
-|    |        |  |    ├─app.2024-10-23.log
-|    |        |  |    ├─app.2024-10-25.log
-|    |        |  |    ├─app.2024-10-29.log
-|    |        |  |    ├─app.2024-10-30.log
-|    |        |  |    ├─app.2024-10-31.log
-|    |        |  |    ├─app.2024-11-01.log
-|    |        |  |    ├─app.2024-11-04.log
-|    |        |  |    ├─app.2024-11-08.log
-|    |        |  |    └app.2024-11-13.log
 |    |        |  ├─access
-|    |        |  |   ├─access.2024-10-23.log
-|    |        |  |   ├─access.2024-10-25.log
-|    |        |  |   ├─access.2024-10-29.log
-|    |        |  |   ├─access.2024-10-30.log
-|    |        |  |   ├─access.2024-10-31.log
-|    |        |  |   ├─access.2024-11-01.log
-|    |        |  |   ├─access.2024-11-04.log
-|    |        |  |   ├─access.2024-11-08.log
-|    |        |  |   └access.2024-11-13.log
 |    |        ├─db
 |    |        | └questionnaire_db.sql
-├─DOC
-|  └structure-tree.txt
+├─docker
+|   └docker-compose.yml
+├─doc
+|  ├─DFD.dio
+|  ├─ER.dio
+|  ├─apifox接口文档.txt
+|  ├─structure-tree.txt
+|  └小木问卷软件架构图.pdf
 ├─.husky
 |   ├─commit-msg
 |   ├─pre-commit

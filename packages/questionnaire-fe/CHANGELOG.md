@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.2](https://gitee.com/IndulgeBack/react-questionnaire/compare/v1.8.1...v1.8.2) (2024-12-18)
+
+
+### Bug Fixes
+
+* FE - 修复问卷列表页面的显示BUG ([01faf84](https://gitee.com/IndulgeBack/react-questionnaire/commits/01faf848d4aa8a504af2d1f4861b08901c66ab25))
+
+
+
+
+
 ## [1.8.1](https://gitee.com/IndulgeBack/react-questionnaire/compare/v1.8.0...v1.8.1) (2024-12-18)
 
 

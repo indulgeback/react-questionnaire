@@ -56,7 +56,7 @@ describe('AuthService', () => {
       email: user.email!,
       password: user.password!,
       nickname: user.nickname!,
-      avatar: 'default-avatar.png',
+      avatar: 'default-avatar.webp',
       bio: '',
       favorites: [],
     }));
@@ -76,7 +76,7 @@ describe('AuthService', () => {
       password: 'hashedPassword',
       nickname: 'TestUser',
       create_time: new Date(),
-      avatar: 'avatar.png',
+      avatar: 'avatar.webp',
       bio: 'Test bio',
       favorites: [],
     };
@@ -100,7 +100,7 @@ describe('AuthService', () => {
       password: 'hashedPassword',
       nickname: 'TestUser',
       create_time: new Date(),
-      avatar: 'avatar.png',
+      avatar: 'avatar.webp',
       bio: 'Test bio',
       favorites: [],
     };
@@ -123,7 +123,7 @@ describe('AuthService', () => {
       password: 'hashedPassword',
       nickname: 'TestUser',
       create_time: new Date(),
-      avatar: 'avatar.png',
+      avatar: 'avatar.webp',
       bio: 'Test bio',
       favorites: [],
     };

@@ -48,7 +48,7 @@ describe('AuthController', () => {
       password: registerUserDto.password,
       nickname: registerUserDto.nickname,
       create_time: new Date(),
-      avatar: 'default-avatar.png',
+      avatar: 'default-avatar.webp',
       bio: '',
       favorites: [],
     };
@@ -73,7 +73,7 @@ describe('AuthController', () => {
       password: registerUserDto.password,
       nickname: registerUserDto.nickname,
       create_time: new Date(),
-      avatar: 'default-avatar.png',
+      avatar: 'default-avatar.webp',
       bio: '',
       favorites: [],
     };
@@ -96,7 +96,7 @@ describe('AuthController', () => {
       password: 'hashedPassword',
       nickname: 'TestUser',
       create_time: new Date(),
-      avatar: 'avatar.png',
+      avatar: 'avatar.webp',
       bio: 'Test bio',
       favorites: [],
     };
@@ -134,7 +134,7 @@ describe('AuthController', () => {
       password: 'hashedPassword',
       nickname: 'TestUser',
       create_time: new Date(),
-      avatar: 'avatar.png',
+      avatar: 'avatar.webp',
       bio: 'Test bio',
       favorites: [],
     };
@@ -158,7 +158,7 @@ describe('AuthController', () => {
       nickname: 'TestUser',
       email: 'test@example.com',
       createTime: new Date(),
-      avatar: 'avatar.png',
+      avatar: 'avatar.webp',
       bio: 'Test bio',
     };
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { HOME_PATH } from '@/router'
-import whiteLogo from '@/assets/img/white-logo.png'
+import whiteLogo from '@/assets/img/white-logo.webp'
 
 const Logo: React.FC = () => {
   return (

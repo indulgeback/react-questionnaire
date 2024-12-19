@@ -23,7 +23,7 @@
     background-image: linear-gradient(to right bottom,
             rgba(var(--primary-300), 0.5),
             rgba(var(--primary-100), 0.5)),
-        url('@/assets/img/bg-hero.png');
+        url('@/assets/img/bg-hero.webp');
     background-size: cover;
     background-position: top;
     position: relative;
@@ -58,7 +58,7 @@
     background-image: linear-gradient(to right bottom,
             rgba(var(--primary-100), 0.5),
             rgba(var(--primary-300), 0.5)),
-        url('@/assets/img/bg-feature.png');
+        url('@/assets/img/bg-feature.webp');
     background-size: cover;
     background-position: top;
     position: relative;

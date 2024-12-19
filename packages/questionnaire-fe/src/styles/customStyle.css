@@ -1,5 +1,5 @@
 .custom-app {
-    height: 100vh;
+    background: rgb(var(--bg-100));
 }
 
 .custom-header {
@@ -130,10 +130,15 @@
     justify-content: center;
     align-items: center;
     text-align: center;
+    background: rgb(var(--bg-100));
     border-top: 1px solid rgb(var(--primary-300));
     color: rgb(var(--text-200));
     line-height: 20px;
     z-index: 999;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
 
 .custom-main-title {

@@ -16,7 +16,7 @@ const MainLayout: React.FC = () => {
         <Logo />
         <UserMenu />
       </header>
-      <main className="custom-main">
+      <main>
         <Outlet />
       </main>
       <footer className="custom-footer">

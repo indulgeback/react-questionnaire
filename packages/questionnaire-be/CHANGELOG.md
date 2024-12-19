@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.4](https://gitee.com/IndulgeBack/react-questionnaire/compare/v1.8.3...v1.8.4) (2024-12-19)
+
+
+### Performance Improvements
+
+* 优化项目图片为webp ([bb19dc2](https://gitee.com/IndulgeBack/react-questionnaire/commits/bb19dc2d12791520cf06544090988f1a071456a5))
+
+
+
+
+
 ## [1.8.3](https://gitee.com/IndulgeBack/react-questionnaire/compare/v1.8.2...v1.8.3) (2024-12-18)
 
 **Note:** Version bump only for package @questionnaire/be

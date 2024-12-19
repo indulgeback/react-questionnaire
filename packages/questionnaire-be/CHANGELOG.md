@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.5](https://gitee.com/IndulgeBack/react-questionnaire/compare/v1.8.3...v1.8.5) (2024-12-19)
+
+
+### Performance Improvements
+
+* FE - 优化项目图片为webp ([07c5615](https://gitee.com/IndulgeBack/react-questionnaire/commits/07c5615232770ebedce0c6d9d20b164bc905ec12))
+
+
+
+
+
 ## [1.8.4](https://gitee.com/IndulgeBack/react-questionnaire/compare/v1.8.3...v1.8.4) (2024-12-19)
 
 

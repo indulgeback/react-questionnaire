@@ -40,7 +40,7 @@ const router = createBrowserRouter([
       {
         path: HOME_PATH,
         element: (
-          <Suspense fallback={<CustomSpin />}>
+          <Suspense>
             <Home />
           </Suspense>
         )
@@ -48,7 +48,7 @@ const router = createBrowserRouter([
       {
         path: LOGIN_PATH,
         element: (
-          <Suspense fallback={<CustomSpin />}>
+          <Suspense>
             <Login />
           </Suspense>
         )
@@ -56,7 +56,7 @@ const router = createBrowserRouter([
       {
         path: REGISTER_PATH,
         element: (
-          <Suspense fallback={<CustomSpin />}>
+          <Suspense>
             <Register />
           </Suspense>
         )
@@ -64,7 +64,7 @@ const router = createBrowserRouter([
       {
         path: PROFILE_PATH,
         element: (
-          <Suspense fallback={<CustomSpin />}>
+          <Suspense>
             <Profile />
           </Suspense>
         )
@@ -76,7 +76,7 @@ const router = createBrowserRouter([
           {
             path: MANAGE_INDEX_PATH,
             element: (
-              <Suspense fallback={<CustomSpin />}>
+              <Suspense>
                 <List />
               </Suspense>
             )
@@ -84,7 +84,7 @@ const router = createBrowserRouter([
           {
             path: MANAGE_STAR_PATH,
             element: (
-              <Suspense fallback={<CustomSpin />}>
+              <Suspense>
                 <Star />
               </Suspense>
             )
@@ -94,7 +94,7 @@ const router = createBrowserRouter([
       {
         path: '*',
         element: (
-          <Suspense fallback={<CustomSpin />}>
+          <Suspense>
             <NotFound />
           </Suspense>
         )
@@ -108,7 +108,7 @@ const router = createBrowserRouter([
       {
         path: QUESTION_EDIT_PATH,
         element: (
-          <Suspense fallback={<CustomSpin />}>
+          <Suspense>
             <Edit />
           </Suspense>
         )
@@ -116,7 +116,7 @@ const router = createBrowserRouter([
       {
         path: QUESTION_STAT_PATH,
         element: (
-          <Suspense fallback={<CustomSpin />}>
+          <Suspense>
             <Stat />
           </Suspense>
         )
@@ -126,7 +126,7 @@ const router = createBrowserRouter([
   {
     path: '/markdown-view',
     element: (
-      <Suspense fallback={<CustomSpin />}>
+      <Suspense>
         <MarkdownView />
       </Suspense>
     )

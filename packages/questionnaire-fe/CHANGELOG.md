@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.6](https://gitee.com/IndulgeBack/react-questionnaire/compare/v1.8.5...v1.8.6) (2024-12-19)
+
+**Note:** Version bump only for package @questionnaire/fe
+
+
+
+
+
+## [1.8.5](https://gitee.com/IndulgeBack/react-questionnaire/compare/v1.8.3...v1.8.5) (2024-12-19)
+
+
+### Performance Improvements
+
+* FE - 底栏样式优化 ([9bc4e38](https://gitee.com/IndulgeBack/react-questionnaire/commits/9bc4e385e56297c8330aa5a64b28e394eca388e1))
+* FE - 移除造成较大性能影响的加载效果 ([aab63da](https://gitee.com/IndulgeBack/react-questionnaire/commits/aab63daaa1c503e3a5df3e1bd9f14940e7073d40))
+* FE - 移除backdrop-filter，减少性能消耗 ([35aa9f2](https://gitee.com/IndulgeBack/react-questionnaire/commits/35aa9f23828da659daf1cdec931e7454876097f1))
+* FE - 优化问卷列表页UI ([d8e2c03](https://gitee.com/IndulgeBack/react-questionnaire/commits/d8e2c03e10e8042d06a9791e6acf58e85122a2c5))
+* FE - 优化项目图片为webp ([07c5615](https://gitee.com/IndulgeBack/react-questionnaire/commits/07c5615232770ebedce0c6d9d20b164bc905ec12))
+
+
+
+
+
 ## [1.8.4](https://gitee.com/IndulgeBack/react-questionnaire/compare/v1.8.3...v1.8.4) (2024-12-19)
 
 

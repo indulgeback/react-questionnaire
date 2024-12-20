@@ -12,7 +12,7 @@
   --accent-200: 67, 164, 155;
   --text-100: 38, 51, 57;
   --text-200: 114, 143, 158;
-  --bg-100: 224, 242, 241;
+  --bg-100: 247, 248, 250;
   --bg-200: 208, 235, 234;
   --bg-300: 255, 255, 255;
 }
@@ -24,14 +24,14 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--bg-200);
+  background: rgb(var(--bg-200));
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--primary-200);
+  background: rgb(var(--primary-200));
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--primary-100);
+  background: rgb(var(--primary-100));
 }

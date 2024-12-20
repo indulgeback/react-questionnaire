@@ -17,7 +17,7 @@ const ManageLayout: React.FC = () => {
   })
 
   return (
-    <div className="py-4 px-12 h-full pt-20 flex bg-custom-bg-100">
+    <div className="pb-14 px-12 h-screen pt-20 flex bg-custom-bg-100">
       <div className="ml-5 w-40">
         <Space direction="vertical">
           <Button

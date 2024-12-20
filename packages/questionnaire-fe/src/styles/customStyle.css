@@ -132,7 +132,6 @@
     align-items: center;
     text-align: center;
     background: rgb(var(--bg-100));
-    border-top: 1px solid rgb(var(--primary-300));
     color: rgb(var(--text-200));
     line-height: 20px;
     z-index: 999;

@@ -91,7 +91,7 @@ const List: React.FC = () => {
           <Empty className="mt-40" description="暂无问卷" />
         )}
         <FloatButton.BackTop target={targetFn} visibilityHeight={120} />
-        <div ref={bottomRef} className="h-14 text-lg text-center text-custom-text-100">
+        <div ref={bottomRef} className="h-14 text-sm text-center text-custom-text-100">
           {questionList.length >= total ? '🎉duang! 到底喽!🎉' : ''}
         </div>
       </div>

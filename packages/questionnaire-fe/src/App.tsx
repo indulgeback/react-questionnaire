@@ -5,6 +5,7 @@ import { App, ConfigProvider } from 'antd'
 import store from '@/store'
 import { Provider } from 'react-redux'
 import { theme } from 'antd'
+import zhCN from 'antd/es/locale/zh_CN'
 
 const themeConfig = {
   token: {
@@ -17,7 +18,7 @@ const themeConfig = {
 
 const MyApp: React.FC = () => {
   return (
-    <ConfigProvider theme={themeConfig}>
+    <ConfigProvider theme={themeConfig} locale={zhCN}>
       <App>
         <Provider store={store}>
           <RouterProvider router={router}></RouterProvider>

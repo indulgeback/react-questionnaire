@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { useInViewport, useRequest, useTitle } from 'ahooks'
+import { useInViewport, useTitle } from 'ahooks'
 import QuestionCard from '@/components/Common/QuestionCard'
 import ListSearch from '@/components/Common/ListSearch'
 import { Typography, FloatButton, Empty } from 'antd'
-import apis from '@/apis'
 import { useDispatch } from 'react-redux'
 import { setScreenSpinning } from '@/store/modules/utilsSlice'
+import { QuestionListType } from '@/hooks/types'
+import useLoadQuestionList from '@/hooks/useLoadQuestionList'
 
 const { Title } = Typography
 // 上拉加载步进长度
@@ -20,18 +21,17 @@ const List: React.FC = () => {
   const [total, setTotal] = useState(10)
   const dispatch = useDispatch()
 
-  // 使用 useRequest 获取数据
-  const { loading, data: res } = useRequest(
-    () => apis.questionApi.getQuestionList(currentView, stepSize, search),
-    {
-      refreshDeps: [currentView, search]
-    }
-  )
-
   const searchChange = (search: string) => {
     setSearch(search)
     setCurrentView(1)
   }
+
+  const { loading, res } = useLoadQuestionList({
+    currentView,
+    stepSize,
+    search,
+    type: QuestionListType.all
+  })
 
   // 当数据加载完成时更新 questionList
   useEffect(() => {

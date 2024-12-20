@@ -6,6 +6,7 @@ import Question from '@/common/entities/question.entity';
 import { InjectRepository, InjectDataSource } from '@nestjs/typeorm';
 import { Repository, DataSource } from 'typeorm';
 import UserFavorite from '@/common/entities/user-favorite.entity';
+import User from '@/common/entities/user.entity';
 @Injectable()
 export class QuestionService {
   constructor(
@@ -13,6 +14,8 @@ export class QuestionService {
     private questionRepository: Repository<Question>,
     @InjectRepository(UserFavorite)
     private userFavorateRepository: Repository<UserFavorite>,
+    @InjectRepository(User)
+    private userRepository: Repository<User>,
     @InjectDataSource()
     private dataSource: DataSource,
   ) {}
@@ -147,7 +150,7 @@ export class QuestionService {
   }
 
   // 删除问卷
-  async remove(id: number) {
+  async remove(id: number, user_id: number) {
     const queryRunner = this.dataSource.createQueryRunner();
 
     await queryRunner.connect();
@@ -157,6 +160,10 @@ export class QuestionService {
       const res = await this.findOne(id);
       if (!res) {
         throw new Error('该问卷不存在');
+      }
+
+      if (res.author_id !== user_id) {
+        throw new Error('非作者无权限删除问卷');
       }
 
       // 先删除所有与该问卷相关的收藏记录

@@ -1,5 +1,4 @@
 import React from 'react'
-import styles from './QuestionCard.module.scss'
 import { App, Button, Divider, Popconfirm, Space, Tag, message } from 'antd'
 import {
   CheckCircleOutlined,
@@ -24,6 +23,7 @@ type PropsType = {
   isPublished: boolean
   answerCount: number
   createdAt: string
+  refresh: () => void
 }
 
 const QuestionCard: React.FC<PropsType> = (props: PropsType) => {
@@ -38,8 +38,11 @@ const QuestionCard: React.FC<PropsType> = (props: PropsType) => {
   const duplicate = () => {
     message.success('复制成功' + id)
   }
-  const del = () => {
-    message.success('删除成功' + id)
+  const del = async () => {
+    const res = await apis.questionApi.deleteQuestion(id)
+    if (isRequestSuccess(res)) {
+      props.refresh()
+    }
   }
   return (
     <div className="my-3 p-3 rounded-md bg-white duration-300 hover:shadow-md">

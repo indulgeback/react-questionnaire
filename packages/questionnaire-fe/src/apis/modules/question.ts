@@ -34,10 +34,16 @@ const favorateQuestion = (id: string) =>
 const unFavorateQuestion = (id: string) =>
   request.get<string, RespType<any>>(`${prefix}/favorate/${id}`)
 
+/**
+ * 删除问卷
+ */
+const deleteQuestion = (id: string) => request.delete<string, RespType<any>>(`${prefix}/${id}`)
+
 export default {
   getQuestionList,
   getQuestionById,
   createQuestion,
   favorateQuestion,
-  unFavorateQuestion
+  unFavorateQuestion,
+  deleteQuestion
 }

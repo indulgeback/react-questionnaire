@@ -20,6 +20,7 @@ const List: React.FC = () => {
   const [search, setSearch] = useState('')
   const [total, setTotal] = useState(10)
   const dispatch = useDispatch()
+  const [forceRefresh, setForceRefresh] = useState(false)
 
   const searchChange = (search: string) => {
     setSearch(search)
@@ -43,7 +44,7 @@ const List: React.FC = () => {
       }
       setTotal(res?.data?.count || 0)
     }
-  }, [res])
+  }, [res, forceRefresh])
 
   useEffect(() => {
     dispatch(setScreenSpinning(loading))
@@ -61,6 +62,11 @@ const List: React.FC = () => {
 
   const targetFn = () => {
     return questionListRef.current as any
+  }
+
+  const refresh = () => {
+    setCurrentView(1)
+    setForceRefresh(prev => !prev)
   }
 
   return (
@@ -85,6 +91,7 @@ const List: React.FC = () => {
               isStar={item.is_star}
               answerCount={item.answer_count}
               createdAt={item.create_time}
+              refresh={refresh}
             />
           ))
         ) : (

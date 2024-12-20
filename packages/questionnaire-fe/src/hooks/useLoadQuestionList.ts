@@ -9,12 +9,12 @@ const useLoadQuestionList = (
   loading: boolean
   res: RespType<any>
 } => {
-  const { currentView, stepSize, search, type } = useLoadQuestionListParams
+  const { currentView, stepSize, search, type, forceRefresh } = useLoadQuestionListParams
   // 使用 useRequest 获取数据
   const { loading, data: res } = useRequest(
     () => apis.questionApi.getQuestionList(currentView, stepSize, search, type),
     {
-      refreshDeps: [currentView, stepSize, search]
+      refreshDeps: [currentView, stepSize, search, forceRefresh]
     }
   )
 

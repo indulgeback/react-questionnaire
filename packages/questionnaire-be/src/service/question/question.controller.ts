@@ -65,9 +65,13 @@ export class QuestionController {
 
   // 删除问卷
   @Delete(':id')
-  async remove(@Param('id', ParseIntPipe) id: number) {
+  async remove(
+    @Param('id', ParseIntPipe) id: number,
+    @currentUser() user: UserToken,
+  ) {
     try {
-      await this.questionService.remove(id);
+      const { userId } = user;
+      await this.questionService.remove(id, userId);
       return new ResponseBody<any>(1, null, '删除成功');
     } catch (error) {
       return new ResponseBody<any>(0, null, error.message);

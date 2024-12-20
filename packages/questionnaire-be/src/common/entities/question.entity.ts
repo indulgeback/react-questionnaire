@@ -7,7 +7,7 @@ import {
   OneToMany,
 } from 'typeorm';
 import UserFavorite from '@/common/entities/user-favorite.entity';
-
+import User from '@/common/entities/user.entity';
 // 问卷模块实体类
 @Entity()
 class Question {
@@ -19,6 +19,9 @@ class Question {
 
   @Column({ length: 255, default: '暂无描述' })
   description: string; // 描述
+
+  @Column({ default: 18 })
+  author_id: number; // 作者ID
 
   @Column({ length: 255, default: '官方' })
   author: string; // 作者
@@ -37,6 +40,9 @@ class Question {
 
   @OneToMany(() => UserFavorite, (userFavorite) => userFavorite.question_id)
   favorites: UserFavorite[];
+
+  @OneToMany(() => User, (user) => user.id)
+  owner: User;
 }
 
 export default Question;

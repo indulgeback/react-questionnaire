@@ -1,7 +1,7 @@
 export const enum QuestionListType {
   all = 'all',
   personal = 'personal',
-  star = 'star'
+  FAVORATE = 'favorate'
 }
 
 export type UseLoadQestionListParams = {

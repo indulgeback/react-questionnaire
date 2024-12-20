@@ -30,7 +30,7 @@ const Star: React.FC = () => {
     currentView: pagination.current || 1,
     stepSize: pagination.pageSize || 10,
     search: search,
-    type: QuestionListType.star
+    type: QuestionListType.FAVORATE
   })
 
   useEffect(() => {

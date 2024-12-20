@@ -1,12 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import CreateQuestionDto from '@/service/question/dto/create-question.dto';
 import UpdateQuestionDto from '@/service/question/dto/update-question.dto';
-import FindAllQuestionDto from './dto/find-all-question.dto';
+import FindAllQuestionDto, { QuestionType } from './dto/find-all-question.dto';
 import Question from '@/common/entities/question.entity';
 import { InjectRepository, InjectDataSource } from '@nestjs/typeorm';
 import { Repository, DataSource } from 'typeorm';
 import UserFavorite from '@/common/entities/user-favorite.entity';
-
 @Injectable()
 export class QuestionService {
   constructor(
@@ -24,7 +23,7 @@ export class QuestionService {
 
   // 分页查询问卷列表
   async findAll(
-    { page, limit, search, is_favorated }: FindAllQuestionDto,
+    { page, limit, search, type }: FindAllQuestionDto,
     user_id: number,
   ) {
     const queryBuilder = this.questionRepository.createQueryBuilder('question');
@@ -43,10 +42,22 @@ export class QuestionService {
     // 映射用户收藏问卷的 ID 数组
     const favoriteIds = userFavorites.map((fav) => fav.question_id);
 
-    // 如果 is_favorated 为 true，则只返回已收藏的问卷
-    if (is_favorated) {
+    console.log(type);
+
+    // 如果 type 为 FAVORATE，则只返回已收藏的问卷, 如果 type 为 PERSONAL，则只返回当前用户的问卷
+    if (type === QuestionType.FAVORATE) {
+      if (favoriteIds.length === 0) {
+        return {
+          list: [],
+          count: 0,
+        };
+      }
       queryBuilder.andWhere('question.id IN (:...favoriteIds)', {
         favoriteIds,
+      });
+    } else if (type === QuestionType.PERSONAL) {
+      queryBuilder.andWhere('question.author_id = :userId', {
+        userId: user_id,
       });
     }
 

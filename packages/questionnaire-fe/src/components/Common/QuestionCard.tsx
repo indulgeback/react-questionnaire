@@ -13,6 +13,8 @@ import {
 } from '@ant-design/icons'
 import { Link, useNavigate } from 'react-router-dom'
 import dayjs from 'dayjs'
+import apis from '@/apis'
+import useRequestSuccessChecker from '@/hooks/useRequestSuccessChecker'
 
 // ts 自定义类型
 type PropsType = {
@@ -27,7 +29,12 @@ type PropsType = {
 const QuestionCard: React.FC<PropsType> = (props: PropsType) => {
   const { message } = App.useApp()
   const nav = useNavigate()
+  const { isRequestSuccess } = useRequestSuccessChecker()
   const { id, title, isStar, isPublished, answerCount, createdAt } = props
+  const handleFavorate = async () => {
+    const res = await apis.questionApi.favorateQuestion(id)
+    isRequestSuccess(res)
+  }
   const duplicate = () => {
     message.success('复制成功' + id)
   }
@@ -90,7 +97,7 @@ const QuestionCard: React.FC<PropsType> = (props: PropsType) => {
         </div>
         <div className="flex-1 text-right">
           <Space>
-            <Button type="text" size="small" icon={<StarOutlined />}>
+            <Button type="text" size="small" icon={<StarOutlined />} onClick={handleFavorate}>
               {isStar ? '取消星标' : '星标问卷'}
             </Button>
             <Popconfirm

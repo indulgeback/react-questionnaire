@@ -52,12 +52,24 @@ function getVersionFromLerna() {
   }
 }
 
+// 提取重复的日志打印逻辑
+function logEnvVarInfo() {
+  logInfo(" -------------------- 环境变量加载完毕 -------------------- ")
+  logInfo("Aliyun Registry URL:", process.env.ALIYUN_REGISTRY_URL)
+  logInfo("Aliyun Username:", process.env.ALIYUN_USERNAME)
+  logInfo("Aliyun Password:", process.env.ALIYUN_PASSWORD)
+  logInfo("Frontend Image Name:", process.env.FRONTEND_IMAGE_NAME)
+  logInfo("Backend Image Name:", process.env.BACKEND_IMAGE_NAME)
+  logInfo("Frontend Dockerfile Path:", process.env.FRONTEND_DOCKERFILE_PATH)
+  logInfo("Backend Dockerfile Path:", process.env.BACKEND_DOCKERFILE_PATH)
+  logInfo(" -------------------------------------------------------- ")
+}
+
 async function logASCIIArtAndENV() {
   return new Promise((resolve) => {
     figlet("XM_questionnaire", function (err, data) {
       if (err) {
-        console.log("Something went wrong...")
-        console.dir(err)
+        logError("ASCII Art 生成失败:", err)
         return
       }
       console.log("")
@@ -65,17 +77,7 @@ async function logASCIIArtAndENV() {
       console.log("")
       logInfo(data)
       console.log("")
-      console.log("")
-
-      logInfo(" -------------------- 环境变量加载完毕 -------------------- ")
-      logInfo("Aliyun Registry URL:", process.env.ALIYUN_REGISTRY_URL)
-      logInfo("Aliyun Username:", process.env.ALIYUN_USERNAME)
-      logInfo("Aliyun Password:", process.env.ALIYUN_PASSWORD)
-      logInfo("Frontend Image Name:", process.env.FRONTEND_IMAGE_NAME)
-      logInfo("Backend Image Name:", process.env.BACKEND_IMAGE_NAME)
-      logInfo("Frontend Dockerfile Path:", process.env.FRONTEND_DOCKERFILE_PATH)
-      logInfo("Backend Dockerfile Path:", process.env.BACKEND_DOCKERFILE_PATH)
-      logInfo(" -------------------------------------------------------- ")
+      logEnvVarInfo()
       resolve()
     })
   })
@@ -89,9 +91,9 @@ async function executeCommand(command) {
         logError("命令执行错误:", err)
         if (stderr) {
           logError("标准错误输出:")
-          console.error(stderr) // 打印完整的 stderr 输出
+          console.error(stderr)
         }
-        return reject({ error: err, stderr })
+        return reject(new Error(stderr))
       }
       resolve(stdout)
     })
@@ -181,9 +183,14 @@ async function createAndPushManifestList(imageName, tag, platforms, version) {
 
 // 登录到阿里云镜像仓库
 async function loginToRegistry() {
-  return executeCommand(
-    `echo ${process.env.ALIYUN_PASSWORD} | docker login --username=${process.env.ALIYUN_USERNAME} --password-stdin ${process.env.ALIYUN_REGISTRY_URL}`
-  )
+  try {
+    const command = `docker login ${process.env.ALIYUN_REGISTRY_URL} -u ${process.env.ALIYUN_USERNAME} -p "${process.env.ALIYUN_PASSWORD}"`
+    await executeCommand(command)
+    logSuccess("登录到阿里云镜像仓库成功")
+  } catch (error) {
+    logError("登录到阿里云镜像仓库失败:", error.message)
+    throw new Error("无法登录到阿里云镜像仓库，请检查您的凭据和网络连接。")
+  }
 }
 
 // 主流程控制

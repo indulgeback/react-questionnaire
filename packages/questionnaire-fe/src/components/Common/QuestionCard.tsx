@@ -1,5 +1,5 @@
 import React from 'react'
-import { App, Button, Divider, Popconfirm, Space, Tag, message } from 'antd'
+import { App, Button, Divider, Popconfirm, Space, Tag } from 'antd'
 import {
   CheckCircleOutlined,
   ClockCircleOutlined,
@@ -8,7 +8,8 @@ import {
   EditOutlined,
   LineChartOutlined,
   QuestionCircleOutlined,
-  StarOutlined
+  StarOutlined,
+  FieldTimeOutlined
 } from '@ant-design/icons'
 import { Link, useNavigate } from 'react-router-dom'
 import dayjs from 'dayjs'
@@ -19,29 +20,45 @@ import useRequestSuccessChecker from '@/hooks/useRequestSuccessChecker'
 type PropsType = {
   id: string
   title: string
-  isStar: boolean
+  isFavorated: boolean
   isPublished: boolean
+  author: string
+  authorId: string
   answerCount: number
   createdAt: string
+  updatedAt: string
   refresh: () => void
 }
 
 const QuestionCard: React.FC<PropsType> = (props: PropsType) => {
-  const { message } = App.useApp()
   const nav = useNavigate()
-  const { isRequestSuccess } = useRequestSuccessChecker()
-  const { id, title, isStar, isPublished, answerCount, createdAt } = props
+  const { isRequestSuccess, successMessage } = useRequestSuccessChecker()
+  const {
+    id,
+    title,
+    isFavorated,
+    isPublished,
+    author,
+    authorId,
+    answerCount,
+    createdAt,
+    updatedAt
+  } = props
+
   const handleFavorate = async () => {
     const res = await apis.questionApi.favorateQuestion(id)
-    isRequestSuccess(res)
+    if (isRequestSuccess(res)) {
+      successMessage(res.msg)
+    }
   }
   const duplicate = () => {
-    message.success('复制成功' + id)
+    successMessage('复制成功' + id)
   }
   const del = async () => {
     const res = await apis.questionApi.deleteQuestion(id)
     if (isRequestSuccess(res)) {
       props.refresh()
+      successMessage(res.msg)
     }
   }
   return (
@@ -51,7 +68,7 @@ const QuestionCard: React.FC<PropsType> = (props: PropsType) => {
           <Link to={isPublished ? `/question/stat/${id}` : `/question/edit/${id}`}>
             <Space>
               <span className="inline-block w-4">
-                {isStar && <StarOutlined className="text-custom-yellow" />}
+                {isFavorated && <StarOutlined className="text-custom-yellow" />}
               </span>
               {title}
             </Space>
@@ -66,8 +83,13 @@ const QuestionCard: React.FC<PropsType> = (props: PropsType) => {
             ) : (
               <Tag icon={<ClockCircleOutlined />}>未发布</Tag>
             )}
-            <span>答卷:{answerCount}</span>
-            <span>创建于:{dayjs(createdAt).format('YYYY-MM-DD HH:mm:ss')}</span>
+            <Tag color="gold">答卷:{answerCount}</Tag>
+            <Tag bordered={false} icon={<FieldTimeOutlined />} color="lime">
+              创建于: {dayjs(createdAt).format('YYYY-MM-DD HH:mm:ss')}
+            </Tag>
+            <Tag bordered={false} icon={<FieldTimeOutlined />} color="lime">
+              更新于: {dayjs(updatedAt).format('YYYY-MM-DD HH:mm:ss')}
+            </Tag>
           </Space>
         </div>
       </div>
@@ -101,7 +123,7 @@ const QuestionCard: React.FC<PropsType> = (props: PropsType) => {
         <div className="flex-1 text-right">
           <Space>
             <Button type="text" size="small" icon={<StarOutlined />} onClick={handleFavorate}>
-              {isStar ? '取消星标' : '星标问卷'}
+              {isFavorated ? '取消星标' : '星标问卷'}
             </Button>
             <Popconfirm
               title="确定复制该问卷？"

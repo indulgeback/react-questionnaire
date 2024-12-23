@@ -15,10 +15,10 @@ import { LOGIN_STATE } from '@/constant'
 
 const Login: React.FC = () => {
   const nav = useNavigate()
-  const { isRequestSuccess } = useRequestSuccessChecker()
+  const { isRequestSuccess, successMessage } = useRequestSuccessChecker()
   const dispatch = useDispatch()
-  const { message } = App.useApp()
   const [searchParams] = useSearchParams()
+  const { message } = App.useApp()
 
   useLayoutEffect(() => {
     gsap.fromTo('#login-form', { opacity: 0, x: 100 }, { opacity: 1, x: 0, duration: 1 })
@@ -43,11 +43,19 @@ const Login: React.FC = () => {
     const { email, password, remember } = values || {}
     const res = await apis.authApi.login({ email, password })
     if (isRequestSuccess(res)) {
+      successMessage(res.msg)
       remember ? rememberUser(email, password) : deleteUserFromStorage()
       dispatch(setToken(res.data?.token))
-      dispatch(setUserInfo(res.data?.userInfo))
       dispatch(setLoginState(LOGIN_STATE.LOGIN))
+      await getUserInfo()
       nav(searchParams.get('redirect') || '/')
+    }
+  }
+
+  const getUserInfo = async () => {
+    const res = await apis.authApi.getUserInfo()
+    if (res.code === 1) {
+      dispatch(setUserInfo(res.data?.userInfo))
     }
   }
 

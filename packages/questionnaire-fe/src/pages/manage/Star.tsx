@@ -26,7 +26,7 @@ const Star: React.FC = () => {
 
   const [search, setSearch] = useState('')
 
-  const { loading, res } = useLoadQuestionList({
+  const { loading, res, refresh } = useLoadQuestionList({
     currentView: pagination.current || 1,
     stepSize: pagination.pageSize || 10,
     search: search,

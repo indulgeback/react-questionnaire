@@ -27,7 +27,7 @@ const List: React.FC = () => {
     setCurrentView(1)
   }
 
-  const { loading, res } = useLoadQuestionList({
+  const { loading, res, refresh } = useLoadQuestionList({
     currentView,
     stepSize,
     search,
@@ -36,6 +36,7 @@ const List: React.FC = () => {
 
   // 当数据加载完成时更新 questionList
   useEffect(() => {
+    console.log('res', res)
     if (res && res?.data?.list) {
       if (currentView === 1) {
         setQuestionList(res.data.list)
@@ -63,12 +64,6 @@ const List: React.FC = () => {
   const targetFn = () => {
     return questionListRef.current as any
   }
-
-  const refresh = () => {
-    setCurrentView(1)
-    setForceRefresh(prev => !prev)
-  }
-
   return (
     <div className="flex flex-col h-full">
       <div className="flex justify-between items-center">
@@ -88,9 +83,12 @@ const List: React.FC = () => {
               id={item.id}
               title={item.title}
               isPublished={item.is_published}
-              isStar={item.is_star}
+              isFavorated={item.is_favorated}
+              author={item.author}
+              authorId={item.author_id}
               answerCount={item.answer_count}
               createdAt={item.create_time}
+              updatedAt={item.update_time}
               refresh={refresh}
             />
           ))

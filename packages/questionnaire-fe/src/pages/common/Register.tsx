@@ -15,7 +15,7 @@ import gsap from 'gsap'
 const Register: React.FC = () => {
   const { message } = App.useApp()
   const nav = useNavigate()
-  const { isRequestSuccess } = useRequestSuccessChecker()
+  const { isRequestSuccess, successMessage } = useRequestSuccessChecker()
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [email, setEmail] = useState('')
   const [code, setCode] = useState('')
@@ -82,6 +82,7 @@ const Register: React.FC = () => {
     if (isRequestSuccess(res)) {
       const times = res.data ? res.data * 1000 : 1000 * 60 * 10
       setTtl(Date.now() + times)
+      successMessage(res.msg)
     }
   }
 
@@ -92,14 +93,15 @@ const Register: React.FC = () => {
   const verifyIdentity = async () => {
     const res = await apis.mailApi.verifyEmailCode({ email, code })
     if (isRequestSuccess(res)) {
-      message.info('验证成功，正在注册中，请稍后')
       registerUser({ ...userInfo, email })
+      successMessage('验证成功，正在注册中，请稍后')
     }
   }
 
   const registerUser = async (data: UserInfo) => {
     const res = await apis.authApi.register(data)
     if (isRequestSuccess(res)) {
+      successMessage(res.msg)
       nav(LOGIN_PATH)
     }
   }

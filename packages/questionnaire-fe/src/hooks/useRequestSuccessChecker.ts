@@ -16,7 +16,6 @@ const useRequestSuccessChecker = () => {
   const isRequestSuccess = (response: RespType<any>) => {
     // 如果响应代码为1，表示请求成功，显示成功通知
     if (response?.code === 1) {
-      message.success(response?.msg)
       return true
     } else {
       // 如果响应代码不为1，表示请求失败，显示错误通知
@@ -25,9 +24,14 @@ const useRequestSuccessChecker = () => {
     }
   }
 
+  const successMessage = (msg: string) => {
+    message.success(msg)
+  }
+
   // 返回包含检查请求成功与否的函数
   return {
-    isRequestSuccess
+    isRequestSuccess,
+    successMessage
   }
 }
 

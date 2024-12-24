@@ -46,16 +46,9 @@ const Login: React.FC = () => {
       successMessage(res.msg)
       remember ? rememberUser(email, password) : deleteUserFromStorage()
       dispatch(setToken(res.data?.token))
-      dispatch(setLoginState(LOGIN_STATE.LOGIN))
-      await getUserInfo()
-      nav(searchParams.get('redirect') || '/')
-    }
-  }
-
-  const getUserInfo = async () => {
-    const res = await apis.authApi.getUserInfo()
-    if (res.code === 1) {
       dispatch(setUserInfo(res.data?.userInfo))
+      dispatch(setLoginState(LOGIN_STATE.LOGIN))
+      nav(searchParams.get('redirect') || '/')
     }
   }
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { useInViewport, useTitle } from 'ahooks'
 import QuestionCard from '@/components/Common/QuestionCard'
 import ListSearch from '@/components/Common/ListSearch'
@@ -7,6 +7,8 @@ import { useDispatch } from 'react-redux'
 import { setScreenSpinning } from '@/store/modules/utilsSlice'
 import { QuestionListType } from '@/hooks/types'
 import useLoadQuestionList from '@/hooks/useLoadQuestionList'
+import { useSelector } from 'react-redux'
+import { RootState } from '@/store'
 
 const { Title } = Typography
 // 上拉加载步进长度
@@ -20,7 +22,6 @@ const List: React.FC = () => {
   const [search, setSearch] = useState('')
   const [total, setTotal] = useState(10)
   const dispatch = useDispatch()
-  const [forceRefresh, setForceRefresh] = useState(false)
 
   const searchChange = (search: string) => {
     setSearch(search)
@@ -34,6 +35,10 @@ const List: React.FC = () => {
     type: QuestionListType.all
   })
 
+  const { userInfo } = useSelector((state: RootState) => state.profile)
+
+  const isMyQuestion = (item: any) => item.author_id === userInfo.userId
+
   // 当数据加载完成时更新 questionList
   useEffect(() => {
     console.log('res', res)
@@ -45,7 +50,7 @@ const List: React.FC = () => {
       }
       setTotal(res?.data?.count || 0)
     }
-  }, [res, forceRefresh])
+  }, [res])
 
   useEffect(() => {
     dispatch(setScreenSpinning(loading))
@@ -85,7 +90,7 @@ const List: React.FC = () => {
               isPublished={item.is_published}
               isFavorated={item.is_favorated}
               author={item.author}
-              authorId={item.author_id}
+              isMyQuestion={isMyQuestion(item)}
               answerCount={item.answer_count}
               createdAt={item.create_time}
               updatedAt={item.update_time}

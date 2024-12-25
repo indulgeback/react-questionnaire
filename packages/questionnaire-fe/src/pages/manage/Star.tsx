@@ -8,10 +8,15 @@ import { QuestionListType } from '@/hooks/types'
 import dayjs from 'dayjs'
 import { ColumnsType } from 'antd/es/table'
 import { EditOutlined, CopyOutlined, DeleteOutlined } from '@ant-design/icons'
+import { useSelector } from 'react-redux'
+import { RootState } from '@/store'
+import { Question } from '@/apis/modules/types/question'
+
 const { Title } = Typography
+
 const Star: React.FC = () => {
   useTitle('小木问卷 - 星标问卷')
-  const [questionList, setQuestionList] = useState([])
+  const [questionList, setQuestionList] = useState<Question[]>([])
 
   const [pagination, setPagination] = useState<TablePaginationConfig>({
     position: ['bottomCenter'],
@@ -26,12 +31,16 @@ const Star: React.FC = () => {
 
   const [search, setSearch] = useState('')
 
-  const { loading, res, refresh } = useLoadQuestionList({
+  const { loading, res } = useLoadQuestionList({
     currentView: pagination.current || 1,
     stepSize: pagination.pageSize || 10,
     search: search,
     type: QuestionListType.FAVORATE
   })
+
+  const { userInfo } = useSelector((state: RootState) => state.profile)
+
+  const editable = (item: any) => item.author_id === userInfo.userId
 
   useEffect(() => {
     if (res && res?.data?.list) {
@@ -98,13 +107,24 @@ const Star: React.FC = () => {
       render: (text, record) => (
         <Space key={`action-${record.id}`}>
           <Tooltip title="编辑" key={`edit-${record.id}`}>
-            <Button size="small" shape="circle" icon={<EditOutlined />} />
+            <Button
+              size="small"
+              shape="circle"
+              icon={<EditOutlined />}
+              disabled={!editable(record)}
+            />
           </Tooltip>
           <Tooltip title="复制" key={`copy-${record.id}`}>
             <Button size="small" shape="circle" icon={<CopyOutlined />} />
           </Tooltip>
           <Tooltip title="删除" key={`delete-${record.id}`}>
-            <Button size="small" shape="circle" danger icon={<DeleteOutlined />} />
+            <Button
+              size="small"
+              shape="circle"
+              danger
+              icon={<DeleteOutlined />}
+              disabled={!editable(record)}
+            />
           </Tooltip>
         </Space>
       )

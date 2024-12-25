@@ -80,7 +80,7 @@ const MarkdownView: React.FC = () => {
       </div>
 
       <div ref={markdownRef} style={{ height: 'calc(100% - 100px)', overflowY: 'auto' }}>
-        <ReactMarkdown>{'```json\n' + questionJsonStr + '\n```'}</ReactMarkdown>
+        <ReactMarkdown>{questionJsonStr}</ReactMarkdown>
       </div>
     </div>
   )

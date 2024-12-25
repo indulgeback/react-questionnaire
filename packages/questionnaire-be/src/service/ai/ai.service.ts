@@ -7,12 +7,14 @@ import configuration from '@/config';
 export class AiService {
   // OpenAI 客户端实例
   private readonly openai: OpenAI;
+  private readonly model: string;
 
   constructor() {
+    this.model = 'deepseek';
     // 初始化 OpenAI 客户端，配置 baseURL 和 apiKey
     this.openai = new OpenAI({
-      baseURL: configuration().openai.baseURL,
-      apiKey: configuration().openai.apiKey,
+      baseURL: configuration().openai[this.model].baseURL,
+      apiKey: configuration().openai[this.model].apiKey,
     });
   }
 
@@ -33,7 +35,7 @@ export class AiService {
         .create(
           {
             messages: [{ role: 'system', content: description }],
-            model: 'deepseek-chat',
+            model: configuration().openai[this.model].model,
             stream: true, // 启用流式响应
           },
           {

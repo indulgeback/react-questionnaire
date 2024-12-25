@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useInViewport, useTitle } from 'ahooks'
 import QuestionCard from '@/components/Common/QuestionCard'
 import ListSearch from '@/components/Common/ListSearch'
@@ -9,26 +9,30 @@ import { QuestionListType } from '@/hooks/types'
 import useLoadQuestionList from '@/hooks/useLoadQuestionList'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/store'
+import apis from '@/apis'
+import useRequestSuccessChecker from '@/hooks/useRequestSuccessChecker'
+import { Question } from '@/apis/modules/types/question'
 
 const { Title } = Typography
 // 上拉加载步进长度
 const stepSize = 20
 
-const List: React.FC = () => {
+const Market: React.FC = () => {
   useTitle('小木问卷 - 我的问卷')
   const bottomRef = useRef(null)
   const [currentView, setCurrentView] = useState(1)
-  const [questionList, setQuestionList] = useState([])
+  const [questionList, setQuestionList] = useState<Question[]>([])
   const [search, setSearch] = useState('')
   const [total, setTotal] = useState(10)
   const dispatch = useDispatch()
+  const { isRequestSuccess } = useRequestSuccessChecker()
 
   const searchChange = (search: string) => {
     setSearch(search)
     setCurrentView(1)
   }
 
-  const { loading, res, refresh } = useLoadQuestionList({
+  const { loading, res } = useLoadQuestionList({
     currentView,
     stepSize,
     search,
@@ -37,7 +41,7 @@ const List: React.FC = () => {
 
   const { userInfo } = useSelector((state: RootState) => state.profile)
 
-  const isMyQuestion = (item: any) => item.author_id === userInfo.userId
+  const editable = (item: any) => item.author_id === userInfo.userId
 
   // 当数据加载完成时更新 questionList
   useEffect(() => {
@@ -64,11 +68,30 @@ const List: React.FC = () => {
     }
   }, [isTouchBottom])
 
+  const getQuestionItem = async (id: number) => {
+    const res = await apis.questionApi.getQuestionById(id)
+    if (isRequestSuccess(res)) {
+      setQuestionList(
+        questionList.map(item => {
+          if (item.id === id) {
+            return res.data
+          }
+          return item
+        })
+      )
+    }
+  }
+
+  const deleteQuestion = (id: number) => {
+    setQuestionList(questionList.filter(item => item.id !== id))
+  }
+
   const questionListRef = useRef(null)
 
   const targetFn = () => {
     return questionListRef.current as any
   }
+
   return (
     <div className="flex flex-col h-full">
       <div className="flex justify-between items-center">
@@ -90,23 +113,24 @@ const List: React.FC = () => {
               isPublished={item.is_published}
               isFavorated={item.is_favorated}
               author={item.author}
-              isMyQuestion={isMyQuestion(item)}
+              editable={editable(item)}
               answerCount={item.answer_count}
               createdAt={item.create_time}
               updatedAt={item.update_time}
-              refresh={refresh}
+              onRefresh={getQuestionItem}
+              onDelete={() => deleteQuestion(item.id)}
             />
           ))
         ) : (
           <Empty className="mt-40" description="暂无问卷" />
         )}
         <FloatButton.BackTop target={targetFn} visibilityHeight={120} />
-        <div ref={bottomRef} className="h-14 text-sm text-center text-custom-text-100">
-          {questionList.length >= total ? '🎉duang! 到底喽!🎉' : ''}
+        <div ref={bottomRef} className="h-14 text-sm text-center text-custom-text-200">
+          {questionList.length >= total && total ? '🎉 duang! 到底喽! 🎉' : ''}
         </div>
       </div>
     </div>
   )
 }
 
-export default List
+export default Market

@@ -6,16 +6,14 @@ import MainLayout from '@/layouts/MainLayout'
 import ManageLayout from '@/layouts/ManageLayout'
 import QuestionLayout from '@/layouts/QuestionLayout'
 
-// 自定义组件
-import CustomSpin from '@/components/CustomSpin/CustomSpin'
-
 // 使用懒加载
 const Home = lazy(() => import('@/pages/common/Home'))
 const Login = lazy(() => import('@/pages/common/Login'))
 const Register = lazy(() => import('@/pages/common/Register'))
 const Profile = lazy(() => import('@/pages/common/Profile'))
 const NotFound = lazy(() => import('@/pages/common/NotFound'))
-const List = lazy(() => import('@/pages/manage/List'))
+const Market = lazy(() => import('@/pages/manage/Market'))
+const Personal = lazy(() => import('@/pages/manage/Personal'))
 const Star = lazy(() => import('@/pages/manage/Star'))
 const Edit = lazy(() => import('@/pages/question/Edit'))
 const Stat = lazy(() => import('@/pages/question/Stat'))
@@ -26,7 +24,8 @@ export const HOME_PATH = '/'
 export const LOGIN_PATH = '/login'
 export const REGISTER_PATH = '/register'
 export const PROFILE_PATH = '/profile'
-export const MANAGE_INDEX_PATH = '/manage/list'
+export const MANAGE_MARKET_PATH = '/manage/market'
+export const MANAGE_PERSONAL_PATH = '/manage/personal'
 export const MANAGE_STAR_PATH = '/manage/star'
 export const QUESTION_EDIT_PATH = '/question/edit/:id'
 export const QUESTION_STAT_PATH = '/question/stat/:id'
@@ -74,10 +73,18 @@ const router = createBrowserRouter([
         element: <ManageLayout />,
         children: [
           {
-            path: MANAGE_INDEX_PATH,
+            path: MANAGE_MARKET_PATH,
             element: (
               <Suspense>
-                <List />
+                <Market />
+              </Suspense>
+            )
+          },
+          {
+            path: MANAGE_PERSONAL_PATH,
+            element: (
+              <Suspense>
+                <Personal />
               </Suspense>
             )
           },

@@ -5,7 +5,7 @@ import { useRequest } from 'ahooks'
 function useLoadQuestionData() {
   const { id = '' } = useParams()
   const getQuestionData = async () => {
-    const data = await apis.questionApi.getQuestionById(id)
+    const data = await apis.questionApi.getQuestionById(+id)
     return data
   }
 

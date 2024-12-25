@@ -15,12 +15,10 @@ import { Link, useNavigate } from 'react-router-dom'
 import dayjs from 'dayjs'
 import apis from '@/apis'
 import useRequestSuccessChecker from '@/hooks/useRequestSuccessChecker'
-import { useSelector } from 'react-redux'
-import { RootState } from '@/store'
 
 // ts 自定义类型
 type PropsType = {
-  id: string
+  id: number
   title: string
   isFavorated: boolean
   isPublished: boolean
@@ -28,8 +26,9 @@ type PropsType = {
   answerCount: number
   createdAt: string
   updatedAt: string
-  refresh: () => void
-  isMyQuestion: boolean
+  editable: boolean
+  onRefresh: (id: number) => Promise<void>
+  onDelete: () => void
 }
 
 const QuestionCard: React.FC<PropsType> = (props: PropsType) => {
@@ -44,22 +43,32 @@ const QuestionCard: React.FC<PropsType> = (props: PropsType) => {
     answerCount,
     createdAt,
     updatedAt,
-    isMyQuestion
+    editable,
+    onRefresh,
+    onDelete
   } = props
 
+  // 收藏或取消收藏
   const handleFavorate = async () => {
-    const res = await apis.questionApi.favorateQuestion(id)
+    const res = !isFavorated
+      ? await apis.questionApi.favorateQuestion(id)
+      : await apis.questionApi.unFavorateQuestion(id)
     if (isRequestSuccess(res)) {
+      onRefresh(id)
       successMessage(res.msg)
     }
   }
+
+  // 复制问卷
   const duplicate = () => {
     successMessage('复制成功' + id)
   }
+
+  // 删除问卷
   const del = async () => {
     const res = await apis.questionApi.deleteQuestion(id)
     if (isRequestSuccess(res)) {
-      props.refresh()
+      onDelete()
       successMessage(res.msg)
     }
   }
@@ -99,7 +108,7 @@ const QuestionCard: React.FC<PropsType> = (props: PropsType) => {
       <Divider className="my-3" />
       <div className="flex">
         <div className="flex-1">
-          {isMyQuestion && (
+          {editable && (
             <Space>
               <Button
                 type="text"
@@ -108,7 +117,7 @@ const QuestionCard: React.FC<PropsType> = (props: PropsType) => {
                 onClick={() => {
                   nav(`/question/edit/${id}`)
                 }}
-                disabled={!isMyQuestion}
+                disabled={!editable}
               >
                 编辑问卷
               </Button>
@@ -119,7 +128,7 @@ const QuestionCard: React.FC<PropsType> = (props: PropsType) => {
                 onClick={() => {
                   nav(`/question/stat/${id}`)
                 }}
-                disabled={!isPublished || !isMyQuestion}
+                disabled={!isPublished || !editable}
               >
                 问卷统计
               </Button>
@@ -141,7 +150,7 @@ const QuestionCard: React.FC<PropsType> = (props: PropsType) => {
                 复制
               </Button>
             </Popconfirm>
-            {isMyQuestion && (
+            {editable && (
               <Popconfirm
                 title="确定删除该问卷？"
                 okText="确定"

@@ -3,7 +3,9 @@ import { Outlet, useNavigate, useLocation } from 'react-router-dom'
 import { useRequest } from 'ahooks'
 import apis from '@/apis'
 import { Button, Divider, Space } from 'antd'
-import { DeleteFilled, FileAddFilled, StarFilled, StepForwardFilled } from '@ant-design/icons'
+import { FileAddFilled } from '@ant-design/icons'
+import SvgIcon from '@/components/Common/SvgIcon'
+import { MANAGE_MARKET_PATH, MANAGE_PERSONAL_PATH, MANAGE_STAR_PATH } from '@/router'
 const ManageLayout: React.FC = () => {
   const nav = useNavigate()
   const { pathname } = useLocation()
@@ -31,28 +33,28 @@ const ManageLayout: React.FC = () => {
           </Button>
           <Divider className="my-4" />
           <Button
-            type={pathname.startsWith('/manage/list') ? 'dashed' : 'text'}
+            type={pathname.startsWith(MANAGE_MARKET_PATH) ? 'dashed' : 'text'}
             size="middle"
-            icon={<StepForwardFilled />}
-            onClick={() => nav('/manage/list')}
+            icon={<SvgIcon name="market" />}
+            onClick={() => nav(MANAGE_MARKET_PATH)}
+          >
+            问卷市场
+          </Button>
+          <Button
+            type={pathname.startsWith(MANAGE_PERSONAL_PATH) ? 'dashed' : 'text'}
+            size="middle"
+            icon={<SvgIcon name="questionnaire" />}
+            onClick={() => nav(MANAGE_PERSONAL_PATH)}
           >
             我的问卷
           </Button>
           <Button
-            type={pathname.startsWith('/manage/star') ? 'dashed' : 'text'}
+            type={pathname.startsWith(MANAGE_STAR_PATH) ? 'dashed' : 'text'}
             size="middle"
-            icon={<StarFilled />}
-            onClick={() => nav('/manage/star')}
+            icon={<SvgIcon name="star" />}
+            onClick={() => nav(MANAGE_STAR_PATH)}
           >
             星标问卷
-          </Button>
-          <Button
-            type={pathname.startsWith('/manage/trash') ? 'dashed' : 'text'}
-            size="middle"
-            icon={<DeleteFilled />}
-            onClick={() => nav('/manage/trash')}
-          >
-            回收站
           </Button>
         </Space>
       </div>

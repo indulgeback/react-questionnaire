@@ -111,7 +111,7 @@ export class QuestionService {
     question_id: number,
   ): Promise<[any, any]> {
     return Promise.all([
-      this.findOne(question_id),
+      this.questionRepository.findOneBy({ id: question_id }),
       this.userFavorateRepository.findOne({
         where: {
           user_id,
@@ -134,7 +134,7 @@ export class QuestionService {
 
   // 取消收藏
   async unFavorate(user_id: number, question_id: number) {
-    const res = await this.findOne(question_id);
+    const res = await this.questionRepository.findOneBy({ id: question_id });
     if (res) {
       return await this.userFavorateRepository.delete({
         user_id,
@@ -157,7 +157,7 @@ export class QuestionService {
     await queryRunner.startTransaction();
 
     try {
-      const res = await this.findOne(id);
+      const res = await this.questionRepository.findOneBy({ id });
       if (!res) {
         throw new Error('该问卷不存在');
       }
@@ -181,7 +181,17 @@ export class QuestionService {
     }
   }
 
-  async findOne(id: number) {
-    return await this.questionRepository.findOneBy({ id });
+  async findOne(id: number, user_id: number) {
+    // 获取当前用户的已收藏问卷
+    const userFavorites = await this.userFavorateRepository.find({
+      where: { user_id },
+      select: ['question_id'],
+    });
+    const is_favorated = userFavorites.find((item) => item.question_id === id);
+    const question = await this.questionRepository.findOneBy({ id });
+    return {
+      ...question,
+      is_favorated: !!is_favorated,
+    };
   }
 }

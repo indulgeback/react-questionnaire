@@ -28,6 +28,7 @@ import {
 export class QuestionController {
   constructor(private readonly questionService: QuestionService) {}
 
+  // 新建问卷
   @Post()
   create(@Body() createQuestionDto: CreateQuestionDto) {
     return this.questionService.create(createQuestionDto);
@@ -49,12 +50,18 @@ export class QuestionController {
     }
   }
 
-  // 查看问卷详情
+  // 获取单个问卷
   @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id: number) {
-    return this.questionService.findOne(id);
+  async findOne(
+    @Param('id', ParseIntPipe) id: number,
+    @currentUser() user: UserToken,
+  ) {
+    const { userId } = user;
+    const res = await this.questionService.findOne(id, userId);
+    return new ResponseBody<any>(1, res, '查询成功');
   }
 
+  // 修改单个问卷
   @Patch(':id')
   update(
     @Param('id', ParseIntPipe) id: number,

@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@ant-design/icons": "^5.3.6",
+    "@antv/g2": "^5.2.10",
     "@gsap/react": "^2.1.0",
     "@questionnaire/shared": "link:../shared",
     "@reduxjs/toolkit": "^2.3.0",

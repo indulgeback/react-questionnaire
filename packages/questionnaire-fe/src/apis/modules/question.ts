@@ -15,29 +15,29 @@ const getQuestionList = (page: number, limit: number, search: string, type: Ques
 /**
  * 获取问卷详情
  */
-const getQuestionById = (id: string) => request.get<string, RespType<any>>(`${prefix}/${id}`)
+const getQuestionById = (id: number) => request.get<number, RespType<any>>(`${prefix}/${id}`)
 
 /**
  * 创建问卷
  */
-const createQuestion = () => request.post<any, RespType<{ id: string }>>(`${prefix}`)
+const createQuestion = () => request.post<any, RespType<{ id: number }>>(`${prefix}`)
 
 /**
  * 收藏问卷
  */
-const favorateQuestion = (id: string) =>
-  request.get<string, RespType<any>>(`${prefix}/favorate/${id}`)
+const favorateQuestion = (id: number) =>
+  request.get<number, RespType<any>>(`${prefix}/favorate/${id}`)
 
 /**
  * 取消收藏问卷
  */
-const unFavorateQuestion = (id: string) =>
-  request.get<string, RespType<any>>(`${prefix}/favorate/${id}`)
+const unFavorateQuestion = (id: number) =>
+  request.delete<number, RespType<any>>(`${prefix}/favorate/${id}`)
 
 /**
  * 删除问卷
  */
-const deleteQuestion = (id: string) => request.delete<string, RespType<any>>(`${prefix}/${id}`)
+const deleteQuestion = (id: number) => request.delete<number, RespType<any>>(`${prefix}/${id}`)
 
 export default {
   getQuestionList,

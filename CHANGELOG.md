@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.9.0](https://gitee.com/IndulgeBack/react-questionnaire/compare/v1.8.6...v1.9.0) (2024-12-26)
+
+
+### Bug Fixes
+
+* 更新docker环境下ai配置 ([a99bae5](https://gitee.com/IndulgeBack/react-questionnaire/commits/a99bae5946a20ae29a8fb7e5555e5be132a0b3b4))
+
+
+### Features
+
+* 收藏问卷功能前后端联调 ([507e961](https://gitee.com/IndulgeBack/react-questionnaire/commits/507e961b5278a49813351f0c8e488c63d0056923))
+* BE - 更新question表结构；完善问卷删除接口; ([8b62b1c](https://gitee.com/IndulgeBack/react-questionnaire/commits/8b62b1c2a53da37b8783b66d3ab18899ed093036))
+* FE - 前端新增问卷市场；问卷渲染和收藏前端逻辑重构； ([b2f2d7a](https://gitee.com/IndulgeBack/react-questionnaire/commits/b2f2d7a71974119e484b70bcdf5bc42167218cc4))
+* FE - 删除功能前后端联调 ([a9451af](https://gitee.com/IndulgeBack/react-questionnaire/commits/a9451af32392bf0bbd12a7f632d011d565060fde))
+* FE - 问卷卡片显示状态根据列表类型变化 ([6105a9f](https://gitee.com/IndulgeBack/react-questionnaire/commits/6105a9f3afffdd103100af2e33f501d65b166f00))
+* FE - 星标问卷静态搭建 ([d6aad83](https://gitee.com/IndulgeBack/react-questionnaire/commits/d6aad83a61df1cffebee3ac5b6d06a7898b54dbc))
+
+
+### Performance Improvements
+
+* FE - 优化底栏及滚动条样式 ([66aed9e](https://gitee.com/IndulgeBack/react-questionnaire/commits/66aed9e09445026fde093e88307a8c03a20b2211))
+
+
+
+
+
 ## [1.8.6](https://gitee.com/IndulgeBack/react-questionnaire/compare/v1.8.5...v1.8.6) (2024-12-19)
 
 **Note:** Version bump only for package root

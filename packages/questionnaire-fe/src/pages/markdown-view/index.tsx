@@ -1,9 +1,11 @@
 import apis from '@/apis'
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect, useMemo, useCallback } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { Input, Button } from 'antd'
 import { useNavigate } from 'react-router-dom'
 import { HOME_PATH } from '@/router'
+import regexp from '@/utils/regexp'
+import { debounce, throttle } from '@/utils'
 
 const MarkdownView: React.FC = () => {
   const [questionJsonStr, setQuestionJsonStr] = useState('')
@@ -45,11 +47,27 @@ const MarkdownView: React.FC = () => {
     })
   }
 
+  const matches = questionJsonStr.match(regexp.questionRegExp)
+  const printCurQuestionThrottled = useCallback(
+    throttle(() => {
+      // 输出结果
+      if (matches) {
+        matches.forEach((questionObj, index) => {
+          console.log(`题目 ${index + 1}: ${questionObj}`)
+        })
+      } else {
+        console.log('未匹配到题目对象')
+      }
+    }, 1000),
+    [matches?.length]
+  )
+
   useEffect(() => {
     if (markdownRef.current) {
       markdownRef.current.scrollTop = markdownRef.current.scrollHeight
     }
-  }, [questionJsonStr])
+    printCurQuestionThrottled()
+  }, [questionJsonStr, printCurQuestionThrottled])
 
   useEffect(() => {
     if (!isGenerating) {

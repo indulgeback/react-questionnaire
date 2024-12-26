@@ -67,3 +67,29 @@ export const setUserInfoStorage = (userInfo: UserInfo) => {
 export const deleteUserInfoStorage = () => {
   localStorage.removeItem(USERINFO_KEY)
 }
+
+// 防抖
+export const debounce = <T extends (...args: any[]) => void>(fn: T, delay: number): T => {
+  let timer: NodeJS.Timeout | null = null
+  return function (this: any, ...args: Parameters<T>) {
+    if (timer) {
+      clearTimeout(timer)
+    }
+    timer = setTimeout(() => {
+      fn.apply(this, args)
+    }, delay)
+  } as T
+}
+
+// 节流
+export const throttle = <T extends (...args: any[]) => void>(fn: T, delay: number): T => {
+  let timer: NodeJS.Timeout | null = null
+  return function (this: any, ...args: Parameters<T>) {
+    if (!timer) {
+      timer = setTimeout(() => {
+        fn.apply(this, args)
+        timer = null
+      }, delay)
+    }
+  } as T
+}

@@ -6,7 +6,9 @@ import { useGSAP } from '@gsap/react'
 import { Button } from 'antd'
 import SvgIcon from '@/components/Common/SvgIcon'
 import LottieAnimation from '@/components/Common/LottieAnimation'
-import cat from '@/assets/lottie/cat.json'
+import aiTransform from '@/assets/lottie/aiTransform.json'
+import report from '@/assets/lottie/report.json'
+import stat from '@/assets/lottie/stat.json'
 
 const Home: React.FC = () => {
   const nav = useNavigate()
@@ -63,23 +65,37 @@ const Home: React.FC = () => {
         </div>
       </div>
 
-      <div className="custom-intro-banner">
-        <div className="custom-intro-card">
-          <h2 className="text-2xl font-bold mb-4">小木问卷</h2>
+      <div className="flex justify-center items-center h-fit">
+        <div className="text-center w-1/2 p-4">
+          <h2 className="text-2xl font-bold mb-4">AI生成问卷</h2>
           <p className="text-lg text-gray-700">
-            小木问卷是一个功能强大的问卷生成系统，基于 NestJS 构建，支持多平台使用。前端采用 React18
-            和 NextJS，提供流畅的用户体验。后端结合 NestJS、MySQL、MongoDB 和
-            Redis，确保数据的高效处理和存储。 系统集成了 AI 模型 DeepSeek
-            Chat，支持智能化问卷生成。动画效果由 GSAP 和 lottie web 提供，UI 设计使用 Ant Design 和
-            TailwindCSS，确保现代化和美观的界面。 项目采用 Vite 和 SWC 进行前端构建，使用 pnpm
-            作为包管理器，Lerna 进行版本管理，确保开发流程的高效和规范。代码质量由 ESLint 和
-            Prettier 保证，Husky 和 Commitlint 确保提交规范。Jest 用于单元测试，确保代码的可靠性。
-            支持容器化部署，方便在本地或云服务器上快速搭建。项目遵循 MIT 开源协议，欢迎在 gitee 提交
-            issue 或 pr，积极参与贡献。
+            利用先进的 AI 技术，快速生成高质量的问卷，节省时间和精力。
           </p>
         </div>
-        <div className="custom-intro-lottie">
-          <LottieAnimation animationData={cat} />
+        <div className="custom-info-animation custom-intro-lottie">
+          <LottieAnimation animationData={aiTransform} />
+        </div>
+      </div>
+
+      <div className="flex justify-center items-center h-fit">
+        <div className="custom-info-animation custom-intro-lottie">
+          <LottieAnimation animationData={stat} />
+        </div>
+        <div className="text-center w-1/2 p-4">
+          <h2 className="text-2xl font-bold mb-4">实时数据监控</h2>
+          <p className="text-lg text-gray-700">
+            实时监控问卷数据，及时了解问卷的反馈情况，做出快速反应。
+          </p>
+        </div>
+      </div>
+
+      <div className="flex justify-center items-center h-fit">
+        <div className="text-center w-1/2 p-4">
+          <h2 className="text-2xl font-bold mb-4">导出结果报告</h2>
+          <p className="text-lg text-gray-700">轻松导出问卷结果报告，方便进行数据分析和分享。</p>
+        </div>
+        <div className="custom-info-animation custom-intro-lottie">
+          <LottieAnimation animationData={report} />
         </div>
       </div>
 

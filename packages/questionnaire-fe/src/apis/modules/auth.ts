@@ -15,7 +15,13 @@ const register = (data: UserInfo) => request.post<any, RespType<any>>(`${prefix}
  */
 const login = (data: UserInfo) => request.post<any, RespType<any>>(`${prefix}/login`, data)
 
+/**
+ * 获取用户信息
+ */
+const getUserInfo = () => request.get<any, RespType<any>>(`${prefix}/info`)
+
 export default {
   register,
-  login
+  login,
+  getUserInfo
 }

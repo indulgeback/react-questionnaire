@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import CreateQuestionDto from '@/service/question/dto/create-question.dto';
 import UpdateQuestionDto from '@/service/question/dto/update-question.dto';
-import FindAllQuestionDto from './dto/find-all-question.dto';
+import FindAllQuestionDto, { QuestionType } from './dto/find-all-question.dto';
 import Question from '@/common/entities/question.entity';
 import { InjectRepository, InjectDataSource } from '@nestjs/typeorm';
 import { Repository, DataSource } from 'typeorm';
 import UserFavorite from '@/common/entities/user-favorite.entity';
-
+import User from '@/common/entities/user.entity';
 @Injectable()
 export class QuestionService {
   constructor(
@@ -14,6 +14,8 @@ export class QuestionService {
     private questionRepository: Repository<Question>,
     @InjectRepository(UserFavorite)
     private userFavorateRepository: Repository<UserFavorite>,
+    @InjectRepository(User)
+    private userRepository: Repository<User>,
     @InjectDataSource()
     private dataSource: DataSource,
   ) {}
@@ -24,7 +26,7 @@ export class QuestionService {
 
   // 分页查询问卷列表
   async findAll(
-    { page, limit, search, is_favorated }: FindAllQuestionDto,
+    { page, limit, search, type }: FindAllQuestionDto,
     user_id: number,
   ) {
     const queryBuilder = this.questionRepository.createQueryBuilder('question');
@@ -43,10 +45,22 @@ export class QuestionService {
     // 映射用户收藏问卷的 ID 数组
     const favoriteIds = userFavorites.map((fav) => fav.question_id);
 
-    // 如果 is_favorated 为 true，则只返回已收藏的问卷
-    if (is_favorated) {
+    console.log(type);
+
+    // 如果 type 为 FAVORATE，则只返回已收藏的问卷, 如果 type 为 PERSONAL，则只返回当前用户的问卷
+    if (type === QuestionType.FAVORATE) {
+      if (favoriteIds.length === 0) {
+        return {
+          list: [],
+          count: 0,
+        };
+      }
       queryBuilder.andWhere('question.id IN (:...favoriteIds)', {
         favoriteIds,
+      });
+    } else if (type === QuestionType.PERSONAL) {
+      queryBuilder.andWhere('question.author_id = :userId', {
+        userId: user_id,
       });
     }
 
@@ -97,7 +111,7 @@ export class QuestionService {
     question_id: number,
   ): Promise<[any, any]> {
     return Promise.all([
-      this.findOne(question_id),
+      this.questionRepository.findOneBy({ id: question_id }),
       this.userFavorateRepository.findOne({
         where: {
           user_id,
@@ -120,7 +134,7 @@ export class QuestionService {
 
   // 取消收藏
   async unFavorate(user_id: number, question_id: number) {
-    const res = await this.findOne(question_id);
+    const res = await this.questionRepository.findOneBy({ id: question_id });
     if (res) {
       return await this.userFavorateRepository.delete({
         user_id,
@@ -136,16 +150,20 @@ export class QuestionService {
   }
 
   // 删除问卷
-  async remove(id: number) {
+  async remove(id: number, user_id: number) {
     const queryRunner = this.dataSource.createQueryRunner();
 
     await queryRunner.connect();
     await queryRunner.startTransaction();
 
     try {
-      const res = await this.findOne(id);
+      const res = await this.questionRepository.findOneBy({ id });
       if (!res) {
         throw new Error('该问卷不存在');
+      }
+
+      if (res.author_id !== user_id) {
+        throw new Error('非作者无权限删除问卷');
       }
 
       // 先删除所有与该问卷相关的收藏记录
@@ -163,7 +181,17 @@ export class QuestionService {
     }
   }
 
-  async findOne(id: number) {
-    return await this.questionRepository.findOneBy({ id });
+  async findOne(id: number, user_id: number) {
+    // 获取当前用户的已收藏问卷
+    const userFavorites = await this.userFavorateRepository.find({
+      where: { user_id },
+      select: ['question_id'],
+    });
+    const is_favorated = userFavorites.find((item) => item.question_id === id);
+    const question = await this.questionRepository.findOneBy({ id });
+    return {
+      ...question,
+      is_favorated: !!is_favorated,
+    };
   }
 }

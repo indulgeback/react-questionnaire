@@ -3,7 +3,7 @@ import React from 'react'
 const SvgIcon: React.FC<{ name: string; prefix?: string; color?: string; size?: string }> = ({
   name,
   prefix = 'icon',
-  color = '#333',
+  color = 'currentColor',
   size = '1em',
   ...props
 }) => {

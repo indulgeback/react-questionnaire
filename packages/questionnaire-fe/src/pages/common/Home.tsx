@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { MANAGE_INDEX_PATH, MARKDOWN_VIEW_PATH } from '@/router'
+import { MANAGE_MARKET_PATH, MARKDOWN_VIEW_PATH } from '@/router'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { Button } from 'antd'
@@ -53,7 +53,7 @@ const Home: React.FC = () => {
             已累计创建问卷 100👧 份，发布问卷 87🧒 份，收到答卷 1800📃 份
           </div>
           <div id="startBtn" className="flex gap-4 justify-center">
-            <Button type="dashed" onClick={() => nav(MANAGE_INDEX_PATH)}>
+            <Button type="dashed" onClick={() => nav(MANAGE_MARKET_PATH)}>
               START USE
             </Button>
             <Button type="dashed" onClick={() => nav(MARKDOWN_VIEW_PATH)}>

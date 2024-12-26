@@ -1,5 +1,11 @@
-import { IsBoolean, IsInt, IsOptional, IsString } from 'class-validator';
-import { Transform, Type } from 'class-transformer';
+import { IsInt, IsOptional, IsString, IsEnum } from 'class-validator';
+import { Type } from 'class-transformer';
+
+export enum QuestionType {
+  ALL = 'all',
+  PERSONAL = 'personal',
+  FAVORATE = 'favorate',
+}
 
 class FindAllQuestionDto {
   @IsInt()
@@ -16,10 +22,9 @@ class FindAllQuestionDto {
   @IsOptional()
   search: string = '';
 
-  @IsBoolean()
-  @Transform(({ value }) => value === 'true' || value === true)
+  @IsEnum(QuestionType)
   @IsOptional()
-  is_favorated?: boolean;
+  type: QuestionType = QuestionType.ALL;
 }
 
 export default FindAllQuestionDto;

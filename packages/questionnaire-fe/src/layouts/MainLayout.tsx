@@ -9,7 +9,6 @@ import { RootState } from '@/store'
 
 const MainLayout: React.FC = () => {
   const screenSpinning = useSelector((state: RootState) => state.utils.screenSpinning)
-
   return (
     <div className="custom-app">
       <header className="custom-header">

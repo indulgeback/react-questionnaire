@@ -3,7 +3,7 @@ import { Space, Button, Form, Input, App, Modal, Statistic } from 'antd'
 import { useNavigate } from 'react-router-dom'
 import { LOGIN_PATH } from '@/router'
 import { Rule } from 'antd/es/form'
-import shared from '@questionnaire/shared'
+import regexp from '@/utils/regexp'
 import apis from '@/apis'
 import colorfulLogo from '@/assets/img/colorful-logo.webp'
 import { UserInfo } from '@/apis/modules/types/auth'
@@ -76,7 +76,7 @@ const Register: React.FC = () => {
   }
 
   const sendEmailCode = async () => {
-    const isValidEmail = shared.RegExp.emailRegExp.test(email)
+    const isValidEmail = regexp.emailRegExp.test(email)
     if (!isValidEmail) return
     const res = await apis.mailApi.sendEmailCode({ email })
     if (isRequestSuccess(res)) {

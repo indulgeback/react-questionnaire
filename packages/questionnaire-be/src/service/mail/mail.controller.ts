@@ -1,7 +1,7 @@
 import { Controller, Body, Post } from '@nestjs/common';
 import { MailService } from '@/service/mail/mail.service';
 import { ResponseBody } from '@/common/classes/response-body';
-import shared from '@questionnaire/shared';
+import utils from '@/common/utils';
 import { Public } from '@/common/decorators/public.decorator';
 import { Logger } from '@/common/utils/log4js';
 
@@ -15,7 +15,7 @@ export class MailController {
     @Body('email') email: string,
   ): Promise<ResponseBody<null | number>> {
     // 校验email是否为邮箱格式
-    const isValidEmail = shared.RegExp.emailRegExp.test(email);
+    const isValidEmail = utils.RegExp.emailRegExp.test(email);
     if (!isValidEmail) {
       return new ResponseBody<null>(0, null, '输入的邮箱地址不合法');
     }

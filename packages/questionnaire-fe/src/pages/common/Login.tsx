@@ -6,7 +6,7 @@ import apis from '@/apis'
 import { rememberUser, deleteUserFromStorage, getUserFromStorage, login } from '@/utils'
 import colorfulLogo from '@/assets/img/colorful-logo.webp'
 import useRequestSuccessChecker from '@/hooks/useRequestSuccessChecker'
-import shared from '@questionnaire/shared'
+import regexp from '@/utils/regexp'
 import { setLoginState, setToken, setUserInfo } from '@/store/modules/profileSlice'
 import { useDispatch } from 'react-redux'
 import AuthBg from '@/components/Common/AuthBg'
@@ -27,7 +27,7 @@ const Login: React.FC = () => {
   const rules: Record<string, FormRule[]> = {
     email: [
       { required: true, message: '请输入邮箱' },
-      { pattern: shared.RegExp.emailRegExp, message: '邮箱格式错误' }
+      { pattern: regexp.emailRegExp, message: '邮箱格式错误' }
     ],
     password: [
       { required: true, message: '请输入密码' },

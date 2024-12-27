@@ -118,7 +118,7 @@ const Register: React.FC = () => {
       <AuthBg />
       <div className="w-1/2 flex justify-center">
         <div
-          className="bg-white/50 backdrop-blur-sm p-10 rounded-md shadow-white shadow-2xl"
+          className="bg-white/80 backdrop-blur-sm p-10 rounded-md shadow-white shadow-2xl"
           id="register-form"
         >
           <img className="h-48" src={colorfulLogo} alt="logo" />

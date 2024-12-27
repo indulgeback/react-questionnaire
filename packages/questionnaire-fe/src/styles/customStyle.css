@@ -2,6 +2,10 @@
     background: rgb(var(--bg-100));
 }
 
+.custom-main {
+    height: 100vh;
+}
+
 .custom-header {
     height: 68px;
     display: flex;

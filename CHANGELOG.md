@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.2](https://gitee.com/IndulgeBack/react-questionnaire/compare/v1.9.1...v1.9.2) (2024-12-27)
+
+
+### Bug Fixes
+
+* FE - 修复登录等页面背景尺寸错乱的问题 ([fa6df32](https://gitee.com/IndulgeBack/react-questionnaire/commits/fa6df323d2ecd7afdb7ceb181b0d8763197ae10c))
+
+
+### Performance Improvements
+
+* FE - 优化首页动效；完成生成问卷的问题提取； ([c7da0ce](https://gitee.com/IndulgeBack/react-questionnaire/commits/c7da0ceb289b66604b3787dbe22a8e209c28857a))
+
+
+
+
+
 ## [1.9.1](https://gitee.com/IndulgeBack/react-questionnaire/compare/v1.9.0...v1.9.1) (2024-12-26)
 
 **Note:** Version bump only for package root

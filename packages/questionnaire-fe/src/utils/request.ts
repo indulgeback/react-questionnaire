@@ -25,7 +25,13 @@ instance.interceptors.response.use(
     if (error.response?.status === 401) {
       window.location.href = LOGIN_PATH + '?redirect=' + window.location.pathname
     }
-    return Promise.reject(error)
+    console.error(error)
+    navigator.clipboard.writeText('https://github.com/indulgeback/react-questionnaire')
+    return {
+      code: 0,
+      msg: '发生了预期之外的错误：请前往 github 提交issue，仓库地址已复制到剪贴板!' + error.message,
+      data: null
+    }
   }
 )
 

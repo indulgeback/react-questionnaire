@@ -8,17 +8,20 @@ import colorfulLogo from '@/assets/img/colorful-logo.webp'
 import useRequestSuccessChecker from '@/hooks/useRequestSuccessChecker'
 import regexp from '@/utils/regexp'
 import { setLoginState, setToken, setUserInfo } from '@/store/modules/profileSlice'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import AuthBg from '@/components/Common/AuthBg'
 import gsap from 'gsap'
 import { LOGIN_STATE } from '@/constant'
+import { RootState } from '@/store'
+import SvgIcon from '@/components/Common/SvgIcon'
 
 const Login: React.FC = () => {
   const nav = useNavigate()
   const { isRequestSuccess, successMessage } = useRequestSuccessChecker()
+  const userInfo = useSelector((state: RootState) => state.profile.userInfo)
   const dispatch = useDispatch()
   const [searchParams] = useSearchParams()
-  const { message } = App.useApp()
+  const { message, notification } = App.useApp()
 
   useLayoutEffect(() => {
     gsap.fromTo('#login-form', { opacity: 0, x: 100 }, { opacity: 1, x: 0, duration: 1 })
@@ -39,6 +42,21 @@ const Login: React.FC = () => {
     ]
   }
 
+  const getNowTime = () => {
+    const now = new Date().getHours()
+    return now < 12 ? '上午' : now < 18 ? '下午' : '晚上'
+  }
+
+  const openNotification = () => {
+    notification.open({
+      message: '亲爱的' + userInfo.nickname,
+      description: getNowTime() + '好！' + '欢迎回来',
+      duration: 3,
+      showProgress: true,
+      icon: <SvgIcon name="hi" />
+    })
+  }
+
   const onFinish = async (values: any) => {
     const { email, password, remember } = values || {}
     const res = await apis.authApi.login({ email, password })
@@ -49,6 +67,7 @@ const Login: React.FC = () => {
       dispatch(setUserInfo(res.data?.userInfo))
       dispatch(setLoginState(LOGIN_STATE.LOGIN))
       nav(searchParams.get('redirect') || '/')
+      openNotification()
     }
   }
 

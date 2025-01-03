@@ -26,29 +26,15 @@ jobs:
           username: ${{ secrets.ALIYUN_USERNAME }}
           password: ${{ secrets.ALIYUN_PASSWORD }}
 
-      # 4. 设置 Node.js 环境
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 22 # 使用 Node.js 22
-
-      # 5. 安装 pnpm
-      - name: Install pnpm
-        run: npm install -g pnpm
-
-      # 6. 安装项目依赖
-      - name: Install dependencies
-        run: pnpm install
-
-      # 7. 获取版本号（从 lerna.json 中读取）
+      # 4. 获取版本号（从 lerna.json 中读取）
       - name: Get version from lerna.json
         id: get-version
         run: |
           VERSION=$(node -p "require('./lerna.json').version")
           echo "version=${VERSION}" >> $GITHUB_OUTPUT
 
-      # 8. 构建并推送前端镜像
-      - name: Build and push frontend image
+      # 5. 构建并推送 Docker 镜像
+      - name: Build and push Docker images
         run: |
           pnpm run build:docker-images-and-push-to-registry
         env:

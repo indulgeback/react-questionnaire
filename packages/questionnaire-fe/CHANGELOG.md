@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.3](https://github.com/indulgeback/react-questionnaire/compare/v1.9.2...v1.9.3) (2025-01-03)
+
+
+### Performance Improvements
+
+* FE - 为viteconfig添加注释 ([3d00847](https://github.com/indulgeback/react-questionnaire/commit/3d008476c6fa9f36b3f0fcbce7c34b81ac5c749f))
+* FE - 优化登录逻辑与全局错误提示 ([86c0706](https://github.com/indulgeback/react-questionnaire/commit/86c07064b63572614b5198adc2b002e84587df46))
+
+
+
+
+
 ## [1.9.2](https://gitee.com/IndulgeBack/react-questionnaire/compare/v1.9.1...v1.9.2) (2024-12-27)
 
 

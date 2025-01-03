@@ -65,9 +65,9 @@ chmod +x .husky/*
 
 #### 参与贡献
 
-本 gitee 仓库仅为 github 镜像仓库，暂不处理 issue 和 pr，如有需求，请在 gitee 提 issue 或 pr。
-github 仓库地址：https://github.com/indulgeback/react-questionnaire
-gitee 仓库地址：https://gitee.com/IndulgeBack/react-questionnaire
-个人主页：https://indulgeback.netlify.app/ or https://indulgeback.github.io/
-邮箱：liuwenyu1937@outlook.com
-juejin：https://juejin.cn/user/1410020421418286
+- 本 gitee 仓库仅为 github 镜像仓库，暂不处理 issue 和 pr，如有需求，请在 gitee 提 issue 或 pr。
+- github 仓库地址：https://github.com/indulgeback/react-questionnaire
+- gitee 仓库地址：https://gitee.com/IndulgeBack/react-questionnaire
+- 个人主页：https://indulgeback.netlify.app/ or https://indulgeback.github.io/
+- 邮箱：liuwenyu1937@outlook.com
+- juejin：https://juejin.cn/user/1410020421418286

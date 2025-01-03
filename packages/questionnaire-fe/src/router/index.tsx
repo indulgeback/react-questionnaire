@@ -15,6 +15,7 @@ const NotFound = lazy(() => import('@/pages/common/NotFound'))
 const Market = lazy(() => import('@/pages/manage/Market'))
 const Personal = lazy(() => import('@/pages/manage/Personal'))
 const Star = lazy(() => import('@/pages/manage/Star'))
+const Detail = lazy(() => import('@/pages/question/Detail'))
 const Edit = lazy(() => import('@/pages/question/Edit'))
 const Stat = lazy(() => import('@/pages/question/Stat'))
 const MarkdownView = lazy(() => import('@/pages/markdown-view'))
@@ -27,8 +28,9 @@ export const PROFILE_PATH = '/profile'
 export const MANAGE_MARKET_PATH = '/manage/market'
 export const MANAGE_PERSONAL_PATH = '/manage/personal'
 export const MANAGE_STAR_PATH = '/manage/star'
-export const QUESTION_EDIT_PATH = '/question/edit/:id'
-export const QUESTION_STAT_PATH = '/question/stat/:id'
+export const QUESTION_DETAIL_PATH = '/question/detail'
+export const QUESTION_EDIT_PATH = '/question/edit'
+export const QUESTION_STAT_PATH = '/question/stat'
 export const MARKDOWN_VIEW_PATH = '/markdown-view'
 
 const router = createBrowserRouter([
@@ -113,7 +115,15 @@ const router = createBrowserRouter([
     element: <QuestionLayout />,
     children: [
       {
-        path: QUESTION_EDIT_PATH,
+        path: QUESTION_DETAIL_PATH + '/:id',
+        element: (
+          <Suspense>
+            <Detail />
+          </Suspense>
+        )
+      },
+      {
+        path: QUESTION_EDIT_PATH + '/:id',
         element: (
           <Suspense>
             <Edit />
@@ -121,7 +131,7 @@ const router = createBrowserRouter([
         )
       },
       {
-        path: QUESTION_STAT_PATH,
+        path: QUESTION_STAT_PATH + '/:id',
         element: (
           <Suspense>
             <Stat />

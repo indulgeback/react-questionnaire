@@ -15,6 +15,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import dayjs from 'dayjs'
 import apis from '@/apis'
 import useRequestSuccessChecker from '@/hooks/useRequestSuccessChecker'
+import { QUESTION_DETAIL_PATH, QUESTION_EDIT_PATH, QUESTION_STAT_PATH } from '@/router'
 
 // ts 自定义类型
 type PropsType = {
@@ -76,7 +77,7 @@ const QuestionCard: React.FC<PropsType> = (props: PropsType) => {
     <div className="my-3 p-3 rounded-md bg-white duration-300 hover:shadow-md">
       <div className="flex">
         <div className="flex-1">
-          <Link to={isPublished ? `/question/stat/${id}` : `/question/edit/${id}`}>
+          <Link to={`${QUESTION_DETAIL_PATH}/${id}`}>
             <Space>
               <span className="inline-block w-4">
                 {isFavorated && <StarOutlined className="text-custom-yellow" />}
@@ -115,7 +116,7 @@ const QuestionCard: React.FC<PropsType> = (props: PropsType) => {
                 size="small"
                 icon={<EditOutlined />}
                 onClick={() => {
-                  nav(`/question/edit/${id}`)
+                  nav(`${QUESTION_EDIT_PATH}/${id}`)
                 }}
                 disabled={!editable}
               >
@@ -126,7 +127,7 @@ const QuestionCard: React.FC<PropsType> = (props: PropsType) => {
                 size="small"
                 icon={<LineChartOutlined />}
                 onClick={() => {
-                  nav(`/question/stat/${id}`)
+                  nav(`${QUESTION_STAT_PATH}/${id}`)
                 }}
                 disabled={!isPublished || !editable}
               >

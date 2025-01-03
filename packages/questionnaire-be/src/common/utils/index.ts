@@ -1,4 +1,4 @@
-import RegExp from './module/regExp';
+import RegExp from './module/regexp';
 
 const Utils = {
   RegExp,

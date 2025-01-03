@@ -15,15 +15,6 @@ react-questionnaire
 |    └postVersion.js
 ├─packages
 |    ├─.DS_Store
-|    ├─shared
-|    |   ├─CHANGELOG.md
-|    |   ├─package.json
-|    |   ├─tsconfig.json
-|    |   ├─src
-|    |   |  ├─index.ts
-|    |   |  ├─modules
-|    |   |  |    ├─regexp.ts
-|    |   |  |    └utils.ts
 |    ├─questionnaire-fe
 |    |        ├─.DS_Store
 |    |        ├─.babelrc
@@ -39,11 +30,13 @@ react-questionnaire
 |    |        ├─tsconfig.json
 |    |        ├─vite.config.ts
 |    |        ├─src
+|    |        |  ├─.DS_Store
 |    |        |  ├─App.tsx
 |    |        |  ├─main.tsx
 |    |        |  ├─vite.env.d.ts
 |    |        |  ├─utils
 |    |        |  |   ├─index.ts
+|    |        |  |   ├─regexp.ts
 |    |        |  |   ├─request.ts
 |    |        |  |   └sseRequest.ts
 |    |        |  ├─styles
@@ -56,7 +49,6 @@ react-questionnaire
 |    |        |  |   |    └utilsSlice.ts
 |    |        |  ├─router
 |    |        |  |   └index.tsx
-|    |        |  ├─pkg
 |    |        |  ├─pages
 |    |        |  |   ├─question
 |    |        |  |   |    ├─Stat
@@ -66,7 +58,8 @@ react-questionnaire
 |    |        |  |   ├─markdown-view
 |    |        |  |   |       └index.tsx
 |    |        |  |   ├─manage
-|    |        |  |   |   ├─List.tsx
+|    |        |  |   |   ├─Market.tsx
+|    |        |  |   |   ├─Personal.tsx
 |    |        |  |   |   └Star.tsx
 |    |        |  |   ├─common
 |    |        |  |   |   ├─Home.tsx
@@ -100,6 +93,7 @@ react-questionnaire
 |    |        |  |     |   ├─QuestionCard.tsx
 |    |        |  |     |   └SvgIcon.tsx
 |    |        |  ├─assets
+|    |        |  |   ├─.DS_Store
 |    |        |  |   ├─svg
 |    |        |  |   |  ├─analysis.svg
 |    |        |  |   |  ├─auth.svg
@@ -107,12 +101,19 @@ react-questionnaire
 |    |        |  |   |  ├─generate.svg
 |    |        |  |   |  ├─gitee.svg
 |    |        |  |   |  ├─github.svg
+|    |        |  |   |  ├─hi.svg
 |    |        |  |   |  ├─juejin.svg
+|    |        |  |   |  ├─market.svg
 |    |        |  |   |  ├─monitor.svg
-|    |        |  |   |  └report.svg
+|    |        |  |   |  ├─questionnaire.svg
+|    |        |  |   |  ├─report.svg
+|    |        |  |   |  └star.svg
 |    |        |  |   ├─lottie
-|    |        |  |   |   ├─cat.json
-|    |        |  |   |   ├─food.json
+|    |        |  |   |   ├─.DS_Store
+|    |        |  |   |   ├─ai.json
+|    |        |  |   |   ├─aiTransform.json
+|    |        |  |   |   ├─report.json
+|    |        |  |   |   ├─stat.json
 |    |        |  |   |   └success.json
 |    |        |  |   ├─img
 |    |        |  |   |  ├─bg-auth.webp
@@ -215,7 +216,10 @@ react-questionnaire
 |    |        |  ├─common
 |    |        |  |   ├─utils
 |    |        |  |   |   ├─generateEmail.ts
-|    |        |  |   |   └log4js.ts
+|    |        |  |   |   ├─index.ts
+|    |        |  |   |   ├─log4js.ts
+|    |        |  |   |   ├─module
+|    |        |  |   |   |   └regexp.ts
 |    |        |  |   ├─strategy
 |    |        |  |   |    └jwt.strategy.ts
 |    |        |  |   ├─entities
@@ -230,13 +234,25 @@ react-questionnaire
 |    |        ├─logs
 |    |        |  ├─error
 |    |        |  |   ├─error.2024-12-20.log
-|    |        |  |   └error.2024-12-23.log
+|    |        |  |   ├─error.2024-12-23.log
+|    |        |  |   ├─error.2024-12-25.log
+|    |        |  |   ├─error.2024-12-26.log
+|    |        |  |   ├─error.2024-12-27.log
+|    |        |  |   └error.2025-01-02.log
 |    |        |  ├─app-out
 |    |        |  |    ├─app.2024-12-20.log
-|    |        |  |    └app.2024-12-23.log
+|    |        |  |    ├─app.2024-12-23.log
+|    |        |  |    ├─app.2024-12-25.log
+|    |        |  |    ├─app.2024-12-26.log
+|    |        |  |    ├─app.2024-12-27.log
+|    |        |  |    └app.2025-01-02.log
 |    |        |  ├─access
 |    |        |  |   ├─access.2024-12-20.log
-|    |        |  |   └access.2024-12-23.log
+|    |        |  |   ├─access.2024-12-23.log
+|    |        |  |   ├─access.2024-12-25.log.gz
+|    |        |  |   ├─access.2024-12-26.log
+|    |        |  |   ├─access.2024-12-27.log
+|    |        |  |   └access.2025-01-02.log
 |    |        ├─db
 |    |        | ├─.DS_Store
 |    |        | └questionnaire_db.sql

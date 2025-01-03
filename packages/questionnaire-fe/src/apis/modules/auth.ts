@@ -1,6 +1,6 @@
 import request from '@/utils/request'
 import { RespType } from './types/common'
-import { UserInfo } from './types/auth'
+import { UserInfo, UserProfile } from './types/auth'
 
 // 统一前缀
 const prefix = '/api/auth'
@@ -18,7 +18,7 @@ const login = (data: UserInfo) => request.post<any, RespType<any>>(`${prefix}/lo
 /**
  * 获取用户信息
  */
-const getUserInfo = () => request.get<any, RespType<any>>(`${prefix}/info`)
+const getUserInfo = () => request.get<any, RespType<UserProfile>>(`${prefix}/info`)
 
 export default {
   register,

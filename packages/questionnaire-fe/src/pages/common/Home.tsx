@@ -72,13 +72,13 @@ const Home: React.FC = () => {
             利用先进的 AI 技术，快速生成高质量的问卷，节省时间和精力。
           </p>
         </div>
-        <div className="custom-info-animation custom-intro-lottie">
+        <div className="custom-intro-lottie">
           <LottieAnimation animationData={aiTransform} />
         </div>
       </div>
 
       <div className="flex justify-center items-center h-fit">
-        <div className="custom-info-animation custom-intro-lottie">
+        <div className="custom-intro-lottie">
           <LottieAnimation animationData={stat} />
         </div>
         <div className="text-center w-1/2 p-4">
@@ -94,7 +94,7 @@ const Home: React.FC = () => {
           <h2 className="text-2xl font-bold mb-4">导出结果报告</h2>
           <p className="text-lg text-gray-700">轻松导出问卷结果报告，方便进行数据分析和分享。</p>
         </div>
-        <div className="custom-info-animation custom-intro-lottie">
+        <div className="custom-intro-lottie">
           <LottieAnimation animationData={report} />
         </div>
       </div>

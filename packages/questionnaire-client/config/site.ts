@@ -2,29 +2,7 @@ export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
   name: "小木问卷",
-  description: "Make beautiful websites regardless of your design experience.",
-  navItems: [
-    {
-      label: "Home",
-      href: "/"
-    },
-    {
-      label: "Docs",
-      href: "/docs"
-    },
-    {
-      label: "Pricing",
-      href: "/pricing"
-    },
-    {
-      label: "Blog",
-      href: "/blog"
-    },
-    {
-      label: "About",
-      href: "/about"
-    }
-  ],
+  description: "Create surveys effortlessly, no design skills needed.",
   navMenuItems: [
     {
       label: "Profile",

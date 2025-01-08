@@ -30,21 +30,21 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html suppressHydrationWarning lang="en">
+    <html suppressHydrationWarning lang="zh-CN">
       <head />
       <body className={clsx("min-h-screen bg-background font-sans antialiased", fontSans.variable)}>
         <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
           <div className="relative flex flex-col h-screen">
             <Navbar />
             <main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">{children}</main>
-            <footer className="w-full flex flex-col items-center justify-center py-3">
+            <footer className="w-full flex flex-col items-center justify-center py-3 text-sm">
               <Link
                 isExternal
-                className="flex items-center gap-1 text-current"
+                className="flex items-center gap-1"
                 href="https://indulgeback.netlify.app/"
                 title="indulgeback homepage"
               >
-                <span className="text-default-600">小木问卷 &copy;2024 - present. Created by</span>
+                <span className="text-default-600 ">小木问卷&copy;2024-present.Created by</span>
                 <p className="text-primary">IndulgeBack</p>
               </Link>
               <span className="text-default-600">晋ICP备2023025256号-2</span>

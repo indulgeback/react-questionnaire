@@ -1,10 +1,8 @@
 import { Link } from "@nextui-org/link";
-import { button as buttonStyles } from "@nextui-org/theme";
 import React from "react";
-import { siteConfig } from "@/config/site";
 import { title, subtitle } from "@/components/primitives";
 import { Button } from "@nextui-org/button";
-
+import { PencilSquareIcon } from "@heroicons/react/24/outline";
 export default function Home() {
   return (
     <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
@@ -27,6 +25,7 @@ export default function Home() {
           as={Link}
           href="/docs"
         >
+          <PencilSquareIcon className="size-4" />
           填写问卷
         </Button>
       </div>

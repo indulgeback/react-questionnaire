@@ -44,7 +44,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 href="https://indulgeback.netlify.app/"
                 title="indulgeback homepage"
               >
-                <span className="text-default-600 ">小木问卷&copy;2024-present.Created by</span>
+                <span className="text-default-600">小木问卷&copy;2024-present.Created by</span>
                 <p className="text-primary">IndulgeBack</p>
               </Link>
               <span className="text-default-600">晋ICP备2023025256号-2</span>

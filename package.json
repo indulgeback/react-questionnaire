@@ -8,7 +8,7 @@
     "dev:fe": "pnpm -F @questionnaire/fe dev",
     "dev:client": "pnpm -F @questionnaire/client dev",
     "dev:be": "pnpm -F @questionnaire/be start:dev",
-    "generate-tree": "npx treer -e ./doc/structure-tree.txt -i \"/node_modules|.git|dist/\"",
+    "generate-tree": "npx treer -e ./doc/structure-tree.txt -i \"/node_modules|.git|dist|.next|logs/\"",
     "prepare": "husky install",
     "version": "npx lerna version --conventional-commits --no-git-tag-version --force-publish=*",
     "postversion": "node scripts/postVersion.js",

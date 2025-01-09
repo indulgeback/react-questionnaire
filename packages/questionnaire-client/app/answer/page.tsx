@@ -4,7 +4,7 @@ import QuestionCheckbox from "@/components/questions/questionCheckbox";
 import QuestionRadio from "@/components/questions/questionRadio";
 import React from "react";
 
-export default function DocsPage() {
+const AnswerPage = () => {
   return (
     <QuestionWrapper>
       <QuestionRadio />
@@ -12,4 +12,6 @@ export default function DocsPage() {
       <QuestionActions />
     </QuestionWrapper>
   );
-}
+};
+
+export default AnswerPage;

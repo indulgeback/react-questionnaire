@@ -26,7 +26,7 @@ export default function Home() {
           className="bg-gradient-to-tr from-sky-500 to-pink-500 text-white shadow-lg"
           radius="full"
           as={Link}
-          href="/docs"
+          href="/answer"
         >
           <PencilSquareIcon className="size-4" />
           填写问卷

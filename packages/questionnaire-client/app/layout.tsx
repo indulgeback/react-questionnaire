@@ -37,10 +37,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <div className="relative flex flex-col h-screen">
             <Navbar />
             <main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">{children}</main>
-            <footer className="w-full flex flex-col items-center justify-center py-3 text-sm">
+            <footer className="w-full flex flex-col items-center justify-center py-3 text-xs md:text-sm">
               <Link
                 isExternal
-                className="flex items-center gap-1"
+                className="flex items-center gap-1 text-xs md:text-sm"
                 href="https://indulgeback.netlify.app/"
                 title="indulgeback homepage"
               >

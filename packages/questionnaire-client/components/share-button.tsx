@@ -7,10 +7,10 @@ import { Snippet } from "@nextui-org/snippet";
 import useNotyf from "@/hooks/useNotyf";
 
 const ShareButton = () => {
-  const { showScuccess } = useNotyf();
+  const { showSuccess } = useNotyf();
   const copyShareLink = () => {
     navigator.clipboard.writeText(window.location.href);
-    showScuccess("分享链接已复制到剪贴板");
+    showSuccess("分享链接已复制到剪贴板");
   };
   return (
     <Popover placement="bottom">

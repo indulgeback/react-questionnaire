@@ -11,8 +11,8 @@ import {
 import { Link } from "@nextui-org/link";
 import NextLink from "next/link";
 import { siteConfig } from "@/config/site";
-import ShareButton from "@/components/share-button";
-import { ThemeSwitch } from "@/components/theme-switch";
+import ShareButton from "@/components/shareButton";
+import { ThemeSwitch } from "@/components/themeSwitch";
 import { GithubIcon, Logo } from "@/components/icons";
 
 export const Navbar = () => {

@@ -3,6 +3,7 @@ import React from "react";
 import { title, subtitle } from "@/components/primitives";
 import { Button } from "@nextui-org/button";
 import { PencilSquareIcon } from "@heroicons/react/24/outline";
+import clsx from "clsx";
 export default function Home() {
   return (
     <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
@@ -10,7 +11,9 @@ export default function Home() {
         <span className={title()}>XM&nbsp;</span>
         <span className={title({ color: "turquoise" })}>questionnaire&nbsp;</span>
         <br />
-        <span className={title()}>Create surveys effortlessly, no design skills needed.</span>
+        <span className={clsx("mt-3", title({ fullWidth: true }))}>
+          Create surveys effortlessly, no design skills needed.
+        </span>
         <div className={subtitle({ class: "mt-4" })}>
           Simple, fast, and powerful survey creation tool.
         </div>

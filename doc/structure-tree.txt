@@ -55,6 +55,8 @@ react-questionnaire
 |    |        |  |   |    |  └index.tsx
 |    |        |  |   |    ├─Edit
 |    |        |  |   |    |  └index.tsx
+|    |        |  |   |    ├─Detail
+|    |        |  |   |    |   └index.tsx
 |    |        |  |   ├─markdown-view
 |    |        |  |   |       └index.tsx
 |    |        |  |   ├─manage
@@ -144,6 +146,51 @@ react-questionnaire
 |    |        |   └favicon.ico
 |    |        ├─nginx
 |    |        |   └nginx.conf
+|    ├─questionnaire-client
+|    |          ├─.DS_Store
+|    |          ├─.eslintignore
+|    |          ├─.eslintrc.json
+|    |          ├─.npmrc
+|    |          ├─.prettierrc
+|    |          ├─LICENSE
+|    |          ├─README.md
+|    |          ├─next-env.d.ts
+|    |          ├─next.config.js
+|    |          ├─package.json
+|    |          ├─postcss.config.js
+|    |          ├─tailwind.config.js
+|    |          ├─tsconfig.json
+|    |          ├─types
+|    |          |   └index.ts
+|    |          ├─styles
+|    |          |   └globals.css
+|    |          ├─public
+|    |          |   └favicon.ico
+|    |          ├─hooks
+|    |          |   └useNotyf.ts
+|    |          ├─config
+|    |          |   ├─fonts.ts
+|    |          |   └site.ts
+|    |          ├─components
+|    |          |     ├─icons.tsx
+|    |          |     ├─navbar.tsx
+|    |          |     ├─primitives.ts
+|    |          |     ├─shareButton.tsx
+|    |          |     ├─themeSwitch.tsx
+|    |          |     ├─questions
+|    |          |     |     ├─questionCheckbox.tsx
+|    |          |     |     └questionRadio.tsx
+|    |          |     ├─question-ui
+|    |          |     |      ├─questionActions.tsx
+|    |          |     |      └questionWrapper.tsx
+|    |          ├─app
+|    |          |  ├─error.tsx
+|    |          |  ├─layout.tsx
+|    |          |  ├─page.tsx
+|    |          |  ├─providers.tsx
+|    |          |  ├─docs
+|    |          |  |  ├─layout.tsx
+|    |          |  |  └page.tsx
 |    ├─questionnaire-be
 |    |        ├─.DS_Store
 |    |        ├─.eslintrc.js
@@ -231,28 +278,6 @@ react-questionnaire
 |    |        |  |   |     └public.decorator.ts
 |    |        |  |   ├─classes
 |    |        |  |   |    └response-body.ts
-|    |        ├─logs
-|    |        |  ├─error
-|    |        |  |   ├─error.2024-12-20.log
-|    |        |  |   ├─error.2024-12-23.log
-|    |        |  |   ├─error.2024-12-25.log
-|    |        |  |   ├─error.2024-12-26.log
-|    |        |  |   ├─error.2024-12-27.log
-|    |        |  |   └error.2025-01-02.log
-|    |        |  ├─app-out
-|    |        |  |    ├─app.2024-12-20.log
-|    |        |  |    ├─app.2024-12-23.log
-|    |        |  |    ├─app.2024-12-25.log
-|    |        |  |    ├─app.2024-12-26.log
-|    |        |  |    ├─app.2024-12-27.log
-|    |        |  |    └app.2025-01-02.log
-|    |        |  ├─access
-|    |        |  |   ├─access.2024-12-20.log
-|    |        |  |   ├─access.2024-12-23.log
-|    |        |  |   ├─access.2024-12-25.log.gz
-|    |        |  |   ├─access.2024-12-26.log
-|    |        |  |   ├─access.2024-12-27.log
-|    |        |  |   └access.2025-01-02.log
 |    |        ├─db
 |    |        | ├─.DS_Store
 |    |        | └questionnaire_db.sql

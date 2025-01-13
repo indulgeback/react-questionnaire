@@ -3,14 +3,19 @@ import OpenAI from 'openai';
 import { Observable } from 'rxjs';
 import configuration from '@/config';
 
+enum Model {
+  deepseek = 'deepseek',
+  QwenMax = 'qwen-max',
+  QwenPlus = 'qwen-plus',
+}
+
 @Injectable()
 export class AiService {
   // OpenAI 客户端实例
   private readonly openai: OpenAI;
-  private readonly model: string;
-
+  private readonly model: Model;
   constructor() {
-    this.model = 'deepseek';
+    this.model = Model.QwenMax;
     // 初始化 OpenAI 客户端，配置 baseURL 和 apiKey
     this.openai = new OpenAI({
       baseURL: configuration().openai[this.model].baseURL,

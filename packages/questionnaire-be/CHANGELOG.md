@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.10.0](https://github.com/indulgeback/react-questionnaire/compare/v1.9.4...v1.10.0) (2025-01-13)
+
+
+### Performance Improvements
+
+* 大模型API类型枚举，切换模型为QwenMax ([1ad63c9](https://github.com/indulgeback/react-questionnaire/commit/1ad63c972f533d644e85c6e2c69578a8c2f1034f))
+
+
+
+
+
 ## [1.9.4](https://github.com/indulgeback/react-questionnaire/compare/v1.9.3...v1.9.4) (2025-01-03)
 
 **Note:** Version bump only for package @questionnaire/be

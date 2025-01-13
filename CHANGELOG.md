@@ -3,6 +3,35 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.10.0](https://github.com/indulgeback/react-questionnaire/compare/v1.9.4...v1.10.0) (2025-01-13)
+
+
+### Bug Fixes
+
+* CLIENT - 修复消息提示组件在初始化较早导致无法获取window的问题； ([9707eeb](https://github.com/indulgeback/react-questionnaire/commit/9707eebf2d780238a27fe2292e590b207edcee87))
+
+
+### Features
+
+* CLIENT - 答题页面与答题控制组件部分更新；引入消息提示库； ([2618aa9](https://github.com/indulgeback/react-questionnaire/commit/2618aa980bd8f13ee3c6d7c9be95e46047a87cda))
+* CLIENT - 客户端首页改造完成 ([c312145](https://github.com/indulgeback/react-questionnaire/commit/c312145bdc58de32182721f0485b5ea7c00cc32b))
+* CLIENT - 小木问卷新增客户端 ([2244f2c](https://github.com/indulgeback/react-questionnaire/commit/2244f2c225ac1021a219152f72ea842f90b7e898))
+* CLIENT - 移除无用组件；样式基础优化； ([c371dc2](https://github.com/indulgeback/react-questionnaire/commit/c371dc25da87c0604f9c82ce3f34b3c196d69dc5))
+* CLIENT - 增加icon依赖库 ([f165649](https://github.com/indulgeback/react-questionnaire/commit/f16564942b76d3499a7fd2aa8a2d3cb3e987b826))
+* FE - 新增问卷详情组件，与路由搭建 ([9066b55](https://github.com/indulgeback/react-questionnaire/commit/9066b5505bcab3f1d190cb8a503d8131121dd6ba))
+
+
+### Performance Improvements
+
+* 大模型API类型枚举，切换模型为QwenMax ([1ad63c9](https://github.com/indulgeback/react-questionnaire/commit/1ad63c972f533d644e85c6e2c69578a8c2f1034f))
+* 修改项目md ([f8c7470](https://github.com/indulgeback/react-questionnaire/commit/f8c74701484dcd39226b0277c9f1de9c8a821581))
+* CLIENT - 样式优化；功能组件名调整； ([bdd8a11](https://github.com/indulgeback/react-questionnaire/commit/bdd8a11549df5dd4fcadf0841b84b725a08e1cff))
+* FE - 优化前端接口TS标注 ([e9ad88f](https://github.com/indulgeback/react-questionnaire/commit/e9ad88fceedbab0736fba42009720bbe4cd5a90a))
+
+
+
+
+
 ## [1.9.4](https://github.com/indulgeback/react-questionnaire/compare/v1.9.3...v1.9.4) (2025-01-03)
 
 **Note:** Version bump only for package root

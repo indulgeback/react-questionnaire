@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.10.0](https://github.com/indulgeback/react-questionnaire/compare/v1.9.4...v1.10.0) (2025-01-13)
+
+
+### Features
+
+* FE - 新增问卷详情组件，与路由搭建 ([9066b55](https://github.com/indulgeback/react-questionnaire/commit/9066b5505bcab3f1d190cb8a503d8131121dd6ba))
+
+
+### Performance Improvements
+
+* FE - 优化前端接口TS标注 ([e9ad88f](https://github.com/indulgeback/react-questionnaire/commit/e9ad88fceedbab0736fba42009720bbe4cd5a90a))
+
+
+
+
+
 ## [1.9.4](https://github.com/indulgeback/react-questionnaire/compare/v1.9.3...v1.9.4) (2025-01-03)
 
 **Note:** Version bump only for package @questionnaire/fe

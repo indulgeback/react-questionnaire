@@ -7,8 +7,8 @@ import {
   NavbarBrand,
   NavbarItem,
   NavbarMenuItem
-} from "@nextui-org/navbar";
-import { Link } from "@nextui-org/link";
+} from "@heroui/navbar";
+import { Link } from "@heroui/link";
 import NextLink from "next/link";
 import { siteConfig } from "@/config/site";
 import ShareButton from "@/components/shareButton";

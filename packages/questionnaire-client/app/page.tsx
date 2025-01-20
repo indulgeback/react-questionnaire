@@ -1,7 +1,7 @@
-import { Link } from "@nextui-org/link";
+import { Link } from "@heroui/link";
 import React from "react";
 import { title, subtitle } from "@/components/primitives";
-import { Button } from "@nextui-org/button";
+import { Button } from "@heroui/button";
 import { PencilSquareIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
 export default function Home() {

@@ -16,9 +16,7 @@ export default defineConfig({
   resolve: {
     alias: {
       // 配置 '@' 别名指向 src 目录
-      '@': path.resolve(__dirname, 'src'),
-      // 配置共享模块的别名
-      '@questionnaire/shared': path.resolve(__dirname, '../shared/src')
+      '@': path.resolve(__dirname, 'src')
     }
   },
   // 配置开发服务器

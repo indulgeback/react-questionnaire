@@ -1,4 +1,5 @@
-@import "./customStyle.css";
+@import "./module/customHome.css";
+@import "./module/customEditor.css";
 
 @tailwind base;
 @tailwind components;

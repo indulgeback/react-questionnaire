@@ -5,9 +5,15 @@ import useLoadQuestionData from '@/hooks/useLoadQuestionData'
 const Edit: React.FC = () => {
   const { loading, data } = useLoadQuestionData()
   return (
-    <div>
-      <h1>Edit</h1>
-      <h1>{loading ? <p> loading </p> : <p>{JSON.stringify(data)}</p>}</h1>
+    <div className="h-full flex flex-col">
+      <div className="h-16 bg-custom-bg-300 shadow-md"></div>
+      <div className="flex-1 p-3">
+        <div className="h-full flex items-center justify-between">
+          <div className="bg-custom-bg-300 shadow-md custom-editor-sidebar rounded-r-lg"></div>
+          <div className="custom-questionnaire-container"></div>
+          <div className="bg-custom-bg-300 shadow-md custom-editor-sidebar rounded-l-lg"></div>
+        </div>
+      </div>
     </div>
   )
 }

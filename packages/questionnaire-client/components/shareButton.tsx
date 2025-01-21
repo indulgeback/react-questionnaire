@@ -15,7 +15,7 @@ const ShareButton = () => {
   return (
     <Popover placement="bottom">
       <PopoverTrigger>
-        <ShareIcon className="text-default-500 size-6" />
+        <ShareIcon className="text-default-500 size-6 cursor-pointer" />
       </PopoverTrigger>
       <PopoverContent>
         <Snippet color="secondary" variant="shadow" onCopy={copyShareLink}>

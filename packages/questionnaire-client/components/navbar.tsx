@@ -14,7 +14,7 @@ import { siteConfig } from "@/config/site";
 import ShareButton from "@/components/shareButton";
 import { ThemeSwitch } from "@/components/themeSwitch";
 import { GithubIcon, Logo } from "@/components/icons";
-
+import { Tooltip } from "@heroui/tooltip";
 export const Navbar = () => {
   return (
     <NextUINavbar maxWidth="xl" position="sticky">
@@ -29,9 +29,11 @@ export const Navbar = () => {
 
       <NavbarContent className="hidden sm:flex basis-1/5 sm:basis-full" justify="end">
         <NavbarItem className="hidden sm:flex gap-3">
-          <Link isExternal aria-label="Github" href={siteConfig.links.github}>
-            <GithubIcon className="text-default-500" />
-          </Link>
+          <Tooltip content="GitHub" showArrow={true}>
+            <Link isExternal aria-label="Github" href={siteConfig.links.github}>
+              <GithubIcon className="text-default-500" />
+            </Link>
+          </Tooltip>
           <ShareButton />
           <ThemeSwitch />
         </NavbarItem>

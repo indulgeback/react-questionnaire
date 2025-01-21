@@ -25,8 +25,8 @@ const QuestionActions = ({
       </Button>
       {isLastQuestion ? (
         <Button color="secondary" variant="shadow" onPress={onSubmit}>
-          提交问卷
           <SparklesIcon className="w-3 h-3" />
+          提交问卷
         </Button>
       ) : (
         <Button color="secondary" variant="shadow" onPress={onNext}>

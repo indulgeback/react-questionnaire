@@ -14,6 +14,7 @@ export type Question = {
 };
 
 export type QuestionContextType = {
+  questionList: Question[];
   question: Question;
   index: number;
 };

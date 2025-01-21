@@ -1,6 +1,7 @@
 import { ArrowRightIcon, ArrowLeftIcon, SparklesIcon } from "@heroicons/react/24/solid";
 import { Button } from "@heroui/button";
 import React from "react";
+import QuestionsStatus from "@/components/questionsStatus";
 
 type QuestionActionsProps = {
   onNext: () => void;
@@ -15,10 +16,10 @@ const QuestionActions = ({
   onPrev,
   onSubmit,
   isLastQuestion,
-  isFirstQuestion
+  isFirstQuestion = false
 }: QuestionActionsProps) => {
   return (
-    <div className="flex justify-center md:justify-end gap-16 mb-4">
+    <div className="relative flex justify-end gap-16 mb-4">
       <Button color="secondary" variant="shadow" isDisabled={isFirstQuestion} onPress={onPrev}>
         <ArrowLeftIcon className="w-3 h-3" />
         上一题
@@ -34,6 +35,9 @@ const QuestionActions = ({
           <ArrowRightIcon className="w-3 h-3" />
         </Button>
       )}
+      <div className="absolute left-0">
+        <QuestionsStatus />
+      </div>
     </div>
   );
 };

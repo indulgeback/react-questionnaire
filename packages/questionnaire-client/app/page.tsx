@@ -14,11 +14,9 @@ export default function Home() {
         <span className={clsx("mt-3", title({ fullWidth: true }))}>
           Create surveys effortlessly, no design skills needed.
         </span>
-        <div className={subtitle({ class: "mt-4" })}>
-          Simple, fast, and powerful survey creation tool.
-        </div>
-        <div className={subtitle({ class: "mt-4" })}>本次问卷主题: 校园暴力行为</div>
-        <div className={subtitle({ class: "mt-4" })}>发起人: IndulgeBack</div>
+        <div className={subtitle()}>Simple, fast, and powerful survey creation tool.</div>
+        <div className={subtitle()}>本次问卷主题: 校园暴力行为</div>
+        <div className={subtitle()}>发起人: IndulgeBack</div>
       </div>
 
       <div className="flex gap-3">
@@ -26,7 +24,7 @@ export default function Home() {
           className="bg-gradient-to-tr from-sky-500 to-pink-500 text-white shadow-lg"
           radius="full"
           as={Link}
-          href="/answer"
+          href="/question/1"
         >
           <PencilSquareIcon className="size-4" />
           填写问卷

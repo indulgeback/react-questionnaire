@@ -12,7 +12,7 @@ const AnswerPage = () => {
     {
       id: 1,
       type: "base_info",
-      question: "dwadawdawdawdawdawdawdawdawdawdawawdawdawdawdwawda"
+      question: "邮箱"
     },
     {
       id: 2,

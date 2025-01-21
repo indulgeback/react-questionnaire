@@ -1,6 +1,6 @@
 import React from "react";
 import { Chip } from "@heroui/chip";
-import { QuestionType, Question } from "@/types/question";
+import { QuestionType, Question, questionTypeMap } from "@/types/question";
 import QuestionBaseInfo from "@/components/question-type/questionBaseInfo";
 import QuestionTrueOfFalse from "@/components/question-type/questionTrueOrFalse";
 import QuestionMultipleChoice from "@/components/question-type/questionMultipleChoice";
@@ -25,12 +25,12 @@ const QuestionRenderer = ({ question }: { question: Question }) => {
   const { id, type } = question;
 
   return (
-    <div className="flex relative pl-8">
-      <Chip className="absolute left-[-12px] top-[-2px]" color="secondary" variant="flat">
-        {id}
+    <>
+      <Chip color="secondary" variant="flat">
+        {id} [{questionTypeMap[type as QuestionType]}]
       </Chip>
       <QuestionRenderSelector type={type as QuestionType} />
-    </div>
+    </>
   );
 };
 

@@ -18,7 +18,8 @@ services:
       - "8879:8879"  # 将主机的 8879 端口映射到容器的 8879 端口
     depends_on:
       - redis
-      - db
+      - mysql
+      - mongo
     environment:
       # 你可以在这里添加后端需要的环境变量
       - NODE_ENV=docker
@@ -26,17 +27,15 @@ services:
       - REDIS_HOST=redis
       - TZ=Asia/Shanghai  # 设置时区为上海
     # 如果有数据库或其他外部服务，可以在这里指定它们
-    # networks:
-    #   - mynetwork
-    # volumes:
-    #   - ./packages/questionnaire-be/logs:/app/logs
+    volumes:
+      - backend_logs:/app/logs
 
   redis:
     image: redis:latest
     ports:
       - "6379:6379"
 
-  db:
+  mysql:
     image: mysql:8.0
     ports:
       - "3307:3307"
@@ -47,5 +46,19 @@ services:
       - TZ=Asia/Shanghai  # 设置时区为上海
     volumes:
       - db_data:/var/lib/mysql
+
+  mongo:
+    image: mongo:6.0
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=12345678
+      - TZ=Asia/Shanghai  # 设置时区为上海
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db  
+
 volumes:
   db_data:
+  mongodb_data:
+  backend_logs:

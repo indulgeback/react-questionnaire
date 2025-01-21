@@ -2,8 +2,8 @@
 
 import React from "react";
 import { ShareIcon } from "@heroicons/react/24/solid";
-import { Popover, PopoverContent, PopoverTrigger } from "@nextui-org/popover";
-import { Snippet } from "@nextui-org/snippet";
+import { Popover, PopoverContent, PopoverTrigger } from "@heroui/popover";
+import { Snippet } from "@heroui/snippet";
 import useNotyf from "@/hooks/useNotyf";
 
 const ShareButton = () => {
@@ -15,7 +15,7 @@ const ShareButton = () => {
   return (
     <Popover placement="bottom">
       <PopoverTrigger>
-        <ShareIcon className="text-default-500 size-6" />
+        <ShareIcon className="text-default-500 size-6 cursor-pointer" />
       </PopoverTrigger>
       <PopoverContent>
         <Snippet color="secondary" variant="shadow" onCopy={copyShareLink}>

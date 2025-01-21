@@ -19,7 +19,7 @@ const QuestionMatrix = () => {
   const { getAnsweredStatus } = useAnswerStore();
   const answeredStatus = getAnsweredStatus(questionnaire.map(question => question.id));
   const toAnswer = (questionId: number) => {
-    router.push(`/answer/${questionId}`);
+    router.push(`/question/${questionId}`);
   };
 
   return (

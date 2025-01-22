@@ -138,3 +138,16 @@
     -webkit-text-fill-color: transparent;
     margin-bottom: 20px;
 }
+
+/* 隐藏滚动条 */
+.custom-no-scrollbar::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari, Opera */
+}
+
+.custom-no-scrollbar {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}

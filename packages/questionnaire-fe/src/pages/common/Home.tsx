@@ -51,8 +51,11 @@ const Home: React.FC = () => {
           <div className="custom-main-title mb-5" id="title">
             问卷调查 | 在线投票
           </div>
-          <div className="mb-5 text-lg" id="description">
-            已累计创建问卷 100👧 份，发布问卷 87🧒 份，收到答卷 1800📃 份
+          <div
+            className="mb-5 text-2xl bg-clip-text text-transparent bg-gradient-to-tr from-[#273339] to-[#738e9d]"
+            id="description"
+          >
+            Create surveys effortlessly, no design skills needed.
           </div>
           <div id="startBtn" className="flex gap-4 justify-center">
             <Button type="dashed" onClick={() => nav(MANAGE_MARKET_PATH)}>

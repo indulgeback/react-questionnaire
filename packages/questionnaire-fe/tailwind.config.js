@@ -11,7 +11,7 @@ module.exports = {
         'custom-accent-200': 'rgb(67, 164, 155)',
         'custom-text-100': 'rgb(38, 51, 57)',
         'custom-text-200': 'rgb(114, 143, 158)',
-        'custom-bg-100': 'rgb(247, 248, 250)',
+        'custom-bg-100': 'rgb(240, 241, 245)',
         'custom-bg-200': 'rgb(208, 235, 234)',
         'custom-bg-300': 'rgb(255, 255, 255)',
         'custom-blue': 'rgb(24, 144, 255)',

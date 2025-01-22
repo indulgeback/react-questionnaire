@@ -14,7 +14,7 @@
     "postversion": "node scripts/postVersion.js",
     "lint": "pnpm -F @questionnaire/fe lint && pnpm -F @questionnaire/be lint",
     "format": "pnpm -F @questionnaire/fe format && pnpm -F @questionnaire/be format",
-    "stat": "cloc --include-lang=JavaScript,TypeScript,SCSS --exclude-dir='node_modules,dist,build,.next' .",
+    "stat": "cloc --include-lang=JavaScript,TypeScript,SCSS,CSS,Markdown --exclude-dir='node_modules,dist,build,.next' .",
     "build:docker-compose:dev": "docker-compose down && docker-compose up --build -d",
     "build:docker-images-and-push-to-registry": "node scripts/buildAndPushImageWithLernaVersion.js"
   },

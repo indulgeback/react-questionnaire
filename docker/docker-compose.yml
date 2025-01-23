@@ -40,7 +40,7 @@ services:
       - MYSQL_DATABASE=questionnaire_db
       - TZ=Asia/Shanghai  # 设置时区为上海
     volumes:
-      - db_data:/var/lib/mysql
+      - mysql_data:/var/lib/mysql
 
   mongo:
     image: mongo:6.0
@@ -54,4 +54,6 @@ services:
       - mongodb_data:/data/db  
 
 volumes:
-  db_data:
+  mysql_data:
+  mongodb_data:
+  backend_logs:

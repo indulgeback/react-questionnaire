@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.11.0](https://github.com/indulgeback/react-questionnaire/compare/v1.10.0...v1.11.0) (2025-01-23)
+
+
+### Features
+
+* FE - 问卷编辑器布局初始化 ([199f6fd](https://github.com/indulgeback/react-questionnaire/commit/199f6fd37bf0bf776248f5d922b018f829cc668d))
+* FE - 问卷编辑器布局初始化；添加编辑器按钮通用组件； ([b22bb9c](https://github.com/indulgeback/react-questionnaire/commit/b22bb9c83bb001f5dc0a9ba0142b0b506079913c))
+* FE - 问卷编辑器集成ai弹框能力；样式修复； ([80441d0](https://github.com/indulgeback/react-questionnaire/commit/80441d0ac7d4d9da8d5326db0ccc00ff81ff5cef))
+
+
+### Performance Improvements
+
+* FE - 样式优化与文案修复 ([9e197c5](https://github.com/indulgeback/react-questionnaire/commit/9e197c5215a4ec4de758ef252b36e9bbea913901))
+
+
+
+
+
 # [1.10.0](https://github.com/indulgeback/react-questionnaire/compare/v1.9.4...v1.10.0) (2025-01-13)
 
 

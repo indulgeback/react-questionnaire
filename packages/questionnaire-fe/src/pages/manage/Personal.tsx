@@ -45,7 +45,6 @@ const List: React.FC = () => {
 
   // 当数据加载完成时更新 questionList
   useEffect(() => {
-    console.log('res', res)
     if (res && res.data.list) {
       if (currentView === 1) {
         setQuestionList(res.data.list)

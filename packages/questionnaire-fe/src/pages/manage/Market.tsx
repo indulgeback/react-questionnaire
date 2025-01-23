@@ -18,7 +18,7 @@ const { Title } = Typography
 const stepSize = 20
 
 const Market: React.FC = () => {
-  useTitle('小木问卷 - 我的问卷')
+  useTitle('小木问卷 - 问卷市场')
   const bottomRef = useRef(null)
   const [currentView, setCurrentView] = useState(1)
   const [questionList, setQuestionList] = useState<Question[]>([])
@@ -45,7 +45,6 @@ const Market: React.FC = () => {
 
   // 当数据加载完成时更新 questionList
   useEffect(() => {
-    console.log('res', res)
     if (res && res?.data?.list) {
       if (currentView === 1) {
         setQuestionList(res.data.list)

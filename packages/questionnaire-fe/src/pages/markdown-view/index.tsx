@@ -25,7 +25,6 @@ const MarkdownView: React.FC = () => {
 
     handleStopClickRef.current = () => {
       // 取消生成
-      console.log('取消生成')
       close()
       setIsGenerating(false)
       setQuestionJsonStr('')

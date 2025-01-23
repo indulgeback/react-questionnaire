@@ -1,23 +1,59 @@
-import EditorButton from '@/components/Editor/IconButton'
-import React from 'react'
+import { LeftOutlined, SendOutlined } from '@ant-design/icons'
+import { Button, Tooltip } from 'antd'
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import EditorButtonGroup from '@/pages/question/Edit/components/EditorButtonGroup'
+import { operationType } from '@/pages/question/Edit/components/type'
+import GenerateDialog from '@/pages/question/Edit/components/GenerrateDialog'
+import useGenerateDialog from '@/pages/question/Edit/hooks/useGenerateDialog'
 
 const Edit: React.FC = () => {
+  const navigate = useNavigate()
+
+  const { isGenerateDialogOpen, openGenerateDialog, closeGenerateDialog } = useGenerateDialog()
+
+  const operationMap = {
+    [operationType.generate]: openGenerateDialog,
+    [operationType.copy]: () => {
+      return
+    },
+    [operationType.save]: () => {
+      return
+    },
+    [operationType.back]: () => {
+      return
+    },
+    [operationType.forward]: () => {
+      return
+    }
+  }
+
+  const operation = (type: operationType) => {
+    operationMap[type]()
+  }
+
   return (
     <div className="w-full h-screen bg-custom-bg-100 flex flex-col">
-      <div className="h-16 flex justify-center items-center gap-4">
-        <EditorButton icon="github" activeIcon="gitee" />
-        <EditorButton icon="github" activeIcon="gitee" />
-        <EditorButton icon="github" activeIcon="gitee" />
-        <EditorButton icon="github" activeIcon="gitee" />
-        <EditorButton icon="github" activeIcon="gitee" />
-        <EditorButton icon="github" activeIcon="gitee" />
-        <EditorButton icon="github" activeIcon="gitee" />
-        <EditorButton icon="github" activeIcon="gitee" />
-        <EditorButton icon="github" activeIcon="gitee" />
-        <EditorButton icon="github" activeIcon="gitee" />
+      <div className="h-16 flex justify-between items-center">
+        <div className="size-10 flex justify-center items-center ml-4">
+          <Tooltip title="返回">
+            <Button shape="circle" icon={<LeftOutlined />} onClick={() => navigate(-1)} />
+          </Tooltip>
+        </div>
+        <div className="flex justify-center items-center gap-4 mx-auto">
+          <EditorButtonGroup operation={operation} />
+          <GenerateDialog isOpen={isGenerateDialogOpen} close={closeGenerateDialog} />
+        </div>
+        <div className="size-10 flex justify-center items-center mr-4">
+          <Tooltip title="提交问卷">
+            <Button shape="circle" icon={<SendOutlined />} />
+          </Tooltip>
+        </div>
       </div>
       <div className="flex-1 flex justify-between p-2">
-        <div className="w-[300px] bg-custom-bg-300 rounded-r-lg"></div>
+        <div className="w-[350px] bg-custom-bg-300 rounded-r-lg shadow-2xl p-2">
+          <p>物料市场</p>
+        </div>
         <div className="flex justify-center items-center">
           <div className="w-[324px] h-[663px] rounded-t-[30px] rounded-b-[40px] p-[10px] shadow-2xl bg-custom-bg-100 border-custom-bg-300 border-8 overflow-y-scroll custom-no-scrollbar">
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa nesciunt enim voluptatem
@@ -111,7 +147,9 @@ const Edit: React.FC = () => {
             alias autem!
           </div>
         </div>
-        <div className="w-[300px] bg-custom-bg-300 rounded-l-lg"></div>
+        <div className="w-[350px] bg-custom-bg-300 rounded-l-lg shadow-2xl p-2">
+          <p>物料配置</p>
+        </div>
       </div>
     </div>
   )

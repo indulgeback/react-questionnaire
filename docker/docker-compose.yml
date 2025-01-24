@@ -18,7 +18,7 @@ services:
       - mongo
     environment:
       - NODE_ENV=docker
-      - MYSQL_HOST=db
+      - MYSQL_HOST=mysql
       - REDIS_HOST=redis
       - TZ=Asia/Shanghai  # 设置时区为上海
     # 如果有数据库或其他外部服务，可以在这里指定它们

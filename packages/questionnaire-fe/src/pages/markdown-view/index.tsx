@@ -5,7 +5,7 @@ import { Input, Button } from 'antd'
 import { useNavigate } from 'react-router-dom'
 import { HOME_PATH } from '@/router'
 import regexp from '@/utils/regexp'
-import { debounce, throttle } from '@/utils'
+import { throttle } from '@/utils'
 
 const MarkdownView: React.FC = () => {
   const [questionJsonStr, setQuestionJsonStr] = useState('')

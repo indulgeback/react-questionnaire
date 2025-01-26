@@ -16,7 +16,8 @@ interface GenerateDialogProps {
 let isFirstOpen = true
 
 // 对话框标题组件 - 使用 memo 优化性能，避免不必要的重渲染
-const GenerateDialogTitle = React.memo(({ title }: { title: string }) => {
+const GenerateDialogTitle = React.memo((props: { title: string }) => {
+  const { title } = props
   return (
     <div className="inline-flex items-center gap-1 relative">
       {/* Lottie 动画容器 */}
@@ -30,7 +31,8 @@ const GenerateDialogTitle = React.memo(({ title }: { title: string }) => {
 
 GenerateDialogTitle.displayName = 'GenerateDialogTitle'
 
-const GenerateDialog = ({ isOpen, close }: GenerateDialogProps) => {
+const GenerateDialog = (props: GenerateDialogProps) => {
+  const { isOpen, close } = props
   // 用于存储停止生成的回调函数
   const handleStopClickRef = useRef<() => void>(() => {
     return

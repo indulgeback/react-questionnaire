@@ -6,7 +6,8 @@ interface EditorButtonGroupProps {
   operation: (type: operationType) => void
 }
 
-const EditorButtonGroup = ({ operation }: EditorButtonGroupProps) => {
+const EditorButtonGroup = (props: EditorButtonGroupProps) => {
+  const { operation } = props
   return (
     <>
       <EditorButton

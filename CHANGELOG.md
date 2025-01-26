@@ -3,6 +3,35 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.11.0](https://github.com/indulgeback/react-questionnaire/compare/v1.10.0...v1.11.0) (2025-01-23)
+
+
+### Bug Fixes
+
+* CLINET - 修复问卷填写状态弹框跳转路径BUG ([0fd601f](https://github.com/indulgeback/react-questionnaire/commit/0fd601f03b131839c63a07cf5afff688637a3d47))
+
+
+### Features
+
+* CLIENT - 客户端组件库迁移；渲染器设计与基础实现； ([ae54331](https://github.com/indulgeback/react-questionnaire/commit/ae543316c0d4615eae021dff8997ee59fe76fffe))
+* CLIENT - 问卷答案收集的store ([3a25c07](https://github.com/indulgeback/react-questionnaire/commit/3a25c07ce15f126548e6fdc971de22ad95be6cfd))
+* FE - 问卷编辑器布局初始化 ([199f6fd](https://github.com/indulgeback/react-questionnaire/commit/199f6fd37bf0bf776248f5d922b018f829cc668d))
+* FE - 问卷编辑器布局初始化；添加编辑器按钮通用组件； ([b22bb9c](https://github.com/indulgeback/react-questionnaire/commit/b22bb9c83bb001f5dc0a9ba0142b0b506079913c))
+* FE - 问卷编辑器集成ai弹框能力；样式修复； ([80441d0](https://github.com/indulgeback/react-questionnaire/commit/80441d0ac7d4d9da8d5326db0ccc00ff81ff5cef))
+
+
+### Performance Improvements
+
+* CLIENT - 顶栏图标提示优化 ([a699823](https://github.com/indulgeback/react-questionnaire/commit/a699823f4431b4cda3ba05e638a4779e152b3e03))
+* CLIENT - 问题类型UI显示优化 ([4d2a420](https://github.com/indulgeback/react-questionnaire/commit/4d2a42005519830d19a7722040da5ae1688d298c))
+* CLINET - 基础信息框样式优化 ([86c6f3c](https://github.com/indulgeback/react-questionnaire/commit/86c6f3c01dcfdb63ce207c3599e46f26d9c13891))
+* CLINET - 客户端渲染逻辑优化；引入mongodb库； ([260e7fd](https://github.com/indulgeback/react-questionnaire/commit/260e7fdc235f007041d2bab33190b536bb6b6e48))
+* FE - 样式优化与文案修复 ([9e197c5](https://github.com/indulgeback/react-questionnaire/commit/9e197c5215a4ec4de758ef252b36e9bbea913901))
+
+
+
+
+
 # [1.10.0](https://github.com/indulgeback/react-questionnaire/compare/v1.9.4...v1.10.0) (2025-01-13)
 
 

@@ -135,12 +135,19 @@ ${question.answer ? `- 答案：${question.answer}` : ''}
     close()
     setIsGenerating(false)
     setFormattedContent('')
+    isFirstOpen = true
     setTheme('')
+    handleStopClickRef.current()
+  }
+
+  const onCancel = () => {
+    isFirstOpen = true
     handleStopClickRef.current()
   }
 
   return (
     <Modal
+      className="top-16"
       title={<GenerateDialogTitle title={dialogTitle} />}
       width={1000}
       open={isOpen}
@@ -164,7 +171,7 @@ ${question.answer ? `- 答案：${question.answer}` : ''}
           >
             生成问卷
           </Button>
-          <Button className="ml-4" type="default" onClick={() => handleStopClickRef.current()}>
+          <Button className="ml-4" type="default" onClick={onCancel}>
             取消生成
           </Button>
         </div>

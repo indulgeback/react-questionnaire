@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { MANAGE_MARKET_PATH, MARKDOWN_VIEW_PATH } from '@/router'
+import { MANAGE_MARKET_PATH } from '@/router'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { Button } from 'antd'
@@ -60,9 +60,6 @@ const Home: React.FC = () => {
           <div id="startBtn" className="flex gap-4 justify-center">
             <Button type="dashed" onClick={() => nav(MANAGE_MARKET_PATH)}>
               START USE
-            </Button>
-            <Button type="dashed" onClick={() => nav(MARKDOWN_VIEW_PATH)}>
-              TRY AI
             </Button>
           </div>
         </div>

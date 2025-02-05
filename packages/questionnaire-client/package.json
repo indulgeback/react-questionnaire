@@ -26,6 +26,7 @@
 		"@heroui/switch": "2.2.9",
 		"@heroui/system": "2.4.7",
 		"@heroui/theme": "2.4.6",
+		"@heroui/tooltip": "^2.2.8",
 		"@react-aria/ssr": "3.9.7",
 		"@react-aria/visually-hidden": "3.8.18",
 		"clsx": "2.1.1",

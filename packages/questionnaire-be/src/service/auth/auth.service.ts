@@ -5,6 +5,7 @@ import User from '@/common/entities/user.entity';
 import { Repository } from 'typeorm';
 import RegisterUserDto from '@/service/auth/dto/register-user.dto';
 import LoginDto from '@/service/auth/dto/login.dto';
+import ChangePasswordDto from '@/service/auth/dto/change-password';
 import * as bcrypt from 'bcryptjs';
 
 @Injectable()
@@ -48,6 +49,13 @@ export class AuthService {
     });
   }
 
+  // 根据用户id查找用户
+  async findById(userId: number) {
+    return await this.userRepository.findOne({
+      where: { id: userId },
+    });
+  }
+
   // 验证密码
   async comparePassword(loginDto: LoginDto) {
     const user = await this.findByEmail(loginDto.email);
@@ -61,5 +69,31 @@ export class AuthService {
   // 生成 Token
   createToken(data) {
     return this.jwtService.sign(data);
+  }
+
+  // 注销账户
+  async deleteAccount(userId: number) {
+    return await this.userRepository.delete(userId);
+  }
+
+  // 修改密码
+  async changePassword(userId: number, changePasswordDto: ChangePasswordDto) {
+    const { oldPassword, newPassword, confirmPassword } = changePasswordDto;
+    const user = await this.findById(userId);
+    if (!user) {
+      throw new Error('用户不存在');
+    }
+    if (newPassword !== confirmPassword) {
+      throw new Error('新密码与确认密码不一致');
+    }
+    if (!(await bcrypt.compare(oldPassword, user.password))) {
+      throw new Error('旧密码错误');
+    }
+    const saltRounds = 10; // 盐的轮数
+    // 撒盐加密
+    const hashNewPassword = await bcrypt.hash(newPassword, saltRounds);
+    return await this.userRepository.update(userId, {
+      password: hashNewPassword,
+    });
   }
 }

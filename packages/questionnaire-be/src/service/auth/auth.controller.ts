@@ -1,14 +1,15 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Delete } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import RegisterUserDto from './dto/register-user.dto';
 import LoginDto from './dto/login.dto';
+import ChangePasswordDto from './dto/change-password';
+
 import { ResponseBody } from '@/common/classes/response-body';
 import { Public } from '@/common/decorators/public.decorator';
 import {
   currentUser,
   UserToken,
 } from '@/common/decorators/current-user.decorator';
-
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
@@ -66,6 +67,26 @@ export class AuthController {
       );
     } catch (error) {
       return new ResponseBody<null>(0, null, error.message);
+    }
+  }
+
+  @Post('changePassword')
+  async changePassword(
+    @currentUser() user: UserToken,
+    @Body() changePasswordDto: ChangePasswordDto,
+  ) {
+    const { userId } = user;
+    this.authService.changePassword(userId, changePasswordDto);
+  }
+
+  @Delete('delete')
+  async deleteAccount(@currentUser() user: UserToken) {
+    const { userId } = user;
+    try {
+      this.authService.deleteAccount(userId);
+      return new ResponseBody<null>(1, null, '注销账户成功');
+    } catch (error) {
+      return new ResponseBody<null>(0, null, '注销账户失败');
     }
   }
 }

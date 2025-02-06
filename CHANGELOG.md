@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.12.0](https://github.com/indulgeback/react-questionnaire/compare/v1.11.0...v1.12.0) (2025-01-31)
+
+
+### Bug Fixes
+
+* FE - 修复生成问卷弹框样式及逻辑问题 ([60ce299](https://github.com/indulgeback/react-questionnaire/commit/60ce299765154ead185618df1476a06f85175025))
+
+
+### Features
+
+* 修改服务器端docker-compose ([dfda319](https://github.com/indulgeback/react-questionnaire/commit/dfda319181399503bb4c950621b3964984db457d))
+* 移除ai体验接口 ([541a632](https://github.com/indulgeback/react-questionnaire/commit/541a632269c2831737da43785443b4265ddfd5a8))
+* FE - 新增问卷编辑器组件，标题 ([0323f59](https://github.com/indulgeback/react-questionnaire/commit/0323f59178297e93dbe6081a78009442d8c11aac))
+
+
+
+
+
 # [1.11.0](https://github.com/indulgeback/react-questionnaire/compare/v1.10.0...v1.11.0) (2025-01-23)
 
 

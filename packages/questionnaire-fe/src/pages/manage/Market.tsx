@@ -36,7 +36,7 @@ const Market: React.FC = () => {
     currentView,
     stepSize,
     search,
-    type: QuestionListType.all
+    type: QuestionListType.ALL
   })
 
   const { userInfo } = useSelector((state: RootState) => state.profile)

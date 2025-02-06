@@ -36,7 +36,7 @@ const List: React.FC = () => {
     currentView,
     stepSize,
     search,
-    type: QuestionListType.personal
+    type: QuestionListType.PERSONAL
   })
 
   const { userInfo } = useSelector((state: RootState) => state.profile)

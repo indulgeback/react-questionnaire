@@ -1,6 +1,6 @@
 export const enum QuestionListType {
-  all = 'all',
-  personal = 'personal',
+  ALL = 'all',
+  PERSONAL = 'personal',
   FAVORATE = 'favorate'
 }
 

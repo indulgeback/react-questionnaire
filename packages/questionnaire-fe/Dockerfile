@@ -13,14 +13,11 @@ RUN pnpm config set registry https://registry.npmmirror.com
 # 复制 monorepo 的根配置文件
 COPY pnpm-workspace.yaml package.json pnpm-lock.yaml ./
 
-# 复制前端项目的依赖文件
-COPY packages/questionnaire-fe/package.json ./packages/questionnaire-fe/package.json
+# 复制前端项目源码
+COPY packages/questionnaire-fe ./packages/questionnaire-fe
 
 # 安装依赖（根目录和前端项目）
 RUN pnpm install -r --filter ./packages/questionnaire-fe
-
-# 复制前端项目源码
-COPY packages/questionnaire-fe ./packages/questionnaire-fe
 
 # 进入前端项目目录并构建
 WORKDIR /app/packages/questionnaire-fe

@@ -6,10 +6,11 @@
 
 - **前端(PC 端前台)**：React18
 - **前端(移动端前台)**：NextJS
-- **后端**：NestJS + MySQL + MongoDB + Redis
+- **后端**：NestJS
+- **数据库**：MySQL + MongoDB + Redis
 - **AI 模型**：DeepSeek Chat
 - **动画库**：GSAP + lottie web
-- **UI 库**：Ant Design + TailwindCSS
+- **UI 库**：Ant Design + HeroUI + TailwindCSS
 - **前端构建工具**：Vite + SWC
 - **包管理器**：pnpm
 - **版本管理**：Lerna
@@ -21,9 +22,9 @@
 #### 软件架构
 
 - 目录树：查看 `/doc/structure-tree.txt`
+- API 接口文档地址：查看 `/doc/apifox接口文档.txt`
 - 架构图：查看 `/doc/小木问卷软件架构图.pdf`
 - ER 图：查看 `/doc/ER.dio`
-- 数据流图：查看 `/doc/DFD.dio`
 
 #### 安装教程
 
@@ -46,14 +47,15 @@ chmod +x .husky/*
 ```json
 "scripts": {
     "dev:fe": "pnpm -F @questionnaire/fe dev", // 前端服务开发模式
+    "dev:client": "pnpm -F @questionnaire/client dev", // 移动端前端服务开发模式
     "dev:be": "pnpm -F @questionnaire/be start:dev", // 后端服务开发模式
-    "generate-tree": "npx treer -e ./doc/structure-tree.txt -i \"/node_modules|.git|dist/\"", // 生成目录树
+    "generate-tree": "npx treer -e ./doc/structure-tree.txt -i \"/node_modules|.git|dist|.next|logs/\"", // 生成目录树
     "prepare": "husky install", // 预装 husky
     "version": "npx lerna version --conventional-commits --no-git-tag-version --force-publish=*", // 发布版本号
-    "postversion": "git add . && git commit -m 'chore: bump versions' && git tag v`node -p \"require('./lerna.json').version\"` && git push && git push origin --tags", // 发布版本号后，自动打 tag
+    "postversion": "node scripts/postVersion.js", // 发布版本号后，自动打 tag
     "lint": "pnpm -F @questionnaire/fe lint && pnpm -F @questionnaire/be lint", // eslint 校验
     "format": "pnpm -F @questionnaire/fe format && pnpm -F @questionnaire/be format", // prettier 格式化代码
-    "stat": "cloc --include-lang=JavaScript,TypeScript,SCSS --exclude-dir=node_modules,dist,build .", // 统计代码行数
+    "stat": "cloc --include-lang=JavaScript,TypeScript,SCSS,CSS,Markdown --exclude-dir='node_modules,dist,build,.next' .", // 统计代码行数
     "build:docker-compose:dev": "docker-compose down && docker-compose up --build -d", // 构建docker-compose
     "build:docker-images-and-push-to-registry": "node scripts/buildAndPushImageWithLernaVersion.js" // 构建docker镜像并推送到镜像仓库
 }

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.13.0](https://github.com/indulgeback/react-questionnaire/compare/v1.12.0...v1.13.0) (2025-02-06)
+
+
+### Features
+
+* BE - 修改密码与注销账户接口 ([2f7fb05](https://github.com/indulgeback/react-questionnaire/commit/2f7fb05eb4c6540b40a4a798469f6813b2a9db3d))
+
+
+
+
+
 # [1.12.0](https://github.com/indulgeback/react-questionnaire/compare/v1.11.0...v1.12.0) (2025-01-31)
 
 **Note:** Version bump only for package @questionnaire/be

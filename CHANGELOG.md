@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.13.0](https://github.com/indulgeback/react-questionnaire/compare/v1.12.0...v1.13.0) (2025-02-06)
+
+
+### Bug Fixes
+
+* CLIENT - 修复客户端tooltip依赖缺失问题 ([2f100e3](https://github.com/indulgeback/react-questionnaire/commit/2f100e32d2f0c2131ea46db42caffa7e62192335))
+* FE - 修复问卷列表类型格式问题 ([f43e66b](https://github.com/indulgeback/react-questionnaire/commit/f43e66b215af184fa1a7284978244ec3a41e7241))
+
+
+### Features
+
+* BE - 修改密码与注销账户接口 ([2f7fb05](https://github.com/indulgeback/react-questionnaire/commit/2f7fb05eb4c6540b40a4a798469f6813b2a9db3d))
+* FE - 前端个人信息页静态搭建完成 ([ab0d08f](https://github.com/indulgeback/react-questionnaire/commit/ab0d08f554e2ae185f03190e8b6273859dd4fa89))
+
+
+
+
+
 # [1.12.0](https://github.com/indulgeback/react-questionnaire/compare/v1.11.0...v1.12.0) (2025-01-31)
 
 

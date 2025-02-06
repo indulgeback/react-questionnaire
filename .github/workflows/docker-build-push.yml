@@ -54,7 +54,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .
-          file: ${ secrets.FRONTEND_DOCKERFILE_PATH } # 替换为前端 Dockerfile 的路径
+          file: ${{ secrets.FRONTEND_DOCKERFILE_PATH }} # 替换为前端 Dockerfile 的路径
           platforms: linux/amd64,linux/arm64 # 构建多平台镜像
           push: true
           tags: ${{ secrets.ALIYUN_REGISTRY_URL }}/${{ secrets.FRONTEND_IMAGE_NAME }}:${{ steps.get-version.outputs.version }}
@@ -64,7 +64,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .
-          file: ${ secrets.BACKEND_DOCKERFILE_PATH } # 替换为后端 Dockerfile 的路径
+          file: ${{ secrets.BACKEND_DOCKERFILE_PATH }} # 替换为后端 Dockerfile 的路径
           platforms: linux/amd64,linux/arm64 # 构建多平台镜像
           push: true
           tags: ${{ secrets.ALIYUN_REGISTRY_URL }}/${{ secrets.BACKEND_IMAGE_NAME }}:${{ steps.get-version.outputs.version }}

@@ -10,6 +10,7 @@ import zhCN from 'antd/es/locale/zh_CN'
 const themeConfig = {
   token: {
     colorPrimary: '#26A69A',
+    colorDanger: '#fe5a55',
     colorText: '#263339',
     colorTextDisabled: '#728f9e'
   },

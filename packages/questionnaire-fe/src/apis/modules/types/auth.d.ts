@@ -11,3 +11,9 @@ export interface UserProfile {
   bio: string
   createTime: string
 }
+
+export interface ChangePasswordParams {
+  oldPassword: string
+  newPassword: string
+  confirmPassword: string
+}

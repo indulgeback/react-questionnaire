@@ -1,6 +1,6 @@
 import request from '@/utils/request'
 import { RespType } from './types/common'
-import { UserInfo, UserProfile } from './types/auth'
+import { UserInfo, UserProfile, ChangePasswordParams } from './types/auth'
 
 // 统一前缀
 const prefix = '/api/auth'
@@ -20,8 +20,21 @@ const login = (data: UserInfo) => request.post<any, RespType<any>>(`${prefix}/lo
  */
 const getUserInfo = () => request.get<any, RespType<UserProfile>>(`${prefix}/info`)
 
+/**
+ * 修改密码
+ */
+const changePassword = (data: ChangePasswordParams) =>
+  request.post<any, RespType<any>>(`${prefix}/changePassword`, data)
+
+/**
+ * 注销账户
+ */
+const deleteAccount = (id: string) => request.delete<any, RespType<any>>(`${prefix}/delete/${id}`)
+
 export default {
   register,
   login,
-  getUserInfo
+  getUserInfo,
+  changePassword,
+  deleteAccount
 }

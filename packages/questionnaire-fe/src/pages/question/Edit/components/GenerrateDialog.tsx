@@ -111,6 +111,7 @@ ${question.answer ? `- 答案：${question.answer}` : ''}
     onMessage(data => {
       if (data === '{[DONE]}') {
         close()
+        printCurQuestionThrottled(data)
         setIsGenerating(false)
         return
       } else {

@@ -7,6 +7,8 @@ enum Model {
   deepseek = 'deepseek',
   QwenMax = 'qwen-max',
   QwenPlus = 'qwen-plus',
+  DeepseekR1 = 'deepseek-r1',
+  DeepseekV3 = 'deepseek-v3',
 }
 
 @Injectable()

@@ -6,18 +6,12 @@ import QuestionWrapper from "@/components/question-ui/questionWrapper";
 import { QuestionContext } from "@/contexts/Question";
 import React, { useEffect, useState } from "react";
 import { Question, QuestionContextType } from "@/types/question";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 
-// 定义组件的 props 类型
-interface QuestionPageProps {
-  params: Promise<{
-    id: string; // 路由参数 id
-  }>;
-}
-
-const QuestionPage = ({ params }: QuestionPageProps) => {
+const QuestionPage = () => {
   const router = useRouter();
-  const { id } = React.use(params);
+  const params = useParams();
+  const id = params?.id as string;
 
   const [questionnaireData, setQuestionnaireData] = useState<Question[]>(
     Array.from({ length: 100 }, (_, index) => ({

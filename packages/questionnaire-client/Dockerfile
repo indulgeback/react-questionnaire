@@ -24,7 +24,7 @@ WORKDIR /app/packages/questionnaire-client
 RUN pnpm build
 
 # 生产阶段
-FROM node:22-slim
+FROM node:22-alpine
 
 # 设置工作目录
 WORKDIR /app
@@ -39,7 +39,7 @@ COPY --from=build-stage /app/packages/questionnaire-client/next.config.js ./
 RUN npm install --production
 
 # 暴露端口
-EXPOSE 3000
+EXPOSE 8878
 
 # 启动应用
 CMD ["npm", "start"]

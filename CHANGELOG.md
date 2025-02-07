@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.13.6](https://github.com/indulgeback/react-questionnaire/compare/v1.13.5...v1.13.6) (2025-02-07)
+
+
+### Bug Fixes
+
+* 尝试不使用国内npm镜像，观察是否可以提高构建速度 ([0328444](https://github.com/indulgeback/react-questionnaire/commit/03284442c7decbd0e9874c850ead26186610bb1b))
+
+
+
+
+
 ## [1.13.5](https://github.com/indulgeback/react-questionnaire/compare/v1.13.4...v1.13.5) (2025-02-07)
 
 

@@ -24,7 +24,7 @@ WORKDIR /app/packages/questionnaire-be
 RUN pnpm build
 
 # 第二阶段：生产环境
-FROM node:22
+FROM node:22-alpine
 
 # 设置工作目录
 WORKDIR /app

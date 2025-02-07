@@ -24,8 +24,10 @@ const ENV_VARS = {
   ALIYUN_REGISTRY_URL: "ALIYUN_REGISTRY_URL",
   FRONTEND_IMAGE_NAME: "FRONTEND_IMAGE_NAME",
   BACKEND_IMAGE_NAME: "BACKEND_IMAGE_NAME",
+  CLIENT_IMAGE_NAME: "CLIENT_IMAGE_NAME",
   FRONTEND_DOCKERFILE_PATH: "FRONTEND_DOCKERFILE_PATH",
   BACKEND_DOCKERFILE_PATH: "BACKEND_DOCKERFILE_PATH",
+  CLIENT_DOCKERFILE_PATH: "CLIENT_DOCKERFILE_PATH",
 }
 
 const requiredEnvVars = Object.values(ENV_VARS)
@@ -60,8 +62,10 @@ function logEnvVarInfo() {
   logInfo("Aliyun Password:", process.env.ALIYUN_PASSWORD)
   logInfo("Frontend Image Name:", process.env.FRONTEND_IMAGE_NAME)
   logInfo("Backend Image Name:", process.env.BACKEND_IMAGE_NAME)
+  logInfo("Client Image Name:", process.env.CLIENT_IMAGE_NAME)
   logInfo("Frontend Dockerfile Path:", process.env.FRONTEND_DOCKERFILE_PATH)
   logInfo("Backend Dockerfile Path:", process.env.BACKEND_DOCKERFILE_PATH)
+  logInfo("Client Dockerfile Path:", process.env.CLIENT_DOCKERFILE_PATH)
   logInfo(" -------------------------------------------------------- ")
 }
 

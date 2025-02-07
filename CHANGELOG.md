@@ -3,6 +3,81 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.13.6](https://github.com/indulgeback/react-questionnaire/compare/v1.13.5...v1.13.6) (2025-02-07)
+
+
+### Bug Fixes
+
+* 尝试不使用国内npm镜像，观察是否可以提高构建速度 ([0328444](https://github.com/indulgeback/react-questionnaire/commit/03284442c7decbd0e9874c850ead26186610bb1b))
+
+
+
+
+
+## [1.13.5](https://github.com/indulgeback/react-questionnaire/compare/v1.13.4...v1.13.5) (2025-02-07)
+
+
+### Bug Fixes
+
+* 修复github actions 环境变量与密钥格式问题 ([497da3c](https://github.com/indulgeback/react-questionnaire/commit/497da3ce389728ae770e1736260b13f3a3802fd4))
+
+
+
+
+
+## [1.13.4](https://github.com/indulgeback/react-questionnaire/compare/v1.13.3...v1.13.4) (2025-02-07)
+
+
+### Bug Fixes
+
+* CLIENT - 修复客户端答题页面传参BUG ([5c1e7df](https://github.com/indulgeback/react-questionnaire/commit/5c1e7dff39738bda777200f316cb4580b787434a))
+
+
+
+
+
+## [1.13.3](https://github.com/indulgeback/react-questionnaire/compare/v1.13.2...v1.13.3) (2025-02-06)
+
+**Note:** Version bump only for package root
+
+
+
+
+
+## [1.13.2](https://github.com/indulgeback/react-questionnaire/compare/v1.13.1...v1.13.2) (2025-02-06)
+
+**Note:** Version bump only for package root
+
+
+
+
+
+## [1.13.1](https://github.com/indulgeback/react-questionnaire/compare/v1.13.0...v1.13.1) (2025-02-06)
+
+**Note:** Version bump only for package root
+
+
+
+
+
+# [1.13.0](https://github.com/indulgeback/react-questionnaire/compare/v1.12.0...v1.13.0) (2025-02-06)
+
+
+### Bug Fixes
+
+* CLIENT - 修复客户端tooltip依赖缺失问题 ([2f100e3](https://github.com/indulgeback/react-questionnaire/commit/2f100e32d2f0c2131ea46db42caffa7e62192335))
+* FE - 修复问卷列表类型格式问题 ([f43e66b](https://github.com/indulgeback/react-questionnaire/commit/f43e66b215af184fa1a7284978244ec3a41e7241))
+
+
+### Features
+
+* BE - 修改密码与注销账户接口 ([2f7fb05](https://github.com/indulgeback/react-questionnaire/commit/2f7fb05eb4c6540b40a4a798469f6813b2a9db3d))
+* FE - 前端个人信息页静态搭建完成 ([ab0d08f](https://github.com/indulgeback/react-questionnaire/commit/ab0d08f554e2ae185f03190e8b6273859dd4fa89))
+
+
+
+
+
 # [1.12.0](https://github.com/indulgeback/react-questionnaire/compare/v1.11.0...v1.12.0) (2025-01-31)
 
 

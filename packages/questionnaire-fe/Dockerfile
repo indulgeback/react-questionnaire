@@ -7,9 +7,6 @@ WORKDIR /app
 # 安装 pnpm
 RUN npm install -g pnpm
 
-# 配置 pnpm 使用国内镜像源
-RUN pnpm config set registry https://registry.npmmirror.com
-
 # 复制 monorepo 的根配置文件
 COPY pnpm-workspace.yaml package.json pnpm-lock.yaml ./
 

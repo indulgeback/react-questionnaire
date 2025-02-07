@@ -54,33 +54,33 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .
-          file: ${{ secrets.FRONTEND_DOCKERFILE_PATH }} # 替换为前端 Dockerfile 的路径
+          file: ${{ vars.FRONTEND_DOCKERFILE_PATH }} # 替换为前端 Dockerfile 的路径
           platforms: linux/amd64,linux/arm64 # 构建多平台镜像
           push: true
           tags: |
-            ${{ secrets.ALIYUN_REGISTRY_URL }}/${{ secrets.FRONTEND_IMAGE_NAME }}:${{ steps.get-version.outputs.version }},
-            ${{ secrets.ALIYUN_REGISTRY_URL }}/${{ secrets.FRONTEND_IMAGE_NAME }}:latest
+            ${{ secrets.ALIYUN_REGISTRY_URL }}/${{ vars.FRONTEND_IMAGE_NAME }}:${{ steps.get-version.outputs.version }},
+            ${{ secrets.ALIYUN_REGISTRY_URL }}/${{ vars.FRONTEND_IMAGE_NAME }}:latest
 
       # 9. 构建并推送后端镜像
       - name: Build and push backend image
         uses: docker/build-push-action@v3
         with:
           context: .
-          file: ${{ secrets.BACKEND_DOCKERFILE_PATH }} # 替换为后端 Dockerfile 的路径
+          file: ${{ vars.BACKEND_DOCKERFILE_PATH }} # 替换为后端 Dockerfile 的路径
           platforms: linux/amd64,linux/arm64 # 构建多平台镜像
           push: true
           tags: |
-            ${{ secrets.ALIYUN_REGISTRY_URL }}/${{ secrets.BACKEND_IMAGE_NAME }}:${{ steps.get-version.outputs.version }},
-            ${{ secrets.ALIYUN_REGISTRY_URL }}/${{ secrets.BACKEND_IMAGE_NAME }}:latest
+            ${{ secrets.ALIYUN_REGISTRY_URL }}/${{ vars.BACKEND_IMAGE_NAME }}:${{ steps.get-version.outputs.version }},
+            ${{ secrets.ALIYUN_REGISTRY_URL }}/${{ vars.BACKEND_IMAGE_NAME }}:latest
 
       # 10. 构建并推送客户端镜像
       - name: Build and push client image
         uses: docker/build-push-action@v3
         with:
           context: .
-          file: ${{ secrets.CLIENT_DOCKERFILE_PATH }} # 替换为客户端 Dockerfile 的路径
+          file: ${{ vars.CLIENT_DOCKERFILE_PATH }} # 替换为客户端 Dockerfile 的路径
           platforms: linux/amd64,linux/arm64 # 构建多平台镜像
           push: true
           tags: |
-            ${{ secrets.ALIYUN_REGISTRY_URL }}/${{ secrets.CLIENT_IMAGE_NAME }}:${{ steps.get-version.outputs.version }},
-            ${{ secrets.ALIYUN_REGISTRY_URL }}/${{ secrets.CLIENT_IMAGE_NAME }}:latest
+            ${{ secrets.ALIYUN_REGISTRY_URL }}/${{ vars.CLIENT_IMAGE_NAME }}:${{ steps.get-version.outputs.version }},
+            ${{ secrets.ALIYUN_REGISTRY_URL }}/${{ vars.CLIENT_IMAGE_NAME }}:latest

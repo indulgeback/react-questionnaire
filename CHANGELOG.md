@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.13.4](https://github.com/indulgeback/react-questionnaire/compare/v1.13.3...v1.13.4) (2025-02-07)
+
+
+### Bug Fixes
+
+* CLIENT - 修复客户端答题页面传参BUG ([5c1e7df](https://github.com/indulgeback/react-questionnaire/commit/5c1e7dff39738bda777200f316cb4580b787434a))
+
+
+
+
+
 ## [1.13.3](https://github.com/indulgeback/react-questionnaire/compare/v1.13.2...v1.13.3) (2025-02-06)
 
 **Note:** Version bump only for package root

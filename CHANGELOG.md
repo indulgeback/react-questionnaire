@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.13.5](https://github.com/indulgeback/react-questionnaire/compare/v1.13.4...v1.13.5) (2025-02-07)
+
+
+### Bug Fixes
+
+* 修复github actions 环境变量与密钥格式问题 ([497da3c](https://github.com/indulgeback/react-questionnaire/commit/497da3ce389728ae770e1736260b13f3a3802fd4))
+
+
+
+
+
 ## [1.13.4](https://github.com/indulgeback/react-questionnaire/compare/v1.13.3...v1.13.4) (2025-02-07)
 
 

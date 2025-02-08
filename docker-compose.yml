@@ -75,7 +75,8 @@ services:
     ports:
       - "27017:27017"
     volumes:
-      - mongodb_data:/data/db  
+      - mongodb_data:/data/db 
+    command: mongod --auth  # 启用身份验证
 
 volumes:
   mysql_data:

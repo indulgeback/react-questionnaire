@@ -4,11 +4,10 @@ import { join } from 'path';
 
 const configFileNameObj = {
   development: 'dev',
-  production: 'prod',
   docker: 'docker',
 };
 
-const env = process.env.NODE_ENV || 'development';
+const env = process.env.NODE_ENV === 'docker' ? 'docker' : 'development';
 
 const config = load(
   readFileSync(join(__dirname, `../config/${configFileNameObj[env]}.yml`)),

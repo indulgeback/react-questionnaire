@@ -14,7 +14,7 @@ class Question {
   @PrimaryGeneratedColumn()
   id: number; // 主键ID
 
-  @Column({ length: 255 })
+  @Column({ length: 255, default: '未命名的问卷' })
   title: string; // 标题
 
   @Column({ length: 255, default: '暂无描述' })
@@ -26,7 +26,7 @@ class Question {
   @Column({ length: 255, default: '官方' })
   author: string; // 作者
 
-  @Column()
+  @Column({ default: 0 })
   answer_count: number; // 填写次数
 
   @CreateDateColumn()

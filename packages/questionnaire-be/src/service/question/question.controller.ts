@@ -28,10 +28,16 @@ import {
 export class QuestionController {
   constructor(private readonly questionService: QuestionService) {}
 
+  @Public()
   // 新建问卷
   @Post()
-  create(@Body() createQuestionDto: CreateQuestionDto) {
-    return this.questionService.create(createQuestionDto);
+  async create(@Body() createQuestionDto: CreateQuestionDto) {
+    try {
+      await this.questionService.create(createQuestionDto);
+      return new ResponseBody<any>(1, null, '创建成功');
+    } catch (error) {
+      return new ResponseBody<any>(0, null, error.message);
+    }
   }
 
   // 获取问卷列表

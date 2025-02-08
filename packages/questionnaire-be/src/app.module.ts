@@ -30,6 +30,7 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { DefaultResponseMiddleware } from '@/middleware/default-response.middleware';
 
 import { join } from 'path';
+import { EditorModule } from './service/editor/editor.module';
 
 @Module({
   imports: [
@@ -77,6 +78,7 @@ import { join } from 'path';
     FileModule,
     AiModule,
     TasksModule,
+    EditorModule,
   ],
   providers: [
     {

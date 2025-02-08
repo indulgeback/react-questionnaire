@@ -19,7 +19,7 @@ db:
     autoLoadEntities: true
     keepConnectionAlive: true
   mongo:
-    uri: mongodb://admin:12345678@localhost:27017
+    uri: mongodb://admin:12345678@localhost:27017/questionnaire_mongo_db
   redis:
     uri: 'redis://localhost:6379'
 # 邮件配置

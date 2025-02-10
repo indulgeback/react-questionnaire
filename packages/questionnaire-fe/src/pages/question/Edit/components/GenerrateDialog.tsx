@@ -49,7 +49,6 @@ const GenerateDialog = (props: GenerateDialogProps) => {
   const parseQuestionsFromContent = (content: string) => {
     const matches = content.match(regexp.questionRegExp)
     if (!matches) return []
-
     return matches
       .map(questionObj => {
         try {
@@ -85,12 +84,16 @@ ${question.answer ? `- 答案：${question.answer}` : ''}
   // 使用节流优化更新频率，避免过于频繁的状态更新
   const printCurQuestionThrottled = useCallback(
     throttle((content: string) => {
-      const questions = parseQuestionsFromContent(content)
-      const formattedContent = formatQuestionsToMarkdown(questions)
-      setFormattedContent(formattedContent)
+      printCurQuestion(content)
     }, 1000),
     []
   )
+
+  const printCurQuestion = (content: string) => {
+    const questions = parseQuestionsFromContent(content)
+    const formattedContent = formatQuestionsToMarkdown(questions)
+    setFormattedContent(formattedContent)
+  }
 
   // 处理生成按钮点击事件
   const handleButtonClick = () => {
@@ -107,15 +110,21 @@ ${question.answer ? `- 答案：${question.answer}` : ''}
       setFormattedContent('')
     }
 
+    // 缓存当前生成的所有数据，如果输出完成则使用当前缓存的数据，以此保证生成的所有数据即使存在节流的情况下，也能保证数据完整性
+    let cacheData = ''
+
     // 处理服务器返回的消息
     onMessage(data => {
       if (data === '{[DONE]}') {
         close()
-        printCurQuestionThrottled(data)
+        setTimeout(() => {
+          printCurQuestion(cacheData)
+        }, 1000)
         setIsGenerating(false)
         return
       } else {
-        printCurQuestionThrottled(data)
+        cacheData = data
+        printCurQuestionThrottled(cacheData)
       }
     })
 

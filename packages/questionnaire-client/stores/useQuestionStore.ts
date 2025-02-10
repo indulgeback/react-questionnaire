@@ -16,7 +16,7 @@ const useQuestionStore = create<QuestionState>((set, get) => ({
   currentIndex: 0,
   questionnaireData: Array.from({ length: 100 }, (_, index) => ({
     id: index + 1,
-    type: QuestionType.SINGLE_CHOICE,
+    type: QuestionType.SHORT_ANSWER,
     question: `Question ${index + 1}`,
     options: ["Option 1", "Option 2", "Option 3"]
   })),

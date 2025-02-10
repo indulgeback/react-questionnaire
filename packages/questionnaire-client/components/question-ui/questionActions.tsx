@@ -1,7 +1,7 @@
 import { ArrowRightIcon, ArrowLeftIcon, SparklesIcon } from "@heroicons/react/24/solid";
 import { Button } from "@heroui/button";
 import React from "react";
-import QuestionsStatus from "@/components/questionsStatus";
+import QuestionsStatus from "@/components/question-ui/questionsStatus";
 import useQuestionStore from "@/stores/useQuestionStore";
 
 const QuestionActions = () => {

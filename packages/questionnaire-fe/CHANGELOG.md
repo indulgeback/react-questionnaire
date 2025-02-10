@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.14.0](https://github.com/indulgeback/react-questionnaire/compare/v1.13.7...v1.14.0) (2025-02-10)
+
+
+### Bug Fixes
+
+* BE - mongodb连接问题修复；FE - 修复节流导致的问卷引擎渲染问题 ([47af8ac](https://github.com/indulgeback/react-questionnaire/commit/47af8ac1149f7e35dab5c95472337927f70ce718))
+
+
+
+
+
 ## [1.13.7](https://github.com/indulgeback/react-questionnaire/compare/v1.13.6...v1.13.7) (2025-02-08)
 
 

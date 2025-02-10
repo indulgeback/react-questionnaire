@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.14.0](https://github.com/indulgeback/react-questionnaire/compare/v1.13.7...v1.14.0) (2025-02-10)
+
+
+### Bug Fixes
+
+* BE - 修复后端自动化测试在不传环境变量的情况下引发的bug ([96dfd73](https://github.com/indulgeback/react-questionnaire/commit/96dfd73223cc553e6be3083618dbf2cdc3222f63))
+* BE - mongodb连接问题修复；FE - 修复节流导致的问卷引擎渲染问题 ([47af8ac](https://github.com/indulgeback/react-questionnaire/commit/47af8ac1149f7e35dab5c95472337927f70ce718))
+
+
+### Features
+
+* BE - 创建问卷接口完成 ([7e2bce3](https://github.com/indulgeback/react-questionnaire/commit/7e2bce3e6d92e7e44f6cb8b84db71ec12e82ebe6))
+* BE - 后端接入mongodb ([87154e4](https://github.com/indulgeback/react-questionnaire/commit/87154e46a75a024eb6dba49e058ec3e5727f6371))
+* BE - 问卷详情表结构设计 ([058b341](https://github.com/indulgeback/react-questionnaire/commit/058b341fde54b6a4051cd8c45e685101cf60b6ec))
+* CLIENT - 新增简答题 ([53366af](https://github.com/indulgeback/react-questionnaire/commit/53366af9c594f32d61fe5a3da3ae60aca07c854b))
+
+
+### Performance Improvements
+
+* CLIENT - 答题列表的交互优化 ([dbd918a](https://github.com/indulgeback/react-questionnaire/commit/dbd918aa1d8d9712c3361278d17448a51ed12757))
+
+
+
+
+
 ## [1.13.7](https://github.com/indulgeback/react-questionnaire/compare/v1.13.6...v1.13.7) (2025-02-08)
 
 

@@ -4,6 +4,7 @@ import { title, subtitle } from "@/components/primitives";
 import { Button } from "@heroui/button";
 import { PencilSquareIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
+
 export default function Home() {
   return (
     <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
@@ -24,7 +25,7 @@ export default function Home() {
           className="bg-gradient-to-tr from-sky-500 to-pink-500 text-white shadow-lg"
           radius="full"
           as={Link}
-          href="/question/1"
+          href="/question"
         >
           <PencilSquareIcon className="size-4" />
           填写问卷

@@ -1,13 +1,9 @@
 "use client";
 
-import { QuestionContext } from "@/contexts/Question";
-import { QuestionContextType } from "@/types/question";
 import { Radio, RadioGroup } from "@heroui/radio";
-import React, { useContext } from "react";
-
-const QuestionRadio = () => {
-  const { question } = useContext(QuestionContext as React.Context<QuestionContextType>);
-
+import React from "react";
+import { Question } from "@/types/question";
+const QuestionRadio = ({ question }: { question: Question }) => {
   return (
     <RadioGroup label={question.question}>
       {(question.options ?? []).map(answer => (

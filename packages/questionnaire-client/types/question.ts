@@ -7,7 +7,7 @@ export enum QuestionType {
 
 export type Question = {
   id: number;
-  type: QuestionType | string;
+  type: QuestionType;
   question: string;
   placeholder?: string;
   options?: string[];

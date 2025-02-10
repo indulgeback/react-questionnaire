@@ -1,18 +1,14 @@
 "use client";
 
-import React, { useContext } from "react";
+import React from "react";
 import { Radio, RadioGroup } from "@heroui/radio";
-import { QuestionContext } from "@/contexts/Question";
-import { QuestionContextType } from "@/types/question";
-
+import { Question } from "@/types/question";
 enum QuestionTrueOrFalseAnswer {
   TRUE = "TRUE",
   FALSE = "FALSE"
 }
 
-const questionTrueOrFalse = () => {
-  const { question } = useContext(QuestionContext as React.Context<QuestionContextType>);
-
+const QuestionTrueOrFalse = ({ question }: { question: Question }) => {
   return (
     <div>
       <RadioGroup label={question.question}>
@@ -35,4 +31,4 @@ const questionTrueOrFalse = () => {
   );
 };
 
-export default questionTrueOrFalse;
+export default QuestionTrueOrFalse;

@@ -1,12 +1,10 @@
 "use client";
 
-import React, { useContext } from "react";
+import React from "react";
 import { Checkbox, CheckboxGroup } from "@heroui/checkbox";
-import { QuestionContext } from "@/contexts/Question";
-import { QuestionContextType } from "@/types/question";
-const QuestionCheckbox = () => {
-  const { question } = useContext(QuestionContext as React.Context<QuestionContextType>);
+import { Question } from "@/types/question";
 
+const QuestionCheckbox = ({ question }: { question: Question }) => {
   return (
     <CheckboxGroup label={question.question}>
       {(question.options ?? []).map(answer => (

@@ -1,12 +1,10 @@
 "use client";
 
-import React, { useContext } from "react";
+import React from "react";
 import { Input } from "@heroui/input";
-import { QuestionContext } from "@/contexts/Question";
-import { QuestionContextType } from "@/types/question";
+import { Question } from "@/types/question";
 
-const questionInput = () => {
-  const { question } = useContext(QuestionContext as React.Context<QuestionContextType>);
+const QuestionInput = ({ question }: { question: Question }) => {
   return (
     <Input
       variant="underlined"
@@ -16,4 +14,4 @@ const questionInput = () => {
   );
 };
 
-export default questionInput;
+export default QuestionInput;

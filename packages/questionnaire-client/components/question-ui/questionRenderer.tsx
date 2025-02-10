@@ -6,16 +6,16 @@ import QuestionTrueOfFalse from "@/components/question-type/questionTrueOrFalse"
 import QuestionMultipleChoice from "@/components/question-type/questionMultipleChoice";
 import QuestionSingleChoice from "@/components/question-type/questionSingleChoice";
 
-const QuestionRenderSelector = ({ type }: { type: QuestionType }) => {
-  switch (type) {
+const QuestionRenderSelector = ({ question }: { question: Question }) => {
+  switch (question.type) {
     case QuestionType.SINGLE_CHOICE:
-      return <QuestionSingleChoice />;
+      return <QuestionSingleChoice question={question} />;
     case QuestionType.MULTIPLE_CHOICE:
-      return <QuestionMultipleChoice />;
+      return <QuestionMultipleChoice question={question} />;
     case QuestionType.BASE_INFO:
-      return <QuestionBaseInfo />;
+      return <QuestionBaseInfo question={question} />;
     case QuestionType.TRUE_OR_FALSE:
-      return <QuestionTrueOfFalse />;
+      return <QuestionTrueOfFalse question={question} />;
     default:
       return <div>Question Renderer Error</div>;
   }
@@ -29,7 +29,7 @@ const QuestionRenderer = ({ question }: { question: Question }) => {
       <Chip color="secondary" variant="flat">
         {id} [{questionTypeMap[type as QuestionType]}]
       </Chip>
-      <QuestionRenderSelector type={type as QuestionType} />
+      <QuestionRenderSelector question={question} />
     </>
   );
 };

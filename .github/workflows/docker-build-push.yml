@@ -6,18 +6,16 @@ on:
       - "v*" # 匹配以 "v" 开头的 Tag，例如 v1.0.0
 
 jobs:
-  build-and-push:
+  # 环境准备任务
+  setup-environment:
     runs-on: ubuntu-latest
-
     steps:
       # 1. 检出代码
       - name: Checkout code
         uses: actions/checkout@v3
-
       # 2. 设置 Docker Buildx
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
-
       # 3. 登录到阿里云容器镜像仓库
       - name: Log in to Aliyun Container Registry
         uses: docker/login-action@v2
@@ -25,28 +23,52 @@ jobs:
           registry: ${{ secrets.ALIYUN_REGISTRY_URL }}
           username: ${{ secrets.ALIYUN_USERNAME }}
           password: ${{ secrets.ALIYUN_PASSWORD }}
-
       # 4. 设置 Node.js 环境
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 22 # 使用 Node.js 22
-
       # 5. 安装 pnpm
       - name: Install pnpm
         run: npm install -g pnpm
 
+  # 依赖安装任务
+  install-dependencies:
+    runs-on: ubuntu-latest
+    needs: setup-environment
+    steps:
+      # 1. 检出代码（确保代码存在）
+      - name: Checkout code
+        uses: actions/checkout@v3
       # 6. 安装项目依赖
       - name: Install dependencies
         run: pnpm install
 
+  # 版本号获取任务
+  get-version:
+    runs-on: ubuntu-latest
+    needs: install-dependencies
+    steps:
+      # 1. 检出代码（确保代码存在）
+      - name: Checkout code
+        uses: actions/checkout@v3
       # 7. 获取版本号（从 lerna.json 中读取）
       - name: Get version from lerna.json
         id: get-version
         run: |
           VERSION=$(node -p "require('./lerna.json').version")
           echo "version=${VERSION}" >> $GITHUB_OUTPUT
+    outputs:
+      version: ${{ steps.get-version.outputs.version }}
 
+  # 前端镜像构建与推送任务
+  build-and-push-frontend:
+    runs-on: ubuntu-latest
+    needs: get-version
+    steps:
+      # 1. 检出代码（确保代码存在）
+      - name: Checkout code
+        uses: actions/checkout@v3
       # 8. 构建并推送前端镜像
       - name: Build and push frontend image
         uses: docker/build-push-action@v3
@@ -56,9 +78,17 @@ jobs:
           platforms: linux/amd64,linux/arm64 # 构建多平台镜像
           push: true
           tags: |
-            ${{ secrets.ALIYUN_REGISTRY_URL }}/${{ vars.FRONTEND_IMAGE_NAME }}:${{ steps.get-version.outputs.version }},
+            ${{ secrets.ALIYUN_REGISTRY_URL }}/${{ vars.FRONTEND_IMAGE_NAME }}:${{ needs.get-version.outputs.version }},
             ${{ secrets.ALIYUN_REGISTRY_URL }}/${{ vars.FRONTEND_IMAGE_NAME }}:latest
 
+  # 后端镜像构建与推送任务
+  build-and-push-backend:
+    runs-on: ubuntu-latest
+    needs: get-version
+    steps:
+      # 1. 检出代码（确保代码存在）
+      - name: Checkout code
+        uses: actions/checkout@v3
       # 9. 构建并推送后端镜像
       - name: Build and push backend image
         uses: docker/build-push-action@v3
@@ -68,9 +98,17 @@ jobs:
           platforms: linux/amd64,linux/arm64 # 构建多平台镜像
           push: true
           tags: |
-            ${{ secrets.ALIYUN_REGISTRY_URL }}/${{ vars.BACKEND_IMAGE_NAME }}:${{ steps.get-version.outputs.version }},
+            ${{ secrets.ALIYUN_REGISTRY_URL }}/${{ vars.BACKEND_IMAGE_NAME }}:${{ needs.get-version.outputs.version }},
             ${{ secrets.ALIYUN_REGISTRY_URL }}/${{ vars.BACKEND_IMAGE_NAME }}:latest
 
+  # 客户端镜像构建与推送任务
+  build-and-push-client:
+    runs-on: ubuntu-latest
+    needs: get-version
+    steps:
+      # 1. 检出代码（确保代码存在）
+      - name: Checkout code
+        uses: actions/checkout@v3
       # 10. 构建并推送客户端镜像
       - name: Build and push client image
         uses: docker/build-push-action@v3
@@ -80,5 +118,5 @@ jobs:
           platforms: linux/amd64,linux/arm64 # 构建多平台镜像
           push: true
           tags: |
-            ${{ secrets.ALIYUN_REGISTRY_URL }}/${{ vars.CLIENT_IMAGE_NAME }}:${{ steps.get-version.outputs.version }},
+            ${{ secrets.ALIYUN_REGISTRY_URL }}/${{ vars.CLIENT_IMAGE_NAME }}:${{ needs.get-version.outputs.version }},
             ${{ secrets.ALIYUN_REGISTRY_URL }}/${{ vars.CLIENT_IMAGE_NAME }}:latest

@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.14.0](https://github.com/indulgeback/react-questionnaire/compare/v1.13.7...v1.14.0) (2025-02-10)
+
+
+### Features
+
+* CLIENT - 新增简答题 ([53366af](https://github.com/indulgeback/react-questionnaire/commit/53366af9c594f32d61fe5a3da3ae60aca07c854b))
+
+
+### Performance Improvements
+
+* CLIENT - 答题列表的交互优化 ([dbd918a](https://github.com/indulgeback/react-questionnaire/commit/dbd918aa1d8d9712c3361278d17448a51ed12757))
+
+
+
+
+
 ## [1.13.7](https://github.com/indulgeback/react-questionnaire/compare/v1.13.6...v1.13.7) (2025-02-08)
 
 **Note:** Version bump only for package @questionnaire/client

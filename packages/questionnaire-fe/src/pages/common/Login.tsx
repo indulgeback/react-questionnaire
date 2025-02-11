@@ -47,9 +47,9 @@ const Login: React.FC = () => {
     return now < 12 ? '上午' : now < 18 ? '下午' : '晚上'
   }
 
-  const openNotification = () => {
+  const openNotification = (nickname: string) => {
     notification.open({
-      message: '亲爱的' + userInfo.nickname,
+      message: '亲爱的' + nickname,
       description: getNowTime() + '好！' + '欢迎回来',
       duration: 3,
       showProgress: true,
@@ -67,7 +67,7 @@ const Login: React.FC = () => {
       dispatch(setUserInfo(res.data?.userInfo))
       dispatch(setLoginState(LOGIN_STATE.LOGIN))
       nav(searchParams.get('redirect') || '/')
-      openNotification()
+      openNotification(res.data?.userInfo?.nickname)
     }
   }
 

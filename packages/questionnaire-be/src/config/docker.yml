@@ -1,6 +1,6 @@
 # 服务器配置
 app:
-  domain: 'http://8.152.210.136' # 服务器域名/ip
+  domain: 'http://8.152.205.176' # 服务器域名/ip
   port: 8879
   prefix: '/api'
   jwt:
@@ -19,7 +19,7 @@ db:
     autoLoadEntities: true
     keepConnectionAlive: true
   mongo:
-    uri: 'mongodb://localhost:27017/questionnaire_mongo_db'
+    uri: mongodb://admin:12345678@localhost:27017/questionnaire_mongo_db?authSource=admin
   redis:
     uri: 'redis://localhost:6379'
 # 邮件配置
@@ -40,5 +40,13 @@ openai:
     baseURL: 'https://dashscope.aliyuncs.com/compatible-mode/v1'
   qwen-plus:
     model: 'qwen-plus'
+    apiKey: 'sk-746e24bbb3d14fc7bced0a4d35453a41'
+    baseURL: 'https://dashscope.aliyuncs.com/compatible-mode/v1'
+  deepseek-r1:
+    model: 'deepseek-r1'
+    apiKey: 'sk-746e24bbb3d14fc7bced0a4d35453a41'
+    baseURL: 'https://dashscope.aliyuncs.com/compatible-mode/v1'
+  deepseek-v3:
+    model: 'deepseek-v3'
     apiKey: 'sk-746e24bbb3d14fc7bced0a4d35453a41'
     baseURL: 'https://dashscope.aliyuncs.com/compatible-mode/v1'

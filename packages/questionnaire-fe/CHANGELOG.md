@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.14.5](https://github.com/indulgeback/react-questionnaire/compare/v1.14.4...v1.14.5) (2025-02-12)
+
+
+### Bug Fixes
+
+* FE - 修复登录时闭包造成的提示用户昵称未及时更新的问题 ([a2601b4](https://github.com/indulgeback/react-questionnaire/commit/a2601b43c88dd1c222c959be302efde130d81803))
+
+
+
+
+
 ## [1.14.4](https://github.com/indulgeback/react-questionnaire/compare/v1.14.3...v1.14.4) (2025-02-12)
 
 **Note:** Version bump only for package @questionnaire/fe

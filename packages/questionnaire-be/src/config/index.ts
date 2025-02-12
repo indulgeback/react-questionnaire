@@ -17,6 +17,7 @@ const config = load(
 if (env === configFileNameObj.docker) {
   config.db.mysql.host = process.env.MYSQL_HOST;
   config.db.redis.uri = `redis://${process.env.REDIS_HOST}:6379`;
+  config.db.mongo.uri = `mongodb://${process.env.MONGO_HOST}:27017/questionnaire_mongo_db?authSource=admin`;
 }
 
 export default () => {

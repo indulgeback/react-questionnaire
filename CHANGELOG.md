@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.14.1](https://github.com/indulgeback/react-questionnaire/compare/v1.14.0...v1.14.1) (2025-02-12)
+
+
+### Bug Fixes
+
+* 修复docker容器配置未同步导致的服务器端连接不到mongo ([81fe648](https://github.com/indulgeback/react-questionnaire/commit/81fe6487f9312f0a8e179e3d31fc664ca0ecfef7))
+
+
+
+
+
 # [1.14.0](https://github.com/indulgeback/react-questionnaire/compare/v1.13.7...v1.14.0) (2025-02-10)
 
 

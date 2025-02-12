@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.14.1](https://github.com/indulgeback/react-questionnaire/compare/v1.14.0...v1.14.1) (2025-02-12)
+
+**Note:** Version bump only for package @questionnaire/fe
+
+
+
+
+
 # [1.14.0](https://github.com/indulgeback/react-questionnaire/compare/v1.13.7...v1.14.0) (2025-02-10)
 
 

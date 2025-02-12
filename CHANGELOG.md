@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.14.4](https://github.com/indulgeback/react-questionnaire/compare/v1.14.3...v1.14.4) (2025-02-12)
+
+
+### Bug Fixes
+
+* Simplify GitHub Actions workflow by consolidating build and push jobs ([d7d2499](https://github.com/indulgeback/react-questionnaire/commit/d7d2499be19894546e7333481d78d2dceac3ccfb))
+
+
+
+
+
 ## [1.14.3](https://github.com/indulgeback/react-questionnaire/compare/v1.14.2...v1.14.3) (2025-02-12)
 
 **Note:** Version bump only for package root

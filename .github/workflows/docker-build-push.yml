@@ -33,7 +33,7 @@ jobs:
         run: npm install -g pnpm
       # 6. 上传代码作为 artifacts
       - name: Upload code artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4  # 升级到 v4 版本
         with:
           name: project-code
           path: .
@@ -45,7 +45,7 @@ jobs:
     steps:
       # 1. 下载代码 artifact
       - name: Download code artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4  # 升级到 v4 版本
         with:
           name: project-code
       # 2. 安装项目依赖
@@ -59,7 +59,7 @@ jobs:
     steps:
       # 1. 下载代码 artifact
       - name: Download code artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4  # 升级到 v4 版本
         with:
           name: project-code
       # 2. 获取版本号（从 lerna.json 中读取）
@@ -78,7 +78,7 @@ jobs:
     steps:
       # 1. 下载代码 artifact
       - name: Download code artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4  # 升级到 v4 版本
         with:
           name: project-code
       # 2. 构建并推送前端镜像
@@ -100,7 +100,7 @@ jobs:
     steps:
       # 1. 下载代码 artifact
       - name: Download code artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4  # 升级到 v4 版本
         with:
           name: project-code
       # 2. 构建并推送后端镜像
@@ -122,7 +122,7 @@ jobs:
     steps:
       # 1. 下载代码 artifact
       - name: Download code artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4  # 升级到 v4 版本
         with:
           name: project-code
       # 2. 构建并推送客户端镜像

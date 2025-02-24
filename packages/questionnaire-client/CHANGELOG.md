@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.15.0](https://github.com/indulgeback/react-questionnaire/compare/v1.14.5...v1.15.0) (2025-02-24)
+
+
+### Features
+
+* CLIENT - 客户端路径前缀，方便反向代理服务器做URL代理 ([36739ad](https://github.com/indulgeback/react-questionnaire/commit/36739adef50b69390739d30edc24ce846665f402))
+
+
+
+
+
 ## [1.14.5](https://github.com/indulgeback/react-questionnaire/compare/v1.14.4...v1.14.5) (2025-02-12)
 
 **Note:** Version bump only for package @questionnaire/client

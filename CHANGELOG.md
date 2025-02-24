@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.15.0](https://github.com/indulgeback/react-questionnaire/compare/v1.14.5...v1.15.0) (2025-02-24)
+
+
+### Bug Fixes
+
+* FE - 修复问卷编辑器响应式失效的问题 ([2bfad02](https://github.com/indulgeback/react-questionnaire/commit/2bfad0271190aa70e946366fbc70592067aeba7b))
+
+
+### Features
+
+* CLIENT - 客户端路径前缀，方便反向代理服务器做URL代理 ([36739ad](https://github.com/indulgeback/react-questionnaire/commit/36739adef50b69390739d30edc24ce846665f402))
+* FE - 前端增加问卷画布与部分问卷题型组件 ([dc764f2](https://github.com/indulgeback/react-questionnaire/commit/dc764f2fad50b5efef17d1b3fd1ff70035bb767a))
+* SQL文件更新 ([3b9f5c5](https://github.com/indulgeback/react-questionnaire/commit/3b9f5c5ccaef378f86da60c1056d4e36b1c38603))
+
+
+
+
+
 ## [1.14.5](https://github.com/indulgeback/react-questionnaire/compare/v1.14.4...v1.14.5) (2025-02-12)
 
 

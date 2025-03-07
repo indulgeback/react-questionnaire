@@ -31,4 +31,65 @@ export class EditorService {
     }
     return result;
   }
+
+  async mock() {
+    const mockDocuments = [];
+    const numberOfDocuments = 1000; // 要插入的文档数量
+
+    // 生成模拟文档
+    for (let i = 1; i <= numberOfDocuments; i++) {
+      const mockDocument = this.generateMockQuestionnaireDetail(i);
+      mockDocuments.push(mockDocument);
+    }
+
+    try {
+      // 插入模拟文档
+      await this.questionnaireDetailModel.insertMany(mockDocuments);
+      console.log(`${numberOfDocuments} 条模拟文档插入成功`);
+
+      // 插入完成后可以选择返回所有文档
+      return this.questionnaireDetailModel.find();
+    } catch (error) {
+      console.error('插入模拟文档时出错:', error);
+      throw error;
+    }
+  }
+
+  generateMockQuestionnaireDetail(id: number): any {
+    return {
+      questionnaire_id: id,
+      title: `测试问卷 ${id}`,
+      description: `这是测试问卷 ${id} 的描述`,
+      questions: [
+        {
+          id: 1,
+          type: 'base_info',
+          question: '你今天过得好吗？',
+        },
+        {
+          id: 2,
+          type: 'multiple_choice',
+          question: '你喜欢的水果有哪些？',
+          options: ['苹果', '香蕉', '橙子', '葡萄'],
+        },
+        {
+          id: 3,
+          type: 'single_choice',
+          question: '你最喜欢的颜色是？',
+          options: ['红色', '蓝色', '绿色', '黄色'],
+        },
+        {
+          id: 4,
+          type: 'true_false',
+          question: '你是否喜欢阅读？',
+        },
+        {
+          id: 5,
+          type: 'short_answer',
+          question: '请简要描述你的爱好。',
+        },
+      ],
+      version: 1,
+    };
+  }
 }

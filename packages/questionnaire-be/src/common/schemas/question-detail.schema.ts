@@ -1,6 +1,13 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
+export type Question = {
+  id: number;
+  type: string;
+  question: string;
+  options?: string[];
+};
+
 // 完整问卷详情（包含问题集合）
 @Schema({ collection: 'questionnaire_details', timestamps: true })
 export class QuestionnaireDetail extends Document {
@@ -8,7 +15,7 @@ export class QuestionnaireDetail extends Document {
     required: true,
     index: true,
   })
-  questionnaire_id: string; // 普通外键字段
+  questionnaire_id: number; // 普通外键字段
 
   @Prop({ required: true })
   title: string; // 问卷标题
@@ -27,12 +34,7 @@ export class QuestionnaireDetail extends Document {
     ],
     required: true,
   })
-  questions: Array<{
-    id: number;
-    type: string;
-    question: string;
-    options?: string[];
-  }>;
+  questions: Array<Question>;
 
   @Prop({ default: 1 })
   version: number; // 新文档默认从版本1开始

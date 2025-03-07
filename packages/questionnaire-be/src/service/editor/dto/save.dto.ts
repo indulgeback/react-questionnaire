@@ -3,8 +3,8 @@ import { IsNotEmpty, IsNumber, IsString, Min } from 'class-validator';
 
 export class SaveDto extends QuestionnaireDetail {
   @IsNotEmpty()
-  @IsString()
-  questionnaire_id: string;
+  @IsNumber()
+  questionnaire_id: number;
 
   @IsNotEmpty()
   @IsNumber()

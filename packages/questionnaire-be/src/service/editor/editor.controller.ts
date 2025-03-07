@@ -9,11 +9,21 @@ export class EditorController {
 
   @Post('save')
   async save(@Body() saveDto: SaveDto) {
-    return this.editorService.save(saveDto);
+    try {
+      await this.editorService.save(saveDto);
+      return new ResponseBody<null>(1, null, '保存成功');
+    } catch (error) {
+      return new ResponseBody<null>(0, null, error.message);
+    }
   }
 
   @Get('mock')
   async mock() {
-    return new ResponseBody<null>(1, null, 'mock');
+    try {
+      await this.editorService.mock();
+      return new ResponseBody<null>(1, null, 'mock');
+    } catch (error) {
+      return new ResponseBody<null>(0, null, error.message);
+    }
   }
 }

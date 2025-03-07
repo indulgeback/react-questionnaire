@@ -25,9 +25,8 @@ export class EditorService {
       },
       { new: true, upsert: false },
     );
-
     if (!result) {
-      throw new ConflictException('数据版本已过期，请刷新后重试');
+      throw new Error('数据版本已过期，请刷新后重试');
     }
     return result;
   }

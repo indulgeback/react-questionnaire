@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.16.0](https://github.com/indulgeback/react-questionnaire/compare/v1.15.0...v1.16.0) (2025-03-12)
+
+
+### Features
+
+* 答题端连接mongo ([4421a5d](https://github.com/indulgeback/react-questionnaire/commit/4421a5dbdd7572924a21aa39ff344cd3f61b6906))
+* 更新SQL文件 ([9329104](https://github.com/indulgeback/react-questionnaire/commit/93291041e604b2a3c4bef9e26c4e32b8a3b25235))
+* BE - 保存问卷数据接口 ([cf919e6](https://github.com/indulgeback/react-questionnaire/commit/cf919e6f3e75c5f748b75cdd19c20be4fa2d57a6))
+* BE - 新增问卷数据mock接口 ([00b3cb0](https://github.com/indulgeback/react-questionnaire/commit/00b3cb00d9b413c5f802a4139eadbcbff93fcb12))
+
+
+
+
+
 # [1.15.0](https://github.com/indulgeback/react-questionnaire/compare/v1.14.5...v1.15.0) (2025-02-24)
 
 

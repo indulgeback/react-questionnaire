@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.16.0](https://github.com/indulgeback/react-questionnaire/compare/v1.15.0...v1.16.0) (2025-03-12)
+
+
+### Features
+
+* 答题端连接mongo ([4421a5d](https://github.com/indulgeback/react-questionnaire/commit/4421a5dbdd7572924a21aa39ff344cd3f61b6906))
+
+
+
+
+
 # [1.15.0](https://github.com/indulgeback/react-questionnaire/compare/v1.14.5...v1.15.0) (2025-02-24)
 
 

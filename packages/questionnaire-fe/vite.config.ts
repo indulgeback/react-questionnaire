@@ -24,7 +24,8 @@ export default defineConfig({
     proxy: {
       // 代理 /api 请求到本地 mock 服务器
       '/api': {
-        target: 'http://localhost:8879',
+        target: 'https://xmquestionnaire.cn',
+        // target: 'http://localhost:8879',
         changeOrigin: true
       }
     },

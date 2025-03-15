@@ -1,4 +1,5 @@
 import { LOGIN_STATE } from '@/constant'
+import { UserInfo } from '@/utils'
 import {
   getLoginState,
   getTokenFromStorage,
@@ -8,7 +9,7 @@ import {
   setTokenStorage,
   setUserInfoStorage
 } from '@/utils'
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 export const profileSlice = createSlice({
   name: 'profile',
@@ -19,19 +20,19 @@ export const profileSlice = createSlice({
     defaultAvatar: ''
   },
   reducers: {
-    setToken: (state, action) => {
+    setToken: (state, action: PayloadAction<string>) => {
       state.token = action.payload
       setTokenStorage(action.payload)
     },
-    setLoginState: (state, action) => {
+    setLoginState: (state, action: PayloadAction<LOGIN_STATE>) => {
       action.payload === LOGIN_STATE.LOGIN ? login() : logout()
       state.loginState = action.payload
     },
-    setUserInfo: (state, action) => {
+    setUserInfo: (state, action: PayloadAction<UserInfo>) => {
       state.userInfo = action.payload
       setUserInfoStorage(action.payload)
     },
-    setDefaultAvatar: (state, action) => {
+    setDefaultAvatar: (state, action: PayloadAction<string>) => {
       state.defaultAvatar = action.payload
     }
   }

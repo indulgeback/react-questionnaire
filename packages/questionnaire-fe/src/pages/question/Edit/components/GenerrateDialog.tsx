@@ -75,7 +75,6 @@ ${
     ? `- 选项：\n${question.options.map((opt: string) => `  - ${opt}`).join('\n')}`
     : ''
 }
-${question.answer ? `- 答案：${question.answer}` : ''}
 `
       )
       .join('\n')

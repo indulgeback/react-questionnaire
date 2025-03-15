@@ -1,19 +1,23 @@
 import React from 'react'
 import { QuestionRadioPropsType, QuestionRadioDefaultProps } from './interface'
 import { Radio } from 'antd'
+import clsx from 'clsx'
 
-const QuestionRadio: React.FC<QuestionRadioPropsType> = (props: QuestionRadioPropsType) => {
-  const { question, options, onChange } = { ...QuestionRadioDefaultProps, ...props }
+const QuestionRadio: React.FC<QuestionRadioPropsType> = (customProps: QuestionRadioPropsType) => {
+  const { title, props } = { ...QuestionRadioDefaultProps, ...customProps }
   return (
     <div className="flex flex-col gap-2 pointer-events-none">
       <div
         className="text-base font-bold text-ellipsis overflow-hidden whitespace-nowrap"
-        title={question}
+        title={title}
       >
-        {question}
+        {title}
       </div>
       <div>
-        <Radio.Group options={options} onChange={onChange} />
+        <Radio.Group
+          className={clsx('flex gap-2', props.column ? 'flex-col' : 'flex-row')}
+          options={props.options}
+        />
       </div>
     </div>
   )

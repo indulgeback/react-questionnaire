@@ -1,11 +1,15 @@
 export type QuestionCheckboxPropsType = {
-  question: string
-  options: string[]
-  onChange: ((checkedValue: any[]) => void) | undefined
+  title: string
+  props: {
+    options: string[]
+    column: boolean
+  }
 }
 
 export const QuestionCheckboxDefaultProps: QuestionCheckboxPropsType = {
-  question: '这是一道多选题',
-  options: ['选项1', '选项2', '选项3'],
-  onChange: undefined
+  title: '这是一道多选题',
+  props: {
+    options: ['选项1', '选项2', '选项3'],
+    column: false
+  }
 }

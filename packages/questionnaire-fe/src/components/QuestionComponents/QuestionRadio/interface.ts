@@ -1,13 +1,15 @@
-import { RadioChangeEvent } from 'antd'
-
 export type QuestionRadioPropsType = {
-  question: string
-  options: string[]
-  onChange: ((e: RadioChangeEvent) => void) | undefined
+  title: string
+  props: {
+    options: string[]
+    column: boolean
+  }
 }
 
 export const QuestionRadioDefaultProps: QuestionRadioPropsType = {
-  question: '这是一道单选题',
-  options: ['选项1', '选项2', '选项3'],
-  onChange: undefined
+  title: '这是一道单选题',
+  props: {
+    options: ['选项1', '选项2', '选项3'],
+    column: false
+  }
 }

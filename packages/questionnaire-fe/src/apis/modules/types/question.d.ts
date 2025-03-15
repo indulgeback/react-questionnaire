@@ -1,3 +1,5 @@
+import { ComponentPropsType } from '@/components/QuestionComponents'
+
 export type Question = {
   answer_count: number
   author: string
@@ -14,4 +16,8 @@ export type Question = {
 export type QuestionListResponse = {
   count: number
   list: Question[]
+}
+
+export type QuestionnaireDetail = Question & {
+  components: ComponentPropsType[]
 }

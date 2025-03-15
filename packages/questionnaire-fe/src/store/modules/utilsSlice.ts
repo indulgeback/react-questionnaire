@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 export const utilsSlice = createSlice({
   name: 'utils',
@@ -6,7 +6,7 @@ export const utilsSlice = createSlice({
     screenSpinning: false
   },
   reducers: {
-    setScreenSpinning: (state, action) => {
+    setScreenSpinning: (state, action: PayloadAction<boolean>) => {
       state.screenSpinning = action.payload
     }
   }

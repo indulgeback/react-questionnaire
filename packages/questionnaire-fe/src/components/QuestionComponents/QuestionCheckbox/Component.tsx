@@ -1,21 +1,24 @@
 import React from 'react'
 import { QuestionCheckboxPropsType, QuestionCheckboxDefaultProps } from './interface'
 import { Checkbox } from 'antd'
-
+import clsx from 'clsx'
 const QuestionCheckbox: React.FC<QuestionCheckboxPropsType> = (
-  props: QuestionCheckboxPropsType
+  customProps: QuestionCheckboxPropsType
 ) => {
-  const { question, options, onChange } = { ...QuestionCheckboxDefaultProps, ...props }
+  const { title, props } = { ...QuestionCheckboxDefaultProps, ...customProps }
   return (
     <div className="flex flex-col gap-2 pointer-events-none">
       <div
         className="text-base font-bold text-ellipsis overflow-hidden whitespace-nowrap"
-        title={question}
+        title={title}
       >
-        {question}
+        {title}
       </div>
       <div>
-        <Checkbox.Group options={options} onChange={onChange} />
+        <Checkbox.Group
+          className={clsx('flex gap-2', props.column ? 'flex-col' : 'flex-row')}
+          options={props.options}
+        />
       </div>
     </div>
   )

@@ -1,51 +1,17 @@
 import React from 'react'
-import { QuestionRadioDefaultProps } from '@/components/QuestionComponents/QuestionRadio/interface'
-import { QuestionCheckboxDefaultProps } from '@/components/QuestionComponents/QuestionCheckbox/interface'
-import { QuestionShortAnswerDefaultProps } from '@/components/QuestionComponents/QuestionShortAnswer/interface'
 import ComponentWapper from '@/pages/question/Edit/components/ComponentWapper'
-import QuestionRadio from '@/components/QuestionComponents/QuestionRadio/Component'
-import QuestionCheckbox from '@/components/QuestionComponents/QuestionCheckbox/Component'
-import QuestionShortAnswer from '@/components/QuestionComponents/QuestionShortAnswer/Component'
-
+import ComponentRender from '@/pages/question/Edit/components/ComponentRender'
+import { useSelector } from 'react-redux'
+import { RootState } from '@/store'
 const EditCanvas: React.FC = () => {
+  const componentList = useSelector((state: RootState) => state.components.componentList)
   return (
     <div className="h-full overflow-y-scroll custom-no-scrollbar">
-      <ComponentWapper>
-        <QuestionShortAnswer {...QuestionShortAnswerDefaultProps} />
-      </ComponentWapper>
-      <ComponentWapper>
-        <QuestionRadio {...QuestionRadioDefaultProps} />
-      </ComponentWapper>
-      <ComponentWapper>
-        <QuestionCheckbox {...QuestionCheckboxDefaultProps} />
-      </ComponentWapper>
-      <ComponentWapper>
-        <QuestionShortAnswer {...QuestionShortAnswerDefaultProps} />
-      </ComponentWapper>
-      <ComponentWapper>
-        <QuestionRadio {...QuestionRadioDefaultProps} />
-      </ComponentWapper>
-      <ComponentWapper>
-        <QuestionCheckbox {...QuestionCheckboxDefaultProps} />
-      </ComponentWapper>
-      <ComponentWapper>
-        <QuestionShortAnswer {...QuestionShortAnswerDefaultProps} />
-      </ComponentWapper>
-      <ComponentWapper>
-        <QuestionRadio {...QuestionRadioDefaultProps} />
-      </ComponentWapper>
-      <ComponentWapper>
-        <QuestionCheckbox {...QuestionCheckboxDefaultProps} />
-      </ComponentWapper>
-      <ComponentWapper>
-        <QuestionShortAnswer {...QuestionShortAnswerDefaultProps} />
-      </ComponentWapper>
-      <ComponentWapper>
-        <QuestionRadio {...QuestionRadioDefaultProps} />
-      </ComponentWapper>
-      <ComponentWapper>
-        <QuestionCheckbox {...QuestionCheckboxDefaultProps} />
-      </ComponentWapper>
+      {componentList.map(component => (
+        <ComponentWapper key={component.fe_id} fe_id={component.fe_id}>
+          <ComponentRender component={component} />
+        </ComponentWapper>
+      ))}
     </div>
   )
 }

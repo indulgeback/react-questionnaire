@@ -14,6 +14,7 @@ module.exports = {
         'custom-bg-100': 'rgb(240, 241, 245)',
         'custom-bg-200': 'rgb(208, 235, 234)',
         'custom-bg-300': 'rgb(255, 255, 255)',
+        'custom-bg-400': 'rgb(160, 235, 234)',
         'custom-blue': 'rgb(24, 144, 255)',
         'custom-yellow': 'rgb(250, 219, 20)',
         'custom-red': 'rgb(255, 77, 79)'

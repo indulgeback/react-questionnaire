@@ -11,7 +11,50 @@ function useLoadQuestionData() {
   const { loading, data, error, run } = useRequest(
     async (id: string) => {
       if (!id) throw new Error('id is required')
-      const res = await apis.questionApi.getQuestionById(+id)
+      const res = {
+        data: {
+          components: [
+            {
+              fe_id: '1',
+              type: 'questionShortAnswer',
+              title: '输入框',
+              props: {
+                title: '输入框',
+                type: 'text',
+                placeholder: '请输入',
+                maxLength: 100,
+                rows: 4
+              }
+            },
+            {
+              fe_id: '2',
+              type: 'questionRadio',
+              title: '单选题',
+              props: {
+                title: '单选题',
+                options: ['选项1', '选项2', '选项3'],
+                column: true
+              }
+            },
+            {
+              fe_id: '3',
+              type: 'questionCheckbox',
+              title: '多选题',
+              props: {
+                title: '多选题',
+                options: ['选项1', '选项2', '选项3'],
+                column: false
+              }
+            }
+          ]
+        }
+      }
+      // 模拟请求延迟
+      await new Promise(resolve => {
+        setTimeout(() => {
+          resolve(1)
+        }, 1000)
+      })
       return res
     },
     {
@@ -21,7 +64,12 @@ function useLoadQuestionData() {
   const dispatch = useDispatch()
   useEffect(() => {
     if (!data) return
-    dispatch(resetComponents({ componentList: data.data.components || [] }))
+    dispatch(
+      resetComponents({
+        selectedId: '',
+        componentList: data.data.components
+      })
+    )
   }, [data])
 
   useEffect(() => {

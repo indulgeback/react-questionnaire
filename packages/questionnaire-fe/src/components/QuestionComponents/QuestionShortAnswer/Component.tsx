@@ -5,7 +5,10 @@ import { Input } from 'antd'
 const QuestionShortAnswer: React.FC<QuestionShortAnswerPropsType> = (
   customProps: QuestionShortAnswerPropsType
 ) => {
-  const { title, props } = { ...QuestionShortAnswerDefaultProps, ...customProps }
+  const { title, type, placeholder, maxLength, rows } = {
+    ...QuestionShortAnswerDefaultProps,
+    ...customProps
+  }
   return (
     <div className="flex flex-col gap-2 pointer-events-none">
       <div
@@ -15,14 +18,10 @@ const QuestionShortAnswer: React.FC<QuestionShortAnswerPropsType> = (
         {title}
       </div>
       <div>
-        {props.type === 'text' ? (
-          <Input placeholder={props.placeholder} maxLength={props.maxLength} />
+        {type === 'text' ? (
+          <Input placeholder={placeholder} maxLength={maxLength} />
         ) : (
-          <Input.TextArea
-            placeholder={props.placeholder}
-            maxLength={props.maxLength}
-            rows={props.rows}
-          />
+          <Input.TextArea placeholder={placeholder} maxLength={maxLength} rows={rows} />
         )}
       </div>
     </div>

@@ -4,7 +4,7 @@ import { Radio } from 'antd'
 import clsx from 'clsx'
 
 const QuestionRadio: React.FC<QuestionRadioPropsType> = (customProps: QuestionRadioPropsType) => {
-  const { title, props } = { ...QuestionRadioDefaultProps, ...customProps }
+  const { title, options, column } = { ...QuestionRadioDefaultProps, ...customProps }
   return (
     <div className="flex flex-col gap-2 pointer-events-none">
       <div
@@ -15,8 +15,8 @@ const QuestionRadio: React.FC<QuestionRadioPropsType> = (customProps: QuestionRa
       </div>
       <div>
         <Radio.Group
-          className={clsx('flex gap-2', props.column ? 'flex-col' : 'flex-row')}
-          options={props.options}
+          className={clsx('flex gap-2', column ? 'flex-col' : 'flex-row')}
+          options={options}
         />
       </div>
     </div>

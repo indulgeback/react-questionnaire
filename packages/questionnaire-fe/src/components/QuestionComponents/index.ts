@@ -3,6 +3,12 @@ import { QuestionRadioPropsType } from './QuestionRadio'
 import { QuestionShortAnswerPropsType } from './QuestionShortAnswer'
 
 export type ComponentPropsType =
-  | QuestionCheckboxPropsType
-  | QuestionRadioPropsType
   | QuestionShortAnswerPropsType
+  | QuestionRadioPropsType
+  | QuestionCheckboxPropsType
+
+export enum ComponentType {
+  QuestionShortAnswer = 'questionShortAnswer',
+  QuestionRadio = 'questionRadio',
+  QuestionCheckbox = 'questionCheckbox'
+}

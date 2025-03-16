@@ -5,7 +5,7 @@ import clsx from 'clsx'
 const QuestionCheckbox: React.FC<QuestionCheckboxPropsType> = (
   customProps: QuestionCheckboxPropsType
 ) => {
-  const { title, props } = { ...QuestionCheckboxDefaultProps, ...customProps }
+  const { title, options, column } = { ...QuestionCheckboxDefaultProps, ...customProps }
   return (
     <div className="flex flex-col gap-2 pointer-events-none">
       <div
@@ -16,8 +16,8 @@ const QuestionCheckbox: React.FC<QuestionCheckboxPropsType> = (
       </div>
       <div>
         <Checkbox.Group
-          className={clsx('flex gap-2', props.column ? 'flex-col' : 'flex-row')}
-          options={props.options}
+          className={clsx('flex gap-2', column ? 'flex-col' : 'flex-row')}
+          options={options}
         />
       </div>
     </div>

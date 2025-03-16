@@ -1,7 +1,7 @@
 import { LeftOutlined, SendOutlined } from '@ant-design/icons'
 import { Button, Tooltip } from 'antd'
 import React from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import EditorButtonGroup from '@/pages/question/Edit/components/EditorButtonGroup'
 import { operationType } from '@/pages/question/Edit/components/type'
 import GenerateDialog from '@/pages/question/Edit/components/GenerrateDialog'
@@ -9,6 +9,8 @@ import useGenerateDialog from '@/pages/question/Edit/hooks/useGenerateDialog'
 import EditCanvas from '@/pages/question/Edit/EditCanvas'
 import useLoadQuestionData from '@/hooks/useLoadQuestionData'
 import CustomSpin from '@/components/CustomSpin/CustomSpin'
+import LeftPanel from '@/pages/question/Edit/components/LeftPanel'
+import RightPanel from '@/pages/question/Edit/components/RightPanel'
 
 const Edit: React.FC = () => {
   const navigate = useNavigate()
@@ -56,7 +58,7 @@ const Edit: React.FC = () => {
       </div>
       <div className="flex-1 flex justify-between p-2 h-0">
         <div className="w-[350px] bg-custom-bg-300 rounded-r-lg shadow-2xl p-2">
-          <p>物料市场</p>
+          <LeftPanel />
         </div>
         <div className="flex justify-center items-center flex-1 w-0">
           {loading ? (
@@ -70,7 +72,7 @@ const Edit: React.FC = () => {
           )}
         </div>
         <div className="w-[350px] bg-custom-bg-300 rounded-l-lg shadow-2xl p-2">
-          <p>物料配置</p>
+          <RightPanel />
         </div>
       </div>
     </div>

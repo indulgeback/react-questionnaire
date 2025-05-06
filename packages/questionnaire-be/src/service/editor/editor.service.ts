@@ -10,6 +10,12 @@ export class EditorService {
     private readonly questionnaireDetailModel: Model<QuestionnaireDetail>,
   ) {}
 
+  async getQuestionnaireDetail(questionnaireId: string) {
+    return await this.questionnaireDetailModel.findOne({
+      questionnaire_id: questionnaireId,
+    });
+  }
+
   async save(saveDto: SaveDto) {
     // 保持原有乐观锁逻辑
     const result = await this.questionnaireDetailModel.findOneAndUpdate(

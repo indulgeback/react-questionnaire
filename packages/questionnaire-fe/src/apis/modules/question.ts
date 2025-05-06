@@ -2,7 +2,7 @@ import request from '@/utils/request'
 import { RespType } from './types/common'
 import qs from 'qs'
 import { QuestionListType } from '@/hooks/types'
-import { Question, QuestionListResponse } from './types/question'
+import { QuestionListResponse, QuestionnaireDetail } from './types/question'
 
 // 统一前缀
 const prefix = '/api/question'
@@ -18,7 +18,7 @@ const getQuestionList = (page: number, limit: number, search: string, type: Ques
 /**
  * 获取问卷详情
  */
-const getQuestionById = (id: number) => request.get<number, RespType<Question>>(`${prefix}/${id}`)
+const getQuestionById = (id: number) => request.get<number, RespType<any>>(`${prefix}/${id}`)
 
 /**
  * 创建问卷

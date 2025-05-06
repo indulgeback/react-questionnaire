@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.17.0](https://github.com/indulgeback/react-questionnaire/compare/v1.16.1...v1.17.0) (2025-05-06)
+
+
+### Features
+
+* 新增数据分析 ([53e1aa6](https://github.com/indulgeback/react-questionnaire/commit/53e1aa660c8601532dce69a4f475abcbc3f6e599))
+* BE - 新增获取问卷详情接口 ([d0aca95](https://github.com/indulgeback/react-questionnaire/commit/d0aca95cb47473869a410b0cd338d178c3a4a175))
+* FE - 完善问卷编辑器，新增左右面板组件及其内容 ([284bdcc](https://github.com/indulgeback/react-questionnaire/commit/284bdcc71f36ddd5a98735a120c0515e4b0da36a))
+* FE - 问卷编辑器开发 ([a675f2b](https://github.com/indulgeback/react-questionnaire/commit/a675f2b47531f815f1fd2722bb0898901dde692b))
+* FE - 问卷编辑器开发-渲染器实现 ([2897d77](https://github.com/indulgeback/react-questionnaire/commit/2897d77baa8d1d16ff448a864026df42eca6974b))
+
+
+
+
+
+
 ## [1.16.1](https://github.com/indulgeback/react-questionnaire/compare/v1.16.0...v1.16.1) (2025-03-12)
 
 **Note:** Version bump only for package root

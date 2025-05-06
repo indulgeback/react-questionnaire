@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.17.0](https://github.com/indulgeback/react-questionnaire/compare/v1.16.1...v1.17.0) (2025-05-06)
+
+
+### Features
+
+* BE - 新增获取问卷详情接口 ([d0aca95](https://github.com/indulgeback/react-questionnaire/commit/d0aca95cb47473869a410b0cd338d178c3a4a175))
+
+
+
+
+
+
 ## [1.16.1](https://github.com/indulgeback/react-questionnaire/compare/v1.16.0...v1.16.1) (2025-03-12)
 
 **Note:** Version bump only for package @questionnaire/be

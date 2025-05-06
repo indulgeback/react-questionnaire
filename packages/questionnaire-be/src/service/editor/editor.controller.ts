@@ -1,11 +1,17 @@
-import { Controller, Post, Body, Get } from '@nestjs/common';
+import { Controller, Post, Body, Get, Query } from '@nestjs/common';
 import { EditorService } from './editor.service';
 import { SaveDto } from './dto/save.dto';
 import { ResponseBody } from '@/common/classes/response-body';
-
 @Controller('editor')
 export class EditorController {
   constructor(private readonly editorService: EditorService) {}
+
+  @Get('getQuestionnaireDetail')
+  async getQuestionnaireDetail(
+    @Query('questionnaireId') questionnaireId: string,
+  ) {
+    return await this.editorService.getQuestionnaireDetail(questionnaireId);
+  }
 
   @Post('save')
   async save(@Body() saveDto: SaveDto) {

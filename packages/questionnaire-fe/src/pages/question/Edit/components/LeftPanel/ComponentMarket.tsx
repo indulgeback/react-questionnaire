@@ -141,7 +141,7 @@ const ComponentMarket: React.FC = () => {
           onClick={() => handleComponentClick(component.type)}
         >
           <div className="flex items-center space-x-3 p-2">
-            <div className="w-10 h-10 flex items-center justify-center bg-custom-bg-400 rounded-md text-white">
+            <div className="w-10 h-10 text-xl flex items-center justify-center bg-custom-bg-400 rounded-md text-white">
               {component.icon}
             </div>
             <div className="font-medium">{component.name}</div>

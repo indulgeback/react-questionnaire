@@ -54,10 +54,60 @@ export const componentsSlice = createSlice({
 
       // 选中新添加的组件
       state.selectedId = newComponent.fe_id
+    },
+    deleteComponent: (state: ComponentsStateType, action: PayloadAction<string>) => {
+      const deleteId = action.payload
+
+      // 删除指定 id 的组件
+      state.componentList = state.componentList.filter(comp => comp.fe_id !== deleteId)
+
+      // 如果删除的是当前选中的组件，则取消选中状态
+      if (state.selectedId === deleteId) {
+        state.selectedId = state.componentList.length > 0 ? state.componentList[0].fe_id : ''
+      }
+    },
+    updateComponentProps: (
+      state: ComponentsStateType,
+      action: PayloadAction<{
+        fe_id: string
+        newProps: ComponentPropsType
+      }>
+    ) => {
+      const { fe_id, newProps } = action.payload
+
+      // 查找要更新的组件
+      const targetComponent = state.componentList.find(c => c.fe_id === fe_id)
+      if (targetComponent) {
+        // 直接替换组件属性
+        targetComponent.props = newProps
+      }
+    },
+    changeComponentTitle: (
+      state: ComponentsStateType,
+      action: PayloadAction<{
+        fe_id: string
+        title: string
+      }>
+    ) => {
+      const { fe_id, title } = action.payload
+
+      // 查找要更新的组件
+      const targetComponent = state.componentList.find(c => c.fe_id === fe_id)
+      if (targetComponent) {
+        // 更新组件标题
+        targetComponent.title = title
+      }
     }
   }
 })
 
-export const { resetComponents, setSelectedId, addComponent } = componentsSlice.actions
+export const {
+  resetComponents,
+  setSelectedId,
+  addComponent,
+  deleteComponent,
+  updateComponentProps,
+  changeComponentTitle
+} = componentsSlice.actions
 
 export default componentsSlice.reducer

@@ -21,11 +21,13 @@ const QuestionNPS: React.FC<QuestionNPSPropsType> = (customProps: QuestionNPSPro
       </div>
       <div className="flex flex-col">
         <Radio.Group>
-          <div className="grid grid-cols-11">
+          <div className="grid grid-cols-11 gap-1">
             {options.map(option => (
-              <div key={option.value} className="flex flex-col items-center">
-                <Radio value={option.value} />
-                <span className="text-xs mt-1">{option.label}</span>
+              <div key={option.value} className="flex flex-col items-center justify-center">
+                <div className="flex justify-center w-full">
+                  <Radio value={option.value} />
+                </div>
+                <span className="text-xs mt-1 text-center mr-2">{option.label}</span>
               </div>
             ))}
           </div>

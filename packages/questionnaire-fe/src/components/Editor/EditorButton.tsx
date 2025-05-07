@@ -37,29 +37,29 @@ const EditorButton = ({
   // 禁用状态直接返回禁用样式按钮
   if (isDisabled) {
     return (
-      <div className={clsx(disabledStyles, addtionalStyles)} onClick={onClick}>
-        <Tooltip title={title}>
+      <Tooltip title={title}>
+        <div className={clsx(disabledStyles, addtionalStyles)} onClick={onClick}>
           <SvgIcon name={icon} size="1.5rem" />
-        </Tooltip>
-      </div>
+        </div>
+      </Tooltip>
     )
   }
 
   return (
-    <div
-      className={clsx(defaultStyles, addtionalStyles)}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      onClick={onClick}
-    >
-      <Tooltip title={title}>
+    <Tooltip title={title}>
+      <div
+        className={clsx(defaultStyles, addtionalStyles)}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        onClick={onClick}
+      >
         <SvgIcon
           name={currentIcon}
           size="1.5rem"
           color={isHovered ? activeColor : 'currentColor'}
         />
-      </Tooltip>
-    </div>
+      </div>
+    </Tooltip>
   )
 }
 

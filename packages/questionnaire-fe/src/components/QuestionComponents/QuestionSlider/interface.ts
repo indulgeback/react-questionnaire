@@ -5,6 +5,7 @@ export type QuestionSliderPropsType = {
   step: number
   showMarks: boolean
   defaultValue: number
+  disabled?: boolean
 }
 
 export const QuestionSliderDefaultProps: QuestionSliderPropsType = {
@@ -13,5 +14,6 @@ export const QuestionSliderDefaultProps: QuestionSliderPropsType = {
   max: 100,
   step: 1,
   showMarks: true,
-  defaultValue: 50
+  defaultValue: 50,
+  disabled: true // 默认禁用交互
 }

@@ -5,7 +5,7 @@ import { Slider } from 'antd'
 const QuestionSlider: React.FC<QuestionSliderPropsType> = (
   customProps: QuestionSliderPropsType
 ) => {
-  const { title, min, max, step, showMarks, defaultValue } = {
+  const { title, min, max, step, showMarks, defaultValue, disabled } = {
     ...QuestionSliderDefaultProps,
     ...customProps
   }
@@ -22,7 +22,7 @@ const QuestionSlider: React.FC<QuestionSliderPropsType> = (
     : {}
 
   return (
-    <div className="flex flex-col gap-2 pointer-events-none">
+    <div className="flex flex-col gap-2">
       <div
         className="text-base font-bold text-ellipsis overflow-hidden whitespace-nowrap"
         title={title}
@@ -30,7 +30,14 @@ const QuestionSlider: React.FC<QuestionSliderPropsType> = (
         {title}
       </div>
       <div className="px-4">
-        <Slider min={min} max={max} step={step} marks={marks} defaultValue={defaultValue} />
+        <Slider
+          min={min}
+          max={max}
+          step={step}
+          marks={marks}
+          defaultValue={defaultValue}
+          disabled={disabled}
+        />
       </div>
     </div>
   )

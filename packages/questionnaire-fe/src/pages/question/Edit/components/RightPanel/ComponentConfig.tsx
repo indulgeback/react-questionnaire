@@ -11,6 +11,10 @@ import ParagraphConfig from './configComponents/ParagraphConfig'
 import ShortAnswerConfig from './configComponents/ShortAnswerConfig'
 import RadioConfig from './configComponents/RadioConfig'
 import CheckboxConfig from './configComponents/CheckboxConfig'
+import NPSConfig from './configComponents/NPSConfig'
+import RatingConfig from './configComponents/RatingConfig'
+import DateConfig from './configComponents/DateConfig'
+import DropdownConfig from './configComponents/DropdownConfig'
 
 // 定义组件配置组件
 const ComponentConfig: React.FC = () => {
@@ -49,6 +53,18 @@ const ComponentConfig: React.FC = () => {
 
       case ComponentType.QuestionCheckbox:
         return <CheckboxConfig componentId={fe_id} />
+
+      case ComponentType.QuestionNPS:
+        return <NPSConfig componentId={fe_id} />
+
+      case ComponentType.QuestionRating:
+        return <RatingConfig componentId={fe_id} />
+
+      case ComponentType.QuestionDate:
+        return <DateConfig componentId={fe_id} />
+
+      case ComponentType.QuestionDropdown:
+        return <DropdownConfig componentId={fe_id} />
 
       // 其他组件类型的配置界面
       default:

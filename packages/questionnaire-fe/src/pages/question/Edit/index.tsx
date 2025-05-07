@@ -11,10 +11,14 @@ import useLoadQuestionData from '@/hooks/useLoadQuestionData'
 import CustomSpin from '@/components/CustomSpin/CustomSpin'
 import LeftPanel from '@/pages/question/Edit/components/LeftPanel'
 import RightPanel from '@/pages/question/Edit/components/RightPanel'
+import { useSelector } from 'react-redux'
+import { RootState } from '@/store'
 
 const Edit: React.FC = () => {
   const navigate = useNavigate()
   const { loading } = useLoadQuestionData()
+  const componentList = useSelector((state: RootState) => state.components.componentList)
+  const pageConfig = useSelector((state: RootState) => state.pageConfig)
 
   const { isGenerateDialogOpen, openGenerateDialog, closeGenerateDialog } = useGenerateDialog()
 
@@ -38,6 +42,14 @@ const Edit: React.FC = () => {
     operationMap[type]()
   }
 
+  const confirmQuestionnaire = () => {
+    // 获取所有当前问卷的数据
+    const questionnaireData = {
+      pageConfig,
+      components: componentList
+    }
+  }
+
   return (
     <div className="w-full h-screen bg-custom-bg-100 flex flex-col">
       <div className="h-16 flex justify-between items-center">
@@ -52,7 +64,7 @@ const Edit: React.FC = () => {
         </div>
         <div className="size-10 flex justify-center items-center mr-4">
           <Tooltip title="提交问卷">
-            <Button shape="circle" icon={<SendOutlined />} />
+            <Button shape="circle" icon={<SendOutlined />} onClick={confirmQuestionnaire} />
           </Tooltip>
         </div>
       </div>

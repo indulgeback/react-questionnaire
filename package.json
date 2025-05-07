@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@heroui/select": "^2.4.19",
     "@nestjs/mapped-types": "*"
   },
   "name": "root",

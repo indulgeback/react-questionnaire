@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { ComponentPropsType } from '@/components/QuestionComponents'
+import { ComponentPropsType, ComponentType } from '@/components/QuestionComponents'
 
 export type ComponentInfoType = {
   fe_id: string
@@ -18,6 +18,11 @@ const initialState: ComponentsStateType = {
   componentList: []
 }
 
+// 生成唯一ID
+const generateID = () => {
+  return Math.floor(Math.random() * 1000000).toString()
+}
+
 export const componentsSlice = createSlice({
   name: 'components',
   initialState,
@@ -27,10 +32,32 @@ export const componentsSlice = createSlice({
     },
     setSelectedId: (state: ComponentsStateType, action: PayloadAction<string>) => {
       state.selectedId = action.payload
+    },
+    addComponent: (
+      state: ComponentsStateType,
+      action: PayloadAction<{
+        type: string
+        title: string
+        props: ComponentPropsType
+      }>
+    ) => {
+      const { type, title, props } = action.payload
+      const newComponent: ComponentInfoType = {
+        fe_id: generateID(), // 生成唯一ID
+        type,
+        title,
+        props
+      }
+
+      // 添加到组件列表末尾
+      state.componentList.push(newComponent)
+
+      // 选中新添加的组件
+      state.selectedId = newComponent.fe_id
     }
   }
 })
 
-export const { resetComponents, setSelectedId } = componentsSlice.actions
+export const { resetComponents, setSelectedId, addComponent } = componentsSlice.actions
 
 export default componentsSlice.reducer

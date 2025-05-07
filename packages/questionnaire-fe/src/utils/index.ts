@@ -13,6 +13,9 @@ export type UserInfo = Partial<{
   nickname: string
 }>
 
+// 导出getComponentDefaultProps函数
+export { getComponentDefaultProps } from './getComponentDefaultProps'
+
 export const rememberUser = (email: string, password: string) => {
   localStorage.setItem(EMAIL_KEY, email)
   localStorage.setItem(PASSWORD_KEY, password)

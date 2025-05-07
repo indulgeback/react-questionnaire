@@ -1,95 +1,133 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
+import {
+  FormOutlined,
+  FileTextOutlined,
+  CheckOutlined,
+  CheckSquareOutlined,
+  DownOutlined,
+  StarOutlined,
+  NumberOutlined,
+  TableOutlined,
+  AppstoreOutlined,
+  SlidersOutlined,
+  CalendarOutlined,
+  UploadOutlined,
+  PictureOutlined,
+  OrderedListOutlined,
+  FontSizeOutlined
+} from '@ant-design/icons'
+import { addComponent } from '@/store/modules/componentsSlice'
+import { getComponentDefaultProps } from '@/utils/getComponentDefaultProps'
+import { message } from 'antd'
 
 const ComponentMarket: React.FC = () => {
+  const dispatch = useDispatch()
+
+  // 处理组件点击，添加到编辑区域
+  const handleComponentClick = (type: string) => {
+    const componentInfo = getComponentDefaultProps(type)
+    if (componentInfo) {
+      dispatch(
+        addComponent({
+          type,
+          title: componentInfo.title,
+          props: componentInfo.props
+        })
+      )
+      message.success('添加组件成功')
+    }
+  }
+
   const componentList = [
     {
       id: 1,
       name: '简答题',
-      icon: 'text',
+      icon: <FormOutlined />,
       type: 'questionShortAnswer'
     },
     {
       id: 2,
       name: '段落题',
-      icon: 'paragraph',
+      icon: <FileTextOutlined />,
       type: 'questionParagraph'
     },
     {
       id: 3,
       name: '单选题',
-      icon: 'radio',
+      icon: <CheckOutlined />,
       type: 'questionRadio'
     },
     {
       id: 4,
       name: '多选题',
-      icon: 'checkbox',
+      icon: <CheckSquareOutlined />,
       type: 'questionCheckbox'
     },
     {
       id: 5,
       name: '下拉选择题',
-      icon: 'dropdown',
+      icon: <DownOutlined />,
       type: 'questionDropdown'
     },
     {
       id: 6,
       name: '评分题',
-      icon: 'star',
+      icon: <StarOutlined />,
       type: 'questionRating'
     },
     {
       id: 7,
       name: 'NPS评分题',
-      icon: 'nps',
+      icon: <NumberOutlined />,
       type: 'questionNPS'
     },
     {
       id: 8,
       name: '矩阵单选题',
-      icon: 'matrix',
+      icon: <TableOutlined />,
       type: 'questionMatrixRadio'
     },
     {
       id: 9,
       name: '矩阵多选题',
-      icon: 'matrixMulti',
+      icon: <AppstoreOutlined />,
       type: 'questionMatrixCheckbox'
     },
     {
       id: 10,
       name: '滑块题',
-      icon: 'slider',
+      icon: <SlidersOutlined />,
       type: 'questionSlider'
     },
     {
       id: 11,
       name: '日期选择题',
-      icon: 'date',
+      icon: <CalendarOutlined />,
       type: 'questionDate'
     },
     {
       id: 12,
       name: '文件上传题',
-      icon: 'upload',
+      icon: <UploadOutlined />,
       type: 'questionUpload'
     },
     {
       id: 13,
       name: '图片选择题',
-      icon: 'image',
+      icon: <PictureOutlined />,
       type: 'questionImageChoice'
     },
     {
       id: 14,
       name: '排序题',
-      icon: 'sort',
+      icon: <OrderedListOutlined />,
       type: 'questionRank'
     },
     {
       id: 15,
       name: '分段标题',
-      icon: 'title',
+      icon: <FontSizeOutlined />,
       type: 'questionTitle'
     }
   ]
@@ -100,10 +138,11 @@ const ComponentMarket: React.FC = () => {
         <div
           key={component.id}
           className="border-custom-bg-200 border-dashed border-2 rounded-lg p-3 transition-all duration-200 hover:border-custom-bg-400 hover:shadow-md cursor-pointer"
+          onClick={() => handleComponentClick(component.type)}
         >
           <div className="flex items-center space-x-3 p-2">
             <div className="w-10 h-10 flex items-center justify-center bg-custom-bg-400 rounded-md text-white">
-              {component.icon.slice(0, 1).toUpperCase()}
+              {component.icon}
             </div>
             <div className="font-medium">{component.name}</div>
           </div>

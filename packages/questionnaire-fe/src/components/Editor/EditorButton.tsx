@@ -14,7 +14,7 @@ interface EditorButtonProps {
 
 // 默认样式
 const defaultStyles =
-  'size-10 rounded-full flex justify-center items-center hover:bg-white hover:shadow-md active:shadow-inner cursor-pointer transition-all duration-300'
+  'size-10 rounded-full flex justify-center items-center hover:shadow-xl cursor-pointer transition-all duration-300'
 
 const disabledStyles =
   'size-10 rounded-full flex justify-center items-center cursor-not-allowed opacity-50 '

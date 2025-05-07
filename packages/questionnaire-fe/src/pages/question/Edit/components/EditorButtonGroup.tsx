@@ -1,5 +1,5 @@
 import React from 'react'
-import EditorButton from '@/components/Editor/IconButton'
+import EditorButton from '@/components/Editor/EditorButton'
 import { operationType } from '@/pages/question/Edit/components/type'
 
 interface EditorButtonGroupProps {

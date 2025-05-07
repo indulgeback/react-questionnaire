@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.18.0](https://github.com/indulgeback/react-questionnaire/compare/v1.17.0...v1.18.0) (2025-05-07)
+
+
+### Features
+
+* 完善问卷编辑器，新增多种题型组件及其默认属性 ([fe14020](https://github.com/indulgeback/react-questionnaire/commit/fe140206a195a1a55da5684fc3424718fcbfef72))
+* 完善问卷编辑器，新增日期选择、下拉选择、评分和NPS题型组件及其配置功能 ([9e3e65a](https://github.com/indulgeback/react-questionnaire/commit/9e3e65aba1e9d8c4eea787ff531b0e0762ef3592))
+* 新增编辑器按钮组件，优化问卷编辑器的组件配置功能 ([97b89aa](https://github.com/indulgeback/react-questionnaire/commit/97b89aa74ab8fe94d0d43aa892b06db0dda6e560))
+* 优化问卷编辑器，调整面板布局并更新保存按钮文本为“应用” ([e59dd0a](https://github.com/indulgeback/react-questionnaire/commit/e59dd0a69f158347f0cb171c4298d17bb05df051))
+
+
+
+
+
 # [1.17.0](https://github.com/indulgeback/react-questionnaire/compare/v1.16.1...v1.17.0) (2025-05-06)
 
 

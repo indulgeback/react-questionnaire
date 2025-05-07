@@ -46,7 +46,7 @@ const Edit: React.FC = () => {
             <Button shape="circle" icon={<LeftOutlined />} onClick={() => navigate(-1)} />
           </Tooltip>
         </div>
-        <div className="flex justify-center items-center h-full gap-4 bg-custom-bg-300 px-24 rounded-b-full mx-auto">
+        <div className="flex justify-center items-center h-full gap-4 bg-custom-bg-300 px-16 rounded-b-full mx-auto">
           <EditorButtonGroup operation={operation} />
           <GenerateDialog isOpen={isGenerateDialogOpen} close={closeGenerateDialog} />
         </div>

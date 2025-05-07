@@ -38,6 +38,27 @@ const customTabsStyles = `
 const LeftPanel: React.FC = () => {
   const [activeKey, setActiveKey] = useState('1')
 
+  const items = [
+    {
+      key: '1',
+      label: '物料市场',
+      children: (
+        <div style={tabContentStyle}>
+          <ComponentMarket />
+        </div>
+      )
+    },
+    {
+      key: '2',
+      label: '问卷图层',
+      children: (
+        <div style={tabContentStyle}>
+          <ComponentLayer />
+        </div>
+      )
+    }
+  ]
+
   return (
     <div className="h-full flex flex-col overflow-hidden scrollbar-hide">
       <style>{customTabsStyles}</style>
@@ -47,18 +68,8 @@ const LeftPanel: React.FC = () => {
         onChange={setActiveKey}
         style={tabsStyle}
         tabBarStyle={{ marginBottom: 0 }}
-      >
-        <Tabs.TabPane tab="物料市场" key="1">
-          <div style={tabContentStyle}>
-            <ComponentMarket />
-          </div>
-        </Tabs.TabPane>
-        <Tabs.TabPane tab="问卷图层" key="2">
-          <div style={tabContentStyle}>
-            <ComponentLayer />
-          </div>
-        </Tabs.TabPane>
-      </Tabs>
+        items={items}
+      />
     </div>
   )
 }

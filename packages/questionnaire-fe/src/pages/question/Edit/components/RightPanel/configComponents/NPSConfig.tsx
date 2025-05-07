@@ -25,7 +25,7 @@ const NPSConfig: React.FC<NPSConfigProps> = ({ componentId }) => {
     }
   }, [currentComponent, form])
 
-  // 保存配置
+  // 应用配置
   const handleSave = async () => {
     if (!currentComponent) return
 
@@ -41,10 +41,10 @@ const NPSConfig: React.FC<NPSConfigProps> = ({ componentId }) => {
         })
       )
 
-      message.success('保存成功')
+      message.success('应用成功')
     } catch (error) {
       console.error('表单验证失败:', error)
-      message.error('保存失败')
+      message.error('应用失败')
     }
   }
 
@@ -55,7 +55,7 @@ const NPSConfig: React.FC<NPSConfigProps> = ({ componentId }) => {
       <div className="flex justify-between items-center mb-4">
         <h3 className="font-bold">{currentComponent.title} 配置</h3>
         <Button type="primary" icon={<SaveOutlined />} onClick={handleSave}>
-          保存
+          应用
         </Button>
       </div>
       <Form form={form} layout="vertical" initialValues={currentComponent.props}>

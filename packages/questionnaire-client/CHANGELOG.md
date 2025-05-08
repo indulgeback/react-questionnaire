@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.19.0](https://github.com/indulgeback/react-questionnaire/compare/v1.18.0...v1.19.0) (2025-05-08)
+
+
+### Features
+
+* 更新问卷编辑器，优化组件版本并新增问卷进度组件，改进题型组件的状态管理和样式 ([c68506a](https://github.com/indulgeback/react-questionnaire/commit/c68506a23ab4a281db92fab3e8a9b7d73fcb6efd))
+* 更新问卷客户端配置，新增图片域名支持，优化Webpack配置以处理MongoDB相关模块，同时重构问卷页面组件以支持动态数据展示和初始化功能 ([46f9669](https://github.com/indulgeback/react-questionnaire/commit/46f9669239ad30a559b2b712005752b67ba9893f))
+* 更新问卷数据生成API，替换图片选择题的占位符图片为真实图片，并删除无用的favicon文件 ([cc31ec9](https://github.com/indulgeback/react-questionnaire/commit/cc31ec9ebd115fc2c8e14c7313351b873bc5f3c2))
+* 更新问卷组件样式，将段落和简答题型的输入框样式修改为“underlined”以提升用户体验 ([ebce96c](https://github.com/indulgeback/react-questionnaire/commit/ebce96ccc7984724b0502144d900ac68a8ea5d11))
+* 完善问卷编辑器，新增多种题型组件（如日期选择、下拉选择、评分、NPS、矩阵单选、矩阵多选、排序、文件上传等），并优化数据加载和测试数据功能 ([73f4691](https://github.com/indulgeback/react-questionnaire/commit/73f4691fa9bf711eb64d26c1291a539ed924cdd3))
+* 新增问卷数据生成API，优化问卷页面加载逻辑，更新问卷组件以支持动态数据展示，并添加加载和错误处理组件 ([b291a71](https://github.com/indulgeback/react-questionnaire/commit/b291a718b6004dc1068bb29a9bdb8cbcede33904))
+* 新增MongoDB连接和问卷初始化功能，确保默认问卷数据存在，并优化问卷数据获取逻辑 ([4980579](https://github.com/indulgeback/react-questionnaire/commit/49805790ea670c911877ae2ed2b969f2dc176e54))
+
+
+
+
+
 # [1.18.0](https://github.com/indulgeback/react-questionnaire/compare/v1.17.0...v1.18.0) (2025-05-07)
 
 **Note:** Version bump only for package @questionnaire/client

@@ -1,12 +1,13 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import useAnswerStore from "@/stores/useAnswerStore";
 import useQuestionStore from "@/stores/useQuestionStore";
 import clsx from "clsx";
 import { Tooltip } from "@heroui/tooltip";
 import { Chip } from "@heroui/chip";
 import { QuestionType } from "@/types/question";
+import useScrollHighlight from "@/hooks/useScrollHighlight";
 
 interface QuestionnaireProgressProps {
   onQuestionClick?: (questionId: number) => void;
@@ -15,63 +16,59 @@ interface QuestionnaireProgressProps {
 const QuestionnaireProgress: React.FC<QuestionnaireProgressProps> = ({ onQuestionClick }) => {
   const { questionnaireData } = useQuestionStore();
   const { getAnsweredStatus, answers } = useAnswerStore();
+  const scrollAndHighlight = useScrollHighlight();
   const [answeredStatus, setAnsweredStatus] = useState<boolean[]>([]);
   const [completionRate, setCompletionRate] = useState<number>(0);
   const [answeredCount, setAnsweredCount] = useState<number>(0);
   const [totalQuestions, setTotalQuestions] = useState<number>(0);
 
-  // 立即执行一次初始化进度计算
+  // 使用useCallback包装updateProgress函数，避免不必要的重新创建
+  const updateProgress = useCallback(() => {
+    if (!questionnaireData || questionnaireData.length === 0) return;
+
+    const questionIds = questionnaireData.map(question => question.id);
+    const status = getAnsweredStatus(questionIds);
+
+    // 特殊处理：将标题类型题目标记为已回答
+    const modifiedStatus = status.map((isAnswered, index) => {
+      // 标题题和无需回答的题目标记为已完成
+      if (questionnaireData[index]?.type === QuestionType.TITLE) {
+        return true;
+      }
+      return isAnswered;
+    });
+
+    setAnsweredStatus(modifiedStatus);
+
+    // 计算完成率
+    const totalQuestionsCount = questionnaireData.length;
+    const currentAnsweredCount = modifiedStatus.filter(Boolean).length;
+
+    setTotalQuestions(totalQuestionsCount);
+    setAnsweredCount(currentAnsweredCount);
+    setCompletionRate(
+      totalQuestionsCount > 0 ? Math.round((currentAnsweredCount / totalQuestionsCount) * 100) : 0
+    );
+  }, [questionnaireData, getAnsweredStatus, answers]);
+
+  // 每当答案、问题数据或updateProgress函数变化时重新计算进度
   useEffect(() => {
     updateProgress();
-  }, []);
+  }, [answers, questionnaireData, updateProgress]);
 
-  // 每当答案变化时重新计算进度
+  // 页面加载时立即执行一次更新
   useEffect(() => {
-    updateProgress();
-  }, [answers, questionnaireData]);
-
-  const updateProgress = () => {
-    if (questionnaireData.length > 0) {
-      const questionIds = questionnaireData.map(question => question.id);
-      const status = getAnsweredStatus(questionIds);
-      setAnsweredStatus(status);
-
-      // 计算完成率（包括所有题目，标题题已在组件中标记为已完成）
-      const totalQuestionsCount = questionnaireData.length;
-      const answeredCount = status.filter(Boolean).length;
-
-      setTotalQuestions(totalQuestionsCount);
-      setAnsweredCount(answeredCount);
-      setCompletionRate(
-        totalQuestionsCount > 0 ? Math.round((answeredCount / totalQuestionsCount) * 100) : 0
-      );
-
-      console.log("进度更新:", {
-        totalQuestions: totalQuestionsCount,
-        answered: answeredCount,
-        rate: totalQuestionsCount > 0 ? Math.round((answeredCount / totalQuestionsCount) * 100) : 0,
-        answers: answers.length,
-        answersData: answers,
-        status
-      });
-    }
-  };
+    const initializeStatus = () => {
+      updateProgress();
+    };
+    initializeStatus();
+  }, [updateProgress]);
 
   const scrollToQuestion = (questionId: number) => {
     if (onQuestionClick) {
       onQuestionClick(questionId);
     } else {
-      const element = document.getElementById(`question-${questionId}`);
-      if (element) {
-        // 将元素滚动到屏幕中心
-        element.scrollIntoView({ behavior: "smooth", block: "center" });
-
-        // 添加高亮效果
-        element.classList.add("highlight-question");
-        setTimeout(() => {
-          element.classList.remove("highlight-question");
-        }, 1500);
-      }
+      scrollAndHighlight(`question-${questionId}`);
     }
   };
 

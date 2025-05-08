@@ -17,7 +17,13 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   icons: {
-    icon: "/favicon.ico"
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/favicon.ico",
+    other: {
+      rel: "apple-touch-icon-precomposed",
+      url: "/favicon.ico"
+    }
   }
 };
 
@@ -31,7 +37,10 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html suppressHydrationWarning lang="zh-CN">
-      <head />
+      <head>
+        <link rel="icon" href="/favicon.png" type="image/png" />
+        <link rel="alternate icon" href="/favicon.ico" />
+      </head>
       <body className={clsx("min-h-screen bg-background font-sans antialiased", fontSans.variable)}>
         <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
           <div className="relative flex flex-col h-screen">

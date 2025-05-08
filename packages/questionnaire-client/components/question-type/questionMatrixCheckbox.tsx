@@ -4,16 +4,53 @@ import useAnswerStore from "@/stores/useAnswerStore";
 import { Checkbox, CheckboxGroup } from "@heroui/checkbox";
 
 const QuestionMatrixCheckbox = ({ question }: { question: Question }) => {
-  const { addOrUpdateAnswer } = useAnswerStore();
+  const { addOrUpdateAnswer, getAnswerByQuestionId } = useAnswerStore();
   const matrix = question.matrix || { rows: [], columns: [] };
   const [selectedValues, setSelectedValues] = useState<Record<string, string[]>>({});
 
+  // 组件挂载时检查是否有已保存的答案
+  useEffect(() => {
+    const savedAnswer = getAnswerByQuestionId(question.id);
+    if (savedAnswer && typeof savedAnswer === "string") {
+      try {
+        const parsedValue = JSON.parse(savedAnswer);
+        if (typeof parsedValue === "object") {
+          // 确保不把__incomplete__标记当作数据使用
+          const cleanValues = { ...parsedValue };
+          delete cleanValues.__incomplete__;
+          setSelectedValues(cleanValues);
+        }
+      } catch (e) {
+        console.error("Error parsing saved matrix checkbox answer:", e);
+      }
+    }
+  }, [question.id, getAnswerByQuestionId]);
+
+  // 检查是否所有行都已选择
+  const allRowsSelected =
+    matrix.rows.length > 0 &&
+    matrix.rows.every(row => selectedValues[row] && selectedValues[row].length > 0);
+
   // 当选择改变时，更新答案存储
   useEffect(() => {
-    if (Object.keys(selectedValues).length > 0) {
+    // 只有当所有行都有选择时，才算作完成
+    if (allRowsSelected) {
       addOrUpdateAnswer(question.id, JSON.stringify(selectedValues));
+    } else if (Object.keys(selectedValues).length > 0) {
+      // 如果有部分选择但并非所有行都选择了，则存储选择但不算完成
+      // 通过特殊标记__incomplete__来表示未完成状态
+      addOrUpdateAnswer(
+        question.id,
+        JSON.stringify({
+          ...selectedValues,
+          __incomplete__: true
+        })
+      );
+    } else {
+      // 没有任何选择，清除答案
+      addOrUpdateAnswer(question.id, "");
     }
-  }, [selectedValues, question.id, addOrUpdateAnswer]);
+  }, [selectedValues, question.id, addOrUpdateAnswer, allRowsSelected]);
 
   const handleChange = (rowId: string, values: string[]) => {
     setSelectedValues(prev => ({
@@ -83,6 +120,9 @@ const QuestionMatrixCheckbox = ({ question }: { question: Question }) => {
           </tbody>
         </table>
       </div>
+      {!allRowsSelected && Object.keys(selectedValues).length > 0 && (
+        <p className="text-xs text-orange-500 dark:text-orange-400 mt-1">请完成所有行的选择</p>
+      )}
     </div>
   );
 };

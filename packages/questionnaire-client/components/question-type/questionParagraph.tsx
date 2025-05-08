@@ -10,9 +10,7 @@ const QuestionParagraph = ({ question }: { question: Question }) => {
   const handleValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
     setValue(newValue);
-    if (newValue.trim()) {
-      addOrUpdateAnswer(question.id, newValue);
-    }
+    addOrUpdateAnswer(question.id, newValue);
   };
 
   return (

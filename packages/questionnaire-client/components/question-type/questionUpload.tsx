@@ -83,7 +83,7 @@ const QuestionUpload = ({ question }: { question: Question }) => {
                     clipRule="evenodd"
                   ></path>
                 </svg>
-                <span className="text-sm truncate font-medium text-default-700 dark:text-default-300">
+                <span className="text-sm truncate font-medium text-default-700 dark:text-white">
                   {file.name}
                 </span>
               </div>

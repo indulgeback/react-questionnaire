@@ -1,62 +1,52 @@
-"use client";
+import React from "react";
+import { Question } from "@/types/question";
+import QuestionnaireClientComponent from "./QuestionnaireClient";
+import { generateQuestionnaireData } from "../api/questionnaire/route";
 
-import QuestionRenderer from "@/components/question-ui/questionRenderer";
-import QuestionWrapper from "@/components/question-ui/questionWrapper";
-import React, { useEffect } from "react";
-import useQuestionStore from "@/stores/useQuestionStore";
-import { Button } from "@heroui/button";
-import { SparklesIcon } from "@heroicons/react/24/solid";
-import QuestionnaireProgress from "@/components/question-ui/QuestionnaireProgress";
+// 定义问卷元数据接口
+interface QuestionnaireMetadata {
+  title: string;
+  creator: string;
+  createTime: string;
+  updateTime: string;
+}
 
-const QuestionPage = () => {
-  const { questionnaireData, loadTestData } = useQuestionStore();
+// 定义完整问卷数据接口
+interface QuestionnaireData {
+  metadata: QuestionnaireMetadata;
+  questions: Question[];
+}
 
-  useEffect(() => {
-    // 初始化加载测试数据
-    loadTestData();
-  }, [loadTestData]);
+// 服务端组件，用于获取问卷数据
+async function getQuestionnaireData(): Promise<QuestionnaireData> {
+  try {
+    // 添加1秒延迟模拟数据获取过程
+    await new Promise(resolve => setTimeout(resolve, 1000));
 
-  const onSubmit = () => {
-    console.log("提交所有问题");
-    // 这里添加提交逻辑
-  };
-
-  if (questionnaireData.length === 0) {
-    return <div className="flex justify-center items-center h-screen">加载问卷中...</div>;
+    // 直接使用API函数，避免服务端fetch问题
+    return generateQuestionnaireData();
+  } catch (error) {
+    console.error("Error fetching questionnaire data:", error);
+    // 返回空数据
+    return {
+      metadata: {
+        title: "加载失败",
+        creator: "系统",
+        createTime: new Date().toISOString(),
+        updateTime: new Date().toISOString()
+      },
+      questions: []
+    };
   }
+}
+
+export default async function QuestionPage() {
+  // 服务端获取问卷数据
+  const questionnaireData = await getQuestionnaireData();
 
   return (
-    <QuestionWrapper>
-      <div className="container mx-auto px-4">
-        <div className="sticky top-12 z-50">
-          <QuestionnaireProgress />
-        </div>
-        <div className="flex flex-col gap-10 mb-16">
-          {questionnaireData.map((question, index) => (
-            <div
-              key={index}
-              id={`question-${question.id}`}
-              className="p-6 bg-background dark:bg-default-50 rounded-lg shadow-sm"
-            >
-              <QuestionRenderer question={question} />
-            </div>
-          ))}
-          <div className="sticky bottom-4 flex justify-center mt-8">
-            <Button
-              color="secondary"
-              variant="shadow"
-              size="lg"
-              onPress={onSubmit}
-              className="px-8"
-            >
-              <SparklesIcon className="w-4 h-4 mr-2" />
-              提交问卷
-            </Button>
-          </div>
-        </div>
-      </div>
-    </QuestionWrapper>
+    <div>
+      <QuestionnaireClientComponent initialQuestionnaireData={questionnaireData} />
+    </div>
   );
-};
-
-export default QuestionPage;
+}

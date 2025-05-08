@@ -7,12 +7,19 @@ const useAnswerStore = create<AnswersState>()(
   devtools(
     persist(
       (set, get) => ({
-        answers: [],
+        answersByQuestionnaire: {},
+        currentQuestionnaireId: "1", // 默认问卷ID
+
+        // 设置当前问卷ID
+        setCurrentQuestionnaireId: (id: string) => {
+          set({ currentQuestionnaireId: id });
+        },
 
         // 新增或更新答案
         addOrUpdateAnswer: (questionId, value, questionType) => {
-          const { answers } = get();
-          const existingAnswer = answers.find(answer => answer.questionId === questionId);
+          const { answersByQuestionnaire, currentQuestionnaireId } = get();
+          const currentAnswers = answersByQuestionnaire[currentQuestionnaireId] || [];
+          const existingAnswer = currentAnswers.find(answer => answer.questionId === questionId);
 
           // 处理空值情况 - 当用户清除答案时
           if (
@@ -24,7 +31,12 @@ const useAnswerStore = create<AnswersState>()(
           ) {
             // 如果值为空，则移除该答案
             set(state => ({
-              answers: state.answers.filter(answer => answer.questionId !== questionId)
+              answersByQuestionnaire: {
+                ...state.answersByQuestionnaire,
+                [currentQuestionnaireId]: currentAnswers.filter(
+                  answer => answer.questionId !== questionId
+                )
+              }
             }));
             return;
           }
@@ -47,15 +59,24 @@ const useAnswerStore = create<AnswersState>()(
             // 标记答案为未完成状态但保存数据
             if (existingAnswer) {
               set(state => ({
-                answers: state.answers.map(answer =>
-                  answer.questionId === questionId
-                    ? { ...answer, value, isIncomplete: true, questionType }
-                    : answer
-                )
+                answersByQuestionnaire: {
+                  ...state.answersByQuestionnaire,
+                  [currentQuestionnaireId]: currentAnswers.map(answer =>
+                    answer.questionId === questionId
+                      ? { ...answer, value, isIncomplete: true, questionType }
+                      : answer
+                  )
+                }
               }));
             } else {
               set(state => ({
-                answers: [...state.answers, { questionId, value, isIncomplete: true, questionType }]
+                answersByQuestionnaire: {
+                  ...state.answersByQuestionnaire,
+                  [currentQuestionnaireId]: [
+                    ...currentAnswers,
+                    { questionId, value, isIncomplete: true, questionType }
+                  ]
+                }
               }));
             }
             return;
@@ -64,38 +85,63 @@ const useAnswerStore = create<AnswersState>()(
           if (existingAnswer) {
             // 如果答案已存在，则更新
             set(state => ({
-              answers: state.answers.map(answer =>
-                answer.questionId === questionId
-                  ? { ...answer, value, isIncomplete: false }
-                  : answer
-              )
+              answersByQuestionnaire: {
+                ...state.answersByQuestionnaire,
+                [currentQuestionnaireId]: currentAnswers.map(answer =>
+                  answer.questionId === questionId
+                    ? { ...answer, value, isIncomplete: false }
+                    : answer
+                )
+              }
             }));
           } else {
             // 如果答案不存在，则新增
-
             set(state => ({
-              answers: [...state.answers, { questionId, value, isIncomplete: false, questionType }]
+              answersByQuestionnaire: {
+                ...state.answersByQuestionnaire,
+                [currentQuestionnaireId]: [
+                  ...currentAnswers,
+                  { questionId, value, isIncomplete: false, questionType }
+                ]
+              }
             }));
           }
         },
 
         // 移除单个答案
         removeAnswer: (questionId: number) => {
+          const { answersByQuestionnaire, currentQuestionnaireId } = get();
+          const currentAnswers = answersByQuestionnaire[currentQuestionnaireId] || [];
+
           set(state => ({
-            answers: state.answers.filter(answer => answer.questionId !== questionId)
+            answersByQuestionnaire: {
+              ...state.answersByQuestionnaire,
+              [currentQuestionnaireId]: currentAnswers.filter(
+                answer => answer.questionId !== questionId
+              )
+            }
           }));
         },
 
-        // 清空所有答案
+        // 清空当前问卷的所有答案
         clearAnswers: () => {
-          set({ answers: [] });
+          const { answersByQuestionnaire, currentQuestionnaireId } = get();
+
+          set({
+            answersByQuestionnaire: {
+              ...answersByQuestionnaire,
+              [currentQuestionnaireId]: []
+            }
+          });
         },
 
         // 获取每个题目是否已回答的 boolean 数组
         getAnsweredStatus: (questionIds: number[]) => {
-          const { answers } = get();
+          const { answersByQuestionnaire, currentQuestionnaireId } = get();
+          const currentAnswers = answersByQuestionnaire[currentQuestionnaireId] || [];
+
           const status = questionIds.map(questionId => {
-            const answer = answers.find(a => a.questionId === questionId);
+            const answer = currentAnswers.find(a => a.questionId === questionId);
             // 答案存在且不是未完成状态才算作已回答
             return answer ? !answer.isIncomplete : false;
           });
@@ -104,8 +150,10 @@ const useAnswerStore = create<AnswersState>()(
 
         // 获取特定问题的答案
         getAnswerByQuestionId: (questionId: number) => {
-          const { answers } = get();
-          return answers.find(answer => answer.questionId === questionId)?.value;
+          const { answersByQuestionnaire, currentQuestionnaireId } = get();
+          const currentAnswers = answersByQuestionnaire[currentQuestionnaireId] || [];
+
+          return currentAnswers.find(answer => answer.questionId === questionId)?.value;
         },
 
         // 检查问卷是否已完成
@@ -114,15 +162,24 @@ const useAnswerStore = create<AnswersState>()(
           return status.every(Boolean);
         },
 
-        // 获取全部答案数据
+        // 获取当前问卷的全部答案数据
         getAllAnswers: () => {
-          const { answers } = get();
-          return answers;
+          const { answersByQuestionnaire, currentQuestionnaireId } = get();
+          return answersByQuestionnaire[currentQuestionnaireId] || [];
+        },
+
+        // 获取特定问卷的所有答案
+        getAnswersByQuestionnaireId: (questionnaireId: string) => {
+          const { answersByQuestionnaire } = get();
+          return answersByQuestionnaire[questionnaireId] || [];
         }
       }),
       {
         name: "questionnaire-answers-storage", // 持久化存储的名称
-        partialize: state => ({ answers: state.answers }) // 只持久化答案数据
+        partialize: state => ({
+          answersByQuestionnaire: state.answersByQuestionnaire,
+          currentQuestionnaireId: state.currentQuestionnaireId
+        }) // 只持久化答案数据和当前问卷ID
       }
     )
   )

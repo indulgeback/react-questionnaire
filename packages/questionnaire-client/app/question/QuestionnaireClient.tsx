@@ -2,7 +2,7 @@
 
 import QuestionRenderer from "@/components/question-ui/questionRenderer";
 import QuestionWrapper from "@/components/question-ui/questionWrapper";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import useQuestionStore from "@/stores/useQuestionStore";
 import { Button } from "@heroui/button";
 import { SparklesIcon } from "@heroicons/react/24/solid";
@@ -11,9 +11,17 @@ import useAnswerStore from "@/stores/useAnswerStore";
 import useScrollHighlight from "@/hooks/useScrollHighlight";
 
 const QuestionnaireClient: React.FC = () => {
-  const { questionnaireData } = useQuestionStore();
-  const { getAnsweredStatus, getAllAnswers } = useAnswerStore();
+  const { questionnaireData, metadata } = useQuestionStore();
+  const { getAnsweredStatus, getAllAnswers, currentQuestionnaireId } = useAnswerStore();
   const scrollAndHighlight = useScrollHighlight();
+  const [questionnaireName, setQuestionnaireName] = useState<string>("问卷调查");
+
+  // 初始化问卷标题
+  useEffect(() => {
+    if (metadata && metadata.title) {
+      setQuestionnaireName(metadata.title);
+    }
+  }, [metadata]);
 
   const onSubmit = () => {
     // 获取所有问题的回答状态
@@ -34,8 +42,8 @@ const QuestionnaireClient: React.FC = () => {
       }, 1500);
     } else {
       // 所有问题都已回答，这里可以添加提交逻辑
-      console.log("所有问题已完成，可以提交问卷");
-      console.log(getAllAnswers());
+      console.log(`问卷ID ${currentQuestionnaireId} 的所有问题已完成，可以提交问卷`);
+      console.log("答案数据:", getAllAnswers());
       // 添加实际提交逻辑
     }
   };
@@ -49,8 +57,12 @@ const QuestionnaireClient: React.FC = () => {
       <div className="container mx-auto px-4">
         {/* 问卷标题和元信息 */}
         <div className="text-center mb-8">
-          <h1 className="text-2xl font-bold text-default-900 dark:text-white mb-2">问卷调查</h1>
-          <p className="text-sm text-default-500 dark:text-white">请认真填写以下问题</p>
+          <h1 className="text-2xl font-bold text-default-900 dark:text-white mb-2">
+            {questionnaireName}
+          </h1>
+          <p className="text-sm text-default-500 dark:text-white">
+            问卷ID: {currentQuestionnaireId} | 请认真填写以下问题
+          </p>
         </div>
 
         <div className="questionnaire-progress sticky top-12 z-50 rounded-lg shadow-lg">

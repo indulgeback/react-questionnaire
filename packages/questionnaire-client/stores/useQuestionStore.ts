@@ -2,14 +2,13 @@ import { create } from "zustand";
 import { Question, QuestionType } from "@/types/question";
 
 interface QuestionState {
-  currentIndex: number;
+  metadata: {
+    title: string;
+    creator: string;
+  };
   questionnaireData: Question[];
-  initialize: (data: Question[]) => void;
-  nextQuestion: () => void;
-  prevQuestion: () => void;
-  jumpToQuestion: (index: number) => void;
-  isLastQuestion: () => boolean;
-  isFirstQuestion: () => boolean;
+  initializeMetadata: (metadata: { title: string; creator: string }) => void;
+  initializeQuestionnaireData: (data: Question[]) => void;
   loadTestData: () => void;
 }
 
@@ -138,45 +137,18 @@ const generateTestData = (): Question[] => {
 };
 
 const useQuestionStore = create<QuestionState>((set, get) => ({
-  currentIndex: 0,
+  metadata: {
+    title: "",
+    creator: ""
+  },
   questionnaireData: [],
 
-  initialize: data => set({ questionnaireData: data }),
-
-  nextQuestion: () => {
-    const { currentIndex, questionnaireData } = get();
-    if (currentIndex < questionnaireData.length - 1) {
-      set({ currentIndex: currentIndex + 1 });
-    }
-  },
-
-  prevQuestion: () => {
-    const { currentIndex } = get();
-    if (currentIndex > 0) {
-      set({ currentIndex: currentIndex - 1 });
-    }
-  },
-
-  jumpToQuestion: index => {
-    const { questionnaireData } = get();
-    if (index >= 0 && index < questionnaireData.length) {
-      set({ currentIndex: index });
-    }
-  },
-
-  isLastQuestion: () => {
-    const { currentIndex, questionnaireData } = get();
-    return currentIndex === questionnaireData.length - 1;
-  },
-
-  isFirstQuestion: () => {
-    const { currentIndex } = get();
-    return currentIndex === 0;
-  },
+  initializeMetadata: metadata => set({ metadata }),
+  initializeQuestionnaireData: data => set({ questionnaireData: data }),
 
   loadTestData: () => {
     const testData = generateTestData();
-    set({ questionnaireData: testData, currentIndex: 0 });
+    set({ questionnaireData: testData });
   }
 }));
 

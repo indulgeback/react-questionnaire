@@ -42,8 +42,8 @@ export async function getQuestionnaireById(id: string | number): Promise<any> {
         id: serializedDetail.questionnaire_id.toString(),
         title: serializedDetail.title,
         creator: "System",
-        createTime: serializedDetail.createdAt?.toISOString() || new Date().toISOString(),
-        updateTime: serializedDetail.updatedAt?.toISOString() || new Date().toISOString(),
+        createTime: serializedDetail.createdAt || new Date().toISOString(),
+        updateTime: serializedDetail.updatedAt || new Date().toISOString(),
         version: serializedDetail.version,
         description: serializedDetail.description
       },

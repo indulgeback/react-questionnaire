@@ -4,33 +4,9 @@ import { title, subtitle } from "@/components/primitives";
 import { Button } from "@heroui/button";
 import { PencilSquareIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
-import { generateQuestionnaireData } from "./api/questionnaire/route";
-import { ensureDefaultQuestionnaire } from "@/utils/ensureDefaultQuestionnaire";
+import HomeClient from "@/components/home-client";
 
-// 服务端获取问卷数据
-async function getQuestionnaireInfo() {
-  // 确保MongoDB中有默认问卷数据
-  await ensureDefaultQuestionnaire();
-
-  try {
-    const data = generateQuestionnaireData();
-    return {
-      title: data.metadata.title,
-      creator: data.metadata.creator
-    };
-  } catch (error) {
-    console.error("Error loading questionnaire info:", error);
-    return {
-      title: "问卷调查",
-      creator: "系统"
-    };
-  }
-}
-
-export default async function Home() {
-  // 获取问卷元数据并初始化数据库
-  const { title: questionnaireTitle, creator } = await getQuestionnaireInfo();
-
+export default function Home() {
   return (
     <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
       <div className="inline-block max-w-2xl text-center justify-center">
@@ -41,8 +17,7 @@ export default async function Home() {
           Create surveys effortlessly, no design skills needed.
         </span>
         <div className={subtitle()}>Simple, fast, and powerful survey creation tool.</div>
-        <div className={subtitle()}>本次问卷主题: {questionnaireTitle}</div>
-        <div className={subtitle()}>发起人: {creator}</div>
+        <HomeClient />
       </div>
 
       <div className="flex gap-3">

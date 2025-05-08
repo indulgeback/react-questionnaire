@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { Question, QuestionType } from "@/types/question";
 import MongoUtils from "@/utils/mongo";
+import { getQuestionnaireById } from "./compatible/route";
 
 // 常量定义
 const COLLECTION_NAME = "questionnaires";
@@ -178,46 +179,19 @@ async function ensureDefaultQuestionnaire() {
 }
 
 export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const id = searchParams.get("id");
+
+  if (!id) {
+    return NextResponse.json({ error: "缺少问卷ID参数" }, { status: 400 });
+  }
+
   try {
-    const { searchParams } = new URL(request.url);
-    const questionnaireId = searchParams.get("id") || DEFAULT_QUESTIONNAIRE_ID;
-
-    // 确保默认问卷存在
-    await ensureDefaultQuestionnaire();
-
-    // 从MongoDB获取问卷数据
-    let questionnaireData = await MongoUtils.findOne(COLLECTION_NAME, {
-      "metadata.id": questionnaireId
-    } as any);
-
-    // 如果没有找到指定ID的问卷，返回默认问卷
-    if (!questionnaireData) {
-      questionnaireData = await MongoUtils.findOne(COLLECTION_NAME, {
-        "metadata.id": DEFAULT_QUESTIONNAIRE_ID
-      } as any);
-
-      // 如果仍然没有找到，生成一个默认问卷
-      if (!questionnaireData) {
-        questionnaireData = generateQuestionnaireData() as any;
-      }
-    }
-
-    // 添加300ms延迟模拟网络请求
-    await new Promise(resolve => setTimeout(resolve, 300));
-
-    // 移除MongoDB的_id字段后返回数据
-    const responseData = {
-      ...questionnaireData,
-      _id: undefined
-    };
-
-    return NextResponse.json({
-      success: true,
-      data: responseData
-    });
+    const data = await getQuestionnaireById(Number(id));
+    return NextResponse.json(data);
   } catch (error) {
-    console.error("获取问卷数据失败:", error);
-    return NextResponse.json({ success: false, message: "获取问卷数据失败" }, { status: 500 });
+    console.error("获取问卷数据出错:", error);
+    return NextResponse.json({ error: "获取问卷数据失败" }, { status: 500 });
   }
 }
 

@@ -7,35 +7,13 @@ import useQuestionStore from "@/stores/useQuestionStore";
 import { Button } from "@heroui/button";
 import { SparklesIcon } from "@heroicons/react/24/solid";
 import QuestionnaireProgress from "@/components/question-ui/QuestionnaireProgress";
-import { Question } from "@/types/question";
 import useAnswerStore from "@/stores/useAnswerStore";
 import useScrollHighlight from "@/hooks/useScrollHighlight";
 
-interface QuestionnaireMetadata {
-  title: string;
-  creator: string;
-  createTime: string;
-  updateTime: string;
-}
-
-interface QuestionnaireClientProps {
-  initialQuestionnaireData: {
-    metadata: QuestionnaireMetadata;
-    questions: Question[];
-  };
-}
-
-const QuestionnaireClient: React.FC<QuestionnaireClientProps> = ({ initialQuestionnaireData }) => {
-  const { initialize, questionnaireData } = useQuestionStore();
+const QuestionnaireClient: React.FC = () => {
+  const { questionnaireData } = useQuestionStore();
   const { getAnsweredStatus } = useAnswerStore();
   const scrollAndHighlight = useScrollHighlight();
-
-  // 使用服务端获取的数据初始化问卷状态
-  useEffect(() => {
-    if (initialQuestionnaireData && initialQuestionnaireData.questions.length > 0) {
-      initialize(initialQuestionnaireData.questions);
-    }
-  }, [initialQuestionnaireData, initialize]);
 
   const onSubmit = () => {
     // 获取所有问题的回答状态
@@ -70,13 +48,8 @@ const QuestionnaireClient: React.FC<QuestionnaireClientProps> = ({ initialQuesti
       <div className="container mx-auto px-4">
         {/* 问卷标题和元信息 */}
         <div className="text-center mb-8">
-          <h1 className="text-2xl font-bold text-default-900 dark:text-white mb-2">
-            {initialQuestionnaireData.metadata.title}
-          </h1>
-          <p className="text-sm text-default-500 dark:text-white">
-            发起人: {initialQuestionnaireData.metadata.creator} | 最近更新:{" "}
-            {new Date(initialQuestionnaireData.metadata.updateTime).toLocaleDateString()}
-          </p>
+          <h1 className="text-2xl font-bold text-default-900 dark:text-white mb-2">问卷调查</h1>
+          <p className="text-sm text-default-500 dark:text-white">请认真填写以下问题</p>
         </div>
 
         <div className="questionnaire-progress sticky top-12 z-50 rounded-lg shadow-lg">

@@ -119,10 +119,22 @@ export const generateQuestionnaireData = () => {
       type: QuestionType.IMAGE_CHOICE,
       question: "您最喜欢下面哪种风格的设计？",
       images: [
-        { url: "https://placehold.co/300x200/4A90E2/FFFFFF?text=简约风格", text: "简约风格" },
-        { url: "https://placehold.co/300x200/50E3C2/FFFFFF?text=自然风格", text: "自然风格" },
-        { url: "https://placehold.co/300x200/F5A623/FFFFFF?text=复古风格", text: "复古风格" },
-        { url: "https://placehold.co/300x200/D0021B/FFFFFF?text=现代风格", text: "现代风格" }
+        {
+          url: "https://images.unsplash.com/photo-1567016432779-094069958ea5?q=80&w=600&auto=format&fit=crop",
+          text: "简约风格"
+        },
+        {
+          url: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=600&auto=format&fit=crop",
+          text: "自然风格"
+        },
+        {
+          url: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=600&auto=format&fit=crop",
+          text: "复古风格"
+        },
+        {
+          url: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=600&auto=format&fit=crop",
+          text: "现代风格"
+        }
       ]
     },
     {

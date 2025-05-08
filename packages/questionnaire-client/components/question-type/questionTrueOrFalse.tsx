@@ -11,7 +11,7 @@ const QuestionTrueOrFalse = ({ question }: { question: Question }) => {
 
   const handleChange = (value: string) => {
     setSelected(value);
-    addOrUpdateAnswer(question.id, value);
+    addOrUpdateAnswer(question.id, value, question.type);
   };
 
   return (
@@ -21,7 +21,7 @@ const QuestionTrueOrFalse = ({ question }: { question: Question }) => {
       value={selected}
       onValueChange={handleChange}
     >
-      {(question.options ?? ["是", "否"]).map(answer => (
+      {["是", "否"].map(answer => (
         <Radio color="secondary" key={answer} value={answer}>
           {answer}
         </Radio>

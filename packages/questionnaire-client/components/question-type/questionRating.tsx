@@ -10,7 +10,7 @@ const QuestionRating = ({ question }: { question: Question }) => {
 
   const handleRatingChange = (value: number) => {
     setRating(value);
-    addOrUpdateAnswer(question.id, value.toString());
+    addOrUpdateAnswer(question.id, value.toString(), question.type);
   };
 
   return (

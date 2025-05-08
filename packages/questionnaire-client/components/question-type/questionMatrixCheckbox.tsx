@@ -35,7 +35,7 @@ const QuestionMatrixCheckbox = ({ question }: { question: Question }) => {
   useEffect(() => {
     // 只有当所有行都有选择时，才算作完成
     if (allRowsSelected) {
-      addOrUpdateAnswer(question.id, JSON.stringify(selectedValues));
+      addOrUpdateAnswer(question.id, JSON.stringify(selectedValues), question.type);
     } else if (Object.keys(selectedValues).length > 0) {
       // 如果有部分选择但并非所有行都选择了，则存储选择但不算完成
       // 通过特殊标记__incomplete__来表示未完成状态
@@ -44,11 +44,12 @@ const QuestionMatrixCheckbox = ({ question }: { question: Question }) => {
         JSON.stringify({
           ...selectedValues,
           __incomplete__: true
-        })
+        }),
+        question.type
       );
     } else {
       // 没有任何选择，清除答案
-      addOrUpdateAnswer(question.id, "");
+      addOrUpdateAnswer(question.id, "", question.type);
     }
   }, [selectedValues, question.id, addOrUpdateAnswer, allRowsSelected]);
 

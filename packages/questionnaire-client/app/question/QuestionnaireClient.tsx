@@ -2,7 +2,7 @@
 
 import QuestionRenderer from "@/components/question-ui/questionRenderer";
 import QuestionWrapper from "@/components/question-ui/questionWrapper";
-import React, { useEffect } from "react";
+import React from "react";
 import useQuestionStore from "@/stores/useQuestionStore";
 import { Button } from "@heroui/button";
 import { SparklesIcon } from "@heroicons/react/24/solid";
@@ -12,7 +12,7 @@ import useScrollHighlight from "@/hooks/useScrollHighlight";
 
 const QuestionnaireClient: React.FC = () => {
   const { questionnaireData } = useQuestionStore();
-  const { getAnsweredStatus } = useAnswerStore();
+  const { getAnsweredStatus, getAllAnswers } = useAnswerStore();
   const scrollAndHighlight = useScrollHighlight();
 
   const onSubmit = () => {
@@ -35,6 +35,7 @@ const QuestionnaireClient: React.FC = () => {
     } else {
       // 所有问题都已回答，这里可以添加提交逻辑
       console.log("所有问题已完成，可以提交问卷");
+      console.log(getAllAnswers());
       // 添加实际提交逻辑
     }
   };
@@ -60,7 +61,7 @@ const QuestionnaireClient: React.FC = () => {
             <div
               key={index}
               id={`question-${question.id}`}
-              className="p-6 bg-background dark:bg-default-50 rounded-lg shadow-sm"
+              className="p-6 bg-background dark:bg-default-50 rounded-lg shadow-lg"
             >
               <QuestionRenderer question={question} />
             </div>

@@ -26,7 +26,7 @@ const QuestionRadio = ({ question }: { question: Question }) => {
     }
 
     setSelected(value);
-    addOrUpdateAnswer(question.id, value);
+    addOrUpdateAnswer(question.id, value, question.type);
   };
 
   return (

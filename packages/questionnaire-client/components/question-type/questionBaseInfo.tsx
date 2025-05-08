@@ -23,7 +23,7 @@ const QuestionInput = ({ question }: { question: Question }) => {
 
     // 无论输入是否为空，都更新答案状态
     // 空值会在 addOrUpdateAnswer 中被处理为移除该答案
-    addOrUpdateAnswer(question.id, newValue);
+    addOrUpdateAnswer(question.id, newValue, question.type);
   };
 
   return (

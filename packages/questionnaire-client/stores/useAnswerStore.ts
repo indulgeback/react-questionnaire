@@ -10,7 +10,7 @@ const useAnswerStore = create<AnswersState>()(
         answers: [],
 
         // 新增或更新答案
-        addOrUpdateAnswer: (questionId, value) => {
+        addOrUpdateAnswer: (questionId, value, questionType) => {
           const { answers } = get();
           const existingAnswer = answers.find(answer => answer.questionId === questionId);
 
@@ -49,13 +49,13 @@ const useAnswerStore = create<AnswersState>()(
               set(state => ({
                 answers: state.answers.map(answer =>
                   answer.questionId === questionId
-                    ? { ...answer, value, isIncomplete: true }
+                    ? { ...answer, value, isIncomplete: true, questionType }
                     : answer
                 )
               }));
             } else {
               set(state => ({
-                answers: [...state.answers, { questionId, value, isIncomplete: true }]
+                answers: [...state.answers, { questionId, value, isIncomplete: true, questionType }]
               }));
             }
             return;
@@ -74,7 +74,7 @@ const useAnswerStore = create<AnswersState>()(
             // 如果答案不存在，则新增
 
             set(state => ({
-              answers: [...state.answers, { questionId, value, isIncomplete: false }]
+              answers: [...state.answers, { questionId, value, isIncomplete: false, questionType }]
             }));
           }
         },
@@ -112,6 +112,12 @@ const useAnswerStore = create<AnswersState>()(
         isQuestionnaireComplete: (questionIds: number[]) => {
           const status = get().getAnsweredStatus(questionIds);
           return status.every(Boolean);
+        },
+
+        // 获取全部答案数据
+        getAllAnswers: () => {
+          const { answers } = get();
+          return answers;
         }
       }),
       {

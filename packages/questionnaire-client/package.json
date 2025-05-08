@@ -23,6 +23,7 @@
 		"@heroui/navbar": "2.2.17",
 		"@heroui/popover": "2.3.19",
 		"@heroui/radio": "2.3.18",
+		"@heroui/skeleton": "^2.2.12",
 		"@heroui/snippet": "2.2.20",
 		"@heroui/switch": "2.2.17",
 		"@heroui/system": "2.4.15",

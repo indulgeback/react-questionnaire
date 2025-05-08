@@ -1,10 +1,11 @@
 import { Link } from "@heroui/link";
-import React from "react";
+import React, { Suspense } from "react";
 import { title, subtitle } from "@/components/primitives";
 import { Button } from "@heroui/button";
 import { PencilSquareIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
 import HomeClient from "@/components/home-client";
+import HomeClientSkeleton from "@/components/home-client-skeleton";
 
 export default function Home() {
   return (

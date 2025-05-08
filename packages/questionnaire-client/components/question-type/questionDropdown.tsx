@@ -18,7 +18,7 @@ const QuestionDropdown = ({ question }: { question: Question }) => {
           const selectedValue = Array.from(keys)[0]?.toString() || "";
           setSelected(selectedValue);
           if (selectedValue) {
-            addOrUpdateAnswer(question.id, selectedValue);
+            addOrUpdateAnswer(question.id, selectedValue, question.type);
           }
         }}
         color="secondary"

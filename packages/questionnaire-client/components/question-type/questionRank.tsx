@@ -14,14 +14,14 @@ const QuestionRank = ({ question }: { question: Question }) => {
       const initialRanking = [...options];
       setRankedItems(initialRanking);
       // 自动保存初始排序，使问题状态为已完成
-      addOrUpdateAnswer(question.id, JSON.stringify(initialRanking));
+      addOrUpdateAnswer(question.id, JSON.stringify(initialRanking), question.type);
     }
   }, [options, addOrUpdateAnswer, question.id]);
 
   // 当排序改变时更新答案
   useEffect(() => {
     if (rankedItems.length > 0) {
-      addOrUpdateAnswer(question.id, JSON.stringify(rankedItems));
+      addOrUpdateAnswer(question.id, JSON.stringify(rankedItems), question.type);
     }
   }, [rankedItems, addOrUpdateAnswer, question.id]);
 

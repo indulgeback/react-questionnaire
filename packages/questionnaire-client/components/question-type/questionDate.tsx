@@ -11,7 +11,7 @@ const QuestionDate = ({ question }: { question: Question }) => {
     const newDate = e.target.value;
     setDate(newDate);
     if (newDate) {
-      addOrUpdateAnswer(question.id, newDate);
+      addOrUpdateAnswer(question.id, newDate, question.type);
     }
   };
 

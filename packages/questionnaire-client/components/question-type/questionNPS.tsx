@@ -9,7 +9,7 @@ const QuestionNPS = ({ question }: { question: Question }) => {
 
   const handleScoreChange = (value: number) => {
     setScore(value);
-    addOrUpdateAnswer(question.id, value.toString());
+    addOrUpdateAnswer(question.id, value.toString(), question.type);
   };
 
   return (

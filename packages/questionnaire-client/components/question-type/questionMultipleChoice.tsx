@@ -20,7 +20,7 @@ const QuestionCheckbox = ({ question }: { question: Question }) => {
   const handleSelectionChange = (values: string[]) => {
     setSelected(values);
     // 确保即使是空数组也会触发状态更新
-    addOrUpdateAnswer(question.id, values);
+    addOrUpdateAnswer(question.id, values, question.type);
   };
 
   return (

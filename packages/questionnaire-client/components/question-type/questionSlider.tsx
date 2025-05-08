@@ -15,14 +15,14 @@ const QuestionSlider = ({ question }: { question: Question }) => {
   // 当滑块值变化时，保存答案
   useEffect(() => {
     if (value !== min) {
-      addOrUpdateAnswer(question.id, value.toString());
+      addOrUpdateAnswer(question.id, value.toString(), question.type);
     }
   }, [value, question.id, min, addOrUpdateAnswer]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = Number(e.target.value);
     setValue(newValue);
-    addOrUpdateAnswer(question.id, newValue.toString());
+    addOrUpdateAnswer(question.id, newValue.toString(), question.type);
   };
 
   return (

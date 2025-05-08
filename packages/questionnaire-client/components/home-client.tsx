@@ -1,15 +1,16 @@
 "use client";
 
 import React from "react";
-import { subtitle, questionInfo } from "@/components/primitives";
+import { questionInfo } from "@/components/primitives";
 import useQuestionStore from "@/stores/useQuestionStore";
+import HomeClientSkeleton from "./home-client-skeleton";
 
 export default function HomeClient() {
   const { questionnaireData, metadata } = useQuestionStore();
 
   // 检查是否有问卷数据
   if (!questionnaireData || questionnaireData.length === 0) {
-    return null;
+    return <HomeClientSkeleton />;
   }
 
   return (

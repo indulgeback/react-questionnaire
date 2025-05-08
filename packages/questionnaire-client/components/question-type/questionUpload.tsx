@@ -13,7 +13,7 @@ const QuestionUpload = ({ question }: { question: Question }) => {
     if (files.length > 0) {
       // 保存文件名列表作为答案，实际文件上传会在表单提交时处理
       const fileNames = files.map(file => file.name);
-      addOrUpdateAnswer(question.id, JSON.stringify(fileNames));
+      addOrUpdateAnswer(question.id, JSON.stringify(fileNames), question.type);
     }
   }, [files, addOrUpdateAnswer, question.id]);
 

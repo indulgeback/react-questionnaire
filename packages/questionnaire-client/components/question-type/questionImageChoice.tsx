@@ -10,7 +10,7 @@ const QuestionImageChoice = ({ question }: { question: Question }) => {
   // 当用户选择图片时记录答案
   useEffect(() => {
     if (selectedImages.length > 0) {
-      addOrUpdateAnswer(question.id, JSON.stringify(selectedImages));
+      addOrUpdateAnswer(question.id, JSON.stringify(selectedImages), question.type);
     }
   }, [selectedImages, addOrUpdateAnswer, question.id]);
 

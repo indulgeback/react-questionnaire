@@ -5,9 +5,13 @@ import { Button } from "@heroui/button";
 import { PencilSquareIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
 import { generateQuestionnaireData } from "./api/questionnaire/route";
+import { ensureDefaultQuestionnaire } from "@/utils/ensureDefaultQuestionnaire";
 
 // 服务端获取问卷数据
 async function getQuestionnaireInfo() {
+  // 确保MongoDB中有默认问卷数据
+  await ensureDefaultQuestionnaire();
+
   try {
     const data = generateQuestionnaireData();
     return {
@@ -24,7 +28,7 @@ async function getQuestionnaireInfo() {
 }
 
 export default async function Home() {
-  // 获取问卷元数据
+  // 获取问卷元数据并初始化数据库
   const { title: questionnaireTitle, creator } = await getQuestionnaireInfo();
 
   return (

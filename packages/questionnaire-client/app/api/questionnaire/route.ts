@@ -1,10 +1,16 @@
 import { NextResponse } from "next/server";
 import { Question, QuestionType } from "@/types/question";
+import MongoUtils from "@/utils/mongo";
+
+// 常量定义
+const COLLECTION_NAME = "questionnaires";
+const DEFAULT_QUESTIONNAIRE_ID = "default";
 
 // 生成测试数据 - 这部分可以替换为真实的数据库查询
 export const generateQuestionnaireData = () => {
   // 问卷元数据
   const metadata = {
+    id: DEFAULT_QUESTIONNAIRE_ID,
     title: "校园暴力行为",
     creator: "IndulgeBack",
     createTime: new Date().toISOString(),
@@ -152,20 +158,118 @@ export const generateQuestionnaireData = () => {
   };
 };
 
-export async function GET() {
+// 确保默认问卷存在于数据库中
+async function ensureDefaultQuestionnaire() {
   try {
-    // 这里可以替换为真实的数据库查询
-    const questionnaireData = generateQuestionnaireData();
+    // 检查数据库中是否已存在默认问卷
+    const existingQuestionnaire = await MongoUtils.findOne(COLLECTION_NAME, {
+      "metadata.id": DEFAULT_QUESTIONNAIRE_ID
+    } as any);
 
-    // 添加1秒延迟模拟网络请求
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    // 如果不存在，则创建默认问卷
+    if (!existingQuestionnaire) {
+      const defaultData = generateQuestionnaireData();
+      await MongoUtils.insertOne(COLLECTION_NAME, defaultData);
+      console.log("已创建默认问卷");
+    }
+  } catch (error) {
+    console.error("确保默认问卷存在时出错:", error);
+  }
+}
+
+export async function GET(request: Request) {
+  try {
+    const { searchParams } = new URL(request.url);
+    const questionnaireId = searchParams.get("id") || DEFAULT_QUESTIONNAIRE_ID;
+
+    // 确保默认问卷存在
+    await ensureDefaultQuestionnaire();
+
+    // 从MongoDB获取问卷数据
+    let questionnaireData = await MongoUtils.findOne(COLLECTION_NAME, {
+      "metadata.id": questionnaireId
+    } as any);
+
+    // 如果没有找到指定ID的问卷，返回默认问卷
+    if (!questionnaireData) {
+      questionnaireData = await MongoUtils.findOne(COLLECTION_NAME, {
+        "metadata.id": DEFAULT_QUESTIONNAIRE_ID
+      } as any);
+
+      // 如果仍然没有找到，生成一个默认问卷
+      if (!questionnaireData) {
+        questionnaireData = generateQuestionnaireData() as any;
+      }
+    }
+
+    // 添加300ms延迟模拟网络请求
+    await new Promise(resolve => setTimeout(resolve, 300));
+
+    // 移除MongoDB的_id字段后返回数据
+    const responseData = {
+      ...questionnaireData,
+      _id: undefined
+    };
 
     return NextResponse.json({
       success: true,
-      data: questionnaireData
+      data: responseData
     });
   } catch (error) {
-    console.error("Error fetching questionnaire data:", error);
+    console.error("获取问卷数据失败:", error);
     return NextResponse.json({ success: false, message: "获取问卷数据失败" }, { status: 500 });
+  }
+}
+
+// 添加保存问卷的POST接口
+export async function POST(request: Request) {
+  try {
+    const body = await request.json();
+
+    // 验证必需字段
+    if (!body.metadata || !Array.isArray(body.questions)) {
+      return NextResponse.json(
+        { success: false, message: "元数据和问题数组是必需的" },
+        { status: 400 }
+      );
+    }
+
+    // 确保问卷有ID
+    if (!body.metadata.id) {
+      body.metadata.id = Date.now().toString();
+    }
+
+    // 检查问卷是否已存在
+    const existingQuestionnaire = await MongoUtils.findOne(COLLECTION_NAME, {
+      "metadata.id": body.metadata.id
+    } as any);
+
+    let result;
+    if (existingQuestionnaire) {
+      // 更新已存在的问卷
+      result = await MongoUtils.updateOne(
+        COLLECTION_NAME,
+        { "metadata.id": body.metadata.id } as any,
+        body
+      );
+
+      return NextResponse.json({
+        success: true,
+        message: "问卷更新成功",
+        data: { id: body.metadata.id }
+      });
+    } else {
+      // 创建新问卷
+      const insertedId = await MongoUtils.insertOne(COLLECTION_NAME, body);
+
+      return NextResponse.json({
+        success: true,
+        message: "问卷创建成功",
+        data: { id: body.metadata.id, mongoId: insertedId }
+      });
+    }
+  } catch (error) {
+    console.error("保存问卷数据失败:", error);
+    return NextResponse.json({ success: false, message: "保存问卷数据失败" }, { status: 500 });
   }
 }

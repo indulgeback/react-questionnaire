@@ -2,6 +2,7 @@ import React from "react";
 import { Question } from "@/types/question";
 import QuestionnaireClientComponent from "./QuestionnaireClient";
 import { generateQuestionnaireData } from "../api/questionnaire/route";
+import { getQuestionnaireById } from "../api/questionnaire/compatible/route";
 
 // 定义问卷元数据接口
 interface QuestionnaireMetadata {
@@ -20,13 +21,30 @@ interface QuestionnaireData {
 // 服务端组件，用于获取问卷数据
 async function getQuestionnaireData(): Promise<QuestionnaireData> {
   try {
-    // 添加1秒延迟模拟数据获取过程
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    // 首先尝试从MongoDB获取数据
+    const mongoData = await getQuestionnaireById(1);
 
-    // 直接使用API函数，避免服务端fetch问题
+    if (mongoData) {
+      console.log("成功从MongoDB获取问卷数据");
+
+      // 深拷贝并清理MongoDB特殊对象，确保数据是纯JavaScript对象
+      const cleanData = {
+        metadata: { ...mongoData.metadata },
+        questions: mongoData.questions.map((q: any) => {
+          // 移除MongoDB特殊字段，如_id，并创建纯对象
+          const { _id, ...cleanQuestion } = q;
+          return cleanQuestion;
+        })
+      };
+
+      return cleanData;
+    }
+
+    // 如果MongoDB中没有数据，使用模拟数据作为备选
+    console.log("MongoDB中无数据，使用模拟数据");
     return generateQuestionnaireData();
   } catch (error) {
-    console.error("Error fetching questionnaire data:", error);
+    console.error("获取问卷数据出错:", error);
     // 返回空数据
     return {
       metadata: {

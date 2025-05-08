@@ -22,17 +22,10 @@ const QuestionParagraph = ({ question }: { question: Question }) => {
         label={question.question}
         placeholder={question.placeholder}
         description="请在此详细描述您的想法"
-        labelPlacement="outside"
-        radius="sm"
-        variant="bordered"
+        variant="underlined"
         color="secondary"
         value={value}
         onChange={handleValueChange}
-        classNames={{
-          label: "font-medium text-base",
-          base: "max-w-full",
-          inputWrapper: "border-2"
-        }}
       />
     </div>
   );

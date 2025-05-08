@@ -20,6 +20,7 @@ const QuestionShortAnswer = ({ question }: { question: Question }) => {
       color="secondary"
       label={question.question}
       placeholder={question.placeholder}
+      variant="underlined"
       value={value}
       onChange={handleValueChange}
     />

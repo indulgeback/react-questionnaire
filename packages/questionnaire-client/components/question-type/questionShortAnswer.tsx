@@ -1,9 +1,29 @@
 import { Question } from "@/types/question";
 import { Input } from "@heroui/input";
-import React from "react";
+import React, { useState } from "react";
+import useAnswerStore from "@/stores/useAnswerStore";
 
 const QuestionShortAnswer = ({ question }: { question: Question }) => {
-  return <Input label={question.question} placeholder={question.placeholder} />;
+  const { addOrUpdateAnswer } = useAnswerStore();
+  const [value, setValue] = useState("");
+
+  const handleValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = e.target.value;
+    setValue(newValue);
+    if (newValue.trim()) {
+      addOrUpdateAnswer(question.id, newValue);
+    }
+  };
+
+  return (
+    <Input
+      color="secondary"
+      label={question.question}
+      placeholder={question.placeholder}
+      value={value}
+      onChange={handleValueChange}
+    />
+  );
 };
 
 export default QuestionShortAnswer;

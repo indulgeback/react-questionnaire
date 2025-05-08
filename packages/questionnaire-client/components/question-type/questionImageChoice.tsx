@@ -1,9 +1,18 @@
 import { Question } from "@/types/question";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import useAnswerStore from "@/stores/useAnswerStore";
 
 const QuestionImageChoice = ({ question }: { question: Question }) => {
+  const { addOrUpdateAnswer } = useAnswerStore();
   const [selectedImages, setSelectedImages] = useState<string[]>([]);
   const images = question.images || [];
+
+  // 当用户选择图片时记录答案
+  useEffect(() => {
+    if (selectedImages.length > 0) {
+      addOrUpdateAnswer(question.id, JSON.stringify(selectedImages));
+    }
+  }, [selectedImages, addOrUpdateAnswer, question.id]);
 
   const toggleImage = (imageUrl: string) => {
     if (selectedImages.includes(imageUrl)) {
@@ -26,8 +35,8 @@ const QuestionImageChoice = ({ question }: { question: Question }) => {
             onClick={() => toggleImage(image.url)}
           >
             <img src={image.url} alt={image.text} className="w-full h-32 object-cover" />
-            <div className="p-2 bg-white">
-              <p className="text-sm">{image.text}</p>
+            <div className="p-2 bg-background dark:bg-default-100">
+              <p className="text-sm text-default-700 dark:text-white">{image.text}</p>
             </div>
             {selectedImages.includes(image.url) && (
               <div className="absolute top-2 right-2 bg-secondary rounded-full p-1">

@@ -1,8 +1,10 @@
 import { Question } from "@/types/question";
 import React, { useState } from "react";
 import { Select, SelectItem } from "@heroui/select";
+import useAnswerStore from "@/stores/useAnswerStore";
 
 const QuestionDropdown = ({ question }: { question: Question }) => {
+  const { addOrUpdateAnswer } = useAnswerStore();
   const [selected, setSelected] = useState("");
   const options = question.options || [];
 
@@ -15,6 +17,9 @@ const QuestionDropdown = ({ question }: { question: Question }) => {
         onSelectionChange={keys => {
           const selectedValue = Array.from(keys)[0]?.toString() || "";
           setSelected(selectedValue);
+          if (selectedValue) {
+            addOrUpdateAnswer(question.id, selectedValue);
+          }
         }}
         color="secondary"
         variant="bordered"

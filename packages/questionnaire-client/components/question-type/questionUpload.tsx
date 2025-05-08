@@ -1,10 +1,21 @@
 import { Question } from "@/types/question";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Button } from "@heroui/button";
+import useAnswerStore from "@/stores/useAnswerStore";
 
 const QuestionUpload = ({ question }: { question: Question }) => {
+  const { addOrUpdateAnswer } = useAnswerStore();
   const [files, setFiles] = useState<File[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // 文件变更时更新答案状态
+  useEffect(() => {
+    if (files.length > 0) {
+      // 保存文件名列表作为答案，实际文件上传会在表单提交时处理
+      const fileNames = files.map(file => file.name);
+      addOrUpdateAnswer(question.id, JSON.stringify(fileNames));
+    }
+  }, [files, addOrUpdateAnswer, question.id]);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
@@ -21,11 +32,11 @@ const QuestionUpload = ({ question }: { question: Question }) => {
     <div className="flex flex-col gap-4">
       <label className="font-medium text-base">{question.question}</label>
       <div
-        className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer transition-colors hover:border-secondary hover:bg-secondary-50/50"
+        className="border-2 border-dashed border-default-300 dark:border-default-600 rounded-lg p-6 text-center cursor-pointer transition-colors hover:border-secondary hover:bg-secondary-50/50 dark:hover:bg-secondary-900/10"
         onClick={() => fileInputRef.current?.click()}
       >
         <svg
-          className="mx-auto h-12 w-12 text-gray-400"
+          className="mx-auto h-12 w-12 text-default-400 dark:text-default-500"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -38,8 +49,12 @@ const QuestionUpload = ({ question }: { question: Question }) => {
             d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
           ></path>
         </svg>
-        <p className="mt-2 text-sm text-gray-600">点击或拖拽文件到此处上传</p>
-        <p className="mt-1 text-xs text-gray-500">{question.placeholder || "支持多种文件格式"}</p>
+        <p className="mt-2 text-sm text-default-600 dark:text-default-400">
+          点击或拖拽文件到此处上传
+        </p>
+        <p className="mt-1 text-xs text-default-500 dark:text-default-500">
+          {question.placeholder || "支持多种文件格式"}
+        </p>
       </div>
       <input
         type="file"
@@ -54,7 +69,7 @@ const QuestionUpload = ({ question }: { question: Question }) => {
           {files.map((file, index) => (
             <li
               key={index}
-              className="py-2 px-3 flex justify-between items-center border rounded-lg bg-gray-50"
+              className="py-2 px-3 flex justify-between items-center border rounded-lg bg-default-50 dark:bg-default-100"
             >
               <div className="flex items-center">
                 <svg
@@ -68,14 +83,19 @@ const QuestionUpload = ({ question }: { question: Question }) => {
                     clipRule="evenodd"
                   ></path>
                 </svg>
-                <span className="text-sm truncate font-medium">{file.name}</span>
+                <span className="text-sm truncate font-medium text-default-700 dark:text-default-300">
+                  {file.name}
+                </span>
               </div>
               <Button
                 size="sm"
                 variant="light"
                 color="danger"
                 isIconOnly
-                onClick={() => removeFile(index)}
+                onClick={e => {
+                  e.stopPropagation(); // 防止触发上传区域点击
+                  removeFile(index);
+                }}
               >
                 <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path

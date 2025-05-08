@@ -11,7 +11,7 @@ const QuestionsStatus = () => {
     <Popover placement="bottom-start" isOpen={isOpen} onOpenChange={open => setIsOpen(open)}>
       <PopoverTrigger>
         <Button color="secondary" variant="shadow" isIconOnly radius="full">
-          <QueueListIcon className="text-white size-6 cursor-pointer" />
+          <QueueListIcon className="size-6 cursor-pointer" />
         </Button>
       </PopoverTrigger>
       <PopoverContent>

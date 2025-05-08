@@ -1,8 +1,20 @@
 import { Question } from "@/types/question";
 import { Input } from "@heroui/input";
-import React from "react";
+import React, { useState } from "react";
+import useAnswerStore from "@/stores/useAnswerStore";
 
 const QuestionParagraph = ({ question }: { question: Question }) => {
+  const { addOrUpdateAnswer } = useAnswerStore();
+  const [value, setValue] = useState("");
+
+  const handleValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = e.target.value;
+    setValue(newValue);
+    if (newValue.trim()) {
+      addOrUpdateAnswer(question.id, newValue);
+    }
+  };
+
   return (
     <div className="flex flex-col gap-4">
       <Input
@@ -14,6 +26,8 @@ const QuestionParagraph = ({ question }: { question: Question }) => {
         radius="sm"
         variant="bordered"
         color="secondary"
+        value={value}
+        onChange={handleValueChange}
         classNames={{
           label: "font-medium text-base",
           base: "max-w-full",

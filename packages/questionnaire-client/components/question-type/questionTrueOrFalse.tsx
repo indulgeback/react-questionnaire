@@ -1,33 +1,32 @@
 "use client";
 
-import React from "react";
-import { Radio, RadioGroup } from "@heroui/radio";
+import React, { useState } from "react";
+import { RadioGroup, Radio } from "@heroui/radio";
 import { Question } from "@/types/question";
-enum QuestionTrueOrFalseAnswer {
-  TRUE = "TRUE",
-  FALSE = "FALSE"
-}
+import useAnswerStore from "@/stores/useAnswerStore";
 
 const QuestionTrueOrFalse = ({ question }: { question: Question }) => {
+  const { addOrUpdateAnswer } = useAnswerStore();
+  const [selected, setSelected] = useState("");
+
+  const handleChange = (value: string) => {
+    setSelected(value);
+    addOrUpdateAnswer(question.id, value);
+  };
+
   return (
-    <div>
-      <RadioGroup label={question.question}>
-        <Radio
-          color="secondary"
-          key={QuestionTrueOrFalseAnswer.TRUE}
-          value={QuestionTrueOrFalseAnswer.TRUE}
-        >
-          是
+    <RadioGroup
+      label={question.question}
+      orientation="horizontal"
+      value={selected}
+      onValueChange={handleChange}
+    >
+      {(question.options ?? ["是", "否"]).map(answer => (
+        <Radio color="secondary" key={answer} value={answer}>
+          {answer}
         </Radio>
-        <Radio
-          color="secondary"
-          key={QuestionTrueOrFalseAnswer.FALSE}
-          value={QuestionTrueOrFalseAnswer.FALSE}
-        >
-          否
-        </Radio>
-      </RadioGroup>
-    </div>
+      ))}
+    </RadioGroup>
   );
 };
 

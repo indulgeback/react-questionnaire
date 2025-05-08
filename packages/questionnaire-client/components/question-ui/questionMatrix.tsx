@@ -3,13 +3,11 @@
 import useAnswerStore from "@/stores/useAnswerStore";
 import useQuestionStore from "@/stores/useQuestionStore";
 import clsx from "clsx";
-import { useTheme } from "next-themes";
 import React from "react";
 
 const QuestionMatrix = ({ onClose }: { onClose: () => void }) => {
   const { questionnaireData } = useQuestionStore();
 
-  const { theme } = useTheme();
   const { getAnsweredStatus } = useAnswerStore();
   const { jumpToQuestion } = useQuestionStore();
   const answeredStatus = getAnsweredStatus(questionnaireData.map(question => question.id));
@@ -26,7 +24,9 @@ const QuestionMatrix = ({ onClose }: { onClose: () => void }) => {
           key={index}
           className={clsx(
             "size-5 rounded-sm flex items-center justify-center text-xs cursor-pointer",
-            answeredStatus[index] ? (theme === "dark" ? "bg-purple-500" : "bg-purple-200") : ""
+            answeredStatus[index]
+              ? "bg-secondary text-secondary-foreground"
+              : "bg-default-100 dark:bg-default-50 text-default-600 dark:text-default-500"
           )}
           onClick={() => jump(question.id)}
         >

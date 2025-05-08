@@ -1,10 +1,17 @@
 import { Question } from "@/types/question";
 import React, { useState } from "react";
 import { Button } from "@heroui/button";
+import useAnswerStore from "@/stores/useAnswerStore";
 
 const QuestionRating = ({ question }: { question: Question }) => {
+  const { addOrUpdateAnswer } = useAnswerStore();
   const [rating, setRating] = useState(0);
   const maxRating = question.max || 5;
+
+  const handleRatingChange = (value: number) => {
+    setRating(value);
+    addOrUpdateAnswer(question.id, value.toString());
+  };
 
   return (
     <div className="flex flex-col gap-4">
@@ -17,7 +24,7 @@ const QuestionRating = ({ question }: { question: Question }) => {
             radius="full"
             variant={value <= rating ? "solid" : "bordered"}
             color={value <= rating ? "secondary" : "default"}
-            onAbort={() => setRating(value)}
+            onPress={() => handleRatingChange(value)}
             className="w-10 h-10 min-w-10"
           >
             {value}
@@ -25,7 +32,7 @@ const QuestionRating = ({ question }: { question: Question }) => {
         ))}
       </div>
       {rating > 0 && (
-        <div className="text-sm text-gray-600 mt-1">
+        <div className="text-sm text-default-600 dark:text-default-400 mt-1">
           当前评分: {rating}/{maxRating}
         </div>
       )}

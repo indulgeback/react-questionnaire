@@ -8,7 +8,7 @@ const QuestionRenderer = ({ question }: { question: Question }) => {
 
   return (
     <>
-      <Chip color="secondary" variant="flat">
+      <Chip color="secondary" variant="flat" className="mb-4">
         {id} [{questionTypeMap[type]}]
       </Chip>
       <QuestionComponent question={question} />

@@ -1,16 +1,29 @@
 import { Question } from "@/types/question";
 import React, { useState, useEffect } from "react";
+import useAnswerStore from "@/stores/useAnswerStore";
 
 const QuestionRank = ({ question }: { question: Question }) => {
+  const { addOrUpdateAnswer } = useAnswerStore();
   const options = question.options || [];
   const [rankedItems, setRankedItems] = useState<string[]>([]);
   const [draggedItem, setDraggedItem] = useState<string | null>(null);
 
+  // 初始化排序项
   useEffect(() => {
     if (rankedItems.length === 0 && options.length > 0) {
-      setRankedItems([...options]);
+      const initialRanking = [...options];
+      setRankedItems(initialRanking);
+      // 自动保存初始排序，使问题状态为已完成
+      addOrUpdateAnswer(question.id, JSON.stringify(initialRanking));
     }
-  }, [options]);
+  }, [options, addOrUpdateAnswer, question.id]);
+
+  // 当排序改变时更新答案
+  useEffect(() => {
+    if (rankedItems.length > 0) {
+      addOrUpdateAnswer(question.id, JSON.stringify(rankedItems));
+    }
+  }, [rankedItems, addOrUpdateAnswer, question.id]);
 
   const handleDragStart = (e: React.DragEvent, item: string) => {
     setDraggedItem(item);
@@ -39,7 +52,9 @@ const QuestionRank = ({ question }: { question: Question }) => {
   return (
     <div className="flex flex-col gap-4">
       <label className="font-medium text-base">{question.question}</label>
-      <p className="text-sm text-gray-600">请拖拽选项调整排序（从上到下，排序从高到低）</p>
+      <p className="text-sm text-default-600 dark:text-default-400">
+        请拖拽选项调整排序（从上到下，排序从高到低）
+      </p>
       <ul className="mt-2 space-y-2">
         {rankedItems.map((item, index) => (
           <li
@@ -48,14 +63,14 @@ const QuestionRank = ({ question }: { question: Question }) => {
             onDragStart={e => handleDragStart(e, item)}
             onDragOver={handleDragOver}
             onDrop={e => handleDrop(e, item)}
-            className={`p-3 border rounded-lg bg-white flex items-center cursor-move ${
+            className={`p-3 border rounded-lg bg-background dark:bg-default-50 flex items-center cursor-move ${
               draggedItem === item ? "opacity-50" : ""
             }`}
           >
-            <span className="inline-flex items-center justify-center w-6 h-6 mr-3 bg-secondary-100 rounded-full text-secondary-800 text-sm font-medium">
+            <span className="inline-flex items-center justify-center w-6 h-6 mr-3 bg-secondary-100 dark:bg-secondary-900 rounded-full text-secondary-800 dark:text-secondary-100 text-sm font-medium">
               {index + 1}
             </span>
-            <span>{item}</span>
+            <span className="text-default-700 dark:text-white">{item}</span>
           </li>
         ))}
       </ul>

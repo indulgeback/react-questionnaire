@@ -1,55 +1,81 @@
 import { Question } from "@/types/question";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import useAnswerStore from "@/stores/useAnswerStore";
+import { Checkbox, CheckboxGroup } from "@heroui/checkbox";
 
 const QuestionMatrixCheckbox = ({ question }: { question: Question }) => {
+  const { addOrUpdateAnswer } = useAnswerStore();
   const matrix = question.matrix || { rows: [], columns: [] };
   const [selectedValues, setSelectedValues] = useState<Record<string, string[]>>({});
 
-  const handleChange = (rowId: string, value: string) => {
-    setSelectedValues(prev => {
-      const rowValues = prev[rowId] || [];
-      const newRowValues = rowValues.includes(value)
-        ? rowValues.filter(v => v !== value)
-        : [...rowValues, value];
+  // 当选择改变时，更新答案存储
+  useEffect(() => {
+    if (Object.keys(selectedValues).length > 0) {
+      addOrUpdateAnswer(question.id, JSON.stringify(selectedValues));
+    }
+  }, [selectedValues, question.id, addOrUpdateAnswer]);
 
-      return {
-        ...prev,
-        [rowId]: newRowValues
-      };
-    });
+  const handleChange = (rowId: string, values: string[]) => {
+    setSelectedValues(prev => ({
+      ...prev,
+      [rowId]: values
+    }));
   };
 
-  const isChecked = (row: string, column: string) => {
-    return (selectedValues[row] || []).includes(column);
+  // 检查特定单元格是否被选中
+  const isCellSelected = (rowId: string, columnId: string) => {
+    return selectedValues[rowId]?.includes(columnId) || false;
+  };
+
+  // 切换单个单元格选中状态
+  const toggleCell = (rowId: string, columnId: string) => {
+    const currentValues = selectedValues[rowId] || [];
+    let newValues;
+
+    if (currentValues.includes(columnId)) {
+      newValues = currentValues.filter(val => val !== columnId);
+    } else {
+      newValues = [...currentValues, columnId];
+    }
+
+    handleChange(rowId, newValues);
   };
 
   return (
     <div className="flex flex-col gap-4">
-      <label className="font-medium text-base">{question.question}</label>
-      <div className="border rounded-md overflow-hidden">
+      <label className="font-medium text-base mb-2">{question.question}</label>
+      <div className="border rounded-lg overflow-hidden shadow-sm">
         <table className="w-full border-collapse">
-          <thead className="bg-gray-50">
+          <thead className="bg-default-100 dark:bg-default-50">
             <tr>
-              <th className="p-3 border-b border-r text-left font-medium text-gray-700"></th>
+              <th className="p-3 border-b border-r text-left font-medium text-default-700 dark:text-white"></th>
               {matrix.columns.map(column => (
-                <th key={column} className="p-3 border-b text-center font-medium text-gray-700">
+                <th
+                  key={column}
+                  className="p-3 border-b text-center font-medium text-default-700 dark:text-white"
+                >
                   {column}
                 </th>
               ))}
             </tr>
           </thead>
-          <tbody>
+          <tbody className="divide-y">
             {matrix.rows.map(row => (
-              <tr key={row} className="border-b last:border-b-0">
-                <td className="p-3 border-r font-medium text-gray-700">{row}</td>
+              <tr key={row} className="hover:bg-default-50 dark:hover:bg-default-100/30">
+                <td className="p-3 border-r font-medium text-default-700 dark:text-white">{row}</td>
                 {matrix.columns.map(column => (
-                  <td key={`${row}-${column}`} className="p-3 text-center">
-                    <input
-                      type="checkbox"
-                      checked={isChecked(row, column)}
-                      onChange={() => handleChange(row, column)}
-                      className="h-4 w-4 accent-secondary focus:ring-2 focus:ring-secondary focus:ring-offset-2 rounded"
-                    />
+                  <td key={column} className="text-center p-2">
+                    <div className="flex justify-center">
+                      <Checkbox
+                        isSelected={isCellSelected(row, column)}
+                        onValueChange={() => toggleCell(row, column)}
+                        color="secondary"
+                        size="sm"
+                        aria-label={`${row} - ${column}`}
+                      >
+                        <span className="sr-only">{column}</span>
+                      </Checkbox>
+                    </div>
                   </td>
                 ))}
               </tr>

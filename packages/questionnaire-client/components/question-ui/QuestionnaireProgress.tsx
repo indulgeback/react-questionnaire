@@ -15,7 +15,7 @@ interface QuestionnaireProgressProps {
 
 const QuestionnaireProgress: React.FC<QuestionnaireProgressProps> = ({ onQuestionClick }) => {
   const { questionnaireData } = useQuestionStore();
-  const { getAnsweredStatus, answers } = useAnswerStore();
+  const { getAnsweredStatus, answersByQuestionnaire } = useAnswerStore();
   const scrollAndHighlight = useScrollHighlight();
   const [answeredStatus, setAnsweredStatus] = useState<boolean[]>([]);
   const [completionRate, setCompletionRate] = useState<number>(0);
@@ -49,12 +49,12 @@ const QuestionnaireProgress: React.FC<QuestionnaireProgressProps> = ({ onQuestio
     setCompletionRate(
       totalQuestionsCount > 0 ? Math.round((currentAnsweredCount / totalQuestionsCount) * 100) : 0
     );
-  }, [questionnaireData, getAnsweredStatus, answers]);
+  }, [questionnaireData, getAnsweredStatus, answersByQuestionnaire]);
 
   // 每当答案、问题数据或updateProgress函数变化时重新计算进度
   useEffect(() => {
     updateProgress();
-  }, [answers, questionnaireData, updateProgress]);
+  }, [questionnaireData, updateProgress, answersByQuestionnaire]);
 
   // 页面加载时立即执行一次更新
   useEffect(() => {

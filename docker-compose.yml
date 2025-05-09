@@ -23,6 +23,7 @@ services:
     environment:
       # 你可以在这里添加后端需要的环境变量
       - NODE_ENV=docker
+      - MONGO_HOST=mongo
       - MYSQL_HOST=mysql
       - REDIS_HOST=redis
       - TZ=Asia/Shanghai  # 设置时区为上海
@@ -42,6 +43,8 @@ services:
       - mongo
     environment:
       # 你可以在这里添加后端需要的环境变量
+      - NODE_ENV=build
+      - MONGO_HOST=mongo
       - NODE_ENV=docker
       - MYSQL_HOST=mysql
       - TZ=Asia/Shanghai  # 设置时区为上海

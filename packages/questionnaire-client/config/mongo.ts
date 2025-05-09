@@ -3,12 +3,9 @@ import { MongoClient, MongoClientOptions } from "mongodb";
 let uri: string = "";
 
 if (process.env.NODE_ENV === "production") {
-  uri = process.env.MONGO_HOST as string;
+  uri = `mongodb://admin:12345678@${process.env.MONGO_HOST}:27017/questionnaire_mongo_db?authSource=admin`;
 } else {
-  // 使用与后端一致的MongoDB连接字符串
-  uri =
-    process.env.MONGODB_URI ||
-    "mongodb://admin:12345678@localhost:27017/questionnaire_mongo_db?authSource=admin";
+  uri = "mongodb://admin:12345678@localhost:27017/questionnaire_mongo_db?authSource=admin";
 }
 
 const options: MongoClientOptions = {};

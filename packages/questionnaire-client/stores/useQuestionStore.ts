@@ -5,9 +5,22 @@ interface QuestionState {
   metadata: {
     title: string;
     creator: string;
+    id?: string;
+    createTime?: string;
+    updateTime?: string;
+    version?: number;
+    description?: string;
   };
   questionnaireData: Question[];
-  initializeMetadata: (metadata: { title: string; creator: string }) => void;
+  initializeMetadata: (metadata: {
+    title: string;
+    creator: string;
+    id?: string;
+    createTime?: string;
+    updateTime?: string;
+    version?: number;
+    description?: string;
+  }) => void;
   initializeQuestionnaireData: (data: Question[]) => void;
   loadTestData: () => void;
 }

@@ -27,6 +27,7 @@ export default function DataInitializer() {
         }
 
         const data = await response.json();
+        console.log("问卷数据", data);
 
         if (data && data.questions) {
           console.log("初始化问卷数据成功，题目数量:", data.questions.length);

@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.20.0](https://github.com/indulgeback/react-questionnaire/compare/v1.19.0...v1.20.0) (2025-05-09)
+
+
+### Bug Fixes
+
+* 修复客户端打包失败问题 ([625fe09](https://github.com/indulgeback/react-questionnaire/commit/625fe09bd167b9c8451b837e0c217b9788c49058))
+
+
+### Features
+
+* 更新问卷客户端，新增当前问卷ID管理功能，优化答案存储结构以支持按问卷ID组织答案，同时改进问卷标题和元信息的动态展示 ([b878492](https://github.com/indulgeback/react-questionnaire/commit/b878492c2482d0c49b9840f3b346dd8b9a85039e))
+* 在问卷客户端中新增Skeleton组件以提升加载体验，更新相关组件以支持Skeleton展示，同时优化答案更新逻辑以包含题目类型 ([800640d](https://github.com/indulgeback/react-questionnaire/commit/800640dfc2dc614ab40c002206d8829ef0545a6e))
+
+
+
+
+
 # [1.19.0](https://github.com/indulgeback/react-questionnaire/compare/v1.18.0...v1.19.0) (2025-05-08)
 
 

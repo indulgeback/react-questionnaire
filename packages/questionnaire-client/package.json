@@ -1,6 +1,6 @@
 {
 	"name": "@questionnaire/client",
-	"version": "1.19.0",
+	"version": "1.20.0",
 	"private": true,
 	"scripts": {
 		"dev": "next dev --turbopack -p 8878",

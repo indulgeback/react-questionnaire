@@ -291,7 +291,9 @@ const EditCanvas: React.FC = () => {
 
   return (
     <div
-      className={`h-full overflow-y-scroll custom-no-scrollbar ${isDragging ? 'bg-gray-50' : ''}`}
+      className={`h-full overflow-y-scroll custom-no-scrollbar ${
+        isDragging ? 'bg-custom-bg-100' : ''
+      }`}
       style={canvasStyle}
     >
       {/* 调试工具 */}
@@ -301,12 +303,23 @@ const EditCanvas: React.FC = () => {
       <div className="pt-4 px-4 pb-2">
         <Title
           level={3}
-          style={{ color: pageConfig.theme, textAlign: 'center', marginBottom: '8px' }}
+          style={{
+            color: pageConfig.theme || 'rgb(38, 166, 154)',
+            textAlign: 'center',
+            marginBottom: '8px'
+          }}
         >
           {pageConfig.title}
         </Title>
 
-        <Paragraph style={{ textAlign: 'center', fontSize: '14px', marginBottom: '16px' }}>
+        <Paragraph
+          style={{
+            textAlign: 'center',
+            fontSize: '14px',
+            marginBottom: '16px',
+            color: 'rgb(114, 143, 158)'
+          }}
+        >
           {pageConfig.description}
         </Paragraph>
 
@@ -322,7 +335,7 @@ const EditCanvas: React.FC = () => {
       </div>
 
       {TEST_MODE && (
-        <div className="my-2 p-2 text-center text-sm bg-yellow-100 rounded">
+        <div className="my-2 p-2 text-center text-sm bg-custom-bg-200 text-custom-text-100 rounded">
           <b>拖拽调试模式已开启</b> - 请尝试拖拽组件头部的蓝色区域调整顺序
         </div>
       )}
@@ -344,8 +357,8 @@ const EditCanvas: React.FC = () => {
                     className={clsx(
                       'rounded-lg transition-all duration-300',
                       snapshot.isDraggingOver
-                        ? 'bg-blue-50 border border-blue-200 shadow-inner'
-                        : 'bg-gray-50 border border-gray-200',
+                        ? 'bg-custom-primary-300 border border-custom-primary-100 shadow-inner'
+                        : 'bg-custom-bg-100 border border-custom-bg-200',
                       isDragging && 'dropping-container'
                     )}
                     style={{
@@ -356,7 +369,7 @@ const EditCanvas: React.FC = () => {
                   >
                     {/* 拖拽时的提示 */}
                     {componentList.length > 1 && (
-                      <div className="text-xs text-center py-2 text-gray-500 mb-2 bg-gray-100 rounded font-medium">
+                      <div className="text-xs text-center py-2 text-custom-text-200 mb-2 bg-custom-bg-200 rounded font-medium">
                         {isDragging
                           ? '↕️ 请拖放到目标位置...'
                           : '↕️ 可通过拖拽蓝色区域调整组件顺序'}
@@ -384,7 +397,6 @@ const EditCanvas: React.FC = () => {
                                 'mb-3 transition-all duration-200 draggable-component',
                                 snapshot.isDragging && 'z-50 shadow-xl scale-[1.01] is-dragging'
                               )}
-                              // 添加备用的HTML5原生拖拽
                               draggable="true"
                               onDragStart={e => handleNativeDragStart(e, index)}
                               onDragEnd={handleNativeDragEnd}
@@ -412,11 +424,11 @@ const EditCanvas: React.FC = () => {
                       className={clsx(
                         'transition-all duration-300',
                         snapshot.isDraggingOver &&
-                          'drop-placeholder bg-blue-100 border-2 border-dashed border-blue-300 rounded-lg p-2 my-2 min-h-[60px] flex items-center justify-center'
+                          'drop-placeholder bg-custom-primary-300 border-2 border-dashed border-custom-primary-100 rounded-lg p-2 my-2 min-h-[60px] flex items-center justify-center'
                       )}
                     >
                       {snapshot.isDraggingOver && (
-                        <div className="text-blue-500 text-sm font-medium animate-pulse">
+                        <div className="text-custom-primary-200 text-sm font-medium animate-pulse">
                           ↓ 放置到这里 ↓
                         </div>
                       )}
@@ -429,11 +441,11 @@ const EditCanvas: React.FC = () => {
           ) : (
             // 拖拽功能暂时禁用时显示正常组件列表
             <div
-              className="rounded-lg transition-all duration-300 bg-gray-50 border border-gray-200"
+              className="rounded-lg transition-all duration-300 bg-custom-bg-100 border border-custom-bg-200"
               style={{ minHeight: '100px', padding: '8px' }}
             >
               {componentList.length > 1 && (
-                <div className="text-xs text-center py-2 text-gray-500 mb-2 bg-gray-100 rounded font-medium">
+                <div className="text-xs text-center py-2 text-custom-text-200 mb-2 bg-custom-bg-200 rounded font-medium">
                   正在初始化拖拽功能...
                 </div>
               )}
@@ -447,7 +459,7 @@ const EditCanvas: React.FC = () => {
             </div>
           )
         ) : (
-          <div className="flex flex-col items-center justify-center h-[200px] text-gray-400 text-center border-2 border-dashed border-gray-300 rounded-lg bg-gray-50 p-6">
+          <div className="flex flex-col items-center justify-center h-[200px] text-custom-text-200 text-center border-2 border-dashed border-custom-bg-200 rounded-lg bg-custom-bg-100 p-6">
             <div className="text-lg mb-2">问卷内容为空</div>
             <div className="text-sm mb-4">请从左侧列表添加组件，或从问卷模板创建</div>
           </div>
@@ -456,7 +468,7 @@ const EditCanvas: React.FC = () => {
 
       {/* 问卷页脚 */}
       {pageConfig.footerText && (
-        <div className="py-3 text-center text-sm text-gray-500">{pageConfig.footerText}</div>
+        <div className="py-3 text-center text-sm text-custom-text-200">{pageConfig.footerText}</div>
       )}
     </div>
   )

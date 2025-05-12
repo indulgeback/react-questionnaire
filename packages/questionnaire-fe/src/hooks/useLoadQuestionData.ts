@@ -202,42 +202,45 @@ const DEFAULT_COMPONENTS = [
 
 function useLoadQuestionData() {
   const { id = '' } = useParams()
+  const dispatch = useDispatch()
   const { isRequestSuccess } = useRequestSuccessChecker()
+
+  // 加载问卷数据
   const { loading, data, error, run } = useRequest(
     async (id: string) => {
-      if (!id) {
-        // 如果没有ID，返回默认数据
-        return { data: { components: DEFAULT_COMPONENTS } }
-      }
-
-      // 调用获取问卷详情API
+      if (!id) return null
       const res = await apis.editorApi.getQuestionnaireDetail(id)
-      if (isRequestSuccess(res)) {
-        return { data: { components: res.data.components } }
-      } else {
-        return { data: { components: DEFAULT_COMPONENTS } }
-      }
+      return res
     },
     {
       manual: true
     }
   )
-  const dispatch = useDispatch()
+
+  // 初始化加载
+  useEffect(() => {
+    if (!id) return
+    run(id)
+  }, [id])
+
+  // 设置组件数据
   useEffect(() => {
     if (!data) return
+    if (!isRequestSuccess(data)) return
+
+    const { components: componentList = [], selectedId = '', version = 1 } = data.data || {}
+
+    // 重置 redux store
     dispatch(
       resetComponents({
-        selectedId: '',
-        componentList: data.data.components
+        componentList,
+        selectedId,
+        version
       })
     )
   }, [data])
 
-  useEffect(() => {
-    run(id)
-  }, [id])
-
-  return { loading, data, error }
+  return { loading, error }
 }
 
 export default useLoadQuestionData

@@ -156,7 +156,7 @@ const ImageChoiceConfig: React.FC<ImageChoiceConfigProps> = ({ componentId }) =>
   return (
     <div>
       <div className="flex justify-between items-center mb-4">
-        <h3 className="font-bold">{currentComponent.title} 配置</h3>
+        <h3 className="font-bold">配置</h3>
         <Button type="primary" icon={<SaveOutlined />} onClick={handleSave}>
           应用
         </Button>

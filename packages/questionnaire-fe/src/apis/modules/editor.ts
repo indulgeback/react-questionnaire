@@ -2,6 +2,7 @@ import request from '@/utils/request'
 import { RespType } from './types/common'
 import { ComponentInfoType } from '@/store/modules/componentsSlice'
 import { PageConfigType } from '@/store/modules/pageConfigSlice'
+import { QuestionnaireDetail } from './types/question'
 
 // 统一前缀
 const prefix = '/api/editor'
@@ -42,7 +43,7 @@ const createQuestionnaire = (params: {
  * @returns 问卷详情
  */
 const getQuestionnaireDetail = (questionnaireId: string) => {
-  return request.get<any, RespType<any>>(
+  return request.get<any, RespType<QuestionnaireDetail>>(
     `${prefix}/getQuestionnaireDetail?questionnaireId=${questionnaireId}`
   )
 }

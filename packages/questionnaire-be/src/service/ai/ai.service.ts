@@ -26,11 +26,62 @@ export class AiService {
   }
 
   // 生成问卷的方法，接收主题参数，返回 Observable<MessageEvent>
-  async generate(theme: string): Promise<Observable<MessageEvent>> {
+  async generate(
+    theme: string,
+    count: number,
+  ): Promise<Observable<MessageEvent>> {
     return new Observable((subscriber) => {
       // 构建提示词，要求生成特定格式的问卷 JSON
-      const description = `生成关于${theme}的20题问卷，类型包括选择题、是非题、简答题。输出JSON格式：
-{"survey":{"title":"问卷标题","description":"问卷目的","questions":[{"id":1,"type":"multiple-choice","question":"问题文本","options":["选项1","选项2"]},...]}}。确保每题ID唯一，内容围绕${theme}。`;
+      const description = `生成一份关于${theme}的问卷，要求如下：
+1. 问卷需包含${count}个问题，每个问题都要与${theme}主题相关
+2. 输出格式为JSON，结构如下：
+{
+  "survey": {
+    "title": "问卷标题",
+    "description": "问卷目的说明",
+    "questions": [
+      {
+        "fe_id": "数字字符串，确保唯一",
+        "type": "问题类型，必须是以下之一：
+          - questionTitle（分段标题）
+          - questionShortAnswer（简答题）
+          - questionParagraph（段落题）
+          - questionRadio（单选题）
+          - questionCheckbox（多选题）
+          - questionDropdown（下拉选择题）
+          - questionRating（评分题）
+          - questionNPS（NPS评分题）
+          - questionMatrixRadio（矩阵单选题）
+          - questionMatrixCheckbox（矩阵多选题）
+          - questionSlider（滑块题）
+          - questionDate（日期选择题）
+          - questionImageChoice（图片选择题）
+          - questionRank（排序题）",
+        "title": "问题标题",
+        "props": {
+          // 根据不同类型设置不同属性
+          // 单选、多选、下拉题：options: string[]
+          // 评分题：count: number
+          // NPS题：min: number, max: number
+          // 矩阵题：rows: string[], columns: string[]
+          // 滑块题：min: number, max: number, step: number
+          // 日期题：format: "YYYY-MM-DD"
+          // 排序题：options: string[]
+        }
+      }
+    ]
+  }
+}
+
+3. 问题类型分配建议：
+- 使用questionTitle作为分段标题，合理分隔不同类型的问题
+- 包含2-3个简答或段落题
+- 包含4-5个单选或多选题
+- 包含1-2个评分或NPS题
+- 包含1-2个矩阵题
+- 其他类型根据主题合理分配
+
+4. 确保生成的JSON格式正确，每个问题的props属性符合对应类型的要求。`;
 
       // 用于累积流式响应内容
       let accumulatedContent = '';

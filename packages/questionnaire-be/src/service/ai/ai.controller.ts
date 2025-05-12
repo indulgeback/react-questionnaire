@@ -8,7 +8,10 @@ export class AiController {
 
   @Public()
   @Sse('generate')
-  generate(@Query('theme') theme: string): Promise<Observable<MessageEvent>> {
-    return this.aiService.generate(theme);
+  generate(
+    @Query('theme') theme: string,
+    @Query('count') count: number,
+  ): Promise<Observable<MessageEvent>> {
+    return this.aiService.generate(theme, count || 20);
   }
 }

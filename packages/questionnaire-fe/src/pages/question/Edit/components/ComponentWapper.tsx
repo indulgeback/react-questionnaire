@@ -49,9 +49,9 @@ const ComponentWapper: React.FC<ComponentWapperProps> = ({
   return (
     <div
       className={clsx(
-        'p-4 pt-12 bg-white rounded-lg mb-2 border-2 border-transparent transition-all duration-200 hover:border-blue-100 relative shadow-sm',
-        selectedId === fe_id && '!border-blue-300 shadow-md',
-        isDragging && 'opacity-90 border-dashed border-blue-400 shadow-lg rotate-1'
+        'p-4 pt-12 bg-custom-bg-300 rounded-lg mb-2 border-2 border-transparent transition-all duration-200 hover:border-custom-primary-300 relative shadow-sm',
+        selectedId === fe_id && '!border-custom-primary-300 shadow-md',
+        isDragging && 'opacity-90 border-dashed border-custom-primary-200 shadow-lg rotate-1'
       )}
       onClick={handleClick}
     >
@@ -66,8 +66,9 @@ const ComponentWapper: React.FC<ComponentWapperProps> = ({
           }
         }}
         className={clsx(
-          'absolute left-0 top-0 w-full h-10 px-3 flex items-center bg-gradient-to-r from-blue-50 to-blue-100 cursor-grab active:cursor-grabbing transition-all duration-200 rounded-t-md group',
-          isDragging && 'cursor-grabbing bg-gradient-to-r from-blue-100 to-blue-200 shadow-inner'
+          'absolute left-0 top-0 w-full h-10 px-3 flex items-center bg-gradient-to-r from-custom-primary-300 to-custom-bg-400 cursor-grab active:cursor-grabbing transition-all duration-200 rounded-t-md group',
+          isDragging &&
+            'cursor-grabbing bg-gradient-to-r from-custom-primary-300 to-custom-primary-200 shadow-inner'
         )}
         style={{
           cursor: isDragging ? 'grabbing' : 'grab'
@@ -75,14 +76,14 @@ const ComponentWapper: React.FC<ComponentWapperProps> = ({
       >
         <MenuOutlined
           className={clsx(
-            'text-blue-500 group-hover:text-blue-600 transition-all',
-            isDragging && 'text-blue-700'
+            'text-custom-primary-100 group-hover:text-custom-primary-200 transition-all',
+            isDragging && 'text-custom-primary-300'
           )}
         />
         <span
           className={clsx(
-            'text-xs ml-2 text-blue-600 font-medium group-hover:text-blue-700 flex items-center',
-            isDragging && 'text-blue-800'
+            'text-xs ml-2 text-custom-primary-100 font-medium group-hover:text-custom-primary-100 flex items-center',
+            isDragging && 'text-custom-primary-100'
           )}
         >
           <span className="transform transition-transform group-hover:translate-y-[-1px] group-hover:translate-x-[-1px] inline-block mr-1">
@@ -96,10 +97,10 @@ const ComponentWapper: React.FC<ComponentWapperProps> = ({
           className={clsx(
             'ml-auto text-xs px-2 py-1 rounded transition-all',
             isDragging
-              ? 'bg-blue-200 text-blue-800'
+              ? 'bg-custom-primary-300 text-custom-primary-100'
               : selectedId === fe_id
-              ? 'bg-green-100 text-green-700'
-              : 'bg-gray-100 text-gray-600 group-hover:bg-gray-200'
+              ? 'bg-custom-primary-300 text-custom-accent-200'
+              : 'bg-custom-bg-200 text-custom-text-200 group-hover:bg-custom-bg-100'
           )}
         >
           {isDragging ? '拖拽中...' : selectedId === fe_id ? '编辑中' : '点击编辑'}

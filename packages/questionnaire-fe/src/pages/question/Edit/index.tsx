@@ -11,10 +11,11 @@ import useLoadQuestionData from '@/hooks/useLoadQuestionData'
 import CustomSpin from '@/components/CustomSpin/CustomSpin'
 import LeftPanel from '@/pages/question/Edit/components/LeftPanel'
 import RightPanel from '@/pages/question/Edit/components/RightPanel'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '@/store'
 import apis from '@/apis'
 import { MANAGE_MARKET_PATH } from '@/router/index'
+import { setVersion, addComponent } from '@/store/modules/componentsSlice'
 
 const Edit: React.FC = () => {
   const navigate = useNavigate()
@@ -23,7 +24,8 @@ const Edit: React.FC = () => {
   const { loading } = useLoadQuestionData()
   const componentList = useSelector((state: RootState) => state.components.componentList)
   const pageConfig = useSelector((state: RootState) => state.pageConfig)
-
+  const version = useSelector((state: RootState) => state.components.version)
+  const dispatch = useDispatch()
   const { isGenerateDialogOpen, openGenerateDialog, closeGenerateDialog } = useGenerateDialog()
 
   // 保存问卷
@@ -39,12 +41,13 @@ const Edit: React.FC = () => {
         title: pageConfig.title || '未命名问卷',
         description: pageConfig.description || '',
         components: componentList,
-        version: 1
+        version
       }
 
       const res = await apis.editorApi.saveQuestionnaireDetail(params)
       if (res.code === 1) {
         message.success('保存成功')
+        dispatch(setVersion(version + 1))
         return true
       } else {
         message.error(res.msg || '保存失败')
@@ -122,6 +125,23 @@ const Edit: React.FC = () => {
     })
   }
 
+  // 处理添加生成的题目
+  const handleAddQuestions = (questions: any[]) => {
+    questions.forEach(question => {
+      dispatch(
+        addComponent({
+          type: question.type,
+          title: question.title,
+          props: {
+            ...question.props,
+            title: question.title
+          }
+        })
+      )
+    })
+    message.success('添加题目成功')
+  }
+
   return (
     <div className="w-full h-screen bg-custom-bg-100 flex flex-col">
       <div className="h-16 flex justify-between items-center">
@@ -132,7 +152,11 @@ const Edit: React.FC = () => {
         </div>
         <div className="flex justify-center items-center h-full gap-4 bg-custom-bg-300 px-16 rounded-b-full mx-auto">
           <EditorButtonGroup operation={operation} />
-          <GenerateDialog isOpen={isGenerateDialogOpen} close={closeGenerateDialog} />
+          <GenerateDialog
+            isOpen={isGenerateDialogOpen}
+            close={closeGenerateDialog}
+            addQuestions={handleAddQuestions}
+          />
         </div>
         <div className="size-10 flex justify-center items-center mr-4">
           <Tooltip title="提交问卷">

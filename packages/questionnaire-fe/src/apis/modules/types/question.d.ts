@@ -1,4 +1,5 @@
 import { ComponentPropsType } from '@/components/QuestionComponents'
+import { ComponentInfoType } from '@/store/modules/componentsSlice'
 
 export type Question = {
   answer_count: number
@@ -18,6 +19,10 @@ export type QuestionListResponse = {
   list: Question[]
 }
 
-export type QuestionnaireDetail = Question & {
-  components: ComponentPropsType[]
+export type QuestionnaireDetail = {
+  components: ComponentInfoType[]
+  selectedId: string
+  version: number
+  title: string
+  description: string
 }

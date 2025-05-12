@@ -1,5 +1,5 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react'
-import { Modal } from 'antd'
+import { Modal, message } from 'antd'
 import LottieAnimation from '@/components/Common/LottieAnimation'
 import ai from '@/assets/lottie/ai.json'
 import { Input, Button, Skeleton } from 'antd'
@@ -7,10 +7,12 @@ import apis from '@/apis'
 import ReactMarkdown from 'react-markdown'
 import { throttle } from '@/utils'
 import regexp from '@/utils/regexp'
+import { PlusOutlined } from '@ant-design/icons'
 
 interface GenerateDialogProps {
   isOpen: boolean // 控制对话框显示/隐藏
   close: () => void // 关闭对话框的回调函数
+  addQuestions: (questions: any[]) => void // 添加题目到问卷的回调函数
 }
 
 let isFirstOpen = true
@@ -32,7 +34,7 @@ const GenerateDialogTitle = React.memo((props: { title: string }) => {
 GenerateDialogTitle.displayName = 'GenerateDialogTitle'
 
 const GenerateDialog = (props: GenerateDialogProps) => {
-  const { isOpen, close } = props
+  const { isOpen, close, addQuestions } = props
   // 用于存储停止生成的回调函数
   const handleStopClickRef = useRef<() => void>(() => {
     return
@@ -42,12 +44,14 @@ const GenerateDialog = (props: GenerateDialogProps) => {
   const [theme, setTheme] = useState('') // 用户输入的主题
   const [isGenerating, setIsGenerating] = useState(false) // 是否正在生成问卷
   const [formattedContent, setFormattedContent] = useState('') // 格式化后的问卷内容
+  const [currentQuestions, setCurrentQuestions] = useState<any[]>([]) // 当前生成的题目数组
 
   const markdownRef = useRef<HTMLDivElement>(null) // Markdown 容器的引用
 
   // 将 AI 返回的内容解析为题目数组
   const parseQuestionsFromContent = (content: string) => {
     const matches = content.match(regexp.questionRegExp)
+    console.log('matches', matches)
     if (!matches) return []
     return matches
       .map(questionObj => {
@@ -69,12 +73,33 @@ const GenerateDialog = (props: GenerateDialogProps) => {
         (question, index) => `
 ### 题目 ${index + 1}
 - 题型：${question.type}
-- 题目：${question.question}
+- 题目：${question.title}
 ${
-  question.options
-    ? `- 选项：\n${question.options.map((opt: string) => `  - ${opt}`).join('\n')}`
+  question.props?.options
+    ? `- 选项：\n${question.props.options.map((opt: string) => `  - ${opt}`).join('\n')}`
     : ''
 }
+${
+  question.props?.rows && question.props?.columns
+    ? `- 矩阵行：\n${question.props.rows
+        .map((row: string) => `  - ${row}`)
+        .join('\n')}\n- 矩阵列：\n${question.props.columns
+        .map((col: string) => `  - ${col}`)
+        .join('\n')}`
+    : ''
+}
+${question.props?.count ? `- 评分范围：1-${question.props.count}` : ''}
+${
+  question.props?.min && question.props?.max
+    ? `- 范围：${question.props.min}-${question.props.max}${
+        question.props.step ? `，步长：${question.props.step}` : ''
+      }`
+    : ''
+}
+${question.props?.format ? `- 日期格式：${question.props.format}` : ''}
+${question.props?.required ? `- 是否必填：是` : ''}
+${question.props?.placeholder ? `- 占位文本：${question.props.placeholder}` : ''}
+${question.props?.description ? `- 题目说明：${question.props.description}` : ''}
 `
       )
       .join('\n')
@@ -90,6 +115,7 @@ ${
 
   const printCurQuestion = (content: string) => {
     const questions = parseQuestionsFromContent(content)
+    setCurrentQuestions(questions)
     const formattedContent = formatQuestionsToMarkdown(questions)
     setFormattedContent(formattedContent)
   }
@@ -146,6 +172,7 @@ ${
     close()
     setIsGenerating(false)
     setFormattedContent('')
+    setCurrentQuestions([])
     isFirstOpen = true
     setTheme('')
     handleStopClickRef.current()
@@ -154,6 +181,20 @@ ${
   const onCancel = () => {
     isFirstOpen = true
     handleStopClickRef.current()
+  }
+
+  const handleAddToQuestionnaire = () => {
+    if (currentQuestions.length > 0) {
+      addQuestions(currentQuestions)
+      close()
+      setIsGenerating(false)
+      setFormattedContent('')
+      setCurrentQuestions([])
+      isFirstOpen = true
+      setTheme('')
+    } else {
+      message.warning('请先生成题目')
+    }
   }
 
   return (
@@ -188,30 +229,42 @@ ${
         </div>
         {/* Markdown 内容展示区域 */}
         {!isFirstOpen && (
-          <div
-            ref={markdownRef}
-            className="bg-custom-bg-100 overflow-y-auto p-4 rounded-lg"
-            style={{ height: 'calc(100% - 50px)', overflowY: 'auto' }}
-          >
-            {formattedContent ? (
-              <ReactMarkdown
-                className="
+          <>
+            <div
+              ref={markdownRef}
+              className="bg-custom-bg-100 overflow-y-auto p-4 rounded-lg"
+              style={{ height: 'calc(100% - 100px)', overflowY: 'auto' }}
+            >
+              {formattedContent ? (
+                <ReactMarkdown
+                  className="
               [&_h3]:text-xl [&_h3]:font-bold [&_h3]:my-4
               [&_ul]:list-disc [&_ul]:pl-8 [&_ul]:my-2
               [&_li]:my-1
               prose prose-slate max-w-none
             "
+                >
+                  {formattedContent}
+                </ReactMarkdown>
+              ) : (
+                <div className="h-full flex flex-col justify-between items-center bg-custom-bg-300 p-4 rounded-lg">
+                  <Skeleton active />
+                  <Skeleton active />
+                  <Skeleton active />
+                </div>
+              )}
+            </div>
+            <div className="flex justify-end mt-4">
+              <Button
+                type="primary"
+                icon={<PlusOutlined />}
+                onClick={handleAddToQuestionnaire}
+                disabled={!currentQuestions.length}
               >
-                {formattedContent}
-              </ReactMarkdown>
-            ) : (
-              <div className="h-full flex flex-col justify-between items-center bg-custom-bg-300 p-4 rounded-lg">
-                <Skeleton active />
-                <Skeleton active />
-                <Skeleton active />
-              </div>
-            )}
-          </div>
+                添加到问卷中
+              </Button>
+            </div>
+          </>
         )}
       </div>
     </Modal>

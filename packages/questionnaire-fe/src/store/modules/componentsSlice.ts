@@ -11,11 +11,13 @@ export type ComponentInfoType = {
 export type ComponentsStateType = {
   selectedId: string
   componentList: Array<ComponentInfoType>
+  version: number
 }
 
 const initialState: ComponentsStateType = {
   selectedId: '',
-  componentList: []
+  componentList: [],
+  version: 1
 }
 
 // 生成唯一ID
@@ -27,7 +29,14 @@ export const componentsSlice = createSlice({
   name: 'components',
   initialState,
   reducers: {
-    resetComponents: (state: ComponentsStateType, action: PayloadAction<ComponentsStateType>) => {
+    resetComponents: (
+      state: ComponentsStateType,
+      action: PayloadAction<{
+        selectedId: string
+        componentList: Array<ComponentInfoType>
+        version: number
+      }>
+    ) => {
       return action.payload
     },
     setSelectedId: (state: ComponentsStateType, action: PayloadAction<string>) => {
@@ -124,6 +133,9 @@ export const componentsSlice = createSlice({
 
       // 更新组件列表
       state.componentList = newComponentList
+    },
+    setVersion: (state: ComponentsStateType, action: PayloadAction<number>) => {
+      state.version = action.payload
     }
   }
 })
@@ -135,7 +147,8 @@ export const {
   deleteComponent,
   updateComponentProps,
   changeComponentTitle,
-  reorderComponents
+  reorderComponents,
+  setVersion
 } = componentsSlice.actions
 
 export default componentsSlice.reducer

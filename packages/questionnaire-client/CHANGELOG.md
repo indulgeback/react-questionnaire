@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.21.0](https://github.com/indulgeback/react-questionnaire/compare/v1.20.1...v1.21.0) (2025-05-12)
+
+
+### Features
+
+* 更新问卷编辑功能，新增问卷创建和保存接口，优化组件拖拽功能，支持动态组件管理和状态更新 ([1d64578](https://github.com/indulgeback/react-questionnaire/commit/1d6457823c89f3f4814f959d0ab82f04ca1eff08))
+
+
+
+
+
 ## [1.20.1](https://github.com/indulgeback/react-questionnaire/compare/v1.20.0...v1.20.1) (2025-05-09)
 
 **Note:** Version bump only for package @questionnaire/client

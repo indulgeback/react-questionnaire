@@ -23,11 +23,9 @@ export class QuestionService {
   // 创建问卷
   async create(createQuestionDto: CreateQuestionDto) {
     const question = new Question();
-    question.title = createQuestionDto.title;
-    question.description = createQuestionDto.description;
     question.author_id = createQuestionDto.author_id;
     question.author = createQuestionDto.author;
-    await this.questionRepository.save(question);
+    return await this.questionRepository.save(question);
   }
 
   // 分页查询问卷列表

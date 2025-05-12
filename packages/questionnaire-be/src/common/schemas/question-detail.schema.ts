@@ -1,14 +1,18 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
-export type Question = {
-  id: number;
+// 定义组件属性类型（这里使用any，因为各种组件的属性结构不同）
+export type ComponentProps = any;
+
+// 定义问题组件
+export type QuestionComponent = {
+  fe_id: string;
   type: string;
-  question: string;
-  options?: string[];
+  title: string;
+  props: ComponentProps;
 };
 
-// 完整问卷详情（包含问题集合）
+// 完整问卷详情（包含问题组件集合）
 @Schema({ collection: 'questionnaire_details', timestamps: true })
 export class QuestionnaireDetail extends Document {
   @Prop({
@@ -26,15 +30,15 @@ export class QuestionnaireDetail extends Document {
   @Prop({
     type: [
       {
-        id: { type: Number, required: true },
+        fe_id: { type: String, required: true },
         type: { type: String, required: true },
-        question: { type: String, required: true },
-        options: { type: [String] },
+        title: { type: String, required: true },
+        props: { type: Object, required: true },
       },
     ],
     required: true,
   })
-  questions: Array<Question>;
+  components: Array<QuestionComponent>;
 
   @Prop({ default: 1 })
   version: number; // 新文档默认从版本1开始

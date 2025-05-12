@@ -1,11 +1,9 @@
 import React from "react";
 import { Question, QuestionType } from "@/types/question";
-import QuestionBaseInfo from "./questionBaseInfo";
 import QuestionMultipleChoice from "./questionMultipleChoice";
 import QuestionParagraph from "./questionParagraph";
 import QuestionShortAnswer from "./questionShortAnswer";
 import QuestionSingleChoice from "./questionSingleChoice";
-import QuestionTrueOrFalse from "./questionTrueOrFalse";
 import QuestionDropdown from "./questionDropdown";
 import QuestionRating from "./questionRating";
 import QuestionNPS from "./questionNPS";
@@ -19,40 +17,37 @@ import QuestionRank from "./questionRank";
 import QuestionTitle from "./questionTitle";
 
 export default function QuestionComponent({ question }: { question: Question }) {
+  // 处理题型
   switch (question.type) {
-    case QuestionType.BASE_INFO:
-      return <QuestionBaseInfo question={question} />;
-    case QuestionType.MULTIPLE_CHOICE:
-      return <QuestionMultipleChoice question={question} />;
-    case QuestionType.SINGLE_CHOICE:
-      return <QuestionSingleChoice question={question} />;
-    case QuestionType.TRUE_FALSE:
-      return <QuestionTrueOrFalse question={question} />;
-    case QuestionType.SHORT_ANSWER:
+    case QuestionType.QuestionShortAnswer:
       return <QuestionShortAnswer question={question} />;
-    case QuestionType.PARAGRAPH:
+    case QuestionType.QuestionRadio:
+      return <QuestionSingleChoice question={question} />;
+    case QuestionType.QuestionCheckbox:
+      return <QuestionMultipleChoice question={question} />;
+    case QuestionType.QuestionParagraph:
       return <QuestionParagraph question={question} />;
-    case QuestionType.DROPDOWN:
+    case QuestionType.QuestionDropdown:
       return <QuestionDropdown question={question} />;
-    case QuestionType.RATING:
+    case QuestionType.QuestionRating:
       return <QuestionRating question={question} />;
-    case QuestionType.NPS:
+    case QuestionType.QuestionNPS:
       return <QuestionNPS question={question} />;
-    case QuestionType.MATRIX_RADIO:
+    case QuestionType.QuestionMatrixRadio:
       return <QuestionMatrixRadio question={question} />;
-    case QuestionType.MATRIX_CHECKBOX:
+    case QuestionType.QuestionMatrixCheckbox:
       return <QuestionMatrixCheckbox question={question} />;
-    case QuestionType.SLIDER:
+    case QuestionType.QuestionSlider:
       return <QuestionSlider question={question} />;
-    case QuestionType.DATE:
+    case QuestionType.QuestionDate:
       return <QuestionDate question={question} />;
-    case QuestionType.UPLOAD:
+    case QuestionType.QuestionUpload:
       return <QuestionUpload question={question} />;
-    case QuestionType.IMAGE_CHOICE:
+    case QuestionType.QuestionImageChoice:
       return <QuestionImageChoice question={question} />;
-    case QuestionType.RANK:
+    case QuestionType.QuestionRank:
       return <QuestionRank question={question} />;
-    case QuestionType.TITLE:
+    case QuestionType.QuestionTitle:
       return <QuestionTitle question={question} />;
     default:
       return <div>未知题型</div>;

@@ -31,8 +31,9 @@ const QuestionnaireProgress: React.FC<QuestionnaireProgressProps> = ({ onQuestio
 
     // 特殊处理：将标题类型题目标记为已回答
     const modifiedStatus = status.map((isAnswered, index) => {
-      // 标题题和无需回答的题目标记为已完成
-      if (questionnaireData[index]?.type === QuestionType.TITLE) {
+      const questionType = questionnaireData[index]?.type;
+      // 标题题标记为已完成
+      if (questionType === QuestionType.QuestionTitle) {
         return true;
       }
       return isAnswered;
@@ -94,7 +95,7 @@ const QuestionnaireProgress: React.FC<QuestionnaireProgressProps> = ({ onQuestio
                   "size-8 rounded-md flex items-center justify-center text-xs cursor-pointer transition-all",
                   answeredStatus[index]
                     ? "bg-secondary text-secondary-foreground"
-                    : question.type === QuestionType.TITLE
+                    : question.type === QuestionType.QuestionTitle
                       ? "bg-default-200 dark:bg-default-100 text-default-500 dark:text-default-400"
                       : "bg-default-100 dark:bg-default-50 text-default-600 dark:text-default-500 hover:bg-default-200 dark:hover:bg-default-100"
                 )}

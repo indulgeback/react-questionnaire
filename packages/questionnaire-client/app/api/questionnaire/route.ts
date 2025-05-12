@@ -25,6 +25,10 @@ export async function GET(request: Request) {
     // 转换为纯JavaScript对象，移除MongoDB特有字段
     const serializedDetail = JSON.parse(JSON.stringify(questionnaireDetail));
 
+    if (!serializedDetail.components) {
+      return NextResponse.json({ error: "问卷数据格式错误" }, { status: 500 });
+    }
+
     // 适配前端需要的数据结构
     const data = {
       metadata: {
@@ -36,14 +40,37 @@ export async function GET(request: Request) {
         version: serializedDetail.version,
         description: serializedDetail.description
       },
-      questions: serializedDetail.questions.map((q: any) => {
-        // 映射后端问题类型到前端类型
-        const mappedType = mapQuestionType(q.type);
+      questions: serializedDetail.components.map((component: any, index: number) => {
         // 移除MongoDB添加的_id字段
-        const { _id, ...cleanQuestion } = q;
+        const { _id, ...rest } = component;
+
+        // 直接使用前端类型
+        const questionType = component.type as QuestionType;
+
+        // 构建前端所需的问题结构
         return {
-          ...cleanQuestion,
-          type: mappedType
+          id: index + 1, // 使用索引作为问题ID
+          fe_id: component.fe_id, // 保留fe_id
+          type: questionType,
+          question: component.props.title || component.title, // 使用组件的props.title或title作为问题内容
+          // 根据不同组件类型提取所需属性
+          ...(component.props.options && { options: component.props.options }),
+          ...(component.props.placeholder && { placeholder: component.props.placeholder }),
+          ...(component.props.maxLength && { maxLength: component.props.maxLength }),
+          ...(component.props.rows && { rows: component.props.rows }),
+          ...(component.props.count && { max: component.props.count }),
+          ...(component.props.min !== undefined && { min: component.props.min }),
+          ...(component.props.max !== undefined && { max: component.props.max }),
+          ...(component.props.step && { step: component.props.step }),
+          ...(component.props.columns &&
+            component.props.rows && {
+              matrix: {
+                rows: component.props.rows,
+                columns: component.props.columns
+              }
+            }),
+          // 保存原始props以便需要时使用
+          props: component.props
         };
       })
     };
@@ -53,31 +80,4 @@ export async function GET(request: Request) {
     console.error("获取问卷数据出错:", error);
     return NextResponse.json({ error: "获取问卷数据失败" }, { status: 500 });
   }
-}
-
-/**
- * 映射后端问题类型到前端类型
- */
-function mapQuestionType(backendType: string): QuestionType {
-  const typeMap: Record<string, QuestionType> = {
-    base_info: QuestionType.BASE_INFO,
-    single_choice: QuestionType.SINGLE_CHOICE,
-    multiple_choice: QuestionType.MULTIPLE_CHOICE,
-    true_false: QuestionType.TRUE_FALSE,
-    short_answer: QuestionType.SHORT_ANSWER,
-    paragraph: QuestionType.PARAGRAPH,
-    dropdown: QuestionType.DROPDOWN,
-    rating: QuestionType.RATING,
-    nps: QuestionType.NPS,
-    matrix_radio: QuestionType.MATRIX_RADIO,
-    matrix_checkbox: QuestionType.MATRIX_CHECKBOX,
-    slider: QuestionType.SLIDER,
-    date: QuestionType.DATE,
-    upload: QuestionType.UPLOAD,
-    image_choice: QuestionType.IMAGE_CHOICE,
-    rank: QuestionType.RANK,
-    title: QuestionType.TITLE
-  };
-
-  return typeMap[backendType.toLowerCase()] || QuestionType.SINGLE_CHOICE;
 }

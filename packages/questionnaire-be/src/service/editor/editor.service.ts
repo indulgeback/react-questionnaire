@@ -17,7 +17,21 @@ export class EditorService {
   }
 
   async save(saveDto: SaveDto) {
-    // 保持原有乐观锁逻辑
+    // 首先检查问卷是否存在
+    const existingQuestionnaire = await this.questionnaireDetailModel.findOne({
+      questionnaire_id: saveDto.questionnaire_id,
+    });
+
+    // 如果问卷不存在，则创建新问卷
+    if (!existingQuestionnaire) {
+      const newQuestionnaire = new this.questionnaireDetailModel({
+        ...saveDto,
+        version: 1, // 新问卷版本从1开始
+      });
+      return await newQuestionnaire.save();
+    }
+
+    // 如果问卷存在，保持原有乐观锁逻辑
     const result = await this.questionnaireDetailModel.findOneAndUpdate(
       {
         questionnaire_id: saveDto.questionnaire_id,
@@ -37,9 +51,14 @@ export class EditorService {
     return result;
   }
 
+  // 获取问卷详情模型，用于创建新实例
+  getModel(): Model<QuestionnaireDetail> {
+    return this.questionnaireDetailModel;
+  }
+
   async mock() {
     const mockDocuments = [];
-    const numberOfDocuments = 1000; // 要插入的文档数量
+    const numberOfDocuments = 10; // 要插入的文档数量
 
     // 生成模拟文档
     for (let i = 1; i <= numberOfDocuments; i++) {
@@ -65,33 +84,60 @@ export class EditorService {
       questionnaire_id: id,
       title: `测试问卷 ${id}`,
       description: `这是测试问卷 ${id} 的描述`,
-      questions: [
+      components: [
         {
-          id: 1,
-          type: 'base_info',
-          question: '你今天过得好吗？',
+          fe_id: '1',
+          type: 'questionTitle',
+          title: '分段标题',
+          props: {
+            title: `测试问卷 ${id}`,
+            level: 1,
+            isCenter: true,
+            fontSize: 20,
+          },
         },
         {
-          id: 2,
-          type: 'multiple_choice',
-          question: '你喜欢的水果有哪些？',
-          options: ['苹果', '香蕉', '橙子', '葡萄'],
+          fe_id: '2',
+          type: 'questionRadio',
+          title: '单选题',
+          props: {
+            title: '你最喜欢的颜色是？',
+            options: ['红色', '蓝色', '绿色', '黄色'],
+            column: false,
+          },
         },
         {
-          id: 3,
-          type: 'single_choice',
-          question: '你最喜欢的颜色是？',
-          options: ['红色', '蓝色', '绿色', '黄色'],
+          fe_id: '3',
+          type: 'questionCheckbox',
+          title: '多选题',
+          props: {
+            title: '你喜欢的水果有哪些？',
+            options: ['苹果', '香蕉', '橙子', '葡萄'],
+            column: false,
+          },
         },
         {
-          id: 4,
-          type: 'true_false',
-          question: '你是否喜欢阅读？',
+          fe_id: '4',
+          type: 'questionShortAnswer',
+          title: '简答题',
+          props: {
+            title: '请简要描述你的爱好。',
+            type: 'textarea',
+            placeholder: '请输入答案',
+            maxLength: 200,
+            rows: 4,
+          },
         },
         {
-          id: 5,
-          type: 'short_answer',
-          question: '请简要描述你的爱好。',
+          fe_id: '5',
+          type: 'questionRating',
+          title: '评分题',
+          props: {
+            title: '请对我们的服务进行评分',
+            count: 5,
+            allowHalf: false,
+            character: 'star',
+          },
         },
       ],
       version: 1,

@@ -23,7 +23,8 @@ const getQuestionById = (id: number) => request.get<number, RespType<any>>(`${pr
 /**
  * 创建问卷
  */
-const createQuestion = () => request.post<any, RespType<{ id: number }>>(`${prefix}`)
+const createQuestion = (params: { author_id?: number; author?: string }) =>
+  request.post<any, RespType<{ id: number }>>(`${prefix}`, params)
 
 /**
  * 收藏问卷

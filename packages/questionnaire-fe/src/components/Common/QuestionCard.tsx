@@ -82,7 +82,7 @@ const QuestionCard: React.FC<PropsType> = (props: PropsType) => {
               <span className="inline-block w-4">
                 {isFavorated && <StarOutlined className="text-custom-yellow" />}
               </span>
-              {title}
+              {id}:{title}
             </Space>
           </Link>
         </div>

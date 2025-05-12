@@ -5,16 +5,32 @@ import apis from '@/apis'
 import { Button, Divider, Space } from 'antd'
 import { FileAddFilled } from '@ant-design/icons'
 import SvgIcon from '@/components/Common/SvgIcon'
-import { MANAGE_MARKET_PATH, MANAGE_PERSONAL_PATH, MANAGE_STAR_PATH } from '@/router'
+import {
+  MANAGE_MARKET_PATH,
+  MANAGE_PERSONAL_PATH,
+  MANAGE_STAR_PATH,
+  QUESTION_EDIT_PATH
+} from '@/router'
+import { getUserInfoFromStorage } from '@/utils'
 const ManageLayout: React.FC = () => {
   const nav = useNavigate()
   const { pathname } = useLocation()
+
+  const createQuestion = async () => {
+    const userInfo = getUserInfoFromStorage()
+    const params = {
+      author_id: userInfo.userId,
+      author: userInfo.nickname
+    }
+    const res = await apis.questionApi.createQuestion(params)
+    nav(`${QUESTION_EDIT_PATH}/${res.data.id}`)
+  }
   // 手动触发逻辑
   const {
     loading,
     error,
     run: handleCreateQuestion
-  } = useRequest(apis.questionApi.createQuestion, {
+  } = useRequest(createQuestion, {
     manual: true
   })
 

@@ -11,30 +11,28 @@ import {
   ParseIntPipe,
 } from '@nestjs/common';
 import { QuestionService } from '@/service/question/question.service';
-import CreateQuestionDto from '@/service/question/dto/create-question.dto';
 import UpdateQuestionDto from '@/service/question/dto/update-question.dto';
 import FindAllQuestionDto from '@/service/question/dto/find-all-question.dto';
 import { JwtAuthGuard } from '@/guard/jwt-auth.guard';
-import { Public } from '@/common/decorators/public.decorator';
 import { ResponseBody } from '@/common/classes/response-body';
 import { Logger } from '@/common/utils/log4js';
 import {
   currentUser,
   UserToken,
 } from '@/common/decorators/current-user.decorator';
+import CreateQuestionDto from './dto/create-question.dto';
 
 @UseGuards(JwtAuthGuard)
 @Controller('question')
 export class QuestionController {
   constructor(private readonly questionService: QuestionService) {}
 
-  @Public()
   // 新建问卷
   @Post()
   async create(@Body() createQuestionDto: CreateQuestionDto) {
     try {
-      await this.questionService.create(createQuestionDto);
-      return new ResponseBody<any>(1, null, '创建成功');
+      const data = await this.questionService.create(createQuestionDto);
+      return new ResponseBody<any>(1, data, '创建成功');
     } catch (error) {
       return new ResponseBody<any>(0, null, error.message);
     }

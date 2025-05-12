@@ -13,3 +13,52 @@
     overflow: hidden;
     background-color: #f5f5f5;
 }
+
+/* 为拖拽操作添加样式 */
+.custom-no-scrollbar {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+.custom-no-scrollbar::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari and Opera */
+}
+
+/* 拖拽中的样式 */
+.dragging {
+    cursor: grabbing !important;
+}
+
+/* 占位符样式 */
+.drop-placeholder {
+    background-color: rgba(var(--primary-300), 0.5);
+    border: 2px dashed rgba(var(--primary-200), 0.5);
+    border-radius: 8px;
+    margin-bottom: 8px;
+    min-height: 80px;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0.6;
+    }
+
+    50% {
+        opacity: 0.9;
+    }
+
+    100% {
+        opacity: 0.6;
+    }
+}
+
+/* 拖拽手柄悬停效果 */
+.drag-handle:hover {
+    background-color: rgba(var(--bg-200), 0.8);
+    color: rgb(var(--primary-100));
+    border-radius: 4px;
+}

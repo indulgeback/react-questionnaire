@@ -97,6 +97,33 @@ export const componentsSlice = createSlice({
         // 更新组件标题
         targetComponent.title = title
       }
+    },
+    reorderComponents: (
+      state: ComponentsStateType,
+      action: PayloadAction<{
+        sourceIndex: number
+        destinationIndex: number
+      }>
+    ) => {
+      const { sourceIndex, destinationIndex } = action.payload
+
+      // 确保索引有效
+      if (
+        sourceIndex < 0 ||
+        sourceIndex >= state.componentList.length ||
+        destinationIndex < 0 ||
+        destinationIndex >= state.componentList.length
+      ) {
+        return
+      }
+
+      // 创建新数组以重新排序组件
+      const newComponentList = [...state.componentList]
+      const [movedComponent] = newComponentList.splice(sourceIndex, 1)
+      newComponentList.splice(destinationIndex, 0, movedComponent)
+
+      // 更新组件列表
+      state.componentList = newComponentList
     }
   }
 })
@@ -107,7 +134,8 @@ export const {
   addComponent,
   deleteComponent,
   updateComponentProps,
-  changeComponentTitle
+  changeComponentTitle,
+  reorderComponents
 } = componentsSlice.actions
 
 export default componentsSlice.reducer

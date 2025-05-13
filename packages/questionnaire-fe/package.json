@@ -1,6 +1,6 @@
 {
   "name": "@questionnaire/fe",
-  "version": "1.21.0",
+  "version": "1.21.1",
   "private": true,
   "dependencies": {
     "@ant-design/icons": "^5.3.6",

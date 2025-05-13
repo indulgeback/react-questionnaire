@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.21.1](https://github.com/indulgeback/react-questionnaire/compare/v1.21.0...v1.21.1) (2025-05-13)
+
+
+### Bug Fixes
+
+* 修复打包失败的问题 ([ad08d9a](https://github.com/indulgeback/react-questionnaire/commit/ad08d9a6af72a295c0e9d3bf7156c88bbfb9fdf2))
+* 修复问题类型导致的打包失败的问题 ([8557eff](https://github.com/indulgeback/react-questionnaire/commit/8557eff50cbedc0a0fa9753b8e10e3536334a552))
+
+
+
+
+
 # [1.21.0](https://github.com/indulgeback/react-questionnaire/compare/v1.20.1...v1.21.0) (2025-05-12)
 
 

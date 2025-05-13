@@ -12,10 +12,11 @@ import {
   QUESTION_EDIT_PATH
 } from '@/router'
 import { getUserInfoFromStorage } from '@/utils'
+import useRequestSuccessChecker from '@/hooks/useRequestSuccessChecker'
 const ManageLayout: React.FC = () => {
   const nav = useNavigate()
   const { pathname } = useLocation()
-
+  const { isRequestSuccess, successMessage } = useRequestSuccessChecker()
   const createQuestion = async () => {
     const userInfo = getUserInfoFromStorage()
     const params = {
@@ -23,7 +24,10 @@ const ManageLayout: React.FC = () => {
       author: userInfo.nickname
     }
     const res = await apis.questionApi.createQuestion(params)
-    nav(`${QUESTION_EDIT_PATH}/${res.data.id}`)
+    if (isRequestSuccess(res)) {
+      successMessage('创建成功')
+      nav(`${QUESTION_EDIT_PATH}/${res.data.id}`)
+    }
   }
   // 手动触发逻辑
   const {

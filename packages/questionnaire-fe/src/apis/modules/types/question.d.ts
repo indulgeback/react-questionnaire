@@ -25,4 +25,5 @@ export type QuestionnaireDetail = {
   version: number
   title: string
   description: string
+  footer_text: string
 }

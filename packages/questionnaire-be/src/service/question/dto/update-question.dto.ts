@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString, IsDate } from 'class-validator';
+import { IsNotEmpty, IsString } from 'class-validator';
 
 class UpdateQuestionDto {
   @IsString()
@@ -8,6 +8,10 @@ class UpdateQuestionDto {
   @IsString()
   @IsNotEmpty()
   title: string;
+
+  @IsString()
+  @IsNotEmpty()
+  footer_text: string;
 }
 
 export default UpdateQuestionDto;

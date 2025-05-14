@@ -22,4 +22,8 @@ export class SaveDto {
   @IsNumber()
   @Min(1)
   version: number;
+
+  @IsNotEmpty()
+  @IsString()
+  footer_text: string;
 }

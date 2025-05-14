@@ -27,6 +27,9 @@ export class QuestionnaireDetail extends Document {
   @Prop({ required: true })
   description: string; // 问卷描述
 
+  @Prop({ required: true })
+  footer_text: string; // 问卷底部文本
+
   @Prop({
     type: [
       {

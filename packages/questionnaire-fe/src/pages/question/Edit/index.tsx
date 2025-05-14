@@ -42,6 +42,7 @@ const Edit: React.FC = () => {
         questionnaire_id: parseInt(id) || 0,
         title: pageConfig.title || '未命名问卷',
         description: pageConfig.description || '',
+        footer_text: pageConfig.footerText || '',
         components: componentList,
         version
       }
@@ -52,7 +53,8 @@ const Edit: React.FC = () => {
         dispatch(setVersion(version + 1))
         await apis.questionApi.updateQuestion(parseInt(id) || 0, {
           title: pageConfig.title || '未命名问卷',
-          description: pageConfig.description || ''
+          description: pageConfig.description || '',
+          footer_text: pageConfig.footerText || ''
         })
         return true
       } else {

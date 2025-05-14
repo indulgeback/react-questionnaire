@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import ComponentWapper from '@/pages/question/Edit/components/ComponentWapper'
 import ComponentRender from '@/pages/question/Edit/components/ComponentRender'
 import { useSelector, useDispatch } from 'react-redux'
@@ -8,72 +8,7 @@ import { Typography, message } from 'antd'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 import { reorderComponents } from '@/store/modules/componentsSlice'
 import DevTools from '@/components/DevTools'
-import { ArrowLeftOutlined } from '@ant-design/icons'
 import clsx from 'clsx'
-import { ComponentType } from '@/components/QuestionComponents'
-import QuestionShortAnswer from '@/components/QuestionComponents/QuestionShortAnswer/Component'
-import QuestionRadio from '@/components/QuestionComponents/QuestionRadio/Component'
-import QuestionCheckbox from '@/components/QuestionComponents/QuestionCheckbox/Component'
-import QuestionParagraph from '@/components/QuestionComponents/QuestionParagraph/Component'
-import QuestionDropdown from '@/components/QuestionComponents/QuestionDropdown/Component'
-import QuestionRating from '@/components/QuestionComponents/QuestionRating/Component'
-import QuestionNPS from '@/components/QuestionComponents/QuestionNPS/Component'
-import QuestionMatrixRadio from '@/components/QuestionComponents/QuestionMatrixRadio/Component'
-import QuestionMatrixCheckbox from '@/components/QuestionComponents/QuestionMatrixCheckbox/Component'
-import QuestionSlider from '@/components/QuestionComponents/QuestionSlider/Component'
-import QuestionDate from '@/components/QuestionComponents/QuestionDate/Component'
-import QuestionUpload from '@/components/QuestionComponents/QuestionUpload/Component'
-import QuestionImageChoice from '@/components/QuestionComponents/QuestionImageChoice/Component'
-import QuestionRank from '@/components/QuestionComponents/QuestionRank/Component'
-import QuestionTitle from '@/components/QuestionComponents/QuestionTitle/Component'
-
-// 添加CSS样式到head中，确保拖拽效果在全局生效
-
-// 添加以确保拖拽在各平台正确工作
-const getItems = (components: any[]) =>
-  components.map((component: any, index: number) => ({
-    id: component.fe_id,
-    index,
-    component
-  }))
-
-// 根据组件类型获取对应的组件
-const getComponentByType = (type: string) => {
-  switch (type) {
-    case ComponentType.QuestionShortAnswer:
-      return QuestionShortAnswer
-    case ComponentType.QuestionRadio:
-      return QuestionRadio
-    case ComponentType.QuestionCheckbox:
-      return QuestionCheckbox
-    case ComponentType.QuestionParagraph:
-      return QuestionParagraph
-    case ComponentType.QuestionDropdown:
-      return QuestionDropdown
-    case ComponentType.QuestionRating:
-      return QuestionRating
-    case ComponentType.QuestionNPS:
-      return QuestionNPS
-    case ComponentType.QuestionMatrixRadio:
-      return QuestionMatrixRadio
-    case ComponentType.QuestionMatrixCheckbox:
-      return QuestionMatrixCheckbox
-    case ComponentType.QuestionSlider:
-      return QuestionSlider
-    case ComponentType.QuestionDate:
-      return QuestionDate
-    case ComponentType.QuestionUpload:
-      return QuestionUpload
-    case ComponentType.QuestionImageChoice:
-      return QuestionImageChoice
-    case ComponentType.QuestionRank:
-      return QuestionRank
-    case ComponentType.QuestionTitle:
-      return QuestionTitle
-    default:
-      return null
-  }
-}
 
 const { Title, Paragraph } = Typography
 
@@ -283,7 +218,6 @@ const EditCanvas: React.FC = () => {
   }
 
   const canvasStyle = {
-    backgroundColor: pageConfig.backgroundColor,
     height: '100%',
     display: 'flex',
     flexDirection: 'column' as const
@@ -304,7 +238,7 @@ const EditCanvas: React.FC = () => {
         <Title
           level={3}
           style={{
-            color: pageConfig.theme || 'rgb(38, 166, 154)',
+            color: 'rgb(38, 166, 154)',
             textAlign: 'center',
             marginBottom: '8px'
           }}
@@ -322,16 +256,6 @@ const EditCanvas: React.FC = () => {
         >
           {pageConfig.description}
         </Paragraph>
-
-        {pageConfig.showHeader && pageConfig.headerImage && (
-          <div className="text-center flex justify-center mb-4">
-            <img
-              src={pageConfig.headerImage}
-              alt="问卷头图"
-              style={{ maxWidth: '100%', maxHeight: '300px', borderRadius: '8px' }}
-            />
-          </div>
-        )}
       </div>
 
       {TEST_MODE && (

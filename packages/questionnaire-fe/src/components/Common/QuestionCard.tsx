@@ -9,13 +9,14 @@ import {
   LineChartOutlined,
   QuestionCircleOutlined,
   StarOutlined,
-  FieldTimeOutlined
+  FieldTimeOutlined,
+  QrcodeOutlined
 } from '@ant-design/icons'
 import { Link, useNavigate } from 'react-router-dom'
 import dayjs from 'dayjs'
 import apis from '@/apis'
 import useRequestSuccessChecker from '@/hooks/useRequestSuccessChecker'
-import { QUESTION_DETAIL_PATH, QUESTION_EDIT_PATH, QUESTION_STAT_PATH } from '@/router'
+import { QUESTION_DETAIL_PATH, QUESTION_EDIT_PATH, QUESTION_STAT_PATH, QRCODE_PATH } from '@/router'
 
 // ts 自定义类型
 type PropsType = {
@@ -60,6 +61,17 @@ const QuestionCard: React.FC<PropsType> = (props: PropsType) => {
     }
   }
 
+  // 发布或取消发布问卷
+  const publish = async () => {
+    const res = isPublished
+      ? await apis.questionApi.unPublishQuestion(id)
+      : await apis.questionApi.publishQuestion(id)
+    if (isRequestSuccess(res)) {
+      onRefresh(id)
+      successMessage(res.msg)
+    }
+  }
+
   // 复制问卷
   const duplicate = () => {
     successMessage('复制成功' + id)
@@ -73,6 +85,12 @@ const QuestionCard: React.FC<PropsType> = (props: PropsType) => {
       successMessage(res.msg)
     }
   }
+
+  // 查看答题二维码
+  const checkQrcode = () => {
+    window.open(`${window.location.origin}${QRCODE_PATH}/${id}`)
+  }
+
   return (
     <div className="my-3 p-3 rounded-md bg-white duration-300 hover:shadow-md">
       <div className="flex">
@@ -129,7 +147,7 @@ const QuestionCard: React.FC<PropsType> = (props: PropsType) => {
                 onClick={() => {
                   nav(`${QUESTION_STAT_PATH}/${id}`)
                 }}
-                disabled={!isPublished || !editable}
+                disabled={!isPublished || !editable || !answerCount}
               >
                 问卷统计
               </Button>
@@ -138,6 +156,11 @@ const QuestionCard: React.FC<PropsType> = (props: PropsType) => {
         </div>
         <div className="flex-1 text-right">
           <Space>
+            {isPublished && (
+              <Button type="text" size="small" onClick={checkQrcode} icon={<QrcodeOutlined />}>
+                查看答题二维码
+              </Button>
+            )}
             <Button type="text" size="small" icon={<StarOutlined />} onClick={handleFavorate}>
               {isFavorated ? '取消星标' : '星标问卷'}
             </Button>
@@ -151,6 +174,18 @@ const QuestionCard: React.FC<PropsType> = (props: PropsType) => {
                 复制
               </Button>
             </Popconfirm>
+            {editable && (
+              <Popconfirm
+                title="确定发布该问卷？"
+                okText="确定"
+                cancelText="取消"
+                onConfirm={publish}
+              >
+                <Button type="text" size="small" icon={<CopyOutlined />}>
+                  {isPublished ? '取消发布' : '发布'}
+                </Button>
+              </Popconfirm>
+            )}
             {editable && (
               <Popconfirm
                 title="确定删除该问卷？"

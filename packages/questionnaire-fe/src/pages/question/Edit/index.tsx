@@ -1,5 +1,5 @@
 import { LeftOutlined, SendOutlined } from '@ant-design/icons'
-import { Button, Tooltip, message, Modal } from 'antd'
+import { Button, Tooltip, Modal, App } from 'antd'
 import React, { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import EditorButtonGroup from '@/pages/question/Edit/components/EditorButtonGroup'
@@ -16,6 +16,7 @@ import { RootState } from '@/store'
 import apis from '@/apis'
 import { MANAGE_MARKET_PATH } from '@/router/index'
 import { setVersion, addComponent } from '@/store/modules/componentsSlice'
+import useRequestSuccessChecker from '@/hooks/useRequestSuccessChecker'
 
 const Edit: React.FC = () => {
   const navigate = useNavigate()
@@ -27,7 +28,8 @@ const Edit: React.FC = () => {
   const version = useSelector((state: RootState) => state.components.version)
   const dispatch = useDispatch()
   const { isGenerateDialogOpen, openGenerateDialog, closeGenerateDialog } = useGenerateDialog()
-
+  const { isRequestSuccess } = useRequestSuccessChecker()
+  const { message } = App.useApp()
   // 保存问卷
   const saveQuestionnaire = async () => {
     if (componentList.length === 0) {
@@ -45,9 +47,13 @@ const Edit: React.FC = () => {
       }
 
       const res = await apis.editorApi.saveQuestionnaireDetail(params)
-      if (res.code === 1) {
+      if (isRequestSuccess(res)) {
         message.success('保存成功')
         dispatch(setVersion(version + 1))
+        await apis.questionApi.updateQuestion(parseInt(id) || 0, {
+          title: pageConfig.title || '未命名问卷',
+          description: pageConfig.description || ''
+        })
         return true
       } else {
         message.error(res.msg || '保存失败')

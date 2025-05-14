@@ -11,6 +11,7 @@ const Home = lazy(() => import('@/pages/common/Home'))
 const Login = lazy(() => import('@/pages/common/Login'))
 const Register = lazy(() => import('@/pages/common/Register'))
 const Profile = lazy(() => import('@/pages/common/Profile'))
+const Qrcode = lazy(() => import('@/pages/common/Qrcode'))
 const NotFound = lazy(() => import('@/pages/common/NotFound'))
 const Market = lazy(() => import('@/pages/manage/Market'))
 const Personal = lazy(() => import('@/pages/manage/Personal'))
@@ -18,12 +19,12 @@ const Star = lazy(() => import('@/pages/manage/Star'))
 const Detail = lazy(() => import('@/pages/question/Detail'))
 const Edit = lazy(() => import('@/pages/question/Edit'))
 const Stat = lazy(() => import('@/pages/question/Stat'))
-
 // 路由常量
 export const HOME_PATH = '/'
 export const LOGIN_PATH = '/login'
 export const REGISTER_PATH = '/register'
 export const PROFILE_PATH = '/profile'
+export const QRCODE_PATH = '/qrcode'
 export const MANAGE_MARKET_PATH = '/manage/market'
 export const MANAGE_PERSONAL_PATH = '/manage/personal'
 export const MANAGE_STAR_PATH = '/manage/star'
@@ -65,6 +66,14 @@ const router = createBrowserRouter([
         element: (
           <Suspense>
             <Profile />
+          </Suspense>
+        )
+      },
+      {
+        path: QRCODE_PATH + '/:id',
+        element: (
+          <Suspense>
+            <Qrcode />
           </Suspense>
         )
       },

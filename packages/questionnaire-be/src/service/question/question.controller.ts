@@ -67,11 +67,16 @@ export class QuestionController {
 
   // 修改单个问卷
   @Patch(':id')
-  update(
+  async update(
     @Param('id', ParseIntPipe) id: number,
     @Body() updateQuestionDto: UpdateQuestionDto,
   ) {
-    return this.questionService.update(id, updateQuestionDto);
+    try {
+      const res = await this.questionService.update(id, updateQuestionDto);
+      return new ResponseBody<any>(1, res, '修改成功');
+    } catch (error) {
+      return new ResponseBody<any>(0, null, error.message);
+    }
   }
 
   // 删除问卷
@@ -114,6 +119,26 @@ export class QuestionController {
       const { userId } = user;
       await this.questionService.unFavorate(userId, question_id);
       return new ResponseBody<any>(1, null, '取消收藏成功');
+    } catch (error) {
+      return new ResponseBody<any>(0, null, error.message);
+    }
+  }
+
+  @Get('publish/:id')
+  async publish(@Param('id', ParseIntPipe) id: number) {
+    try {
+      await this.questionService.publish(id);
+      return new ResponseBody<any>(1, null, '发布成功');
+    } catch (error) {
+      return new ResponseBody<any>(0, null, error.message);
+    }
+  }
+
+  @Get('unpublish/:id')
+  async unPublish(@Param('id', ParseIntPipe) id: number) {
+    try {
+      await this.questionService.unPublish(id);
+      return new ResponseBody<any>(1, null, '取消发布成功');
     } catch (error) {
       return new ResponseBody<any>(0, null, error.message);
     }

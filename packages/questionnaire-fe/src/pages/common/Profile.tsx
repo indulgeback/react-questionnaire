@@ -1,19 +1,19 @@
 import { useAvatar } from '@/hooks/useAvatar'
-import { HOME_PATH } from '@/router'
+import { HOME_PATH, MANAGE_MARKET_PATH } from '@/router'
 import { LeftOutlined } from '@ant-design/icons'
-import { Avatar, FloatButton, Progress, Button, Modal, Form, Input, message, Spin } from 'antd'
+import { Avatar, FloatButton, Button, Modal, Form, Input, message } from 'antd'
 import { Rule } from 'antd/es/form'
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { RootState } from '@/store'
 import apis from '@/apis'
 import { QuestionListType } from '@/hooks/types'
 import useRequestSuccessChecker from '@/hooks/useRequestSuccessChecker'
+import CustomSpin from '@/components/CustomSpin/CustomSpin'
 
 const Profile: React.FC = () => {
   const { avatar } = useAvatar()
-  const dispatch = useDispatch()
   const nav = useNavigate()
   const { isRequestSuccess } = useRequestSuccessChecker()
   const userInfo = useSelector((state: RootState) => state.profile.userInfo)
@@ -48,7 +48,6 @@ const Profile: React.FC = () => {
       } catch (error) {
         console.error('获取用户信息失败:', error)
       } finally {
-        console.log('userProfile', userProfile)
         setLoading(false)
       }
     }
@@ -60,14 +59,14 @@ const Profile: React.FC = () => {
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
-        // 获取用户创建的问卷列表
-        const res = await apis.questionApi.getQuestionList(1, 3, '', QuestionListType.PERSONAL)
+        // 获取用户的星标问卷列表
+        const res = await apis.questionApi.getQuestionList(1, 3, '', QuestionListType.FAVORATE)
         if (res.code === 1 && res.data) {
           setQuestions(res.data.list || [])
           setQuestionCount(res.data.count || 0)
         }
       } catch (error) {
-        console.error('获取问卷列表失败:', error)
+        console.error('获取星标问卷列表失败:', error)
       }
     }
 
@@ -202,7 +201,7 @@ const Profile: React.FC = () => {
   if (loading) {
     return (
       <div className="h-screen bg-custom-bg-200 flex items-center justify-center">
-        <Spin size="large" tip="加载用户信息中..." />
+        <CustomSpin />
       </div>
     )
   }
@@ -267,11 +266,6 @@ const Profile: React.FC = () => {
               <span className="text-gray-600">创建问卷</span>
               <span className="font-medium">{questionCount} 份</span>
             </div>
-            <Progress
-              percent={Math.min(100, (questionCount / 100) * 100)}
-              showInfo={false}
-              className="mb-4"
-            />
           </div>
 
           <div className="border-t border-gray-200 pt-6">
@@ -308,46 +302,82 @@ const Profile: React.FC = () => {
 
         {/* 右侧内容区域 */}
         <div className="flex-1 p-8">
-          <h2 className="text-2xl font-semibold text-gray-800 mb-6">我的精选问卷</h2>
+          <h2 className="text-2xl font-semibold text-gray-800 mb-6">我的星标问卷</h2>
 
-          {/* 问卷列表 */}
+          {/* 问卷列表 - 始终显示3个位置 */}
           <div className="grid gap-4">
             {questions.length > 0 ? (
-              questions.map(question => (
+              <>
+                {/* 渲染已有的星标问卷 */}
+                {questions.map(question => (
+                  <div
+                    key={question.id}
+                    className="p-4 border border-gray-200 rounded-lg hover:border-blue-500 transition-colors cursor-pointer"
+                    onClick={() => nav(`/question/detail/${question.id}`)}
+                  >
+                    <div className="flex justify-between items-center">
+                      <div>
+                        <h3 className="font-medium text-gray-800 mb-1">{question.title}</h3>
+                        <p className="text-sm text-gray-600">
+                          创建于 {new Date(question.create_time).toLocaleDateString()}
+                        </p>
+                      </div>
+                      <div className="flex gap-4 text-sm text-gray-500">
+                        <span>📊 收集 {question.answer_count} 份</span>
+                        <span
+                          className={`${
+                            question.is_published ? 'text-green-600' : 'text-yellow-600'
+                          }`}
+                        >
+                          ● {question.is_published ? '进行中' : '未发布'}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+
+                {/* 如果已有的问卷少于3个，渲染空状态卡片填充剩余位置 */}
+                {Array.from({ length: 3 - questions.length }).map((_, index) => (
+                  <div
+                    key={`empty-${index}`}
+                    className="p-4 border border-dashed border-gray-300 rounded-lg hover:border-blue-500 transition-colors cursor-pointer bg-gray-50"
+                    onClick={() => nav(MANAGE_MARKET_PATH)}
+                  >
+                    <div className="flex justify-between items-center">
+                      <div>
+                        <h3 className="font-medium text-gray-800 mb-1 flex items-center">
+                          <span className="text-yellow-500 mr-2">⭐</span>
+                          <span>收藏更多问卷</span>
+                        </h3>
+                        <p className="text-sm text-gray-600">
+                          点击前往问卷市场，挑选您感兴趣的问卷
+                        </p>
+                      </div>
+                      <div className="text-sm text-blue-500">去收藏 →</div>
+                    </div>
+                  </div>
+                ))}
+              </>
+            ) : (
+              // 当没有任何星标问卷时，显示三个空状态卡片
+              Array.from({ length: 3 }).map((_, index) => (
                 <div
-                  key={question.id}
-                  className="p-4 border border-gray-200 rounded-lg hover:border-blue-500 transition-colors cursor-pointer"
-                  onClick={() => nav(`/question/edit/${question.id}`)}
+                  key={`empty-${index}`}
+                  className="p-4 border border-dashed border-gray-300 rounded-lg hover:border-blue-500 transition-colors cursor-pointer bg-gray-50"
+                  onClick={() => nav(MANAGE_MARKET_PATH)}
                 >
                   <div className="flex justify-between items-center">
                     <div>
-                      <h3 className="font-medium text-gray-800 mb-1">{question.title}</h3>
-                      <p className="text-sm text-gray-600">
-                        创建于 {new Date(question.create_time).toLocaleDateString()}
-                      </p>
+                      <h3 className="font-medium text-gray-800 mb-1 flex items-center">
+                        <span className="text-yellow-500 mr-2">⭐</span>
+                        <span>收藏更多问卷</span>
+                      </h3>
+                      <p className="text-sm text-gray-600">点击前往问卷市场，挑选您感兴趣的问卷</p>
                     </div>
-                    <div className="flex gap-4 text-sm text-gray-500">
-                      <span>📊 收集 {question.answer_count} 份</span>
-                      <span
-                        className={`${
-                          question.is_published ? 'text-green-600' : 'text-yellow-600'
-                        }`}
-                      >
-                        ● {question.is_published ? '进行中' : '未发布'}
-                      </span>
-                    </div>
+                    <div className="text-sm text-blue-500">去收藏 →</div>
                   </div>
                 </div>
               ))
-            ) : (
-              <div className="text-center py-12 text-gray-500">
-                您还没有创建任何问卷
-                <div className="mt-4">
-                  <Button color="primary" onClick={() => nav('/question/manage')}>
-                    立即创建
-                  </Button>
-                </div>
-              </div>
             )}
           </div>
         </div>

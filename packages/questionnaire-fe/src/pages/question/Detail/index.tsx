@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useParams, useNavigate } from 'react-router-dom'
-import { Typography, Spin, Button, Tooltip } from 'antd'
+import { Typography, Button, Tooltip } from 'antd'
 import { LeftOutlined } from '@ant-design/icons'
 import useLoadQuestionData from '@/hooks/useLoadQuestionData'
 import { RootState } from '@/store'
 import ComponentRender from '@/pages/question/Edit/components/ComponentRender'
 import { ComponentInfoType } from '@/store/modules/componentsSlice'
+import CustomSpin from '@/components/CustomSpin/CustomSpin'
 
 const { Title, Paragraph } = Typography
 
@@ -20,7 +21,7 @@ const Detail: React.FC = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <Spin size="large" tip="加载问卷中..." />
+        <CustomSpin />
       </div>
     )
   }

@@ -4,9 +4,25 @@ import { Button } from "@heroui/button";
 import useAnswerStore from "@/stores/useAnswerStore";
 
 const QuestionUpload = ({ question }: { question: Question }) => {
-  const { addOrUpdateAnswer } = useAnswerStore();
+  const { addOrUpdateAnswer, getAnswerByQuestionId } = useAnswerStore();
   const [files, setFiles] = useState<File[]>([]);
+  const [fileNames, setFileNames] = useState<string[]>([]); // 仅用于回显
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // 回显逻辑（仅回显文件名）
+  useEffect(() => {
+    const saved = getAnswerByQuestionId(question.id);
+    if (typeof saved === "string") {
+      try {
+        const arr = JSON.parse(saved);
+        if (Array.isArray(arr)) {
+          setFileNames(arr);
+        }
+      } catch (e) {
+        // ignore error
+      }
+    }
+  }, [question.id, getAnswerByQuestionId]);
 
   // 文件变更时更新答案状态
   useEffect(() => {
@@ -14,6 +30,7 @@ const QuestionUpload = ({ question }: { question: Question }) => {
       // 保存文件名列表作为答案，实际文件上传会在表单提交时处理
       const fileNames = files.map(file => file.name);
       addOrUpdateAnswer(question.id, JSON.stringify(fileNames), question.type);
+      setFileNames(fileNames);
     }
   }, [files, addOrUpdateAnswer, question.id]);
 
@@ -26,6 +43,7 @@ const QuestionUpload = ({ question }: { question: Question }) => {
 
   const removeFile = (index: number) => {
     setFiles(prev => prev.filter((_, i) => i !== index));
+    setFileNames(prev => prev.filter((_, i) => i !== index));
   };
 
   return (
@@ -64,9 +82,9 @@ const QuestionUpload = ({ question }: { question: Question }) => {
         multiple
       />
 
-      {files.length > 0 && (
+      {(files.length > 0 || fileNames.length > 0) && (
         <ul className="mt-2 space-y-2">
-          {files.map((file, index) => (
+          {(files.length > 0 ? files.map(file => file.name) : fileNames).map((name, index) => (
             <li
               key={index}
               className="py-2 px-3 flex justify-between items-center border rounded-lg bg-default-50 dark:bg-default-100"
@@ -84,7 +102,7 @@ const QuestionUpload = ({ question }: { question: Question }) => {
                   ></path>
                 </svg>
                 <span className="text-sm truncate font-medium text-default-700 dark:text-white">
-                  {file.name}
+                  {name}
                 </span>
               </div>
               <Button

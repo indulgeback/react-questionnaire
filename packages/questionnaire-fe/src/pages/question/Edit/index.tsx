@@ -17,6 +17,7 @@ import apis from '@/apis'
 import { MANAGE_MARKET_PATH } from '@/router/index'
 import { setVersion, addComponent } from '@/store/modules/componentsSlice'
 import useRequestSuccessChecker from '@/hooks/useRequestSuccessChecker'
+import { getUserInfoFromStorage } from '@/utils'
 
 const Edit: React.FC = () => {
   const navigate = useNavigate()
@@ -38,13 +39,16 @@ const Edit: React.FC = () => {
     }
 
     try {
+      const userInfo = getUserInfoFromStorage()
+      const creator = userInfo.nickname || '未知'
       const params = {
         questionnaire_id: parseInt(id) || 0,
         title: pageConfig.title || '未命名问卷',
         description: pageConfig.description || '',
         footer_text: pageConfig.footerText || '',
         components: componentList,
-        version
+        version,
+        creator
       }
 
       const res = await apis.editorApi.saveQuestionnaireDetail(params)

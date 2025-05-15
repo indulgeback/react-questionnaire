@@ -1,12 +1,20 @@
 import { Question } from "@/types/question";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Select, SelectItem } from "@heroui/select";
 import useAnswerStore from "@/stores/useAnswerStore";
 
 const QuestionDropdown = ({ question }: { question: Question }) => {
-  const { addOrUpdateAnswer } = useAnswerStore();
+  const { addOrUpdateAnswer, getAnswerByQuestionId } = useAnswerStore();
   const [selected, setSelected] = useState("");
   const options = question.options || [];
+
+  // 回显逻辑
+  useEffect(() => {
+    const saved = getAnswerByQuestionId(question.id);
+    if (typeof saved === "string") {
+      setSelected(saved);
+    }
+  }, [question.id, getAnswerByQuestionId]);
 
   return (
     <div className="flex flex-col gap-4">

@@ -3,11 +3,19 @@ import React, { useState, useEffect } from "react";
 import useAnswerStore from "@/stores/useAnswerStore";
 
 const QuestionSlider = ({ question }: { question: Question }) => {
-  const { addOrUpdateAnswer } = useAnswerStore();
+  const { addOrUpdateAnswer, getAnswerByQuestionId } = useAnswerStore();
   const min = question.min || 0;
   const max = question.max || 100;
   const step = question.step || 1;
   const [value, setValue] = useState(min);
+
+  // 回显逻辑
+  useEffect(() => {
+    const saved = getAnswerByQuestionId(question.id);
+    if (typeof saved === "string" && !isNaN(Number(saved))) {
+      setValue(Number(saved));
+    }
+  }, [question.id, getAnswerByQuestionId, min]);
 
   // 计算滑块填充百分比
   const fillPercentage = ((value - min) / (max - min)) * 100;

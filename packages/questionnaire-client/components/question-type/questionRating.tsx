@@ -1,12 +1,20 @@
 import { Question } from "@/types/question";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "@heroui/button";
 import useAnswerStore from "@/stores/useAnswerStore";
 
 const QuestionRating = ({ question }: { question: Question }) => {
-  const { addOrUpdateAnswer } = useAnswerStore();
+  const { addOrUpdateAnswer, getAnswerByQuestionId } = useAnswerStore();
   const [rating, setRating] = useState(0);
   const maxRating = question.max || 5;
+
+  // 回显逻辑
+  useEffect(() => {
+    const saved = getAnswerByQuestionId(question.id);
+    if (typeof saved === "string" && !isNaN(Number(saved))) {
+      setRating(Number(saved));
+    }
+  }, [question.id, getAnswerByQuestionId]);
 
   const handleRatingChange = (value: number) => {
     setRating(value);

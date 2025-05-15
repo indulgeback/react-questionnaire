@@ -12,6 +12,10 @@ export class SaveDto {
 
   @IsNotEmpty()
   @IsString()
+  creator: string;
+
+  @IsNotEmpty()
+  @IsString()
   description: string;
 
   @IsNotEmpty()

@@ -3,6 +3,7 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import { ViteImageOptimizer } from 'vite-plugin-image-optimizer'
+import removeConsole from 'vite-plugin-remove-console'
 import pkg from './package.json'
 
 // 提取package.json中的版本号
@@ -46,7 +47,9 @@ export default defineConfig({
       symbolId: 'icon-[dir]-[name]'
     }),
     // 使用图片优化插件
-    ViteImageOptimizer()
+    ViteImageOptimizer(),
+    // 使用 removeConsole 插件
+    removeConsole()
   ],
   // 配置 CSS 相关选项
   css: {

@@ -1,11 +1,19 @@
 import { Question } from "@/types/question";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "@heroui/button";
 import useAnswerStore from "@/stores/useAnswerStore";
 
 const QuestionNPS = ({ question }: { question: Question }) => {
-  const { addOrUpdateAnswer } = useAnswerStore();
+  const { addOrUpdateAnswer, getAnswerByQuestionId } = useAnswerStore();
   const [score, setScore] = useState<number | null>(null);
+
+  // 回显逻辑
+  useEffect(() => {
+    const saved = getAnswerByQuestionId(question.id);
+    if (typeof saved === "string" && !isNaN(Number(saved))) {
+      setScore(Number(saved));
+    }
+  }, [question.id, getAnswerByQuestionId]);
 
   const handleScoreChange = (value: number) => {
     setScore(value);

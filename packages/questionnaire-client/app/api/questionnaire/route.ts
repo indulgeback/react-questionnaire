@@ -34,7 +34,7 @@ export async function GET(request: Request) {
       metadata: {
         id: serializedDetail.questionnaire_id.toString(),
         title: serializedDetail.title,
-        creator: "System",
+        creator: serializedDetail.creator,
         createTime: serializedDetail.createdAt || new Date().toISOString(),
         updateTime: serializedDetail.updatedAt || new Date().toISOString(),
         version: serializedDetail.version,

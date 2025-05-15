@@ -9,21 +9,46 @@ import { SparklesIcon } from "@heroicons/react/24/solid";
 import QuestionnaireProgress from "@/components/question-ui/QuestionnaireProgress";
 import useAnswerStore from "@/stores/useAnswerStore";
 import useScrollHighlight from "@/hooks/useScrollHighlight";
+import { useRouter } from "next/navigation";
+import useNotyf from "@/hooks/useNotyf";
 
 const QuestionnaireClient: React.FC = () => {
   const { questionnaireData, metadata } = useQuestionStore();
-  const { getAnsweredStatus, getAllAnswers, currentQuestionnaireId } = useAnswerStore();
+  const {
+    getAnsweredStatus,
+    getAllAnswers,
+    currentQuestionnaireId,
+    clearAnswers,
+    setCurrentQuestionnaireId
+  } = useAnswerStore();
   const scrollAndHighlight = useScrollHighlight();
   const [questionnaireName, setQuestionnaireName] = useState<string>("问卷调查");
+  const router = useRouter();
+  const { showSuccess, showError } = useNotyf();
 
-  // 初始化问卷标题
+  // 初始化问卷标题和ID
   useEffect(() => {
-    if (metadata && metadata.title) {
-      setQuestionnaireName(metadata.title);
+    if (metadata) {
+      if (metadata.title) {
+        setQuestionnaireName(metadata.title);
+      }
+      if (metadata.id) {
+        setCurrentQuestionnaireId(metadata.id.toString());
+      }
     }
-  }, [metadata]);
+  }, [metadata, setCurrentQuestionnaireId]);
 
-  const onSubmit = () => {
+  // 在提交前检查答案格式
+  const formatAnswers = () => {
+    const answers = getAllAnswers();
+    return answers.map(answer => ({
+      question_id: answer.questionId,
+      question_type: answer.questionType,
+      answer: answer.value
+    }));
+  };
+
+  const onSubmit = async () => {
     // 获取所有问题的回答状态
     const progress = document.querySelector(".questionnaire-progress");
     const questionIds = questionnaireData.map(question => question.id);
@@ -41,10 +66,40 @@ const QuestionnaireClient: React.FC = () => {
         progress?.classList.remove("highlight-animation");
       }, 1500);
     } else {
-      // 所有问题都已回答，这里可以添加提交逻辑
-      console.log(`问卷ID ${currentQuestionnaireId} 的所有问题已完成，可以提交问卷`);
-      console.log("答案数据:", getAllAnswers());
-      // 添加实际提交逻辑
+      try {
+        // 获取并格式化所有答案
+        const formattedAnswers = formatAnswers();
+
+        // 提交答案到服务器
+        const response = await fetch("/client/api/answer", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            questionnaire_id: Number(currentQuestionnaireId),
+            answers: formattedAnswers,
+            metadata: {
+              user_agent: navigator.userAgent,
+              submit_time: new Date().toISOString()
+            }
+          })
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+          // 提交成功，弹出提示并跳转到成功页
+          showSuccess("问卷提交成功！");
+          clearAnswers();
+          router.push("/question/success");
+        } else {
+          throw new Error(result.error || "提交失败");
+        }
+      } catch (error) {
+        console.error("提交问卷失败:", error);
+        showError("提交失败，请稍后重试");
+      }
     }
   };
 

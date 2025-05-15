@@ -44,6 +44,7 @@ services:
     environment:
       # 你可以在这里添加后端需要的环境变量
       - NODE_ENV=build
+      - NEXT_PUBLIC_INTERNAL_API_SECRET=indulgeback
       - MONGO_HOST=mongo
       - NODE_ENV=docker
       - MYSQL_HOST=mysql

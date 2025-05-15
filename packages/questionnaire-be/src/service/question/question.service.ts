@@ -221,4 +221,12 @@ export class QuestionService {
       is_published: false,
     });
   }
+
+  async incrementAnswerCount(questionnaireId: number): Promise<void> {
+    await this.questionRepository.increment(
+      { id: questionnaireId },
+      'answer_count',
+      1,
+    );
+  }
 }

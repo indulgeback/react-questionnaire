@@ -12,6 +12,8 @@ import useScrollHighlight from "@/hooks/useScrollHighlight";
 import { useRouter } from "next/navigation";
 import useNotyf from "@/hooks/useNotyf";
 
+const BE_API = process.env.NODE_ENV === "production" ? "" : "http://localhost:8879";
+
 const QuestionnaireClient: React.FC = () => {
   const { questionnaireData, metadata } = useQuestionStore();
   const {
@@ -71,7 +73,7 @@ const QuestionnaireClient: React.FC = () => {
         const formattedAnswers = formatAnswers();
 
         // 提交答案到服务器
-        const response = await fetch("/client/api/answer", {
+        const response = await fetch(`/client/api/answer`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
@@ -92,6 +94,13 @@ const QuestionnaireClient: React.FC = () => {
           // 提交成功，弹出提示并跳转到成功页
           showSuccess("问卷提交成功！");
           clearAnswers();
+          // 调用BE接口增加答卷数量，带上密钥
+          fetch(`${BE_API}/api/question/increment-answer-count/${currentQuestionnaireId}`, {
+            method: "PATCH",
+            headers: {
+              "x-internal-secret": process.env.NEXT_PUBLIC_INTERNAL_API_SECRET || "dev-secret"
+            }
+          });
           router.push("/question/success");
         } else {
           throw new Error(result.error || "提交失败");

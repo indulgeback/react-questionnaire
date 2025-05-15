@@ -9,6 +9,8 @@ import {
   Query,
   UseGuards,
   ParseIntPipe,
+  Headers,
+  ForbiddenException,
 } from '@nestjs/common';
 import { QuestionService } from '@/service/question/question.service';
 import UpdateQuestionDto from '@/service/question/dto/update-question.dto';
@@ -21,6 +23,8 @@ import {
   UserToken,
 } from '@/common/decorators/current-user.decorator';
 import CreateQuestionDto from './dto/create-question.dto';
+import { Public } from '@/common/decorators/public.decorator';
+import config from '@/config';
 
 @UseGuards(JwtAuthGuard)
 @Controller('question')
@@ -142,5 +146,18 @@ export class QuestionController {
     } catch (error) {
       return new ResponseBody<any>(0, null, error.message);
     }
+  }
+
+  @Public()
+  @Patch('increment-answer-count/:id')
+  async incrementAnswerCount(
+    @Param('id') id: string,
+    @Headers('x-internal-secret') secret: string,
+  ) {
+    if (secret !== config().client.internalApiSecret) {
+      throw new ForbiddenException('非法访问');
+    }
+    await this.questionService.incrementAnswerCount(Number(id));
+    return { success: true, message: '答卷数量已增加' };
   }
 }

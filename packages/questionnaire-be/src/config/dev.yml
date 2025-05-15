@@ -50,3 +50,5 @@ openai:
     model: 'deepseek-v3'
     apiKey: 'sk-746e24bbb3d14fc7bced0a4d35453a41'
     baseURL: 'https://dashscope.aliyuncs.com/compatible-mode/v1'
+client:
+  internalApiSecret: 'indulgeback'

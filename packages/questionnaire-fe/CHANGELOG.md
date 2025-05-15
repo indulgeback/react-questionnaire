@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.22.0](https://github.com/indulgeback/react-questionnaire/compare/v1.21.1...v1.22.0) (2025-05-15)
+
+
+### Bug Fixes
+
+* 添加请求成功检查 ([19df971](https://github.com/indulgeback/react-questionnaire/commit/19df9718d93435139b391064380011833165a57d))
+
+
+### Features
+
+* 添加问卷创建者字段，更新相关数据传输对象，新增答案提交和获取接口，优化问卷组件回显逻辑 ([b2f0fa1](https://github.com/indulgeback/react-questionnaire/commit/b2f0fa121a756466a39a97792746685354e1b984))
+* 新增问卷底部文本字段，更新相关数据传输对象和页面配置，优化问卷编辑功能 ([c091e1f](https://github.com/indulgeback/react-questionnaire/commit/c091e1f1801627f50cd4108bafaf2ea5cf4b7c8b))
+* 增强问卷功能，支持问卷发布与取消发布，更新问卷时返回更详细的响应信息，新增二维码分享功能 ([1f1b1d2](https://github.com/indulgeback/react-questionnaire/commit/1f1b1d2d72fb06b3766a5e8a822e722e26f11c07))
+
+
+
+
+
 ## [1.21.1](https://github.com/indulgeback/react-questionnaire/compare/v1.21.0...v1.21.1) (2025-05-13)
 
 **Note:** Version bump only for package @questionnaire/fe

@@ -5,11 +5,13 @@ export interface UserInfo {
 }
 
 export interface UserProfile {
-  email: string
-  nickname: string
-  avatar: string
-  bio: string
-  createTime: string
+  userInfo: {
+    email: string
+    nickname: string
+    avatar: string
+    bio: string
+    createTime: string
+  }
 }
 
 export interface ChangePasswordParams {

@@ -1,14 +1,78 @@
 import { useAvatar } from '@/hooks/useAvatar'
 import { HOME_PATH } from '@/router'
 import { LeftOutlined } from '@ant-design/icons'
-import { Avatar, FloatButton, Progress, Button, Modal, Form, Input } from 'antd'
+import { Avatar, FloatButton, Progress, Button, Modal, Form, Input, message, Spin } from 'antd'
 import { Rule } from 'antd/es/form'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import { RootState } from '@/store'
+import apis from '@/apis'
+import { QuestionListType } from '@/hooks/types'
+import useRequestSuccessChecker from '@/hooks/useRequestSuccessChecker'
 
 const Profile: React.FC = () => {
   const { avatar } = useAvatar()
+  const dispatch = useDispatch()
   const nav = useNavigate()
+  const { isRequestSuccess } = useRequestSuccessChecker()
+  const userInfo = useSelector((state: RootState) => state.profile.userInfo)
+
+  const [userProfile, setUserProfile] = useState<{
+    email: string
+    nickname: string
+    avatar: string
+    bio: string
+    createTime: string
+  }>({
+    email: '',
+    nickname: '',
+    avatar: '',
+    bio: '',
+    createTime: ''
+  })
+
+  const [questions, setQuestions] = useState<any[]>([])
+  const [questionCount, setQuestionCount] = useState(0)
+  const [loading, setLoading] = useState(true)
+
+  // 获取用户信息
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      try {
+        setLoading(true)
+        const res = await apis.authApi.getUserInfo()
+        if (isRequestSuccess(res)) {
+          setUserProfile(res.data.userInfo)
+        }
+      } catch (error) {
+        console.error('获取用户信息失败:', error)
+      } finally {
+        console.log('userProfile', userProfile)
+        setLoading(false)
+      }
+    }
+
+    fetchUserProfile()
+  }, [])
+
+  // 获取用户问卷列表
+  useEffect(() => {
+    const fetchQuestions = async () => {
+      try {
+        // 获取用户创建的问卷列表
+        const res = await apis.questionApi.getQuestionList(1, 3, '', QuestionListType.PERSONAL)
+        if (res.code === 1 && res.data) {
+          setQuestions(res.data.list || [])
+          setQuestionCount(res.data.count || 0)
+        }
+      } catch (error) {
+        console.error('获取问卷列表失败:', error)
+      }
+    }
+
+    fetchQuestions()
+  }, [])
 
   enum formItem {
     oldPassword = 'oldPassword',
@@ -49,6 +113,7 @@ const Profile: React.FC = () => {
 
   const [form] = Form.useForm()
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [changingPassword, setChangingPassword] = useState(false)
 
   const changePassword = () => {
     resetForm()
@@ -68,14 +133,78 @@ const Profile: React.FC = () => {
     form.resetFields()
   }
 
-  const onFinish = (values: any) => {
-    console.log(values)
-    form.resetFields()
-    setIsModalOpen(false)
+  const onFinish = async (values: any) => {
+    try {
+      setChangingPassword(true)
+      const res = await apis.authApi.changePassword({
+        oldPassword: values.oldPassword,
+        newPassword: values.newPassword,
+        confirmPassword: values.confirmPassword
+      })
+
+      if (res.code === 1) {
+        message.success('密码修改成功')
+        setIsModalOpen(false)
+        form.resetFields()
+      } else {
+        message.error(res.msg || '密码修改失败')
+      }
+    } catch (error) {
+      console.error('修改密码失败:', error)
+      message.error('修改密码失败，请稍后重试')
+    } finally {
+      setChangingPassword(false)
+    }
   }
 
   const deleteAccount = () => {
-    console.log('deleteAccount')
+    Modal.confirm({
+      title: '确定要注销账号吗？',
+      content: '注销后，您的所有数据将被删除，且无法恢复！',
+      okText: '确认注销',
+      okType: 'danger',
+      cancelText: '取消',
+      onOk: async () => {
+        try {
+          if (!userInfo.userId) {
+            message.error('未找到用户ID')
+            return
+          }
+
+          const res = await apis.authApi.deleteAccount(userInfo.userId.toString())
+          if (res.code === 1) {
+            message.success('账号已注销')
+            nav(HOME_PATH)
+          } else {
+            message.error(res.msg || '注销失败')
+          }
+        } catch (error) {
+          console.error('注销账号失败:', error)
+          message.error('注销账号失败，请稍后重试')
+        }
+      }
+    })
+  }
+
+  // 计算使用天数
+  const calculateUsageDays = (createTime: string) => {
+    if (!createTime) return 0
+
+    const createDate = new Date(createTime)
+    const today = new Date()
+    const diffTime = Math.abs(today.getTime() - createDate.getTime())
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
+    return diffDays
+  }
+
+  const usageDays = calculateUsageDays(userProfile.createTime)
+
+  if (loading) {
+    return (
+      <div className="h-screen bg-custom-bg-200 flex items-center justify-center">
+        <Spin size="large" tip="加载用户信息中..." />
+      </div>
+    )
   }
 
   return (
@@ -97,14 +226,21 @@ const Profile: React.FC = () => {
               src={<img src={avatar} alt="avatar" className="rounded-full" />}
               className="ring-4 ring-gray-200 mb-4"
             />
-            <h1 className="text-2xl font-bold text-gray-800 mb-2">UserNickname</h1>
-            <span className="text-gray-600 text-sm">注册时间：2023年1月</span>
+            <h1 className="text-2xl font-bold text-gray-800 mb-2">
+              {userProfile.nickname || '未设置昵称'}
+            </h1>
+            <span className="text-gray-600 text-sm">
+              注册时间：
+              {userProfile.createTime
+                ? new Date(userProfile.createTime).toLocaleDateString()
+                : '未知'}
+            </span>
           </div>
 
           <div className="mb-6">
             <h2 className="text-sm font-semibold text-gray-800 mb-2">个人简介</h2>
             <p className="text-gray-600 text-sm leading-6">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam, temporibus eaque.
+              {userProfile.bio || '这个用户很懒，还没有填写个人简介...'}
             </p>
           </div>
 
@@ -112,7 +248,7 @@ const Profile: React.FC = () => {
             <h2 className="text-sm font-semibold text-gray-800 mb-2">联系信息</h2>
             <div className="flex items-center text-sm text-gray-600 mb-2">
               <span className="mr-2">📧</span>
-              <span>liuwenyu1937@outlook.com</span>
+              <span>{userProfile.email || '未设置邮箱'}</span>
             </div>
             <div className="flex gap-4 text-sm">
               <Button variant="dashed" color="primary" size="small" onClick={changePassword}>
@@ -125,13 +261,17 @@ const Profile: React.FC = () => {
             <h2 className="text-sm font-semibold text-gray-800 mb-4">统计信息</h2>
             <div className="flex justify-between text-sm mb-3">
               <span className="text-gray-600">使用天数</span>
-              <span className="font-medium">127 天</span>
+              <span className="font-medium">{usageDays} 天</span>
             </div>
             <div className="flex justify-between text-sm mb-3">
               <span className="text-gray-600">创建问卷</span>
-              <span className="font-medium">42 份</span>
+              <span className="font-medium">{questionCount} 份</span>
             </div>
-            <Progress percent={70} showInfo={false} className="mb-4" />
+            <Progress
+              percent={Math.min(100, (questionCount / 100) * 100)}
+              showInfo={false}
+              className="mb-4"
+            />
           </div>
 
           <div className="border-t border-gray-200 pt-6">
@@ -141,7 +281,13 @@ const Profile: React.FC = () => {
           </div>
         </div>
 
-        <Modal title="修改密码" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+        <Modal
+          title="修改密码"
+          open={isModalOpen}
+          onOk={handleOk}
+          onCancel={handleCancel}
+          confirmLoading={changingPassword}
+        >
           <Form form={form} onFinish={onFinish} labelCol={{ span: 4 }}>
             <Form.Item required label="旧密码" name="oldPassword" rules={rules.oldPassword}>
               <Input.Password placeholder="请输入旧密码" />
@@ -166,23 +312,43 @@ const Profile: React.FC = () => {
 
           {/* 问卷列表 */}
           <div className="grid gap-4">
-            {[1, 2, 3].map(item => (
-              <div
-                key={item}
-                className="p-4 border border-gray-200 rounded-lg hover:border-blue-500 transition-colors cursor-pointer"
-              >
-                <div className="flex justify-between items-center">
-                  <div>
-                    <h3 className="font-medium text-gray-800 mb-1">用户满意度调查 #{item}</h3>
-                    <p className="text-sm text-gray-600">创建于 2023年9月{item}日</p>
-                  </div>
-                  <div className="flex gap-4 text-sm text-gray-500">
-                    <span>📊 收集 1{item}2 份</span>
-                    <span className="text-green-600">● 进行中</span>
+            {questions.length > 0 ? (
+              questions.map(question => (
+                <div
+                  key={question.id}
+                  className="p-4 border border-gray-200 rounded-lg hover:border-blue-500 transition-colors cursor-pointer"
+                  onClick={() => nav(`/question/edit/${question.id}`)}
+                >
+                  <div className="flex justify-between items-center">
+                    <div>
+                      <h3 className="font-medium text-gray-800 mb-1">{question.title}</h3>
+                      <p className="text-sm text-gray-600">
+                        创建于 {new Date(question.create_time).toLocaleDateString()}
+                      </p>
+                    </div>
+                    <div className="flex gap-4 text-sm text-gray-500">
+                      <span>📊 收集 {question.answer_count} 份</span>
+                      <span
+                        className={`${
+                          question.is_published ? 'text-green-600' : 'text-yellow-600'
+                        }`}
+                      >
+                        ● {question.is_published ? '进行中' : '未发布'}
+                      </span>
+                    </div>
                   </div>
                 </div>
+              ))
+            ) : (
+              <div className="text-center py-12 text-gray-500">
+                您还没有创建任何问卷
+                <div className="mt-4">
+                  <Button color="primary" onClick={() => nav('/question/manage')}>
+                    立即创建
+                  </Button>
+                </div>
               </div>
-            ))}
+            )}
           </div>
         </div>
       </div>

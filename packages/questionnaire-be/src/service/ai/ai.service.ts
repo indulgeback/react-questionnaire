@@ -54,9 +54,7 @@ export class AiService {
           - questionMatrixRadio（矩阵单选题）
           - questionMatrixCheckbox（矩阵多选题）
           - questionSlider（滑块题）
-          - questionDate（日期选择题）
-          - questionImageChoice（图片选择题）
-          - questionRank（排序题）",
+          - questionDate（日期选择题）",
         "title": "问题标题",
         "props": {
           // 根据不同类型设置不同属性
@@ -66,7 +64,6 @@ export class AiService {
           // 矩阵题：rows: string[], columns: string[]
           // 滑块题：min: number, max: number, step: number
           // 日期题：format: "YYYY-MM-DD"
-          // 排序题：options: string[]
         }
       }
     ]

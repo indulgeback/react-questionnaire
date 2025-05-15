@@ -11,9 +11,6 @@ import QuestionMatrixRadio from '@/components/QuestionComponents/QuestionMatrixR
 import QuestionMatrixCheckbox from '@/components/QuestionComponents/QuestionMatrixCheckbox/Component'
 import QuestionSlider from '@/components/QuestionComponents/QuestionSlider/Component'
 import QuestionDate from '@/components/QuestionComponents/QuestionDate/Component'
-import QuestionUpload from '@/components/QuestionComponents/QuestionUpload/Component'
-import QuestionImageChoice from '@/components/QuestionComponents/QuestionImageChoice/Component'
-import QuestionRank from '@/components/QuestionComponents/QuestionRank/Component'
 import QuestionTitle from '@/components/QuestionComponents/QuestionTitle/Component'
 
 import { QuestionShortAnswerPropsType } from '@/components/QuestionComponents/QuestionShortAnswer'
@@ -27,9 +24,6 @@ import { QuestionMatrixRadioPropsType } from '@/components/QuestionComponents/Qu
 import { QuestionMatrixCheckboxPropsType } from '@/components/QuestionComponents/QuestionMatrixCheckbox'
 import { QuestionSliderPropsType } from '@/components/QuestionComponents/QuestionSlider'
 import { QuestionDatePropsType } from '@/components/QuestionComponents/QuestionDate'
-import { QuestionUploadPropsType } from '@/components/QuestionComponents/QuestionUpload'
-import { QuestionImageChoicePropsType } from '@/components/QuestionComponents/QuestionImageChoice'
-import { QuestionRankPropsType } from '@/components/QuestionComponents/QuestionRank'
 import { QuestionTitlePropsType } from '@/components/QuestionComponents/QuestionTitle'
 
 import { ComponentType } from '@/components/QuestionComponents'
@@ -60,12 +54,6 @@ const ComponentRender: React.FC<{ component: ComponentInfoType }> = ({ component
       return <QuestionSlider {...(props as QuestionSliderPropsType)} />
     case ComponentType.QuestionDate:
       return <QuestionDate {...(props as QuestionDatePropsType)} />
-    case ComponentType.QuestionUpload:
-      return <QuestionUpload {...(props as QuestionUploadPropsType)} />
-    case ComponentType.QuestionImageChoice:
-      return <QuestionImageChoice {...(props as QuestionImageChoicePropsType)} />
-    case ComponentType.QuestionRank:
-      return <QuestionRank {...(props as QuestionRankPropsType)} />
     case ComponentType.QuestionTitle:
       return <QuestionTitle {...(props as QuestionTitlePropsType)} />
   }

@@ -18,9 +18,6 @@ import DropdownConfig from './configComponents/DropdownConfig'
 import MatrixRadioConfig from './configComponents/MatrixRadioConfig'
 import MatrixCheckboxConfig from './configComponents/MatrixCheckboxConfig'
 import SliderConfig from './configComponents/SliderConfig'
-import UploadConfig from './configComponents/UploadConfig'
-import ImageChoiceConfig from './configComponents/ImageChoiceConfig'
-import RankConfig from './configComponents/RankConfig'
 
 // 定义组件配置组件
 const ComponentConfig: React.FC = () => {
@@ -80,15 +77,6 @@ const ComponentConfig: React.FC = () => {
 
       case ComponentType.QuestionSlider:
         return <SliderConfig componentId={fe_id} />
-
-      case ComponentType.QuestionUpload:
-        return <UploadConfig componentId={fe_id} />
-
-      case ComponentType.QuestionImageChoice:
-        return <ImageChoiceConfig componentId={fe_id} />
-
-      case ComponentType.QuestionRank:
-        return <RankConfig componentId={fe_id} />
 
       // 其他组件类型的配置界面
       default:

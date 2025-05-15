@@ -11,9 +11,6 @@ export enum QuestionType {
   QuestionMatrixCheckbox = "questionMatrixCheckbox",
   QuestionSlider = "questionSlider",
   QuestionDate = "questionDate",
-  QuestionUpload = "questionUpload",
-  QuestionImageChoice = "questionImageChoice",
-  QuestionRank = "questionRank",
   QuestionTitle = "questionTitle"
 }
 
@@ -66,8 +63,5 @@ export const feAlignedQuestionTypeMap = {
   [QuestionType.QuestionMatrixCheckbox]: "矩阵多选题",
   [QuestionType.QuestionSlider]: "滑块题",
   [QuestionType.QuestionDate]: "日期选择题",
-  [QuestionType.QuestionUpload]: "文件上传题",
-  [QuestionType.QuestionImageChoice]: "图片选择题",
-  [QuestionType.QuestionRank]: "排序题",
   [QuestionType.QuestionTitle]: "分段标题"
 };

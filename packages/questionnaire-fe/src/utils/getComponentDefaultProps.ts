@@ -12,9 +12,6 @@ import { QuestionMatrixRadioDefaultProps } from '@/components/QuestionComponents
 import { QuestionMatrixCheckboxDefaultProps } from '@/components/QuestionComponents/QuestionMatrixCheckbox'
 import { QuestionSliderDefaultProps } from '@/components/QuestionComponents/QuestionSlider'
 import { QuestionDateDefaultProps } from '@/components/QuestionComponents/QuestionDate'
-import { QuestionUploadDefaultProps } from '@/components/QuestionComponents/QuestionUpload'
-import { QuestionImageChoiceDefaultProps } from '@/components/QuestionComponents/QuestionImageChoice'
-import { QuestionRankDefaultProps } from '@/components/QuestionComponents/QuestionRank'
 import { QuestionTitleDefaultProps } from '@/components/QuestionComponents/QuestionTitle'
 
 // 导入所有组件信息
@@ -29,9 +26,6 @@ import QuestionMatrixRadioInfo from '@/components/QuestionComponents/QuestionMat
 import QuestionMatrixCheckboxInfo from '@/components/QuestionComponents/QuestionMatrixCheckbox'
 import QuestionSliderInfo from '@/components/QuestionComponents/QuestionSlider'
 import QuestionDateInfo from '@/components/QuestionComponents/QuestionDate'
-import QuestionUploadInfo from '@/components/QuestionComponents/QuestionUpload'
-import QuestionImageChoiceInfo from '@/components/QuestionComponents/QuestionImageChoice'
-import QuestionRankInfo from '@/components/QuestionComponents/QuestionRank'
 import QuestionTitleInfo from '@/components/QuestionComponents/QuestionTitle'
 
 /**
@@ -95,21 +89,6 @@ export function getComponentDefaultProps(type: string) {
       return {
         title: QuestionDateInfo.title,
         props: QuestionDateDefaultProps
-      }
-    case ComponentType.QuestionUpload:
-      return {
-        title: QuestionUploadInfo.title,
-        props: QuestionUploadDefaultProps
-      }
-    case ComponentType.QuestionImageChoice:
-      return {
-        title: QuestionImageChoiceInfo.title,
-        props: QuestionImageChoiceDefaultProps
-      }
-    case ComponentType.QuestionRank:
-      return {
-        title: QuestionRankInfo.title,
-        props: QuestionRankDefaultProps
       }
     case ComponentType.QuestionTitle:
       return {

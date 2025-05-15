@@ -108,24 +108,6 @@ const ComponentMarket: React.FC = () => {
     },
     {
       id: 12,
-      name: '文件上传题',
-      icon: <UploadOutlined />,
-      type: 'questionUpload'
-    },
-    {
-      id: 13,
-      name: '图片选择题',
-      icon: <PictureOutlined />,
-      type: 'questionImageChoice'
-    },
-    {
-      id: 14,
-      name: '排序题',
-      icon: <OrderedListOutlined />,
-      type: 'questionRank'
-    },
-    {
-      id: 15,
       name: '分段标题',
       icon: <FontSizeOutlined />,
       type: 'questionTitle'

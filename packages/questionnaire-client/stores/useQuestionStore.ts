@@ -109,29 +109,6 @@ const generateTestData = (): Question[] => {
       type: QuestionType.QuestionDate,
       question: "请选择您的出生日期",
       placeholder: "年/月/日"
-    },
-    {
-      id: 13,
-      type: QuestionType.QuestionUpload,
-      question: "请上传相关文件或图片",
-      placeholder: "支持jpg、png、pdf格式，大小不超过2MB"
-    },
-    {
-      id: 14,
-      type: QuestionType.QuestionImageChoice,
-      question: "您最喜欢下面哪种风格的设计？",
-      images: [
-        { url: "https://placehold.co/300x200/4A90E2/FFFFFF?text=简约风格", text: "简约风格" },
-        { url: "https://placehold.co/300x200/50E3C2/FFFFFF?text=自然风格", text: "自然风格" },
-        { url: "https://placehold.co/300x200/F5A623/FFFFFF?text=复古风格", text: "复古风格" },
-        { url: "https://placehold.co/300x200/D0021B/FFFFFF?text=现代风格", text: "现代风格" }
-      ]
-    },
-    {
-      id: 15,
-      type: QuestionType.QuestionRank,
-      question: "请对以下因素按重要性进行排序",
-      options: ["价格", "质量", "服务", "品牌", "便利性"]
     }
   ];
 };

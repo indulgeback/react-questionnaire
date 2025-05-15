@@ -11,9 +11,6 @@ import QuestionMatrixRadio from "./questionMatrixRadio";
 import QuestionMatrixCheckbox from "./questionMatrixCheckbox";
 import QuestionSlider from "./questionSlider";
 import QuestionDate from "./questionDate";
-import QuestionUpload from "./questionUpload";
-import QuestionImageChoice from "./questionImageChoice";
-import QuestionRank from "./questionRank";
 import QuestionTitle from "./questionTitle";
 
 export default function QuestionComponent({ question }: { question: Question }) {
@@ -41,12 +38,6 @@ export default function QuestionComponent({ question }: { question: Question }) 
       return <QuestionSlider question={question} />;
     case QuestionType.QuestionDate:
       return <QuestionDate question={question} />;
-    case QuestionType.QuestionUpload:
-      return <QuestionUpload question={question} />;
-    case QuestionType.QuestionImageChoice:
-      return <QuestionImageChoice question={question} />;
-    case QuestionType.QuestionRank:
-      return <QuestionRank question={question} />;
     case QuestionType.QuestionTitle:
       return <QuestionTitle question={question} />;
     default:

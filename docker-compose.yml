@@ -43,10 +43,9 @@ services:
       - mongo
     environment:
       # 你可以在这里添加后端需要的环境变量
-      - NODE_ENV=build
+      - NODE_ENV=production
       - NEXT_PUBLIC_INTERNAL_API_SECRET=indulgeback
       - MONGO_HOST=mongo
-      - NODE_ENV=docker
       - MYSQL_HOST=mysql
       - TZ=Asia/Shanghai  # 设置时区为上海
     # 如果有数据库或其他外部服务，可以在这里指定它们

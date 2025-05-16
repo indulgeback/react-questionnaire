@@ -1,10 +1,18 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { Typography, Spin, Alert, Card, Button, Tag, List, Space } from 'antd'
+import { Typography, Spin, Alert, Card, Button, Tag, List, Space, Select, message } from 'antd'
 import { ArrowLeftOutlined, FileWordOutlined } from '@ant-design/icons'
 import apis from '@/apis'
 
 const { Title, Paragraph, Text } = Typography
+const { Option } = Select
+
+// 模型信息类型
+interface ModelInfo {
+  value: string
+  label: string
+  description: string
+}
 
 // 简化的AI分析结果类型定义
 interface AIAnalysisResult {
@@ -30,6 +38,33 @@ const AIAnalysis: React.FC = () => {
   const [analyzing, setAnalyzing] = useState(false)
   const [progressText, setProgressText] = useState('正在分析问卷数据...')
   const [downloading, setDownloading] = useState(false)
+  const [models, setModels] = useState<ModelInfo[]>([])
+  const [selectedModel, setSelectedModel] = useState<string>('')
+
+  // 获取可用的AI模型列表
+  useEffect(() => {
+    const fetchModels = async () => {
+      try {
+        const result = await apis.aiApi.getModelList()
+        if (result.code === 1 && result.data) {
+          setModels(result.data)
+          if (result.data.length > 0) {
+            setSelectedModel(result.data[0].value)
+          }
+        }
+      } catch (error) {
+        console.error('获取模型列表失败:', error)
+        message.error('获取AI模型列表失败')
+      }
+    }
+
+    fetchModels()
+  }, [])
+
+  // 处理模型选择变更
+  const handleModelChange = (value: string) => {
+    setSelectedModel(value)
+  }
 
   // 返回统计页面
   const handleBack = () => {
@@ -119,8 +154,8 @@ const AIAnalysis: React.FC = () => {
       setProgressText('正在分析问卷数据...')
       setError(null)
 
-      // 使用封装好的SSE请求
-      const { onMessage, onError, close } = apis.aiApi.analyzeQuestionnaire(id)
+      // 使用封装好的SSE请求，传入选择的模型
+      const { onMessage, onError, close } = apis.aiApi.analyzeQuestionnaire(id, selectedModel)
 
       // 处理消息事件
       onMessage(data => {
@@ -266,10 +301,37 @@ const AIAnalysis: React.FC = () => {
           <Alert message="分析出错" description={error} type="error" showIcon className="mb-6" />
         )}
 
-        {/* 开始分析按钮 */}
+        {/* 开始分析按钮和模型选择 */}
         {!analysisResult && !analyzing && (
           <div className="text-center py-8">
-            <Button type="primary" size="large" onClick={generateAnalysis}>
+            {/* 模型选择 */}
+            <div className="mb-4">
+              <Text className="mr-2">选择AI模型:</Text>
+              <Select
+                value={selectedModel}
+                onChange={handleModelChange}
+                style={{ width: 200 }}
+                disabled={analyzing}
+              >
+                {models.map(model => (
+                  <Option key={model.value} value={model.value}>
+                    {model.label}
+                  </Option>
+                ))}
+              </Select>
+              {selectedModel && (
+                <div className="mt-2 text-gray-500">
+                  {models.find(m => m.value === selectedModel)?.description}
+                </div>
+              )}
+            </div>
+
+            <Button
+              type="primary"
+              size="large"
+              onClick={generateAnalysis}
+              disabled={!selectedModel}
+            >
               开始AI分析
             </Button>
             <Paragraph className="text-gray-500 mt-4">点击开始分析问卷数据 (需要10-15秒)</Paragraph>

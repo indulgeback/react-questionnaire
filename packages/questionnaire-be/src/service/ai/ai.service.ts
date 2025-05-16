@@ -11,20 +11,61 @@ enum Model {
   DeepseekV3 = 'deepseek-v3',
 }
 
+interface ModelInfo {
+  value: string;
+  label: string;
+  description: string;
+}
+
 @Injectable()
 export class AiService {
   // OpenAI 客户端实例
   private readonly openai: OpenAI;
-  private readonly model: Model;
+  private readonly defaultModel: Model = Model.QwenMax;
+
   constructor(
     private readonly answerService: AnswerService,
     private readonly editorService: EditorService,
   ) {
-    this.model = Model.QwenMax;
-    // 初始化 OpenAI 客户端，配置 baseURL 和 apiKey
+    // 初始化 OpenAI 客户端，配置在使用时动态设置
     this.openai = new OpenAI({
-      baseURL: configuration().openai[this.model].baseURL,
-      apiKey: configuration().openai[this.model].apiKey,
+      baseURL: configuration().openai[this.defaultModel].baseURL,
+      apiKey: configuration().openai[this.defaultModel].apiKey,
+    });
+  }
+
+  // 获取可用的AI模型列表
+  getAvailableModels(): ModelInfo[] {
+    // 返回配置中定义的所有模型及描述
+    return [
+      {
+        value: Model.QwenMax,
+        label: '通义千问Max',
+        description: '最强大的通义千问模型，支持复杂分析',
+      },
+      {
+        value: Model.QwenPlus,
+        label: '通义千问Plus',
+        description: '均衡的通义千问模型，速度更快',
+      },
+      {
+        value: Model.DeepseekV3,
+        label: 'DeepSeek V3',
+        description: 'DeepSeek最新模型，性能优异',
+      },
+    ];
+  }
+
+  // 根据传入的模型创建OpenAI客户端
+  private createClientForModel(modelName: string): OpenAI {
+    // 检查模型是否有效
+    const validModel = Object.values(Model).includes(modelName as Model)
+      ? (modelName as Model)
+      : this.defaultModel;
+
+    return new OpenAI({
+      baseURL: configuration().openai[validModel].baseURL,
+      apiKey: configuration().openai[validModel].apiKey,
     });
   }
 
@@ -32,7 +73,17 @@ export class AiService {
   async generate(
     theme: string,
     count: number,
+    modelName?: string,
   ): Promise<Observable<MessageEvent>> {
+    // 使用指定模型或默认模型创建客户端
+    const client = modelName
+      ? this.createClientForModel(modelName)
+      : this.openai;
+    const useModel =
+      modelName && Object.values(Model).includes(modelName as Model)
+        ? (modelName as Model)
+        : this.defaultModel;
+
     return new Observable((subscriber) => {
       // 构建提示词，要求生成特定格式的问卷 JSON
       const description = `生成一份关于${theme}的问卷，要求如下：
@@ -89,11 +140,11 @@ export class AiService {
       const abortController = new AbortController();
 
       // 调用 OpenAI API 创建聊天完成
-      this.openai.chat.completions
+      client.chat.completions
         .create(
           {
             messages: [{ role: 'system', content: description }],
-            model: configuration().openai[this.model].model,
+            model: configuration().openai[useModel].model,
             stream: true, // 启用流式响应
           },
           {
@@ -131,7 +182,19 @@ export class AiService {
     });
   }
 
-  async analysis(questionnaire_id: number): Promise<Observable<MessageEvent>> {
+  async analysis(
+    questionnaire_id: number,
+    modelName?: string,
+  ): Promise<Observable<MessageEvent>> {
+    // 使用指定模型或默认模型创建客户端
+    const client = modelName
+      ? this.createClientForModel(modelName)
+      : this.openai;
+    const useModel =
+      modelName && Object.values(Model).includes(modelName as Model)
+        ? (modelName as Model)
+        : this.defaultModel;
+
     // 获取问卷的统计数据
     const statsData =
       await this.answerService.getAnswersByQuestionId(questionnaire_id);
@@ -195,11 +258,11 @@ export class AiService {
       const abortController = new AbortController();
 
       // 调用 OpenAI API 创建聊天完成
-      this.openai.chat.completions
+      client.chat.completions
         .create(
           {
             messages: [{ role: 'system', content: prompt }],
-            model: configuration().openai[this.model].model,
+            model: configuration().openai[useModel].model,
             stream: true, // 启用流式响应
           },
           {

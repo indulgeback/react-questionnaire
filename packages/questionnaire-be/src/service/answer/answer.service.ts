@@ -596,8 +596,8 @@ export class AnswerService {
       });
 
       // 处理英文单词，同样统计实际频率
-      const englishWords = allText.match(/\b[a-zA-Z]{3,}\b/g) || [];
-      englishWords.forEach((word) => {
+      const englishWords: string[] = allText.match(/\b[a-zA-Z]{3,}\b/g) || [];
+      englishWords.forEach((word: string) => {
         const lowerWord = word.toLowerCase();
         if (lowerWord.length > 2) {
           wordFrequency[lowerWord] = (wordFrequency[lowerWord] || 0) + 1;

@@ -50,9 +50,9 @@ function useLoadQuestionData() {
     dispatch(
       resetPageConfig({
         ...pageConfig,
-        title: data.data.title,
-        description: data.data.description,
-        footerText: data.data.footer_text
+        title: data.data?.title || '',
+        description: data.data?.description || '',
+        footerText: data.data?.footer_text || ''
       })
     )
   }, [data])

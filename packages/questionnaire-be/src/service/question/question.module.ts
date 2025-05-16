@@ -1,24 +1,25 @@
 import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { MongooseModule } from '@nestjs/mongoose';
 import { QuestionService } from '@/service/question/question.service';
 import { QuestionController } from '@/service/question/question.controller';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import Question from '@/common/entities/question.entity';
-import UserFavorite from '@/common/entities/user-favorite.entity';
-import User from '@/common/entities/user.entity';
-import { Schema } from 'mongoose';
-
-const QuestionSchema = new Schema({
-  title: String,
-  createdAt: Date,
-});
+import Question from '@/service/question/entities/question.entity';
+import UserFavorite from '@/service/question/entities/user-favorite.entity';
+import User from '@/service/auth/entities/user.entity';
+import {
+  QuestionnaireDetail,
+  QuestionnaireDetailSchema,
+} from '@/common/schemas/question-detail.schema';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([Question, UserFavorite, User]),
-    MongooseModule.forFeature([{ name: 'Question', schema: QuestionSchema }]),
+    MongooseModule.forFeature([
+      { name: QuestionnaireDetail.name, schema: QuestionnaireDetailSchema },
+    ]),
   ],
   controllers: [QuestionController],
   providers: [QuestionService],
+  exports: [QuestionService],
 })
 export class QuestionModule {}

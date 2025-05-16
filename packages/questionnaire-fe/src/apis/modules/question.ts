@@ -29,10 +29,8 @@ const createQuestion = (params: { author_id?: number; author?: string }) =>
 /**
  * 更新问卷
  */
-const updateQuestion = (
-  id: number,
-  params: { title: string; description: string; footer_text: string }
-) => request.patch<any, RespType<any>>(`${prefix}/${id}`, params)
+const updateQuestion = (id: number, params: { title: string; description: string }) =>
+  request.patch<any, RespType<any>>(`${prefix}/${id}`, params)
 
 /**
  * 收藏问卷

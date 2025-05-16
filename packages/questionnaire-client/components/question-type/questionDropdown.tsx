@@ -10,11 +10,11 @@ const QuestionDropdown = ({ question }: { question: Question }) => {
 
   // 回显逻辑
   useEffect(() => {
-    const saved = getAnswerByQuestionId(question.id);
+    const saved = getAnswerByQuestionId(question.fe_id);
     if (typeof saved === "string") {
       setSelected(saved);
     }
-  }, [question.id, getAnswerByQuestionId]);
+  }, [question.fe_id, getAnswerByQuestionId]);
 
   return (
     <div className="flex flex-col gap-4">
@@ -26,7 +26,7 @@ const QuestionDropdown = ({ question }: { question: Question }) => {
           const selectedValue = Array.from(keys)[0]?.toString() || "";
           setSelected(selectedValue);
           if (selectedValue) {
-            addOrUpdateAnswer(question.id, selectedValue, question.type);
+            addOrUpdateAnswer(question.fe_id, selectedValue, question.type);
           }
         }}
         color="secondary"

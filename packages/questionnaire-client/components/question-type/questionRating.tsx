@@ -10,15 +10,15 @@ const QuestionRating = ({ question }: { question: Question }) => {
 
   // 回显逻辑
   useEffect(() => {
-    const saved = getAnswerByQuestionId(question.id);
-    if (typeof saved === "string" && !isNaN(Number(saved))) {
+    const saved = getAnswerByQuestionId(question.fe_id);
+    if (saved !== undefined) {
       setRating(Number(saved));
     }
-  }, [question.id, getAnswerByQuestionId]);
+  }, [question.fe_id, getAnswerByQuestionId]);
 
   const handleRatingChange = (value: number) => {
     setRating(value);
-    addOrUpdateAnswer(question.id, value.toString(), question.type);
+    addOrUpdateAnswer(question.fe_id, value.toString(), question.type);
   };
 
   return (

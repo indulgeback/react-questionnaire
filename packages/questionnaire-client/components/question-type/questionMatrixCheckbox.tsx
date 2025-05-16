@@ -10,7 +10,7 @@ const QuestionMatrixCheckbox = ({ question }: { question: Question }) => {
 
   // 组件挂载时检查是否有已保存的答案
   useEffect(() => {
-    const savedAnswer = getAnswerByQuestionId(question.id);
+    const savedAnswer = getAnswerByQuestionId(question.fe_id);
     if (savedAnswer && typeof savedAnswer === "string") {
       try {
         const parsedValue = JSON.parse(savedAnswer);
@@ -24,7 +24,7 @@ const QuestionMatrixCheckbox = ({ question }: { question: Question }) => {
         console.error("Error parsing saved matrix checkbox answer:", e);
       }
     }
-  }, [question.id, getAnswerByQuestionId]);
+  }, [question.fe_id, getAnswerByQuestionId]);
 
   // 检查是否所有行都已选择
   const allRowsSelected =
@@ -35,12 +35,12 @@ const QuestionMatrixCheckbox = ({ question }: { question: Question }) => {
   useEffect(() => {
     // 只有当所有行都有选择时，才算作完成
     if (allRowsSelected) {
-      addOrUpdateAnswer(question.id, JSON.stringify(selectedValues), question.type);
+      addOrUpdateAnswer(question.fe_id, JSON.stringify(selectedValues), question.type);
     } else if (Object.keys(selectedValues).length > 0) {
       // 如果有部分选择但并非所有行都选择了，则存储选择但不算完成
       // 通过特殊标记__incomplete__来表示未完成状态
       addOrUpdateAnswer(
-        question.id,
+        question.fe_id,
         JSON.stringify({
           ...selectedValues,
           __incomplete__: true
@@ -49,9 +49,9 @@ const QuestionMatrixCheckbox = ({ question }: { question: Question }) => {
       );
     } else {
       // 没有任何选择，清除答案
-      addOrUpdateAnswer(question.id, "", question.type);
+      addOrUpdateAnswer(question.fe_id, "", question.type);
     }
-  }, [selectedValues, question.id, addOrUpdateAnswer, allRowsSelected]);
+  }, [selectedValues, question.fe_id, addOrUpdateAnswer, allRowsSelected]);
 
   const handleChange = (rowId: string, values: string[]) => {
     setSelectedValues(prev => ({

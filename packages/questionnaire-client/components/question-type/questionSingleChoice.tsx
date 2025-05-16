@@ -11,22 +11,27 @@ const QuestionRadio = ({ question }: { question: Question }) => {
 
   // 组件挂载时检查是否有已保存的答案
   useEffect(() => {
-    const savedAnswer = getAnswerByQuestionId(question.id);
+    const questionIdentifier = question.fe_id;
+    const savedAnswer = getAnswerByQuestionId(questionIdentifier);
     if (savedAnswer && typeof savedAnswer === "string") {
       setSelected(savedAnswer);
     }
-  }, [question.id, getAnswerByQuestionId]);
+  }, [question.fe_id, getAnswerByQuestionId]);
 
   const handleSelectionChange = (value: string) => {
+    // 优先使用fe_id
+    const questionIdentifier = question.fe_id;
+
     // 如果选择了相同的值，则清除选择
     if (value === selected) {
       setSelected("");
-      removeAnswer(question.id);
+      removeAnswer(questionIdentifier);
       return;
     }
 
     setSelected(value);
-    addOrUpdateAnswer(question.id, value, question.type);
+    // 同时传递id和fe_id，确保后端可以正确匹配
+    addOrUpdateAnswer(question.fe_id, value, question.type);
   };
 
   return (

@@ -8,10 +8,6 @@ class UpdateQuestionDto {
   @IsString()
   @IsNotEmpty()
   title: string;
-
-  @IsString()
-  @IsNotEmpty()
-  footer_text: string;
 }
 
 export default UpdateQuestionDto;

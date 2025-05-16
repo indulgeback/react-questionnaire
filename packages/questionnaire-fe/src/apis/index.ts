@@ -3,13 +3,13 @@ import authApi from './modules/auth'
 import mailApi from './modules/mail'
 import aiApi from './modules/ai'
 import editorApi from './modules/editor'
+import answerApi from './modules/answer'
 
-const apis = {
+export default {
   questionApi,
   authApi,
   mailApi,
   aiApi,
-  editorApi
+  editorApi,
+  answerApi
 }
-
-export default apis

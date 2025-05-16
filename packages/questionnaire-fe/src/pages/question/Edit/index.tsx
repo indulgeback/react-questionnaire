@@ -57,8 +57,7 @@ const Edit: React.FC = () => {
         dispatch(setVersion(version + 1))
         await apis.questionApi.updateQuestion(parseInt(id) || 0, {
           title: pageConfig.title || '未命名问卷',
-          description: pageConfig.description || '',
-          footer_text: pageConfig.footerText || ''
+          description: pageConfig.description || ''
         })
         return true
       } else {

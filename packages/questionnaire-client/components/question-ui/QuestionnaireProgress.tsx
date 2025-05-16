@@ -11,7 +11,7 @@ import useScrollHighlight from "@/hooks/useScrollHighlight";
 import { ChevronUpIcon, ChevronDownIcon } from "@heroicons/react/24/solid";
 
 interface QuestionnaireProgressProps {
-  onQuestionClick?: (questionId: number) => void;
+  onQuestionClick?: (fe_id: string) => void;
 }
 
 const QuestionnaireProgress: React.FC<QuestionnaireProgressProps> = ({ onQuestionClick }) => {
@@ -28,8 +28,8 @@ const QuestionnaireProgress: React.FC<QuestionnaireProgressProps> = ({ onQuestio
   const updateProgress = useCallback(() => {
     if (!questionnaireData || questionnaireData.length === 0) return;
 
-    const questionIds = questionnaireData.map(question => question.id);
-    const status = getAnsweredStatus(questionIds);
+    const feIds = questionnaireData.map(question => question.fe_id);
+    const status = getAnsweredStatus(feIds);
 
     // 特殊处理：将标题类型题目标记为已回答
     const modifiedStatus = status.map((isAnswered, index) => {
@@ -67,11 +67,11 @@ const QuestionnaireProgress: React.FC<QuestionnaireProgressProps> = ({ onQuestio
     initializeStatus();
   }, [updateProgress]);
 
-  const scrollToQuestion = (questionId: number) => {
+  const scrollToQuestion = (fe_id: string) => {
     if (onQuestionClick) {
-      onQuestionClick(questionId);
+      onQuestionClick(fe_id);
     } else {
-      scrollAndHighlight(`question-${questionId}`);
+      scrollAndHighlight(`question-${fe_id}`);
     }
   };
 
@@ -121,7 +121,7 @@ const QuestionnaireProgress: React.FC<QuestionnaireProgressProps> = ({ onQuestio
             {questionnaireData.map((question, index) => (
               <Tooltip
                 key={index}
-                content={`${question.id}. ${question.question.substring(0, 20)}${
+                content={`${index + 1}. ${question.question.substring(0, 20)}${
                   question.question.length > 20 ? "..." : ""
                 } - ${answeredStatus[index] ? "已填写" : "未填写"}`}
                 delay={500}
@@ -135,9 +135,9 @@ const QuestionnaireProgress: React.FC<QuestionnaireProgressProps> = ({ onQuestio
                         ? "bg-default-200 dark:bg-default-100 text-default-500 dark:text-default-400"
                         : "bg-default-100 dark:bg-default-50 text-default-600 dark:text-default-500 hover:bg-default-200 dark:hover:bg-default-100"
                   )}
-                  onClick={() => scrollToQuestion(question.id)}
+                  onClick={() => scrollToQuestion(question.fe_id)}
                 >
-                  {question.id}
+                  {index + 1}
                 </div>
               </Tooltip>
             ))}

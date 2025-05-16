@@ -16,10 +16,17 @@ const useAnswerStore = create<AnswersState>()(
         },
 
         // 新增或更新答案
-        addOrUpdateAnswer: (questionId, value, questionType) => {
+        addOrUpdateAnswer: (fe_id, value, questionType) => {
           const { answersByQuestionnaire, currentQuestionnaireId } = get();
           const currentAnswers = answersByQuestionnaire[currentQuestionnaireId] || [];
-          const existingAnswer = currentAnswers.find(answer => answer.questionId === questionId);
+
+          // 确保fe_id存在，如果不存在则创建一个
+          const ensuredFeId = fe_id;
+
+          // 使用两种ID进行匹配，优先使用fe_id
+          const existingAnswer = currentAnswers.find(
+            answer => answer.fe_id && answer.fe_id === ensuredFeId
+          );
 
           // 处理空值情况 - 当用户清除答案时
           if (
@@ -30,12 +37,10 @@ const useAnswerStore = create<AnswersState>()(
             value === false
           ) {
             // 如果值为空，则移除该答案
-            set(state => ({
+            set((state: AnswersState) => ({
               answersByQuestionnaire: {
                 ...state.answersByQuestionnaire,
-                [currentQuestionnaireId]: currentAnswers.filter(
-                  answer => answer.questionId !== questionId
-                )
+                [currentQuestionnaireId]: currentAnswers.filter(answer => answer.fe_id !== fe_id)
               }
             }));
             return;
@@ -58,23 +63,23 @@ const useAnswerStore = create<AnswersState>()(
           if (isIncompleteMatrix) {
             // 标记答案为未完成状态但保存数据
             if (existingAnswer) {
-              set(state => ({
+              set((state: AnswersState) => ({
                 answersByQuestionnaire: {
                   ...state.answersByQuestionnaire,
                   [currentQuestionnaireId]: currentAnswers.map(answer =>
-                    answer.questionId === questionId
-                      ? { ...answer, value, isIncomplete: true, questionType }
+                    answer.fe_id && answer.fe_id === ensuredFeId
+                      ? { ...answer, value, isIncomplete: true, questionType, fe_id: ensuredFeId }
                       : answer
                   )
                 }
               }));
             } else {
-              set(state => ({
+              set((state: AnswersState) => ({
                 answersByQuestionnaire: {
                   ...state.answersByQuestionnaire,
                   [currentQuestionnaireId]: [
                     ...currentAnswers,
-                    { questionId, value, isIncomplete: true, questionType }
+                    { fe_id: ensuredFeId, value, isIncomplete: true, questionType }
                   ]
                 }
               }));
@@ -84,24 +89,24 @@ const useAnswerStore = create<AnswersState>()(
 
           if (existingAnswer) {
             // 如果答案已存在，则更新
-            set(state => ({
+            set((state: AnswersState) => ({
               answersByQuestionnaire: {
                 ...state.answersByQuestionnaire,
                 [currentQuestionnaireId]: currentAnswers.map(answer =>
-                  answer.questionId === questionId
-                    ? { ...answer, value, isIncomplete: false }
+                  answer.fe_id && answer.fe_id === ensuredFeId
+                    ? { ...answer, value, isIncomplete: false, fe_id: ensuredFeId }
                     : answer
                 )
               }
             }));
           } else {
             // 如果答案不存在，则新增
-            set(state => ({
+            set((state: AnswersState) => ({
               answersByQuestionnaire: {
                 ...state.answersByQuestionnaire,
                 [currentQuestionnaireId]: [
                   ...currentAnswers,
-                  { questionId, value, isIncomplete: false, questionType }
+                  { value, isIncomplete: false, questionType, fe_id: ensuredFeId }
                 ]
               }
             }));
@@ -109,16 +114,14 @@ const useAnswerStore = create<AnswersState>()(
         },
 
         // 移除单个答案
-        removeAnswer: (questionId: number) => {
+        removeAnswer: (fe_id: string) => {
           const { answersByQuestionnaire, currentQuestionnaireId } = get();
           const currentAnswers = answersByQuestionnaire[currentQuestionnaireId] || [];
 
-          set(state => ({
+          set((state: AnswersState) => ({
             answersByQuestionnaire: {
               ...state.answersByQuestionnaire,
-              [currentQuestionnaireId]: currentAnswers.filter(
-                answer => answer.questionId !== questionId
-              )
+              [currentQuestionnaireId]: currentAnswers.filter(answer => answer.fe_id !== fe_id)
             }
           }));
         },
@@ -127,38 +130,56 @@ const useAnswerStore = create<AnswersState>()(
         clearAnswers: () => {
           const { answersByQuestionnaire, currentQuestionnaireId } = get();
 
-          set({
+          set((state: AnswersState) => ({
+            ...state,
             answersByQuestionnaire: {
               ...answersByQuestionnaire,
               [currentQuestionnaireId]: []
             }
-          });
+          }));
         },
 
         // 获取每个题目是否已回答的 boolean 数组
-        getAnsweredStatus: (questionIds: number[]) => {
+        getAnsweredStatus: (fe_ids: string[]) => {
           const { answersByQuestionnaire, currentQuestionnaireId } = get();
           const currentAnswers = answersByQuestionnaire[currentQuestionnaireId] || [];
 
-          const status = questionIds.map(questionId => {
-            const answer = currentAnswers.find(a => a.questionId === questionId);
+          const status = fe_ids.map(fe_id => {
+            // 强制转换所有ID为字符串进行比较
+            const strFeId = String(fe_id);
+
+            const answer = currentAnswers.find(a => {
+              const aFeId = String(a.fe_id);
+
+              return aFeId === strFeId;
+            });
+
             // 答案存在且不是未完成状态才算作已回答
             return answer ? !answer.isIncomplete : false;
           });
+
           return status;
         },
 
         // 获取特定问题的答案
-        getAnswerByQuestionId: (questionId: number) => {
+        getAnswerByQuestionId: (fe_id: string) => {
           const { answersByQuestionnaire, currentQuestionnaireId } = get();
           const currentAnswers = answersByQuestionnaire[currentQuestionnaireId] || [];
 
-          return currentAnswers.find(answer => answer.questionId === questionId)?.value;
+          // 强制转换为字符串统一比较
+          const strFeId = String(fe_id);
+
+          const answer = currentAnswers.find(answer => {
+            const answerFeId = String(answer.fe_id);
+            return answerFeId === strFeId;
+          });
+
+          return answer?.value;
         },
 
         // 检查问卷是否已完成
-        isQuestionnaireComplete: (questionIds: number[]) => {
-          const status = get().getAnsweredStatus(questionIds);
+        isQuestionnaireComplete: (fe_ids: string[]) => {
+          const status = get().getAnsweredStatus(fe_ids);
           return status.every(Boolean);
         },
 

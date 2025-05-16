@@ -19,6 +19,7 @@ const Star = lazy(() => import('@/pages/manage/Star'))
 const Detail = lazy(() => import('@/pages/question/Detail'))
 const Edit = lazy(() => import('@/pages/question/Edit'))
 const Stat = lazy(() => import('@/pages/question/Stat'))
+const AIAnalysis = lazy(() => import('@/pages/question/AIAnalysis'))
 // 路由常量
 export const HOME_PATH = '/'
 export const LOGIN_PATH = '/login'
@@ -31,6 +32,7 @@ export const MANAGE_STAR_PATH = '/manage/star'
 export const QUESTION_DETAIL_PATH = '/question/detail'
 export const QUESTION_EDIT_PATH = '/question/edit'
 export const QUESTION_STAT_PATH = '/question/stat'
+export const QUESTION_AI_ANALYSIS_PATH = '/question/ai-analysis'
 
 const router = createBrowserRouter([
   {
@@ -142,6 +144,14 @@ const router = createBrowserRouter([
         element: (
           <Suspense>
             <Stat />
+          </Suspense>
+        )
+      },
+      {
+        path: QUESTION_AI_ANALYSIS_PATH + '/:id',
+        element: (
+          <Suspense>
+            <AIAnalysis />
           </Suspense>
         )
       }

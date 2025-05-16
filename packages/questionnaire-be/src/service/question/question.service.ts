@@ -2,11 +2,15 @@ import { Injectable } from '@nestjs/common';
 import CreateQuestionDto from '@/service/question/dto/create-question.dto';
 import UpdateQuestionDto from '@/service/question/dto/update-question.dto';
 import FindAllQuestionDto, { QuestionType } from './dto/find-all-question.dto';
-import Question from '@/common/entities/question.entity';
+import Question from '@/service/question/entities/question.entity';
 import { InjectRepository, InjectDataSource } from '@nestjs/typeorm';
 import { Repository, DataSource } from 'typeorm';
-import UserFavorite from '@/common/entities/user-favorite.entity';
-import User from '@/common/entities/user.entity';
+import UserFavorite from '@/service/question/entities/user-favorite.entity';
+import User from '@/service/auth/entities/user.entity';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { QuestionnaireDetail } from '@/common/schemas/question-detail.schema';
+
 @Injectable()
 export class QuestionService {
   constructor(
@@ -18,6 +22,8 @@ export class QuestionService {
     private userRepository: Repository<User>,
     @InjectDataSource()
     private dataSource: DataSource,
+    @InjectModel(QuestionnaireDetail.name)
+    private readonly questionnaireDetailModel: Model<QuestionnaireDetail>,
   ) {}
 
   // 创建问卷
@@ -25,7 +31,29 @@ export class QuestionService {
     const question = new Question();
     question.author_id = createQuestionDto.author_id;
     question.author = createQuestionDto.author;
-    return await this.questionRepository.save(question);
+
+    // 保存问卷基本信息
+    const savedQuestion = await this.questionRepository.save(question);
+
+    try {
+      // 同时创建问卷详情记录
+      const newQuestionnaireDetail = new this.questionnaireDetailModel({
+        questionnaire_id: savedQuestion.id.toString(),
+        title: '未命名问卷',
+        description: '',
+        footer_text: '',
+        components: [],
+        version: 1,
+        creator: createQuestionDto.author || '未知',
+      });
+
+      await newQuestionnaireDetail.save();
+    } catch (error) {
+      console.error('创建问卷详情失败:', error);
+      // 即使创建详情失败，也返回问卷基本信息
+    }
+
+    return savedQuestion;
   }
 
   // 分页查询问卷列表

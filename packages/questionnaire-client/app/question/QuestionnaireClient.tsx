@@ -43,26 +43,39 @@ const QuestionnaireClient: React.FC = () => {
   // 在提交前检查答案格式
   const formatAnswers = () => {
     const answers = getAllAnswers();
-    return answers.map(answer => ({
-      question_id: answer.questionId,
-      question_type: answer.questionType,
-      answer: answer.value
-    }));
+    return answers.map(answer => {
+      console.log(`格式化答案 - fe_id:${answer.fe_id}, 类型:${answer.questionType}`);
+      return {
+        question_id: answer.fe_id,
+        question_type: answer.questionType,
+        answer: answer.value
+      };
+    });
   };
 
   const onSubmit = async () => {
-    // 获取所有问题的回答状态
-    const progress = document.querySelector(".questionnaire-progress");
-    const questionIds = questionnaireData.map(question => question.id);
-    const answeredStatus = getAnsweredStatus(questionIds);
+    // 在提交前，记录当前所有题目的ID信息和答案状态，用于调试
+    console.log("------------- 开始提交问卷 -------------");
+    console.log("所有题目:", questionnaireData);
+    console.log("当前所有答案:", getAllAnswers());
+
+    // 统一使用fe_id作为问题标识符
+    const questionIdentifiers = questionnaireData.map(question => {
+      // 确保每个问题都有fe_id，如果没有则使用id并转为字符串
+      const id = question.fe_id;
+      console.log(`检查题目完成状态 - ID:${id}, 类型:${question.type}`);
+      return id;
+    });
+    const answeredStatus = getAnsweredStatus(questionIdentifiers);
 
     // 查找第一个未回答的问题索引
     const firstUnansweredIndex = answeredStatus.findIndex(status => !status);
 
     // 如果有未回答的问题，滚动到该问题
     if (firstUnansweredIndex !== -1) {
-      const questionId = questionnaireData[firstUnansweredIndex].id;
-      scrollAndHighlight(`question-${questionId}`);
+      const question = questionnaireData[firstUnansweredIndex];
+      scrollAndHighlight(`question-${question.fe_id}`);
+      const progress = document.querySelector(".questionnaire-progress");
       progress?.classList.add("highlight-animation");
       setTimeout(() => {
         progress?.classList.remove("highlight-animation");
@@ -136,10 +149,10 @@ const QuestionnaireClient: React.FC = () => {
           {questionnaireData.map((question, index) => (
             <div
               key={index}
-              id={`question-${question.id}`}
+              id={`question-${question.fe_id}`}
               className="p-6 bg-background dark:bg-default-50 rounded-lg shadow-lg"
             >
-              <QuestionRenderer question={question} />
+              <QuestionRenderer question={question} index={index} />
             </div>
           ))}
           <div className="sticky bottom-4 flex justify-center mt-8">

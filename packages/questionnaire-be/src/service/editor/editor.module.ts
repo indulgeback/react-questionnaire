@@ -12,5 +12,6 @@ import { QuestionnaireDetailSchema } from '@/common/schemas/question-detail.sche
       { name: 'QuestionnaireDetail', schema: QuestionnaireDetailSchema },
     ]),
   ],
+  exports: [EditorService],
 })
 export class EditorModule {}

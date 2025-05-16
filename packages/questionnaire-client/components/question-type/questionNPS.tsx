@@ -9,15 +9,15 @@ const QuestionNPS = ({ question }: { question: Question }) => {
 
   // 回显逻辑
   useEffect(() => {
-    const saved = getAnswerByQuestionId(question.id);
+    const saved = getAnswerByQuestionId(question.fe_id);
     if (typeof saved === "string" && !isNaN(Number(saved))) {
       setScore(Number(saved));
     }
-  }, [question.id, getAnswerByQuestionId]);
+  }, [question.fe_id, getAnswerByQuestionId]);
 
   const handleScoreChange = (value: number) => {
     setScore(value);
-    addOrUpdateAnswer(question.id, value.toString(), question.type);
+    addOrUpdateAnswer(question.fe_id, value.toString(), question.type);
   };
 
   return (

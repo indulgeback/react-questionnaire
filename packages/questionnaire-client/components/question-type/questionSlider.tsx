@@ -11,11 +11,11 @@ const QuestionSlider = ({ question }: { question: Question }) => {
 
   // 回显逻辑
   useEffect(() => {
-    const saved = getAnswerByQuestionId(question.id);
+    const saved = getAnswerByQuestionId(question.fe_id);
     if (typeof saved === "string" && !isNaN(Number(saved))) {
-      setValue(Number(saved));
+      setValue(Number(saved) || min);
     }
-  }, [question.id, getAnswerByQuestionId, min]);
+  }, [question.fe_id, getAnswerByQuestionId, min]);
 
   // 计算滑块填充百分比
   const fillPercentage = ((value - min) / (max - min)) * 100;
@@ -23,14 +23,14 @@ const QuestionSlider = ({ question }: { question: Question }) => {
   // 当滑块值变化时，保存答案
   useEffect(() => {
     if (value !== min) {
-      addOrUpdateAnswer(question.id, value.toString(), question.type);
+      addOrUpdateAnswer(question.fe_id, value.toString(), question.type);
     }
-  }, [value, question.id, min, addOrUpdateAnswer]);
+  }, [value, question.fe_id, min, addOrUpdateAnswer]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = Number(e.target.value);
     setValue(newValue);
-    addOrUpdateAnswer(question.id, newValue.toString(), question.type);
+    addOrUpdateAnswer(question.fe_id, newValue.toString(), question.type);
   };
 
   return (

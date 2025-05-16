@@ -27,13 +27,17 @@ export default function DataInitializer() {
         }
 
         const data = await response.json();
-        console.log("问卷数据", data);
+        console.log("原始问卷数据", data);
 
         if (data && data.questions) {
-          console.log("初始化问卷数据成功，题目数量:", data.questions.length);
+          const processedQuestions = data.questions;
+
+          // 添加调试信息
+          console.log("初始化问卷数据成功，题目数量:", processedQuestions.length);
           console.log("当前问卷ID:", id);
+
           // 将数据存储到Zustand
-          initializeQuestionnaireData(data.questions);
+          initializeQuestionnaireData(processedQuestions);
           initializeMetadata(data.metadata);
         } else {
           console.warn("问卷数据为空，请检查数据库");

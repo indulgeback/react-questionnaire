@@ -13,11 +13,12 @@ import { QuestionModule } from '@/service/question/question.module';
 import { FileModule } from '@/service/file/file.module';
 import { AiModule } from '@/service/ai/ai.module';
 import { TasksModule } from '@/tasks/tasks.module';
+import { AnswerModule } from '@/service/answer/answer.module';
 
 // 实体类
-import User from '@/common/entities/user.entity';
-import Question from '@/common/entities/question.entity';
-import UserFavorite from '@/common/entities/user-favorite.entity';
+import User from '@/service/auth/entities/user.entity';
+import Question from '@/service/question/entities/question.entity';
+import UserFavorite from '@/service/question/entities/user-favorite.entity';
 
 // 自定义配置
 import configuration from '@/config';
@@ -79,6 +80,7 @@ import { EditorModule } from './service/editor/editor.module';
     AiModule,
     TasksModule,
     EditorModule,
+    AnswerModule,
   ],
   providers: [
     {

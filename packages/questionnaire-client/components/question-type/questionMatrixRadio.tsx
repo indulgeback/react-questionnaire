@@ -8,9 +8,12 @@ const QuestionMatrixRadio = ({ question }: { question: Question }) => {
   const matrix = question.matrix || { rows: [], columns: [] };
   const [selectedValues, setSelectedValues] = useState<Record<string, string>>({});
 
-  // 组件挂载时检查是否有已保存的答案
+  // 组件挂载时检查是否有已保存的答案 - 优先使用fe_id
   useEffect(() => {
-    const savedAnswer = getAnswerByQuestionId(question.id);
+    // 优先使用fe_id查找答案
+    const questionId = question.fe_id;
+
+    const savedAnswer = getAnswerByQuestionId(questionId);
     if (savedAnswer && typeof savedAnswer === "string") {
       try {
         const parsedValue = JSON.parse(savedAnswer);
@@ -21,7 +24,7 @@ const QuestionMatrixRadio = ({ question }: { question: Question }) => {
         console.error("Error parsing saved matrix radio answer:", e);
       }
     }
-  }, [question.id, getAnswerByQuestionId]);
+  }, [question.fe_id, getAnswerByQuestionId]);
 
   // 检查是否所有行都已选择
   const allRowsSelected =
@@ -30,14 +33,17 @@ const QuestionMatrixRadio = ({ question }: { question: Question }) => {
 
   // 当选择改变时，更新答案存储
   useEffect(() => {
+    // 确保使用fe_id
+    const questionId = question.fe_id;
+
     // 只有当所有行都有选择时，才算作完成
     if (allRowsSelected) {
-      addOrUpdateAnswer(question.id, JSON.stringify(selectedValues), question.type);
+      addOrUpdateAnswer(questionId, JSON.stringify(selectedValues), question.type);
     } else if (Object.keys(selectedValues).length > 0) {
       // 如果有部分选择但并非所有行都选择了，则存储选择但不算完成
       // 通过特殊标记__incomplete__来表示未完成状态
       addOrUpdateAnswer(
-        question.id,
+        questionId,
         JSON.stringify({
           ...selectedValues,
           __incomplete__: true
@@ -46,9 +52,9 @@ const QuestionMatrixRadio = ({ question }: { question: Question }) => {
       );
     } else {
       // 没有任何选择，清除答案
-      addOrUpdateAnswer(question.id, "", question.type);
+      addOrUpdateAnswer(questionId, "", question.type);
     }
-  }, [selectedValues, question.id, addOrUpdateAnswer, allRowsSelected]);
+  }, [selectedValues, question.fe_id, addOrUpdateAnswer, allRowsSelected]);
 
   const handleChange = (rowId: string, value: string) => {
     setSelectedValues(prev => ({

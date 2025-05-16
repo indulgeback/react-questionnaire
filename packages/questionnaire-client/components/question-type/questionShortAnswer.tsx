@@ -9,16 +9,16 @@ const QuestionShortAnswer = ({ question }: { question: Question }) => {
 
   // 回显逻辑
   useEffect(() => {
-    const saved = getAnswerByQuestionId(question.id);
+    const saved = getAnswerByQuestionId(question.fe_id);
     if (typeof saved === "string") {
       setValue(saved);
     }
-  }, [question.id, getAnswerByQuestionId]);
+  }, [question.fe_id, getAnswerByQuestionId]);
 
   const handleValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
     setValue(newValue);
-    addOrUpdateAnswer(question.id, newValue, question.type);
+    addOrUpdateAnswer(question.fe_id, newValue, question.type);
   };
 
   return (

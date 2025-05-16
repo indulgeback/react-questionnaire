@@ -1,15 +1,15 @@
 import React from "react";
 import { Chip } from "@heroui/chip";
-import { Question, feAlignedQuestionTypeMap, QuestionType } from "@/types/question";
+import { Question, feAlignedQuestionTypeMap } from "@/types/question";
 import QuestionComponent from "@/components/question-type";
 
-const QuestionRenderer = ({ question }: { question: Question }) => {
-  const { id, type } = question;
+const QuestionRenderer = ({ question, index }: { question: Question; index: number }) => {
+  const { type, fe_id } = question;
 
   return (
     <>
       <Chip color="secondary" variant="flat" className="mb-4">
-        {id} [{feAlignedQuestionTypeMap[type]}]
+        {index + 1} [{feAlignedQuestionTypeMap[type]}]
       </Chip>
       <QuestionComponent question={question} />
     </>

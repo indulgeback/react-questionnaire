@@ -8,7 +8,7 @@ const QuestionTitle = ({ question }: { question: Question }) => {
   // 标题题自动标记为已完成
   useEffect(() => {
     // 使用固定值"title"作为标题的答案，以便识别这是一个已完成的标题题
-    addOrUpdateAnswer(question.id, "title", question.type);
+    addOrUpdateAnswer(question.fe_id, "title", question.type);
   }, [question.id, addOrUpdateAnswer]);
 
   return (

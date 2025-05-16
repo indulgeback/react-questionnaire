@@ -30,20 +30,12 @@ mailer:
   port: 465
 # 大模型 API 配置
 openai:
-  deepseek:
-    model: 'deepseek-chat'
-    apiKey: 'sk-2edf4f402e524747923f625f5154e808'
-    baseURL: 'https://api.deepseek.com'
   qwen-max:
     model: 'qwen-max'
     apiKey: 'sk-746e24bbb3d14fc7bced0a4d35453a41'
     baseURL: 'https://dashscope.aliyuncs.com/compatible-mode/v1'
   qwen-plus:
     model: 'qwen-plus'
-    apiKey: 'sk-746e24bbb3d14fc7bced0a4d35453a41'
-    baseURL: 'https://dashscope.aliyuncs.com/compatible-mode/v1'
-  deepseek-r1:
-    model: 'deepseek-r1'
     apiKey: 'sk-746e24bbb3d14fc7bced0a4d35453a41'
     baseURL: 'https://dashscope.aliyuncs.com/compatible-mode/v1'
   deepseek-v3:

@@ -24,8 +24,7 @@ export type QuestionComponent = {
 
 // 问题类型结构
 export type Question = {
-  id: number;
-  fe_id?: string;
+  fe_id: string;
   type: QuestionType;
   question: string;
   placeholder?: string;

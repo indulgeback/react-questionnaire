@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.23.0](https://github.com/indulgeback/react-questionnaire/compare/v1.22.0...v1.23.0) (2025-05-16)
+
+
+### Bug Fixes
+
+* 修复无法打包的问题 ([e98a403](https://github.com/indulgeback/react-questionnaire/commit/e98a403a2735d45766be8040576fc5cee1712ae8))
+
+
+### Features
+
+* 更新问卷进度组件，添加可折叠功能并调整样式，优化用户体验 ([aa51c68](https://github.com/indulgeback/react-questionnaire/commit/aa51c68ecd41ded27b259092228a69f0dc859e63))
+* 更新用户资料页面，修改问卷列表展示为星标问卷，优化加载状态和空状态卡片，提升用户体验 ([b348bd9](https://github.com/indulgeback/react-questionnaire/commit/b348bd9e7ea2f3576fcefb9acc56a7d30095cbef))
+* 更新用户资料页面，整合用户信息获取逻辑，优化密码修改和账号注销功能，增强用户体验 ([d4e05dd](https://github.com/indulgeback/react-questionnaire/commit/d4e05ddd70f7e44081214a6c4e062cf56bbf8573))
+* 更新docker-compose配置，将NODE_ENV环境变量修改为production，并添加NEXT_PUBLIC_INTERNAL_API_SECRET环境变量 ([572bd7e](https://github.com/indulgeback/react-questionnaire/commit/572bd7eb0d92b40070cc11e1fcc64e18d54a8ecb))
+* 添加内部API密钥支持，新增增量答卷数量接口，更新问卷客户端逻辑以调用该接口 ([b8e4a33](https://github.com/indulgeback/react-questionnaire/commit/b8e4a3318758d8205a61f88b66645f26d19adffb))
+* 新增答案模块，整合问卷统计功能，优化问卷编辑和分析逻辑，更新相关数据传输对象和API接口 ([70c156d](https://github.com/indulgeback/react-questionnaire/commit/70c156d75a69b870dd0357818950f29899007229))
+* 移除不再使用的问卷组件（文件上传、图片选择、排序），更新相关类型和默认属性，优化问卷编辑和统计功能 ([9c2d9ea](https://github.com/indulgeback/react-questionnaire/commit/9c2d9ea7add8c8eb5d7e65ee78572132d98e7717))
+* 增强AI服务功能，支持模型选择和获取可用模型列表，更新问卷生成和分析接口 ([b713e91](https://github.com/indulgeback/react-questionnaire/commit/b713e91d2889b326bbf5f358942a025e9ea177cf))
+
+
+
+
+
 # [1.22.0](https://github.com/indulgeback/react-questionnaire/compare/v1.21.1...v1.22.0) (2025-05-15)
 
 

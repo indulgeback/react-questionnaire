@@ -41,7 +41,6 @@
     "mongoose": "^8.7.1",
     "multer": "1.4.5-lts.1",
     "mysql2": "^3.11.3",
-    "nodejieba": "^3.4.4",
     "nodemailer": "^6.9.15",
     "openai": "^4.67.3",
     "passport-jwt": "^4.0.1",

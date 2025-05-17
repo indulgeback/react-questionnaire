@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { QuestionnaireAnswer } from '@/common/schemas/answer.schema';
-import * as nodejieba from 'nodejieba';
 
 // 定义题目类型枚举
 enum QuestionType {
@@ -579,18 +578,18 @@ export class AnswerService {
       }
     }
 
-    // 词频统计
+    // 简化的词频统计，不使用nodejieba分词
     const wordFrequency: Record<string, number> = {};
     if (textAnswers.length > 0) {
       const allText = textAnswers.join(' ');
 
-      // 使用nodejieba.cut进行分词，获取全部词语
-      const allWords = nodejieba.cut(allText);
+      // 简单的空格分词处理（适用于英文）
+      const words = allText.split(/\s+/);
 
-      // 统计每个词的实际出现次数
-      allWords.forEach((word) => {
+      // 统计词频
+      words.forEach((word) => {
         // 过滤掉单个字符、数字、标点符号和空白
-        if (word.length > 1 && !/^[\d\s\p{P}]+$/u.test(word)) {
+        if (word && word.length > 1 && !/^[\d\s\p{P}]+$/u.test(word)) {
           wordFrequency[word] = (wordFrequency[word] || 0) + 1;
         }
       });

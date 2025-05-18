@@ -1,6 +1,10 @@
 # 构建阶段
 FROM node:22 as build-stage
 
+# 设置构建时环境变量
+ARG NEXT_PUBLIC_INTERNAL_API_SECRET=indulgeback
+ENV NEXT_PUBLIC_INTERNAL_API_SECRET=${NEXT_PUBLIC_INTERNAL_API_SECRET}
+
 # 设置工作目录
 WORKDIR /app
 

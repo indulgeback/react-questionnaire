@@ -36,6 +36,8 @@ services:
     build: 
       context: .
       dockerfile: packages/questionnaire-client/Dockerfile
+      args:
+        - NEXT_PUBLIC_INTERNAL_API_SECRET=indulgeback
     ports:
       - "8878:8878"  # 将主机的 8879 端口映射到容器的 8879 端口
     depends_on:

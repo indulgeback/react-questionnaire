@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.23.2](https://github.com/indulgeback/react-questionnaire/compare/v1.23.1...v1.23.2) (2025-05-18)
+
+
+### Bug Fixes
+
+* 修复密钥无法正常传入生产环境的问题 ([0fdf0b3](https://github.com/indulgeback/react-questionnaire/commit/0fdf0b3251a22e50bf81f07555872b6dd9e4b96c))
+
+
+
+
+
 ## [1.23.1](https://github.com/indulgeback/react-questionnaire/compare/v1.23.0...v1.23.1) (2025-05-17)
 
 **Note:** Version bump only for package @questionnaire/client

@@ -24,7 +24,7 @@ const QuestionRating = ({ question }: { question: Question }) => {
   return (
     <div className="flex flex-col gap-4">
       <label className="font-medium text-base">{question.question}</label>
-      <div className="flex gap-2">
+      <div className="flex gap-2 flex-wrap">
         {Array.from({ length: maxRating }, (_, i) => i + 1).map(value => (
           <Button
             key={value}

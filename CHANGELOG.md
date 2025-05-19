@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.24.0](https://github.com/indulgeback/react-questionnaire/compare/v1.23.2...v1.24.0) (2025-05-19)
+
+
+### Bug Fixes
+
+* 移动端显示有问题 ([d1f96d0](https://github.com/indulgeback/react-questionnaire/commit/d1f96d0d6b30dc4a3c0cb6393f468375338fdcc3))
+
+
+### Features
+
+* 添加撤销和前进功能，更新组件状态管理，移除复制功能 ([6757103](https://github.com/indulgeback/react-questionnaire/commit/67571035d3afa05b6d32d823dce537547fd1bc92))
+* 增加问卷复制功能，支持从原问卷获取详细信息并保存新问卷，更新相关API参数 ([7946b3d](https://github.com/indulgeback/react-questionnaire/commit/7946b3d58672e2a83ee1d3400f40e81af4a5123c))
+
+
+
+
+
 ## [1.23.2](https://github.com/indulgeback/react-questionnaire/compare/v1.23.1...v1.23.2) (2025-05-18)
 
 

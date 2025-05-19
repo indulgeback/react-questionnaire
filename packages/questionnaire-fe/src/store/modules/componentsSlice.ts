@@ -12,17 +12,41 @@ export type ComponentsStateType = {
   selectedId: string
   componentList: Array<ComponentInfoType>
   version: number
+  history: Array<{
+    componentList: Array<ComponentInfoType>
+    selectedId: string
+  }>
+  historyIndex: number
 }
 
 const initialState: ComponentsStateType = {
   selectedId: '',
   componentList: [],
-  version: 1
+  version: 1,
+  history: [],
+  historyIndex: -1
 }
 
 // 生成唯一ID
 const generateID = () => {
   return Math.floor(Math.random() * 1000000).toString()
+}
+
+// 保存历史记录
+const saveHistory = (state: ComponentsStateType) => {
+  // 如果当前不是最新状态，删除当前位置之后的历史记录
+  if (state.historyIndex < state.history.length - 1) {
+    state.history = state.history.slice(0, state.historyIndex + 1)
+  }
+
+  // 添加新的历史记录
+  state.history.push({
+    componentList: JSON.parse(JSON.stringify(state.componentList)),
+    selectedId: state.selectedId
+  })
+
+  // 更新历史记录索引
+  state.historyIndex = state.history.length - 1
 }
 
 export const componentsSlice = createSlice({
@@ -37,10 +61,15 @@ export const componentsSlice = createSlice({
         version: number
       }>
     ) => {
-      return action.payload
+      return {
+        ...action.payload,
+        history: [],
+        historyIndex: -1
+      }
     },
     setSelectedId: (state: ComponentsStateType, action: PayloadAction<string>) => {
       state.selectedId = action.payload
+      saveHistory(state)
     },
     addComponent: (
       state: ComponentsStateType,
@@ -52,28 +81,25 @@ export const componentsSlice = createSlice({
     ) => {
       const { type, title, props } = action.payload
       const newComponent: ComponentInfoType = {
-        fe_id: generateID(), // 生成唯一ID
+        fe_id: generateID(),
         type,
         title,
         props
       }
 
-      // 添加到组件列表末尾
       state.componentList.push(newComponent)
-
-      // 选中新添加的组件
       state.selectedId = newComponent.fe_id
+      saveHistory(state)
     },
     deleteComponent: (state: ComponentsStateType, action: PayloadAction<string>) => {
       const deleteId = action.payload
 
-      // 删除指定 id 的组件
       state.componentList = state.componentList.filter(comp => comp.fe_id !== deleteId)
 
-      // 如果删除的是当前选中的组件，则取消选中状态
       if (state.selectedId === deleteId) {
         state.selectedId = state.componentList.length > 0 ? state.componentList[0].fe_id : ''
       }
+      saveHistory(state)
     },
     updateComponentProps: (
       state: ComponentsStateType,
@@ -84,11 +110,10 @@ export const componentsSlice = createSlice({
     ) => {
       const { fe_id, newProps } = action.payload
 
-      // 查找要更新的组件
       const targetComponent = state.componentList.find(c => c.fe_id === fe_id)
       if (targetComponent) {
-        // 直接替换组件属性
         targetComponent.props = newProps
+        saveHistory(state)
       }
     },
     changeComponentTitle: (
@@ -100,11 +125,10 @@ export const componentsSlice = createSlice({
     ) => {
       const { fe_id, title } = action.payload
 
-      // 查找要更新的组件
       const targetComponent = state.componentList.find(c => c.fe_id === fe_id)
       if (targetComponent) {
-        // 更新组件标题
         targetComponent.title = title
+        saveHistory(state)
       }
     },
     reorderComponents: (
@@ -116,7 +140,6 @@ export const componentsSlice = createSlice({
     ) => {
       const { sourceIndex, destinationIndex } = action.payload
 
-      // 确保索引有效
       if (
         sourceIndex < 0 ||
         sourceIndex >= state.componentList.length ||
@@ -126,16 +149,31 @@ export const componentsSlice = createSlice({
         return
       }
 
-      // 创建新数组以重新排序组件
       const newComponentList = [...state.componentList]
       const [movedComponent] = newComponentList.splice(sourceIndex, 1)
       newComponentList.splice(destinationIndex, 0, movedComponent)
 
-      // 更新组件列表
       state.componentList = newComponentList
+      saveHistory(state)
     },
     setVersion: (state: ComponentsStateType, action: PayloadAction<number>) => {
       state.version = action.payload
+    },
+    undo: (state: ComponentsStateType) => {
+      if (state.historyIndex > 0) {
+        state.historyIndex--
+        const previousState = state.history[state.historyIndex]
+        state.componentList = JSON.parse(JSON.stringify(previousState.componentList))
+        state.selectedId = previousState.selectedId
+      }
+    },
+    redo: (state: ComponentsStateType) => {
+      if (state.historyIndex < state.history.length - 1) {
+        state.historyIndex++
+        const nextState = state.history[state.historyIndex]
+        state.componentList = JSON.parse(JSON.stringify(nextState.componentList))
+        state.selectedId = nextState.selectedId
+      }
     }
   }
 })
@@ -148,7 +186,9 @@ export const {
   updateComponentProps,
   changeComponentTitle,
   reorderComponents,
-  setVersion
+  setVersion,
+  undo,
+  redo
 } = componentsSlice.actions
 
 export default componentsSlice.reducer

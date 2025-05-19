@@ -11,13 +11,6 @@ const EditorButtonGroup = (props: EditorButtonGroupProps) => {
   return (
     <>
       <EditorButton
-        icon="copy"
-        activeIcon="copy"
-        title="复制"
-        activeColor="#00E676"
-        onClick={() => operation(operationType.copy)}
-      />
-      <EditorButton
         icon="save"
         activeIcon="save"
         title="保存"

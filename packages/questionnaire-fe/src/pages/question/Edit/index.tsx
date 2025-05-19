@@ -15,7 +15,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '@/store'
 import apis from '@/apis'
 import { MANAGE_MARKET_PATH } from '@/router/index'
-import { setVersion, addComponent } from '@/store/modules/componentsSlice'
+import { setVersion, addComponent, undo, redo } from '@/store/modules/componentsSlice'
 import useRequestSuccessChecker from '@/hooks/useRequestSuccessChecker'
 import { getUserInfoFromStorage } from '@/utils'
 
@@ -27,10 +27,13 @@ const Edit: React.FC = () => {
   const componentList = useSelector((state: RootState) => state.components.componentList)
   const pageConfig = useSelector((state: RootState) => state.pageConfig)
   const version = useSelector((state: RootState) => state.components.version)
+  const historyIndex = useSelector((state: RootState) => state.components.historyIndex)
+  const historyLength = useSelector((state: RootState) => state.components.history.length)
   const dispatch = useDispatch()
   const { isGenerateDialogOpen, openGenerateDialog, closeGenerateDialog } = useGenerateDialog()
   const { isRequestSuccess } = useRequestSuccessChecker()
   const { message } = App.useApp()
+
   // 保存问卷
   const saveQuestionnaire = async () => {
     if (componentList.length === 0) {
@@ -73,21 +76,22 @@ const Edit: React.FC = () => {
 
   const operationMap = {
     [operationType.generate]: openGenerateDialog,
-    [operationType.copy]: () => {
-      // 复制功能
-      if (navigator.clipboard) {
-        navigator.clipboard.writeText(JSON.stringify({ components: componentList, pageConfig }))
-        message.success('复制成功，可粘贴到其他问卷中')
-      }
-    },
     [operationType.save]: saveQuestionnaire,
     [operationType.back]: () => {
-      // TODO: 实现撤销功能
-      message.info('撤销功能开发中')
+      if (historyIndex > 0) {
+        dispatch(undo())
+        message.success('撤销成功')
+      } else {
+        message.info('没有可撤销的操作')
+      }
     },
     [operationType.forward]: () => {
-      // TODO: 实现前进功能
-      message.info('前进功能开发中')
+      if (historyIndex < historyLength - 1) {
+        dispatch(redo())
+        message.success('前进成功')
+      } else {
+        message.info('没有可前进的操作')
+      }
     }
   }
 

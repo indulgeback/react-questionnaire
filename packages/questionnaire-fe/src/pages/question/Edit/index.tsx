@@ -1,7 +1,7 @@
 import { LeftOutlined, SendOutlined } from '@ant-design/icons'
 import { Button, Tooltip, Modal, App } from 'antd'
-import React, { useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import EditorButtonGroup from '@/pages/question/Edit/components/EditorButtonGroup'
 import { operationType } from '@/pages/question/Edit/components/type'
 import GenerateDialog from '@/pages/question/Edit/components/GenerrateDialog'
@@ -14,14 +14,21 @@ import RightPanel from '@/pages/question/Edit/components/RightPanel'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '@/store'
 import apis from '@/apis'
-import { MANAGE_MARKET_PATH } from '@/router/index'
-import { setVersion, addComponent, undo, redo } from '@/store/modules/componentsSlice'
+import { QUESTION_EDIT_PATH, MANAGE_MARKET_PATH } from '@/router/index'
+import {
+  setVersion,
+  addComponent,
+  resetComponents,
+  undo,
+  redo
+} from '@/store/modules/componentsSlice'
 import useRequestSuccessChecker from '@/hooks/useRequestSuccessChecker'
 import { getUserInfoFromStorage } from '@/utils'
 
 const Edit: React.FC = () => {
   const navigate = useNavigate()
   const { id = '' } = useParams()
+  const [searchParams] = useSearchParams()
   const [submitting, setSubmitting] = useState(false)
   const { loading } = useLoadQuestionData()
   const componentList = useSelector((state: RootState) => state.components.componentList)
@@ -33,6 +40,60 @@ const Edit: React.FC = () => {
   const { isGenerateDialogOpen, openGenerateDialog, closeGenerateDialog } = useGenerateDialog()
   const { isRequestSuccess } = useRequestSuccessChecker()
   const { message } = App.useApp()
+
+  // 处理复制问卷
+  useEffect(() => {
+    const copyFrom = searchParams.get('copyFrom')
+    if (copyFrom) {
+      const copyQuestionnaire = async () => {
+        try {
+          // 获取原问卷详情
+          const detailRes = await apis.editorApi.getQuestionnaireDetail(copyFrom)
+          if (!isRequestSuccess(detailRes)) {
+            message.error('获取原问卷详情失败')
+            return
+          }
+
+          const questionnaireDetail = detailRes.data
+
+          // 重置组件状态
+          dispatch(
+            resetComponents({
+              selectedId: questionnaireDetail.selectedId,
+              componentList: questionnaireDetail.components,
+              version: 1
+            })
+          )
+
+          // 保存到新问卷
+          const userInfo = getUserInfoFromStorage()
+          const saveRes = await apis.editorApi.saveQuestionnaireDetail({
+            questionnaire_id: parseInt(id) || 0,
+            title: `${questionnaireDetail.title} (复制)`,
+            description: questionnaireDetail.description,
+            footer_text: questionnaireDetail.footer_text || '',
+            components: questionnaireDetail.components,
+            version: 1,
+            creator: userInfo.nickname || '未知'
+          })
+
+          if (!isRequestSuccess(saveRes)) {
+            message.error('保存问卷详情失败')
+            return
+          }
+
+          message.success('复制成功')
+          // 移除 URL 中的 copyFrom 参数
+          navigate(`${QUESTION_EDIT_PATH}/${id}`, { replace: true })
+        } catch (error) {
+          console.error('复制问卷失败:', error)
+          message.error('复制问卷失败，请稍后重试')
+        }
+      }
+
+      copyQuestionnaire()
+    }
+  }, [id, searchParams])
 
   // 保存问卷
   const saveQuestionnaire = async () => {
@@ -125,7 +186,13 @@ const Edit: React.FC = () => {
             return
           }
 
-          // TODO: 调用发布问卷接口
+          const publicSucess = await apis.questionApi.publishQuestion(parseInt(id))
+
+          if (!publicSucess) {
+            setSubmitting(false)
+            return
+          }
+
           message.success('问卷提交成功')
 
           // 跳转到问卷管理页面

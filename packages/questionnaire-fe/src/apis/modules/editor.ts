@@ -18,6 +18,8 @@ const saveQuestionnaireDetail = (params: {
   description: string
   components: ComponentInfoType[]
   version: number
+  footer_text: string
+  creator: string
 }) => {
   return request.post<any, RespType<null>>(`${prefix}/save`, params)
 }

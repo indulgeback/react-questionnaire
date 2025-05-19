@@ -17,6 +17,7 @@ import dayjs from 'dayjs'
 import apis from '@/apis'
 import useRequestSuccessChecker from '@/hooks/useRequestSuccessChecker'
 import { QUESTION_DETAIL_PATH, QUESTION_EDIT_PATH, QUESTION_STAT_PATH, QRCODE_PATH } from '@/router'
+import { getUserInfoFromStorage } from '@/utils'
 
 // ts 自定义类型
 type PropsType = {
@@ -73,8 +74,28 @@ const QuestionCard: React.FC<PropsType> = (props: PropsType) => {
   }
 
   // 复制问卷
-  const duplicate = () => {
-    successMessage('复制成功' + id)
+  const duplicate = async () => {
+    try {
+      // 1. 创建新问卷
+      const userInfo = getUserInfoFromStorage()
+      const createRes = await apis.questionApi.createQuestion({
+        author_id: userInfo.userId,
+        author: userInfo.nickname || '未知'
+      })
+
+      if (!isRequestSuccess(createRes)) {
+        successMessage('创建新问卷失败')
+        return
+      }
+
+      const newQuestionId = createRes.data.id
+
+      // 2. 跳转到新问卷的编辑页面，并传递原问卷ID作为复制源
+      nav(`${QUESTION_EDIT_PATH}/${newQuestionId}?copyFrom=${id}`)
+    } catch (error) {
+      console.error('复制问卷失败:', error)
+      successMessage('复制问卷失败，请稍后重试')
+    }
   }
 
   // 删除问卷

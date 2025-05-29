@@ -1,3 +1,5 @@
+"use client";
+
 import { Question } from "@/types/question";
 import React, { useState, useEffect } from "react";
 import { Button } from "@heroui/button";

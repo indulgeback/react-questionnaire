@@ -1,3 +1,5 @@
+"use client";
+
 import { Question } from "@/types/question";
 import React, { useEffect } from "react";
 import useAnswerStore from "@/stores/useAnswerStore";

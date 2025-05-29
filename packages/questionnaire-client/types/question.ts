@@ -43,12 +43,6 @@ export type Question = {
   props?: any; // 保存原始props以便需要时使用
 };
 
-export type QuestionContextType = {
-  questionList: Question[];
-  question: Question;
-  index: number;
-};
-
 // 前端对齐的问题类型映射
 export const feAlignedQuestionTypeMap = {
   [QuestionType.QuestionShortAnswer]: "简答题",
